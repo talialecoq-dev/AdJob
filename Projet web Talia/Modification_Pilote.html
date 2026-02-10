@@ -6,7 +6,6 @@
     <meta charset="utf-8">
     <link href=""rel="stylesheet" />
     <title>AdJob</title>
-
   </head>
 
   <body> 
@@ -21,7 +20,23 @@
       <a href="page6.html">Contact</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
     </ul>
    </nav></center>
-  <hr>
+  <hr><br><br><br><br>
+
+
+  <div align="center">
+
+  <img id="photo"
+       src="https://www.pngall.com/wp-content/uploads/5/Profile-PNG-High-Quality-Image.png"
+       width="100"
+       height="100">
+
+  <br><br>
+
+  <input type="file" accept="image/*"
+         onchange="document.getElementById('photo').src = window.URL.createObjectURL(this.files[0])">
+
+</div>
+
   <h1>Information personnel</h1>
         <label for="name" >Nom :</label> <br>
         <input type="text" id = "name" placeholder="Entree votre nom" ><br><br>
@@ -43,9 +58,8 @@
         </form><br>
         <label for="password" >Mots de passe :</label> <br>
         <input type="text" id = "password" placeholder="Entree votre mot de passe "><br><br>
-        
 
-  <h1>Information Complementaire</h1>
+    <h1>Information Complementaire</h1>
         <label for="name" >Nom de l'entreprise:</label> <br>
         <input type="text" id = "name" placeholder="Entree le nom de votre entreprise" ><br><br>
         <label for="promo" >Promo :</label> <br>
@@ -57,7 +71,7 @@
         <label for="mail" >Modifier l'adresse mail :</label> <br>
         <input type="text" id = "mail" placeholder="Modifier votre adresse mail" ><br><br>
         <label for="password" >Modifier votre password :</label> <br>
-        <input type="text" id = "password" placeholder="Modifier votre mots de passe" ><br><br>
+        <input type="text" id = "password" placeholder="Modifier votre mots de passe" ><br><br> 
      </body> <br><br>
 
 
@@ -70,4 +84,3 @@
           color:black;"> Mentions légales</a>
 </div>
 </html>
-Test3
