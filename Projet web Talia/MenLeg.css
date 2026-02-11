@@ -5,14 +5,17 @@ body {
 .flexbox1 ul {
   height: 100 px;
   width: 75%;
-  background: #426e55;
+  background: #73986f;
   border: 2px solid black;
   border-radius: 20px 20px 20px 20px;
-  padding: 15px;
+  padding: 10px;
 }
 .flexbox1 ul a {
   height: 100 px;
-  width: 75%;
+  width: 100%;
   margin: 10px;
   background: #c36d86;
+  padding: 5px;
+  border-radius: 10px 10px 10px 10px;
+  border: 2px solid black;
 }
