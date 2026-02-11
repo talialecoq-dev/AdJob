@@ -2,7 +2,11 @@ body {
   background-color: #eceade;  
 }
 
-.menu {
+
+.menu{
+    width: 100px;
+}
+.menu_lien {
 
     display: flex;
     flex-direction: column;
@@ -33,4 +37,13 @@ body {
     background-color: #d698a8;
     border-radius: 40%;
     transition: background-color 0.3s ease;
+}
+
+.Logo {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    
 }
