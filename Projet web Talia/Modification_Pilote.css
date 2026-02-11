@@ -1,26 +1,24 @@
 body {
-  background-color: #eceade;  
+  background-color: #eceade;
 }
 
 h1 {
   color: #000000;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   font-size: 36px;
   margin-top: 50px;
 }
 
-
 h2 {
   color: #000000;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   font-size: 28px;
   margin-top: 30px;
 }
 
 p {
-
   color: #000000;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   font-size: 18px;
   margin-top: 20px;
 }
@@ -34,14 +32,17 @@ p {
   width: 1500px;
   height: 80px;
   align-items: center;
+<<<<<<< HEAD
   border-radius: 20px 20px 20px 20px; 
 
+=======
+>>>>>>> 0dd074f97757faf65123529061dc7f84f674243d
 }
 
-.flexbox ul a  {
+.flexbox ul a {
   text-decoration: none;
   color: #000000;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   font-size: 25px;
   margin: 0 30px;
   width: 500px;
@@ -53,9 +54,13 @@ p {
   gap: 15px;
   padding: 30px 20px;
   border: 2px solid #000;
+<<<<<<< HEAD
   border-radius: 20px 20px 20px 20px; 
   background-color: #ca748d;
+=======
+  border-radius: 40px;
+  background-color: #eed4cb;
+>>>>>>> 0dd074f97757faf65123529061dc7f84f674243d
   width: 100px;
   height: 5px;
-  
 }
