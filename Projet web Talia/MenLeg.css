@@ -1,0 +1,18 @@
+body {
+  background-color: #eceade;
+}
+
+.flexbox1 ul {
+  height: 100 px;
+  width: 75%;
+  background: #426e55;
+  border: 2px solid black;
+  border-radius: 20px 20px 20px 20px;
+  padding: 15px;
+}
+.flexbox1 ul a {
+  height: 100 px;
+  width: 75%;
+  margin: 10px;
+  background: #c36d86;
+}
