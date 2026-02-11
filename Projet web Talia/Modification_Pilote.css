@@ -23,35 +23,60 @@ p {
   margin-top: 20px;
 }
 
+
 .flexbox ul {
   padding: 0;
   display: flex;
-  background-color: green;
+  background-color: #73986f;
   font-size: 25px;
   margin: 0 auto;
   width: 1500px;
   height: 80px;
   align-items: center;
   border-radius: 20px 20px 20px 20px; 
+
 }
 
 .flexbox ul a {
   text-decoration: none;
   color: #000000;
   font-family: "Arial", sans-serif;
-  font-size: 25px;
+  font-size: 20px;
   margin: 0 30px;
-  width: 500px;
   list-style: none;
-  background-color: pink;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
   padding: 30px 20px;
   border: 2px solid #000;
   border-radius: 20px 20px 20px 20px; 
   background-color: #ca748d;
-  width: 100px;
+  width: 100%;
   height: 5px;
 }
+
+
+.flexbox ul :hover {
+    background-color: #d698a8;
+    transition: background-color 0.3s ease;
+}
+
+
+.mention a {
+  display: flex;  
+  text-decoration: none;
+  color: #000000;
+  font-family: "Arial", sans-serif;
+  font-size: 10px;
+  padding: 1px 40px;    
+  border: 1px solid #000; 
+  border-radius: 20px;
+  background-color: #b1b9ac;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+
+
+}
+
