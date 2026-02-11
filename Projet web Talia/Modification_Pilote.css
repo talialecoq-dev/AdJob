@@ -25,3 +25,36 @@ p {
   margin-top: 20px;
 }
 
+.flexbox ul {
+  padding: 0;
+  display: flex;
+  background-color: green;
+  font-size: 25px;
+  margin: 0 auto;
+  width: 1500px;
+  height: 80px;
+  align-items: center;
+
+}
+
+.flexbox ul a  {
+  text-decoration: none;
+  color: #000000;
+  font-family: 'Arial', sans-serif;
+  font-size: 25px;
+  margin: 0 30px;
+  width: 500px;
+  list-style: none;
+  background-color: pink;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  padding: 30px 20px;
+  border: 2px solid #000;
+  border-radius: 40px; 
+  background-color: #eed4cb;
+  width: 100px;
+  height: 5px;
+  
+}
