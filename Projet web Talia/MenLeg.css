@@ -26,19 +26,312 @@ body {
   background-color: #b1b9ac;
   border: 2px solid black;
   border-radius: 10px 10px 10px 10px;
+  margin: 5px;
 }
 .flexbox3 {
   background-color: #426e55;
   border: 2px solid black;
   border-radius: 10px 10px 10px 10px;
+  margin: 5px;
 }
 .flexbox3 h2 {
   background-color: #eed5db;
   border: 2px solid black;
   border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
 }
 .flexbox3 h3 {
   background-color: #b1b9ac;
   border: 2px solid #eceade;
   border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
+}
+.flexbox4 {
+  background-color: #426e55;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 5px;
+}
+.flexbox4 h2 {
+  background-color: #eed5db;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
+}
+.flexbox4 h3 {
+  background-color: #b1b9ac;
+  border: 2px solid #eceade;
+  border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
+}
+.flexbox5 {
+  background-color: #426e55;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 5px;
+}
+.flexbox5 h2 {
+  background-color: #eed5db;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
+}
+.flexbox5 h3 {
+  background-color: #b1b9ac;
+  border: 2px solid #eceade;
+  border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
+}
+.flexbox6 {
+  background-color: #426e55;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 5px;
+}
+.flexbox6 h2 {
+  background-color: #eed5db;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 5px;
+  padding: 5px;
+}
+.flexbox6 h3 {
+  background-color: #b1b9ac;
+  border: 2px solid #eceade;
+  border-radius: 10px 10px 10px 10px;
+  margin: 5px;
+  padding: 5px;
+}
+.flexbox7 {
+  height: 75px;
+  background-color: #b1b9ac;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 5px;
+}
+.flexbox8 {
+  background-color: #426e55;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 5px;
+}
+.flexbox8 h2 {
+  background-color: #eed5db;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
+}
+.flexbox8 h3 {
+  background-color: #b1b9ac;
+  border: 2px solid #eceade;
+  border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
+}
+.flexbox9 {
+  background-color: #426e55;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 5px;
+}
+.flexbox9 h2 {
+  background-color: #eed5db;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
+}
+.flexbox9 h3 {
+  background-color: #b1b9ac;
+  border: 2px solid #eceade;
+  border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
+}
+.flexbox10 {
+  background-color: #426e55;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 5px;
+}
+.flexbox10 h2 {
+  background-color: #eed5db;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
+}
+.flexbox10 h3 {
+  background-color: #b1b9ac;
+  border: 2px solid #eceade;
+  border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
+}
+.flexbox11 {
+  background-color: #426e55;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 5px;
+}
+.flexbox11 h2 {
+  background-color: #eed5db;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
+}
+.flexbox11 h3 {
+  background-color: #b1b9ac;
+  border: 2px solid #eceade;
+  border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
+}
+.flexbox12 {
+  background-color: #426e55;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 5px;
+}
+.flexbox12 h2 {
+  background-color: #eed5db;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
+}
+.flexbox12 h3 {
+  background-color: #b1b9ac;
+  border: 2px solid #eceade;
+  border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
+}
+.flexbox13 {
+  background-color: #426e55;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 5px;
+}
+.flexbox13 h2 {
+  background-color: #eed5db;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
+}
+.flexbox13 h3 {
+  background-color: #b1b9ac;
+  border: 2px solid #eceade;
+  border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
+}
+.flexbox14 {
+  background-color: #426e55;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 5px;
+}
+.flexbox14 h2 {
+  background-color: #eed5db;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
+}
+.flexbox14 h3 {
+  background-color: #b1b9ac;
+  border: 2px solid #eceade;
+  border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
+}
+.flexbox15 {
+  background-color: #426e55;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 5px;
+}
+.flexbox15 h2 {
+  background-color: #eed5db;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
+}
+.flexbox15 h3 {
+  background-color: #b1b9ac;
+  border: 2px solid #eceade;
+  border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
+}
+.flexbox16 {
+  background-color: #426e55;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 5px;
+}
+.flexbox16 h2 {
+  background-color: #eed5db;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
+}
+.flexbox16 h3 {
+  background-color: #b1b9ac;
+  border: 2px solid #eceade;
+  border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
+}
+.flexbox17 {
+  background-color: #426e55;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 5px;
+}
+.flexbox17 h2 {
+  background-color: #eed5db;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
+}
+.flexbox17 h3 {
+  background-color: #b1b9ac;
+  border: 2px solid #eceade;
+  border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
+}
+.flexbox18 {
+  background-color: #426e55;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 5px;
+}
+.flexbox18 h2 {
+  background-color: #eed5db;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
+}
+.flexbox18 h3 {
+  background-color: #b1b9ac;
+  border: 2px solid #eceade;
+  border-radius: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 5px;
 }
