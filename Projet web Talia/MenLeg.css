@@ -7,10 +7,12 @@ body {
   width: 75%;
   background: #73986f;
   border: 2px solid black;
-  border-radius: 20px 20px 20px 20px;
+  border-radius: 10px 10px 10px 10px;
   padding: 10px;
 }
 .flexbox1 ul a {
+  text-decoration: none;
+  color: black;
   height: 100 px;
   width: 100%;
   margin: 10px;
@@ -18,4 +20,25 @@ body {
   padding: 5px;
   border-radius: 10px 10px 10px 10px;
   border: 2px solid black;
+}
+
+.flexbox2 h1 {
+  background-color: #b1b9ac;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+}
+.flexbox3 {
+  background-color: #426e55;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+}
+.flexbox3 h2 {
+  background-color: #eed5db;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+}
+.flexbox3 h3 {
+  background-color: #b1b9ac;
+  border: 2px solid #eceade;
+  border-radius: 10px 10px 10px 10px;
 }
