@@ -32,11 +32,7 @@ p {
   width: 1500px;
   height: 80px;
   align-items: center;
-<<<<<<< HEAD
   border-radius: 20px 20px 20px 20px; 
-
-=======
->>>>>>> 0dd074f97757faf65123529061dc7f84f674243d
 }
 
 .flexbox ul a {
@@ -54,13 +50,8 @@ p {
   gap: 15px;
   padding: 30px 20px;
   border: 2px solid #000;
-<<<<<<< HEAD
   border-radius: 20px 20px 20px 20px; 
   background-color: #ca748d;
-=======
-  border-radius: 40px;
-  background-color: #eed4cb;
->>>>>>> 0dd074f97757faf65123529061dc7f84f674243d
   width: 100px;
   height: 5px;
 }
