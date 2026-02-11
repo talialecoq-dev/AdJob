@@ -3,7 +3,7 @@ body {
 }
 
 .flexbox1 ul {
-  height: 100 px;
+  height: 25px;
   width: 75%;
   background: #73986f;
   border: 2px solid black;
@@ -20,8 +20,14 @@ body {
   padding: 5px;
   border-radius: 10px 10px 10px 10px;
   border: 2px solid black;
+  justify-content: center;
+  align-items: center;
 }
-
+.flexbox1 ul a img {
+  vertical-align: middle;
+  position: relative;
+  bottom: 2px;
+}
 .flexbox2 h1 {
   background-color: #b1b9ac;
   border: 2px solid black;
