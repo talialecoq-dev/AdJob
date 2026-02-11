@@ -3,6 +3,7 @@ body {
 }
 
 .menu {
+
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -16,6 +17,8 @@ body {
 }
 
 .navigation {
+
    color :#000000;
+   text-decoration: none;
 
 }
