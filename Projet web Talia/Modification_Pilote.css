@@ -34,6 +34,7 @@ p {
   width: 1500px;
   height: 80px;
   align-items: center;
+  border-radius: 20px 20px 20px 20px; 
 
 }
 
@@ -52,8 +53,8 @@ p {
   gap: 15px;
   padding: 30px 20px;
   border: 2px solid #000;
-  border-radius: 40px; 
-  background-color: #eed4cb;
+  border-radius: 20px 20px 20px 20px; 
+  background-color: #ca748d;
   width: 100px;
   height: 5px;
   
