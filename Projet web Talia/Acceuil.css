@@ -28,3 +28,9 @@ body {
     height: 50px;
     padding: 10px 10px;
 }
+
+.icon_menu:hover {
+    background-color: #d698a8;
+    border-radius: 40%;
+    transition: background-color 0.3s ease;
+}
