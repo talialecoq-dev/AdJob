@@ -1,0 +1,9 @@
+services:
+  php:
+    image: php:8.4-apache
+    container_name: apache_projet
+    ports:
+      - "8070:80"
+    volumes:
+      - .:/var/www/html
+    restart: always
