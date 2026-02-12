@@ -2,27 +2,6 @@ body {
   background-color: #eceade;
 }
 
-h1 {
-  color: #000000;
-  font-family: "Arial", sans-serif;
-  text-align: left;
-}
-
-p {
-  color: #000000;
-  font-family: "Arial", sans-serif;
-  font-size: 18px;
-  margin-top: -10px;
-}
-
-p2 {
-  color: #000000;
-  font-family: "Arial", sans-serif;
-  font-size: 18px;
-  margin-top: -20px;
-}
-
-
 .flexbox ul {
   padding: 0;
   display: flex;
@@ -78,7 +57,7 @@ p2 {
 }
 
 .container {
- display: flex;
+ display: flex; 
   gap: 100px;
   justify-content: center;
   align-items: flex-start;
@@ -87,12 +66,28 @@ p2 {
 
 .colonne {
   display: flex;
-  flex-direction: column; 
-  gap: 10px;
-  margin: 0 250px;
-
+  flex-direction: column;
+  gap: 30px;
 }
 
 input, select {
-  width: 200px;
+  margin-bottom: 30px;
 }
+
+.flexbox2 { 
+  padding: 1px 40px;    
+  border: 1px solid #000; 
+  border-radius: 20px;
+  background-color: #b1b9ac;
+  width: 1500px; margin: 0 auto;
+ }
+
+
+ .flexbox3{
+   padding: 1px 10px;    
+  border: 1px solid #000; 
+  border-radius: 20px;
+  background-color: #b1b9ac;
+  width: 1500px; margin: 0 auto;
+  
+ }
