@@ -93,13 +93,33 @@ body {
 
 
 .cercle {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  font-size: 10px;
-  padding: 20px 40px;
-  border: 1px solid #000; 
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
-  background-color: #426e55;
+  overflow: hidden;
+  margin: 40px auto;
+  border: 2px solid #000;
+  cursor: pointer;
+  background-color: #ca748d;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2px; 
+}
+
+.cercle img {
+  width: 120%;
+  height: 105%;
+  object-fit: cover; 
+}
+
+.cercle input {
+  display: none;
+}
+
+.cercle:hover {
+    background-color: #d698a8;
+    transition: background-color 0.3s ease;
 }
