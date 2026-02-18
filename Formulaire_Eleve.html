@@ -1,0 +1,68 @@
+<!doctype html>
+
+<html lang="fr">
+
+  <head>
+    <meta charset="utf-8">
+    <link href="Modification_Pilote.css"rel="stylesheet" />
+    <title>AdJob</title>
+  </head>
+
+  <body> 
+  
+    <div class="flexbox">
+   <center><nav>
+    <ul>
+      <a href="Acceuil.html">Accueil<img src="Images/Image_Maison.png" width="30" height="30"></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="page2.html">A propos<img src="Images/Image_Profil.png" width="30" height="30"></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="page3.html">Candidature<img src="Images/Image_Candidature.png" width="30" height="30"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="page4.html">Parametre<img src="Images/Image_Paramètre.png" width="30" height="30"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="page5.html">Avis<img src="Images/Image_Avis.png" width="30" height="30"></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="page6.html">Contact<img src="Images/Image_Profil.png" width="30" height="30"></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </ul>
+   </nav></center>
+   </div><br><br><br><br>
+
+ <label class="cercle">
+  <img id="photo" src="" alt="">
+
+  <input type="file" accept="image/*"
+         onchange="document.getElementById('photo').src = window.URL.createObjectURL(this.files[0])">
+</label>
+
+
+
+<div class="flexbox2">
+<div class="container">
+<div class="colonne2">
+<div class="colonne">
+  <h1>Information personnel de l'eleve</h1>
+        <p2>
+        <label for="name" >Nom :</label> <br>
+        <input type="text" id = "name" placeholder="Entree votre nom" ><br><br>
+        <label for="surname">Prenom :</label><br>
+        <input type="text" id = "surname" placeholder="Entree votre Prenom" ><br><br>
+        <form>
+        Civilité : <br>
+        <select name = "Civilité">
+            <option value="Monsieur">Monsieur</option>
+            <option value="Madame">Madame</option>
+            <option value="Je prefere ne pas repondre">Je prefere pas repondre</option>
+
+        </select> <br><br>
+        <label for="email" >Couriel :</label> <br>
+        <input type="text" id = "email" placeholder="Entree votre email"><br><br>
+        <form>
+        <label for="age">Date de naissance</label><br>
+        <input type="date" required>
+        </form><br>
+        <label for="password" >Mots de passe :</label> <br>
+        <input type="text" id = "password" placeholder="Entree votre mot de passe "><br>
+        </p2>
+        </div><br><br>
+        </div>
+    
+     <div class="mention">
+      <a href="MenLeg.html">Mention legale</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+</html>
