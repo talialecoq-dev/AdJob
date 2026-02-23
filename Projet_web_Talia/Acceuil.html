@@ -1,40 +1,71 @@
 <!doctype html>
 <html lang="fr">
-<head>
-    <meta charset="utf-8">
-    
-    <link href="Acceuil.css"rel="stylesheet" />
-</head>
+    <head>
+        <meta charset="utf-8">
+        <link href="Acceuil.css" rel="stylesheet" />
+    </head>
 
+    <body>
 
-<body>
-    <div class="menu">
-        <nav class="menu_lien">
+        
+        <div class="sidebar">
+            <div class="photo_profil">
+                <img src="Images/Image_Utilisateur.png"/>
+            </div>
+
+            <nav class="menu_lien">
+                <a href="Acceuil.html" class="navigation">
+                    <div class="icon_texte_menu">
+                        <img class="icon_menu" src="Images/Image_Maison.png"/>
+                        <span class="texte_menu">Accueil</span>
+                    </div>
+                </a>
+                <a href="Profil.html" class="navigation">
+                    <div class="icon_texte_menu">
+                        <img class="icon_menu" src="Images/Image_Profil.png"/>
+                        <span class="texte_menu">Profil</span>
+                    </div>
+                </a>
+                <a href="Candidatures.html" class="navigation">
+                    <div class="icon_texte_menu">
+                        <img class="icon_menu" src="Images/Image_Candidature.png"/>
+                        <span class="texte_menu">Candidatures</span>
+                    </div>
+                </a>
+                <a href="APropos.html" class="navigation">
+                    <div class="icon_texte_menu">
+                        <img class="icon_menu" src="Images/Image_Propos.png"/>
+                        <span class="texte_menu">À Propos</span>
+                    </div>
+                </a>
+                <a href="Paramètre.html" class="navigation">
+                    <div class="icon_texte_menu">
+                        <img class="icon_menu" src="Images/Image_Paramètre.png"/>
+                        <span class="texte_menu">Paramètres</span>
+                    </div>
+                </a>
+            </nav>
+        </div>
+
+        
+        <div class="contenu">
+            <div class="barre_top">
+                <a href="Connexion.html" class="btn_connexion">Connexion</a>
+            </div>
+
             
-                <a href="Acceuil.html" class="navigation"><img class="icon_menu" src="Images/Image_Maison.png"/> </a>
-                <a href="Profil.html"class="navigation"><img class="icon_menu" src="Images/Image_Profil.png"/></a>
-                <a href="Candidatures.html"class="navigation"><img class="icon_menu" src="Images/Image_Candidature.png"/></a>
-                <a href="Paramètre.html"class="navigation"><img class="icon_menu" src="Images/Image_Paramètre.png"/></a>
-                
-        </nav>
-    </div>
+            <div class="Logo">
+                <img src="Images/Logo.png"/>
+            </div>
 
-    
-        
-    <div class="Logo">
-        <img  src ="Images/Logo.png"/>
-    </div> 
-       
-    
+            
+            <div class="barre_recherche">
+                <img src="Images/Image_Loupe.png" class="icon_loupe"/>
+                <input type="text" placeholder="Barre de recherche"/>
+            </div>
+        </div>
 
-    <div>
-        <footer>
-        
-        <a href="MenLeg.html"class="navigation">Mentions Légales</a>
-      
-        </footer>
-    </div>
+  
 
-</body>
-
+    </body>
 </html>
