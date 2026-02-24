@@ -41,8 +41,6 @@ body {
 }
 
 
-
-/* ✅ Nouveau flexbox2 */
 .flexbox2 {
   display: flex;
   justify-content: center;
