@@ -1,0 +1,15 @@
+.Flexbox1 {
+  background-color: #d699ab;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 0px 700px 0px 700px;
+}
+.Flexbox2 h2 {
+  background-color: #eed5db;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 5px 15px 5px 15px;
+  text-decoration: none;
+  color: black;
+  list-style: none;
+}

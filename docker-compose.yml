@@ -1,0 +1,9 @@
+services:
+  php:
+    image: php:8.4-apache
+    container_name: php
+    ports:
+      - "8090:80"
+    volumes:
+      - .:/var/www/html
+    restart: always

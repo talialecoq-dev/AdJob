@@ -1,0 +1,55 @@
+body {
+  background-color: #eceade;
+}
+.FlexboxL {
+  background-color: #b1b9ac;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 40px 200px 40px 200px;
+}
+.FlexboxL2 {
+  background-color: #eceade;
+  margin: 40px;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+}
+.Flexbox1 {
+  background-color: #73986f;
+  border: 1px solid black;
+}
+
+.Flexbox2 h1 {
+  background-color: #eed5db;
+  margin: 40px 200px 40px 200px;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+}
+.Flexbox3 {
+  background-color: #426e55;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+}
+.Flexbox4 h2 {
+  background-color: #ca748d;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 30px 600px 30px 600px;
+}
+.Flexbox5 h2 {
+  background-color: #ca748d;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 30px 600px 30px 600px;
+}
+.Flexbox6 {
+  background-color: #ca748d;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 20px 550px 20px 550px;
+}
+.Flexbox7 input {
+  background-color: #eed5db;
+  margin: 10px 50px 10px 50px;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+}
