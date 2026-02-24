@@ -20,6 +20,9 @@ body {
     gap: 15px;
     width: 200px;
     flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
 }
 
 .photo_profil {
@@ -65,7 +68,7 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 10px;
+    padding: 8px 0px;
     border-radius: 30px;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
@@ -126,8 +129,8 @@ body {
     transform: translateY(-3px);
     transition: box-shadow 0.3s, transform 0.3s;
     box-shadow: 0 0 25px rgba(107, 144, 113, 0.35);
-
 }
+
 .barre_recherche {
     display: flex;
     align-items: center;
@@ -138,9 +141,6 @@ body {
     width: 950px;
     margin-left: 300px;
 }
-
-
-
 
 .icon_loupe {
     width: 25px;
@@ -160,3 +160,143 @@ body {
     color: #333;
 }
 
+
+.grille_cartes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    padding: 10px 0 30px 0;
+}
+
+.carte_entreprise {
+    background-color: #8fa882;
+    border: 3px solid #5a6e4a;
+    border-radius: 25px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.carte_entreprise:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(74, 94, 58, 0.3);
+}
+
+
+.carte_header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.carte_logo {
+    background-color: #eed4cb;
+    border: 2px solid #c8889a;
+    border-radius: 14px;
+    width: 75px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.logo_entreprise {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 6px;
+}
+
+.carte_infos {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    padding-top: 4px;
+}
+
+.carte_nom {
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffffff;
+    border-bottom: 2px solid #c8889a;
+    padding-bottom: 4px;
+}
+
+.carte_tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.tag {
+    background-color: #eed4cb;
+    border: 1.5px solid #4a5e3a;
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 11px;
+    color: #1a1a1a;
+}
+
+.tag:hover {
+    background-color: #d698a8;
+    border-color: #3a4a2c;
+    color: #fff;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+
+.carte_description_box {
+    background-color: #f5f0eb;
+    border-radius: 15px;
+    padding: 15px;
+    flex: 1;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carte_description {
+    font-size: 13px;
+    color: #4a5e3a;
+    text-align: center;
+    font-style: italic;
+}
+
+
+.carte_boutons {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.btn_candidater,
+.btn_wishlist,
+.btn_statistiques,
+.btn_savoir_plus {
+    background-color: #4a5e3a;
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    text-align: center;
+    line-height: 1.3;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+}
+
+.btn_candidater:hover,
+.btn_wishlist:hover,
+.btn_statistiques:hover,
+.btn_savoir_plus:hover {
+    background-color: #3a4a2c;
+    transform: translateY(-2px);
+}
