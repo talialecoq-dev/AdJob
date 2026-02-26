@@ -300,3 +300,48 @@ body {
     background-color: #3a4a2c;
     transform: translateY(-2px);
 }
+
+
+.nav_sous_menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav_sous_menu .icon_texte_menu {
+    cursor: pointer;
+}
+
+
+
+
+.sous_menu {
+    display: none;
+    flex-direction: column;
+    padding-left: 20px;
+    gap: 2px;
+    overflow: hidden;
+    animation: glisser 0.3s ease;
+}
+
+.sous_menu.ouvert {
+    display: flex;
+}
+
+.sous_lien {
+    color: #1a1a1a;
+    text-decoration: none;
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 20px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.sous_lien:hover {
+    background-color: #d698a8;
+    transform: translateX(4px);
+}
+
+@keyframes glisser {
+    from { opacity: 0; transform: translateY(-5px); }
+    to   { opacity: 1; transform: translateY(0); }
+}

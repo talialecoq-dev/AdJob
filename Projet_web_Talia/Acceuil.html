@@ -5,6 +5,9 @@
         <link href="Acceuil.css" rel="stylesheet" />
     </head>
 
+   
+    <script src="Acceuil.js"></script>
+
     <body>
 
         <div class="sidebar">
@@ -32,26 +35,42 @@
                     </div>
                 </a>
 
-                <a href="Offre.html" class="navigation">
-                    <div class="icon_texte_menu">
+                <div class="nav_sous_menu">
+                    <div class="icon_texte_menu" onclick="SousMenu(this)">
                         <img class="icon_menu" src="Images/Image_Offre.png"/>
                         <span class="texte_menu">Offres</span>
                     </div>
-                </a>
+                    <div class="sous_menu">
+                        <a href="AjouterOffre.html" class="sous_lien"> Ajouter</a>
+                        <a href="ModifierOffre.html" class="sous_lien"> Modifier</a>
+                        <a href="SupprimerOffre.html" class="sous_lien"> Supprimer</a>
+                    </div>
+                </div>
 
-                <a href="Étudiants.html" class="navigation">
-                    <div class="icon_texte_menu">
+                <div class="nav_sous_menu">
+                    <div class="icon_texte_menu" onclick="SousMenu(this)">
                         <img class="icon_menu" src="Images/Image_Etudiant.png"/>
                         <span class="texte_menu">Étudiants</span>
                     </div>
-                </a>
+                    <div class="sous_menu" >
+                        <a href="Liste_Etudiants.html" class="sous_lien"> Mes Étudiants</a>
+                        <a href="Formulaire_Eleve.html" class="sous_lien"> Ajouter</a>
+                        <a href="#" class="sous_lien"> Modifier</a>
+                        <a href="#" class="sous_lien"> Supprimer</a>
+                    </div>
+                </div>
 
-                <a href="Pilotes.html" class="navigation">
-                    <div class="icon_texte_menu">
+                <div class="nav_sous_menu">
+                    <div class="icon_texte_menu" onclick="SousMenu(this)">
                         <img class="icon_menu" src="Images/Image_Pilote.png"/>
                         <span class="texte_menu">Pilotes</span>
                     </div>
-                </a>
+                    <div class="sous_menu">
+                        <a href="Formulaires_Entreprise.html" class="sous_lien"> Ajouter</a>
+                        <a href="#" class="sous_lien"> Modifier</a>
+                        <a href="#" class="sous_lien"> Supprimer</a>
+                    </div>
+                </div>
 
 
                 <a href="APropos.html" class="navigation">
