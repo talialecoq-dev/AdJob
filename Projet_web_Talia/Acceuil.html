@@ -5,10 +5,170 @@
         <link href="Acceuil.css" rel="stylesheet" />
     </head>
 
-   
     <script src="Acceuil.js"></script>
 
     <body>
+
+       
+
+        
+        <input type="checkbox" id="modal-ajouter" class="modal-toggle" />
+
+        
+        <input type="checkbox" id="modal-modifier" class="modal-toggle" />
+
+        
+        <input type="checkbox" id="modal-supprimer" class="modal-toggle" />
+
+
+        
+        <div class="modale" id="modale-ajouter">
+            <div class="modale-boite">
+                <div class="modale-header">
+                    <h2 class="modale-titre"> Ajouter une offre</h2>
+                    
+                    <label for="modal-ajouter" class="modale-fermer">✕</label>
+                </div>
+
+                <!-- Quand PHP arrivera : action="ajouter_offre.php" method="POST" -->
+                <form class="modale-form" action="#" method="POST">
+                    <div class="form-groupe">
+                        <label class="form-label">Intitulé du poste</label>
+                        <input type="text" name="nom" class="form-input" placeholder="Ex: STAGE DÉVELOPPEUR WEB" required />
+                    </div>
+
+                    <div class="form-ligne">
+                        <div class="form-groupe">
+                            <label class="form-label">Durée</label>
+                            <input type="text" name="duree" class="form-input" placeholder="Ex: 6 mois" />
+                        </div>
+                        <div class="form-groupe">
+                            <label class="form-label">Salaire</label>
+                            <input type="text" name="salaire" class="form-input" placeholder="Ex: 900€/mois" />
+                        </div>
+                    </div>
+
+                    <div class="form-ligne">
+                        <div class="form-groupe">
+                            <label class="form-label">Secteur</label>
+                            <input type="text" name="secteur" class="form-input" placeholder="Ex: Informatique" />
+                        </div>
+                        <div class="form-groupe">
+                            <label class="form-label">Ville</label>
+                            <input type="text" name="ville" class="form-input" placeholder="Ex: Paris" />
+                        </div>
+                    </div>
+
+                    <div class="form-groupe">
+                        <label class="form-label">Genre recherché</label>
+                        <select name="genre" class="form-input">
+                            <option value="H|F">H | F</option>
+                            <option value="H">H</option>
+                            <option value="F">F</option>
+                        </select>
+                    </div>
+
+                    <div class="form-groupe">
+                        <label class="form-label">Description</label>
+                        <textarea name="description" class="form-textarea" placeholder="Décrivez le poste..."></textarea>
+                    </div>
+
+                    <div class="modale-boutons">
+                        <label for="modal-ajouter" class="btn-annuler">Annuler</label>
+                        <!-- Pour l'instant ça ne fait rien, en PHP ce sera un vrai submit -->
+                        <button type="submit" class="btn-confirmer">Ajouter l'offre</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        
+        <div class="modale" id="modale-modifier">
+            <div class="modale-boite">
+                <div class="modale-header">
+                    <h2 class="modale-titre"> Modifier une offre</h2>
+                    <label for="modal-modifier" class="modale-fermer">✕</label>
+                </div>
+
+                <!-- En PHP, les value="" seront remplies avec les données de l'offre -->
+                
+                <form class="modale-form" action="#" method="POST">
+                    <div class="form-groupe">
+                        <label class="form-label">Intitulé du poste</label>
+                        <!-- Valeur pré-remplie simulée pour montrer le rendu -->
+                        <input type="text" name="nom" class="form-input" value="STAGE ADMINISTRATEUR DES SYSTÈMES ET RÉSEAUX" />
+                    </div>
+
+                    <div class="form-ligne">
+                        <div class="form-groupe">
+                            <label class="form-label">Durée</label>
+                            <input type="text" name="duree" class="form-input" value="6 mois" />
+                        </div>
+                        <div class="form-groupe">
+                            <label class="form-label">Salaire</label>
+                            <input type="text" name="salaire" class="form-input" value="650€/mois" />
+                        </div>
+                    </div>
+
+                    <div class="form-ligne">
+                        <div class="form-groupe">
+                            <label class="form-label">Secteur</label>
+                            <input type="text" name="secteur" class="form-input" value="Informatique" />
+                        </div>
+                        <div class="form-groupe">
+                            <label class="form-label">Ville</label>
+                            <input type="text" name="ville" class="form-input" value="Reims" />
+                        </div>
+                    </div>
+
+                    <div class="form-groupe">
+                        <label class="form-label">Genre recherché</label>
+                        <select name="genre" class="form-input">
+                            <option value="H|F" selected>H | F</option>
+                            <option value="H">H</option>
+                            <option value="F">F</option>
+                        </select>
+                    </div>
+
+                    <div class="form-groupe">
+                        <label class="form-label">Description</label>
+                        <textarea name="description" class="form-textarea">Nous recherchons un stagiaire Administrateur Systèmes et Réseaux pour participer à la gestion, la sécurisation et l'optimisation de notre infrastructure informatique.</textarea>
+                    </div>
+
+                    <div class="modale-boutons">
+                        <label for="modal-modifier" class="btn-annuler">Annuler</label>
+                        <button type="submit" class="btn-confirmer">Enregistrer les modifications</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        
+        <div class="modale" id="modale-supprimer">
+            <div class="modale-boite modale-boite-petite">
+                <div class="modale-header">
+                    <h2 class="modale-titre">Supprimer une offre</h2>
+                    <label for="modal-supprimer" class="modale-fermer">✕</label>
+                </div>
+
+                <p class="modale-texte-confirm">
+                    Êtes-vous sûr de vouloir supprimer l'offre <strong>"STAGE ADMINISTRATEUR DES SYSTÈMES ET RÉSEAUX"</strong> ?
+                    <br/><br/>
+                    <span class="modale-avertissement">Cette action est irréversible.</span>
+                </p>
+
+                <!-- En PHP : action="supprimer_offre.php" avec un champ hidden id -->
+                
+                <div class="modale-boutons">
+                    <label for="modal-supprimer" class="btn-annuler">Annuler</label>
+                    <button type="submit" class="btn-supprimer">Oui, supprimer</button>
+                </div>
+            </div>
+        </div>
+
+
 
         <div class="sidebar">
             <div class="photo_profil">
@@ -41,9 +201,10 @@
                         <span class="texte_menu">Offres</span>
                     </div>
                     <div class="sous_menu">
-                        <a href="AjouterOffre.html" class="sous_lien"> Ajouter</a>
-                        <a href="ModifierOffre.html" class="sous_lien"> Modifier</a>
-                        <a href="SupprimerOffre.html" class="sous_lien"> Supprimer</a>
+                        
+                        <label for="modal-ajouter" class="sous_lien"> Ajouter</label>
+                        <label for="modal-modifier" class="sous_lien"> Modifier</label>
+                        <label for="modal-supprimer" class="sous_lien"> Supprimer</label>
                     </div>
                 </div>
 
@@ -52,11 +213,11 @@
                         <img class="icon_menu" src="Images/Image_Etudiant.png"/>
                         <span class="texte_menu">Étudiants</span>
                     </div>
-                    <div class="sous_menu" >
-                        <a href="Liste_Etudiants.html" class="sous_lien"> Mes Étudiants</a>
-                        <a href="Formulaire_Eleve.html" class="sous_lien"> Ajouter</a>
-                        <a href="#" class="sous_lien"> Modifier</a>
-                        <a href="#" class="sous_lien"> Supprimer</a>
+                    <div class="sous_menu">
+                        <a href="Liste_Etudiants.html" class="sous_lien">Mes Étudiants</a>
+                        <a href="Formulaire_Eleve.html" class="sous_lien">Ajouter</a>
+                        <a href="#" class="sous_lien">Modifier</a>
+                        <a href="#" class="sous_lien">Supprimer</a>
                     </div>
                 </div>
 
@@ -66,12 +227,11 @@
                         <span class="texte_menu">Pilotes</span>
                     </div>
                     <div class="sous_menu">
-                        <a href="Formulaires_Entreprise.html" class="sous_lien"> Ajouter</a>
-                        <a href="#" class="sous_lien"> Modifier</a>
-                        <a href="#" class="sous_lien"> Supprimer</a>
+                        <a href="Formulaires_Entreprise.html" class="sous_lien">Ajouter</a>
+                        <a href="#" class="sous_lien">Modifier</a>
+                        <a href="#" class="sous_lien">Supprimer</a>
                     </div>
                 </div>
-
 
                 <a href="APropos.html" class="navigation">
                     <div class="icon_texte_menu">
@@ -88,6 +248,7 @@
             </nav>
         </div>
 
+
         <div class="contenu">
             <div class="barre_top">
                 <a href="Login.html" class="btn_connexion">Connexion</a>
@@ -102,7 +263,6 @@
                 <input type="text" placeholder="Barre de recherche"/>
             </div>
 
-            <!-- PS : C'est des exemples de cartes que j'utilises pour regarder si le filtre marche | et aussi d'avoir un modèle pour tous ce qui est modification et création d'offre -->
             <div class="grille_cartes">
 
                 <div class="carte_entreprise">
@@ -110,38 +270,27 @@
                         <div class="carte_logo">
                             <img class="logo_entreprise" src="Images/Image_Entreprise_Exemple.png" />
                         </div>
-
                         <div class="carte_infos">
-                            <p class="carte_nom">
-                                STAGE ADMINISTRATREUR DES SYSTÈMES ET RÉSEAUX
-                            </p>
-
+                            <p class="carte_nom">STAGE ADMINISTRATEUR DES SYSTÈMES ET RÉSEAUX</p>
                             <div class="carte_tags">
                                 <span class="tag">6 mois</span>
-                                <span class="tag">650/mois</span>
+                                <span class="tag">650€/mois</span>
                                 <span class="tag">Informatique</span>
                                 <span class="tag">H|F</span>
                                 <span class="tag">Reims</span>
                             </div>
                         </div>
                     </div>
-
                     <div class="carte_description_box">
-                        <p class="carte_description">
-                            Nous recherchons un stagiaire Administrateur Systèmes et Réseaux pour participer à la gestion, la sécurisation et l’optimisation de notre infrastructure informatique. Vous interviendrez sur la maintenance des serveurs, le support aux utilisateurs et l’amélioration continue des performances réseau.
-                        </p>
+                        <p class="carte_description">Nous recherchons un stagiaire Administrateur Systèmes et Réseaux pour participer à la gestion, la sécurisation et l'optimisation de notre infrastructure informatique.</p>
                     </div>
-
                     <div class="carte_boutons">
-                        <!-- Faudra remplacer les # par les .html :) quand on aura un peu plus avancé-->
                         <a href="#" class="btn_candidater">Candidater</a>
                         <a href="#" class="btn_wishlist">Ajouter à la Wishlist</a>
                         <a href="#" class="btn_statistiques">Statistiques</a>
                         <a href="#" class="btn_savoir_plus">En savoir plus</a>
                     </div>
                 </div>
-
-
 
                 <div class="carte_entreprise">
                     <div class="carte_header">
@@ -160,9 +309,7 @@
                         </div>
                     </div>
                     <div class="carte_description_box">
-                        <p class="carte_description">
-                            Participation au développement d’applications web modernes, intégration de nouvelles fonctionnalités et optimisation des performances front-end et back-end.
-                        </p>
+                        <p class="carte_description">Participation au développement d'applications web modernes, intégration de nouvelles fonctionnalités et optimisation des performances front-end et back-end.</p>
                     </div>
                     <div class="carte_boutons">
                         <a href="#" class="btn_candidater">Candidater</a>
@@ -189,9 +336,7 @@
                         </div>
                     </div>
                     <div class="carte_description_box">
-                        <p class="carte_description">
-                            Analyse des vulnérabilités, surveillance des incidents de sécurité et participation au renforcement de la protection des systèmes informatiques.
-                        </p>
+                        <p class="carte_description">Analyse des vulnérabilités, surveillance des incidents de sécurité et participation au renforcement de la protection des systèmes informatiques.</p>
                     </div>
                     <div class="carte_boutons">
                         <a href="#" class="btn_candidater">Candidater</a>
@@ -218,9 +363,7 @@
                         </div>
                     </div>
                     <div class="carte_description_box">
-                        <p class="carte_description">
-                            Assistance aux utilisateurs, maintenance des postes informatiques et résolution des incidents matériels et logiciels.
-                        </p>
+                        <p class="carte_description">Assistance aux utilisateurs, maintenance des postes informatiques et résolution des incidents matériels et logiciels.</p>
                     </div>
                     <div class="carte_boutons">
                         <a href="#" class="btn_candidater">Candidater</a>
@@ -247,9 +390,7 @@
                         </div>
                     </div>
                     <div class="carte_description_box">
-                        <p class="carte_description">
-                            Analyse et traitement de données internes afin d’améliorer la prise de décision stratégique de l’entreprise.
-                        </p>
+                        <p class="carte_description">Analyse et traitement de données internes afin d'améliorer la prise de décision stratégique de l'entreprise.</p>
                     </div>
                     <div class="carte_boutons">
                         <a href="#" class="btn_candidater">Candidater</a>
@@ -276,9 +417,7 @@
                         </div>
                     </div>
                     <div class="carte_description_box">
-                        <p class="carte_description">
-                            Participation au recrutement, gestion administrative du personnel et amélioration des processus RH.
-                        </p>
+                        <p class="carte_description">Participation au recrutement, gestion administrative du personnel et amélioration des processus RH.</p>
                     </div>
                     <div class="carte_boutons">
                         <a href="#" class="btn_candidater">Candidater</a>
@@ -305,9 +444,7 @@
                         </div>
                     </div>
                     <div class="carte_description_box">
-                        <p class="carte_description">
-                            Configuration et supervision des équipements réseau, optimisation des performances et sécurisation des flux de données.
-                        </p>
+                        <p class="carte_description">Configuration et supervision des équipements réseau, optimisation des performances et sécurisation des flux de données.</p>
                     </div>
                     <div class="carte_boutons">
                         <a href="#" class="btn_candidater">Candidater</a>
@@ -316,8 +453,8 @@
                         <a href="#" class="btn_savoir_plus">En savoir plus</a>
                     </div>
                 </div>
-            
 
+            </div>
         </div>
 
     </body>
