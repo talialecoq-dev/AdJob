@@ -5,7 +5,7 @@ body {
 .flexbox ul {
   padding: 0;
   display: flex;
-  background-color: #73986f;
+  background-color: #8fa882;
   font-size: 25px;
   margin: 0 auto;
   width: 1500px;
@@ -38,7 +38,7 @@ body {
   transition: background-color 0.3s ease;
 }
 .Flexbox2 {
-  background-color: #73986f;
+  background-color: #8fa882;
   border: 1px solid black;
   border-radius: 10px 10px 10px 10px;
   margin: 20px;
