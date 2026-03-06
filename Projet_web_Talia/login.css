@@ -16,6 +16,7 @@ body {
 .Flexbox1 {
   background-color: #73986f;
   border: 1px solid black;
+  border-radius: 10px 10px 10px 10px;
 }
 
 .Flexbox2 h1 {

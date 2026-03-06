@@ -5,7 +5,7 @@ body {
 .flexbox ul {
   padding: 0;
   display: flex;
-  background-color: #73986f;
+  background-color: #8fa882;
   font-size: 25px;
   margin: 0 auto;
   width: 1500px;
@@ -37,65 +37,37 @@ body {
   background-color: #d698a8;
   transition: background-color 0.3s ease;
 }
-.Flexbox1 {
-  background-color: #73986f;
+.Flexbox2 {
+  background-color: #8fa882;
   border: 1px solid black;
-  border-radius: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 20px;
-}
-.flexbox1 {
-  background-color: #ca748d;
-  border: 2px solid black;
   border-radius: 10px 10px 10px 10px;
   margin: 20px;
-  width: 100%;
-  text-align: center;
 }
-.Flexbox2,
-.Flexbox3,
-.Flexbox4,
-.Flexbox5,
-.Flexbox7,
-.Flexbox8,
-.Flexbox9,
-.Flexbox10 {
+.Flexbox2 h2 {
   background-color: #eed5db;
+  margin: 20px;
   border: 1px solid black;
-  border-radius: 10px;
-  margin: 15px;
+  border-radius: 10px 10px 10px 10px;
+  margin: 20px;
+  padding: 10px;
+  margin: 20px 1100px 20px 20px;
+}
+.Flexbox3 {
+  background-color: #b1b9ac;
+  border: 1px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 20px 1300px 20px 20px;
   padding: 10px;
 }
-.Flexbox2 h2,
-.Flexbox3 h2,
-.Flexbox4 h2,
-.Flexbox5 h2,
-.Flexbox7 h2,
-.Flexbox8 h2,
-.Flexbox9 h2,
-.Flexbox10 h2 {
-  background-color: #ca748d;
-  border: 2px solid black;
-  border-radius: 10px 10px 10px 10px;
-  margin: 20px;
-}
-.Flexbox2 input,
-.Flexbox3 input,
-.Flexbox4 input,
-.Flexbox5 textarea,
-.Flexbox7 input,
-.Flexbox8 input,
-.Flexbox9 input,
-.Flexbox10 input {
-  width: 90%;
+.Flexbox4 {
+  margin: 10px;
   box-sizing: border-box;
-  margin: 20px;
+  width: 80%;
 }
-.colonne-gauche,
-.colonne-droite {
-  flex: 1;
-  min-width: 300px;
-  max-width: 600px;
+.Flexbox5 {
+  background-color: #eed5db;
+  border: 1px solid black;
+  border-radius: 10px 10px 10px 10px;
+  margin: 20px 1300px 20px 20px;
+  padding: 10px;
 }
