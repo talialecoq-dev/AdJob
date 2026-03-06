@@ -1,0 +1,17 @@
+{
+    "name": "doria/projet_web_talia",
+    "autoload": {
+        "psr-4": {
+            "Doria\\ProjetWebTalia\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dorian LECOMTE",
+            "email": "dorian.lecomte@viacesi.fr"
+        }
+    ],
+    "require": {
+        "twig/twig": "^3.23"
+    }
+}
