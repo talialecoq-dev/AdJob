@@ -5,7 +5,9 @@
     <meta charset="utf-8" />
     <div class="FlexboxL">
       <div class="Logo">
-        <div class="FlexboxL2"><center><img src="Images/Logo.png" alt="" /></center></div>
+        <div class="FlexboxL2">
+          <center><img src="Images/Logo.png" alt="" /></center>
+        </div>
       </div>
     </div>
   </head>
@@ -22,23 +24,33 @@
     <div class="Flexbox3">
       <br />
       <br />
-      <center>
-        <div class="Flexbox4"><h2>Adresse Mail :</h2></div>
-        <input type="text" id="name" placeholder="Entrez votre Adresse Mail"/>
-      </center>
-
-      <br /><br />
-      <center>
-        <div class="Flexbox5"><h2>Mot de passe :</h2></div>
-        <input type="text" id="name" placeholder="Entrez Mot de Passe" />
-      </center>
-      <br /><br />
-
-      <div class="Flexbox6">
+      <form action="Acceuil.html" method="GET">
         <center>
-          <div class="Flexbox7"><center> <input type="submit" value ="Se connecter"></center></div>
-        
-      </div>
+          <div class="Flexbox4"><h2>Adresse Mail :</h2></div>
+          <input
+            type="email"
+            id="email"
+            placeholder="Entrez votre Adresse Mail"
+          />
+        </center>
+
+        <br /><br />
+        <center>
+          <div class="Flexbox5"><h2>Mot de passe :</h2></div>
+          <input
+            type="password"
+            id="password"
+            placeholder="Entrez Mot de Passe"
+          />
+        </center>
+        <br /><br />
+
+        <div class="Flexbox6">
+          <div class="Flexbox7">
+            <center><input type="submit" value="Se connecter" /></center>
+          </div>
+        </div>
+      </form>
     </div>
   </body>
 </html>
