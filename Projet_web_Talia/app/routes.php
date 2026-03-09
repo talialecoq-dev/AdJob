@@ -10,6 +10,7 @@ use App\Application\Controller\HomeController;
 use App\Application\Controller\EntrepriseController;
 use App\Application\Controller\PiloteController;
 
+
 return function (App $app) {
     $app->options('/{routes:.*}', function (Request $request, Response $response) {
         // CORS Pre-Flight OPTIONS Request Handler
@@ -20,7 +21,7 @@ return function (App $app) {
 
     $app->get('/pilote', [PiloteController::class, 'profil']);
     
-    
+    $app->get('/Entreprise', [EntrepriseController::class, 'inscription']);
 
     /*
     $app->group('/users', function (Group $group) {Q
