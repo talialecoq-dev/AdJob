@@ -8,6 +8,7 @@ use Slim\App;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 use App\Application\Controller\HomeController;
 use App\Application\Controller\EntrepriseController;
+use App\Application\Controller\PiloteController;
 
 return function (App $app) {
     $app->options('/{routes:.*}', function (Request $request, Response $response) {
@@ -16,13 +17,14 @@ return function (App $app) {
     });
 
     $app->get('/', [HomeController::class, 'home']);
-    $app->get('/entreprises[/{page:\d+}]', [EntrepriseController::class, 'liste'])->setName('liste-entreprises');
-    $app->get('/ajout-entreprise', [EntrepriseController::class, 'ajoute'])->setName('ajout-entreprise');
-    $app->post('/ajout-entreprise', [EntrepriseController::class, 'ajoute'])->setName('ajout-entreprise');
+
+    $app->get('/pilote', [PiloteController::class, 'profil']);
+    
     
 
     /*
-    $app->group('/users', function (Group $group) {
+    $app->group('/users', function (Group $group) {Q
+
         $group->get('', ListUsersAction::class);
         $group->get('/{id}', ViewUserAction::class);
     });
