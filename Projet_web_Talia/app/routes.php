@@ -19,7 +19,7 @@ return function (App $app) {
 
     $app->get('/', [HomeController::class, 'home']);
 
-    $app->get('/pilote', [PiloteController::class, 'profil']);
+    $app->get('/profil', [PiloteController::class, 'profil']);
     
     $app->get('/Entreprise', [EntrepriseController::class, 'inscription']);
 

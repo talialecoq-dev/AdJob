@@ -10,6 +10,6 @@ class PiloteController
     public function profil(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $view = Twig::fromRequest($request);
-        return $view->render($response, 'Page_Profil_Pilote.html.twig', []);
+        return $view->render($response, 'Pilotes/Page_Profil_Pilote.html.twig', []);
     }
 }
