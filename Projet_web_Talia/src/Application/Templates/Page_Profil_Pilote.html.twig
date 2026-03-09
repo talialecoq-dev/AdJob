@@ -5,78 +5,74 @@
   <head>
     <meta charset="utf-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="Random.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <title>AdJob</title>
   </head>
 
   <body> 
 
-
-    <nav class="navbar">
-  <div class="container">
-    <span class="navbar-brand mb-0 h1">Acceuil</span>
-    <span class="navbar-brand mb-0 h1">Avis</span>
-    <span class="navbar-brand mb-0 h1">Contact</span>
-    <span class="navbar-brand mb-0 h1">A propos</span>
-    <span class="navbar-brand mb-0 h1">Deconnexion</span>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Acceuil</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Profil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Candidatures</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Etudiants
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Ajouter un étudiant</a></li>
+             <li><a class="dropdown-item" href="#">Modifier un étudiant</a></li>
+             <li><a class="dropdown-item" href="#">Supprimer un étudiant</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Mes Etudiants</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Pilotes
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Ajouter un pilote</a></li>
+             <li><a class="dropdown-item" href="#">Modifier un pilote</a></li>
+             <li><a class="dropdown-item" href="#">Supprimer un pilote</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Mes Pilotes</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Entreprises
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Ajouter une entreprise</a></li>
+             <li><a class="dropdown-item" href="#">Modifier une entreprise</a></li>
+             <li><a class="dropdown-item" href="#">Supprimer une entreprise</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Paramètres</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
   </div>
 </nav>
 
-    <div class="text-center">
-  <img src="" class="rounded" alt="...">
-</div>
 
-
-
-<div class="flexbox2">
-<div class="container">
-<div class="colonne2">
-<div class="colonne">
-  <h1>Information personnel</h1>
-        <p2>
-        <label for="name" >Nom :</label> <br>
-        <input type="text" id = "name" placeholder="Entree votre nom" ><br><br>
-        <label for="surname">Prenom :</label><br>
-        <input type="text" id = "surname" placeholder="Entree votre Prenom" ><br><br>
-        <form>
-        Civilité : <br>
-        <select name = "Civilité">
-            <option value="Monsieur">Monsieur</option>
-            <option value="Madame">Madame</option>
-            <option value="Je prefere ne pas repondre">Je prefere pas repondre</option>
-
-        </select> <br><br>
-        <label for="email" >Couriel :</label> <br>
-        <input type="text" id = "email" placeholder="Entree votre email"><br><br>
-        <form>
-        <label for="age">Date de naissance</label><br>
-        <input type="date" required>
-        </form><br>
-        <label for="password" >Mots de passe :</label> <br>
-        <input type="text" id = "password" placeholder="Entree votre mot de passe "><br>
-        </p2>
-        </div><br><br>
-        </div>
-        <div class="colonne2">
-        <div class="colonne">
-        
-        <h2>Information Complementaire</h2>
-      <p>
-        <label for="name" >Nom de l'entreprise:</label> <br>
-        <input type="text" id = "name" placeholder="Entree le nom de votre entreprise" ><br><br>
-        <label for="promo" >Promo :</label> <br>
-        <input type="text" id = "promo" placeholder="Entree votre nom de promo" ><br><br>
-        <label for="adresse" >adresse de l'entreprise:</label> <br>
-        <input type="text" id = "adresse" placeholder="Entree l'adresse de l'entreprise" ><br><br>
-        <label for="postale" >Code postale:</label> <br>
-        <input type="text" id = "postale" placeholder="Entree le code postale de l'entreprise" ><br><br>
-        <label for="mail" >Modifier l'adresse mail :</label> <br>
-        <input type="text" id = "mail" placeholder="Modifier votre adresse mail" ><br><br>
-        <label for="password" >Modifier votre password :</label> <br>
-        <input type="text" id = "password" placeholder="Modifier votre mots de passe" ><br><br> </p>
-     </body> <br><br></div>
-     </div>
-    </div>
+     </body> 
     
   
      <div class="mention">
