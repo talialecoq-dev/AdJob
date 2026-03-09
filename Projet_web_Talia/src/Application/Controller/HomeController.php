@@ -14,7 +14,7 @@ class HomeController
     {
        $view = Twig::fromRequest($request);
     
-        return $view->render($response, 'home.html.twig', [
+        return $view->render($response, 'Accueil.html.twig', [
             'name' => 'John',
         ]);
     }
