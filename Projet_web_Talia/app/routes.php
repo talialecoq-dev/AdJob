@@ -8,6 +8,9 @@ use Slim\App;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 use App\Application\Controller\HomeController;
 use App\Application\Controller\EntrepriseController;
+use App\Application\Controller\ProfilController;
+use App\Application\Controller\CandidaturesController;
+use App\Application\Controller\ÉtudiantController;
 use App\Application\Controller\PiloteController;
 
 
@@ -19,9 +22,23 @@ return function (App $app) {
 
     $app->get('/', [HomeController::class, 'home']);
 
-    $app->get('/profil', [PiloteController::class, 'profil']);
+    $app->get('/Profil', [ProfilController::class, 'profil']);
     
-    $app->get('/Entreprise', [EntrepriseController::class, 'inscription']);
+    $app->get('/Inscription-Entreprise', [EntrepriseController::class, 'inscription']);
+    $app->get('/Modifier-Entreprise', [EntrepriseController::class, 'modifier']);
+    $app->get('/Supprimer-Entreprise', [EntrepriseController::class, 'supprimer']);
+
+    $app->get('/Inscription-Étudiant', [ÉtudiantController::class, 'inscription']);
+    $app->get('/Modifier-Étudiant', [ÉtudiantController::class, 'modifier']);
+    $app->get('/Supprimer-Étudiant', [ÉtudiantController::class, 'supprimer']);
+
+    $app->get('/Inscription-Pilote', [PiloteController::class, 'inscription']);
+    $app->get('/Modifier-Pilote', [PiloteController::class, 'modifier']);
+    $app->get('/Supprimer-Pilote', [PiloteController::class, 'supprimer']);
+
+
+
+    $app->get('/Candidatures', [CandidaturesController::class, 'candidatures']);
 
     /*
     $app->group('/users', function (Group $group) {Q
