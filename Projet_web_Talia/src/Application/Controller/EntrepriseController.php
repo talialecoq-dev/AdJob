@@ -10,6 +10,6 @@ class EntrepriseController
     public function inscription(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $view = Twig::fromRequest($request);
-        return $view->render($response, 'Page_Inscription_Entreprise.html.twig', []);
+        return $view->render($response, 'Entreprise/Page_Inscription_Entreprise.html.twig', []);
     }
 }
