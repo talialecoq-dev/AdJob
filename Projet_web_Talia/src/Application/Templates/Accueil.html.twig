@@ -3,17 +3,6 @@
 {% block title %}Accueil - AdJob{% endblock %}
 
 {% block content %}
-<div class="text-center mt-3">
-  <img src="Image/Logo.png" class="img-fluid" alt="logo" width="400" height="400">
-  <div class="d-flex justify-content-center mt-2">
-    <form class="d-flex" role="search">
-      <input class="form-control me-2" type="search" style="width: 600px;" placeholder="Rechercher..."/>
-      <button class="btn btn-outline-success" type="submit">
-        <img src="Images/Image_Loupe.png" alt="Rechercher" width="30" height="30">
-      </button>
-    </form>
-  </div>
-</div>
-
-
+  {% include 'Offres/Page_Filtres_Offre.html.twig' %}
+  {% include 'Offres/Page_Modal_Ajout_Offre.html.twig' %}
 {% endblock %}
