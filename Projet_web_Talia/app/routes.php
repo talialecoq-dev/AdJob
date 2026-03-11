@@ -12,6 +12,7 @@ use App\Application\Controller\ProfilController;
 use App\Application\Controller\CandidaturesController;
 use App\Application\Controller\ÉtudiantController;
 use App\Application\Controller\PiloteController;
+use App\Application\Controller\WishlistController;
 
 
 return function (App $app) {
@@ -36,7 +37,7 @@ return function (App $app) {
     $app->get('/Modifier-Pilote', [PiloteController::class, 'modifier']);
     $app->get('/Supprimer-Pilote', [PiloteController::class, 'supprimer']);
 
-
+    $app->get('/Whishlist', [WishlistController::class, 'wishlist']);
 
     $app->get('/Candidatures', [CandidaturesController::class, 'candidatures']);
 
