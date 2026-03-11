@@ -1,3 +1,4 @@
-{% extends "Bases/Base.html.twig" %}
-
-{% block title %}Inscription Pilote - AdJob{% endblock %}
+{% block content %}
+    {% set type = "Pilote" %}
+    {% include "Entreprises/Page_Inscription_Entreprise.html.twig" %}
+{% endblock %}
