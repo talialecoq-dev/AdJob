@@ -3,23 +3,25 @@
 <style>
 .col {
   padding : 15px; 
+  background-color : #a0a890 ;
 }
+
 
 </style>
 {% endblock %}
 {% block content %}
 
 <div class="col ">
-  <label for="Nom de l'entreprise" class="form-label pt-2">Nom de l'entreprise</label>
+  <label for="Nom de l'entreprise" class="form-label pt-2 m-2">Nom de l'entreprise</label>
   <input type="text" class="form-control" id="Nom de l'entreprise" placeholder="Entrez le nom de votre entreprise">
 </div> 
 <div class="row g-3">
   <div class="col ">
-  <label for="Nom de l'entreprise" class="form-label pt-2">Téléphone de l'entreprise</label>
+  <label for="Nom de l'entreprise" class="form-label pt-2 m-2">Téléphone de l'entreprise</label>
   <input type="num" class="form-control" id="Nom de l'entreprise" placeholder="Entrez le téléphone de votre entreprise">
 </div>
 <div class="col ">  
-    <label for="Email de l'entreprise" class="form-label pt-2">Email</label>
+    <label for="Email de l'entreprise" class="form-label pt-2 m-2">Email</label>
     <input type="email" class="form-control" id="Email de l'entreprise" placeholder="Entrez l'adresse email de contact de votre entreprise">
 </div>
   </div>
@@ -27,26 +29,26 @@
 
 <div class="row g-3">   
 <div class="col ">
-  <label for="Secteur d'activité de l'entreprise" class="form-label pt-2">Secteur d'activité </label>
+  <label for="Secteur d'activité de l'entreprise" class="form-label pt-2 m-2">Secteur d'activité </label>
   <input type="text" class="form-control" id="Adresse de l'entreprise" placeholder="Entrez le secteur d'activité de votre entreprise">
 </div>
 <div class="col ">
-  <label for="Site internet de l'entreprise" class="form-label pt-2">Site Internet </label>
+  <label for="Site internet de l'entreprise" class="form-label pt-2 m-2">Site Internet </label>
   <input type="text" class="form-control" id="Adresse de l'entreprise" placeholder="Entrez le site internet de votre entreprise">
 </div>
 </div>
 
   <div class="col ">
-  <label for="Adresse de l'entreprise" class="form-label pt-2">Adresse Postal </label>
+  <label for="Adresse de l'entreprise" class="form-label pt-2 m-2">Adresse Postal </label>
   <input type="text" class="form-control" id="Adresse de l'entreprise" placeholder="Entrez l'adresse Postal de votre entreprise">
 </div>
 <form class="row g-3">
   <div class="col-md-6">
-    <label for="inputCity" class="form-label pt-2">Ville</label>
+    <label for="inputCity" class="form-label pt-2 m-2">Ville</label>
     <input type="text" class="form-control" id="inputCity" placeholder="Entrez la ville de votre entreprise ">
   </div>
   <div class="col-md-4">
-    <label for="inputState" class="form-label pt-2">Region</label>
+    <label for="inputState" class="form-label pt-2 m-2">Region</label>
     <select id="inputState" class="form-select">
     <option selected>Choisir votre region </option>
     <option>Auvergne-Rhône-Alpes</option>
@@ -65,11 +67,11 @@
   </div>
   </form>
   <div class="col-md-6">
-  <label for="formFile" class="form-label pt-2">Choisissez une image</label>
+  <label for="formFile" class="form-label pt-2 m-2">Choisissez une image</label>
   <input class="form-control" type="file" id="formFile" accept="image/*">
 </div>
- <div class="col-12">
-    <button type="submit" class="btn btn-primary pt-4">Submit</button>
+ <div class="col-12 pt-4 m-2">
+    <button type="submit" class="btn btn-primary">Submit</button>
   </div>
 </form>
 
