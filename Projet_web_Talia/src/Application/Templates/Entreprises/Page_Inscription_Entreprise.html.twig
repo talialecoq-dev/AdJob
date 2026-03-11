@@ -1,5 +1,9 @@
 {% extends "Bases/Base.html.twig" %}
+
+
 {% block style %}
+
+
 <style>
 .col {
   padding : 15px; 
@@ -11,6 +15,29 @@
 {% endblock %}
 {% block content %}
 
+{% if type == "Etudiants" %}
+<div class="col ">
+  <label for="Nom de l'étudiant" class="form-label pt-2 m-2">Nom de l'étudiant</label>
+  <input type="text" class="form-control" id="Nom de l'étudiant" placeholder="Entrez le nom de l'étudiant">
+</div>
+<div class="col ">
+  <label for="Prénom de l'étudiant" class="form-label pt-2 m-2">Prénom de l'étudiant</label>
+  <input type="text" class="form-control" id="Prénom de l'étudiant" placeholder="Entrez le prénom de l'étudiant"> 
+</div>
+
+{% elseif type == "Pilote" %}
+
+<div class="col ">
+  <label for="Nom du pilote" class="form-label pt-2 m-2">Nom du pilote</label>
+  <input type="text" class="form-control" id="Nom du pilote" placeholder="Entrez le nom du pilote">
+</div>
+<div class="col ">
+  <label for="Prénom du pilote" class="form-label pt-2 m-2">Prénom du pilote</label>
+  <input type="text" class="form-control" id="Prénom du pilote" placeholder="Entrez le prénom du pilote">
+</div>
+
+{% else %}
+
 <div class="col ">
   <label for="Nom de l'entreprise" class="form-label pt-2 m-2">Nom de l'entreprise</label>
   <input type="text" class="form-control" id="Nom de l'entreprise" placeholder="Entrez le nom de votre entreprise">
@@ -20,12 +47,6 @@
   <label for="Nom de l'entreprise" class="form-label pt-2 m-2">Téléphone de l'entreprise</label>
   <input type="num" class="form-control" id="Nom de l'entreprise" placeholder="Entrez le téléphone de votre entreprise">
 </div>
-<div class="col ">  
-    <label for="Email de l'entreprise" class="form-label pt-2 m-2">Email</label>
-    <input type="email" class="form-control" id="Email de l'entreprise" placeholder="Entrez l'adresse email de contact de votre entreprise">
-</div>
-  </div>
-
 
 <div class="row g-3">   
 <div class="col ">
@@ -37,6 +58,19 @@
   <input type="text" class="form-control" id="Adresse de l'entreprise" placeholder="Entrez le site internet de votre entreprise">
 </div>
 </div>
+
+{% endif %}
+
+
+
+
+
+<div class="col ">  
+    <label for="Email de l'entreprise" class="form-label pt-2 m-2">Email</label>
+    <input type="email" class="form-control" id="Email de l'entreprise" placeholder="Entrez l'adresse email de contact de votre entreprise">
+</div>
+  </div>
+
 
   <div class="col ">
   <label for="Adresse de l'entreprise" class="form-label pt-2 m-2">Adresse Postal </label>
