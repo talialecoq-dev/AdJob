@@ -13,6 +13,7 @@ use App\Application\Controller\CandidaturesController;
 use App\Application\Controller\ÉtudiantController;
 use App\Application\Controller\PiloteController;
 use App\Application\Controller\WishlistController;
+use App\Application\Controller\LoginController;
 
 
 return function (App $app) {
@@ -24,6 +25,8 @@ return function (App $app) {
     $app->get('/', [HomeController::class, 'home']);
 
     $app->get('/Profil', [ProfilController::class, 'profil']);
+
+    $app->get('/Login', [LoginController::class, 'login']);
     
     $app->get('/Inscription-Entreprise', [EntrepriseController::class, 'inscription']);
     $app->get('/Modifier-Entreprise', [EntrepriseController::class, 'modifier']);
