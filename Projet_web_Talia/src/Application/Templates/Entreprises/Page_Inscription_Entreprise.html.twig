@@ -2,112 +2,121 @@
 
 
 {% block style %}
+	<style>
 
+		.main-container .col {
+			background-color: #ffffff;
+			border: 2px solid #a0a890;
+			border-radius: 12px;
+			padding: 25px;
+			margin-bottom: 20px;
 
-<style>
-.col {
-  padding : 15px; 
-  background-color : #a0a890 ;
-}
-
-
-
-</style>
+			display: block;
+		}
+		.btn-primary {
+			background-color: #a0a890;
+			border: none;
+			padding: 10px 40px;
+			font-weight: bold;
+		}
+	</style>
 {% endblock %}
 {% block content %}
+	<div class="main-container">
+		<div class="container">
+			{% if type == "Etudiants" %}
+				<div class="col">
+					<label for="Nom de l'étudiant" class="form-label pt-2 m-2">Nom de l'étudiant</label>
+					<input type="text" class="form-control" id="Nom de l'étudiant" placeholder="Entrez le nom de l'étudiant">
+				</div>
+				<div class="col">
+					<label for="Prénom de l'étudiant" class="form-label pt-2 m-2">Prénom de l'étudiant</label>
+					<input type="text" class="form-control" id="Prénom de l'étudiant" placeholder="Entrez le prénom de l'étudiant">
+				</div>
 
-{% if type == "Etudiants" %}
-<div class="col ">
-  <label for="Nom de l'étudiant" class="form-label pt-2 m-2">Nom de l'étudiant</label>
-  <input type="text" class="form-control" id="Nom de l'étudiant" placeholder="Entrez le nom de l'étudiant">
-</div>
-<div class="col ">
-  <label for="Prénom de l'étudiant" class="form-label pt-2 m-2">Prénom de l'étudiant</label>
-  <input type="text" class="form-control" id="Prénom de l'étudiant" placeholder="Entrez le prénom de l'étudiant"> 
-</div>
+			{% elseif type == "Pilote" %}
 
-{% elseif type == "Pilote" %}
+				<div class="col">
+					<label for="Nom du pilote" class="form-label pt-2 m-2">Nom du pilote</label>
+					<input type="text" class="form-control" id="Nom du pilote" placeholder="Entrez le nom du pilote">
+				</div>
+				<div class="col">
+					<label for="Prénom du pilote" class="form-label pt-2 m-2">Prénom du pilote</label>
+					<input type="text" class="form-control" id="Prénom du pilote" placeholder="Entrez le prénom du pilote">
+				</div>
 
-<div class="col ">
-  <label for="Nom du pilote" class="form-label pt-2 m-2">Nom du pilote</label>
-  <input type="text" class="form-control" id="Nom du pilote" placeholder="Entrez le nom du pilote">
-</div>
-<div class="col ">
-  <label for="Prénom du pilote" class="form-label pt-2 m-2">Prénom du pilote</label>
-  <input type="text" class="form-control" id="Prénom du pilote" placeholder="Entrez le prénom du pilote">
-</div>
+			{% else %}
 
-{% else %}
+				<div class="col">
+					<label for="Nom de l'entreprise" class="form-label pt-2 m-2">Nom de l'entreprise</label>
+					<input type="text" class="form-control" id="Nom de l'entreprise" placeholder="Entrez le nom de votre entreprise">
+				</div>
+				<div class="row g-3">
+					<div class="col">
+						<label for="Nom de l'entreprise" class="form-label pt-2 m-2">Téléphone de l'entreprise</label>
+						<input type="num" class="form-control" id="Nom de l'entreprise" placeholder="Entrez le téléphone de votre entreprise">
+					</div>
 
-<div class="col ">
-  <label for="Nom de l'entreprise" class="form-label pt-2 m-2">Nom de l'entreprise</label>
-  <input type="text" class="form-control" id="Nom de l'entreprise" placeholder="Entrez le nom de votre entreprise">
-</div> 
-<div class="row g-3">
-  <div class="col ">
-  <label for="Nom de l'entreprise" class="form-label pt-2 m-2">Téléphone de l'entreprise</label>
-  <input type="num" class="form-control" id="Nom de l'entreprise" placeholder="Entrez le téléphone de votre entreprise">
-</div>
+					<div class="row g-3">
+						<div class="col">
+							<label for="Secteur d'activité de l'entreprise" class="form-label pt-2 m-2">Secteur d'activité
+							</label>
+							<input type="text" class="form-control" id="Adresse de l'entreprise" placeholder="Entrez le secteur d'activité de votre entreprise">
+						</div>
+						<div class="col">
+							<label for="Site internet de l'entreprise" class="form-label pt-2 m-2">Site Internet
+							</label>
+							<input type="text" class="form-control" id="Adresse de l'entreprise" placeholder="Entrez le site internet de votre entreprise">
+						</div>
+					</div>
 
-<div class="row g-3">   
-<div class="col ">
-  <label for="Secteur d'activité de l'entreprise" class="form-label pt-2 m-2">Secteur d'activité </label>
-  <input type="text" class="form-control" id="Adresse de l'entreprise" placeholder="Entrez le secteur d'activité de votre entreprise">
-</div>
-<div class="col ">
-  <label for="Site internet de l'entreprise" class="form-label pt-2 m-2">Site Internet </label>
-  <input type="text" class="form-control" id="Adresse de l'entreprise" placeholder="Entrez le site internet de votre entreprise">
-</div>
-</div>
-
-{% endif %}
-
-
-
-
-
-<div class="col ">  
-    <label for="Email de l'entreprise" class="form-label pt-2 m-2">Email</label>
-    <input type="email" class="form-control" id="Email de l'entreprise" placeholder="Entrez l'adresse email de contact de votre entreprise">
-</div>
-  </div>
+				{% endif %}
 
 
-  <div class="col ">
-  <label for="Adresse de l'entreprise" class="form-label pt-2 m-2">Adresse Postal </label>
-  <input type="text" class="form-control" id="Adresse de l'entreprise" placeholder="Entrez l'adresse Postal de votre entreprise">
-</div>
-<form class="row g-3">
-  <div class="col-md-6">
-    <label for="inputCity" class="form-label pt-2 m-2">Ville</label>
-    <input type="text" class="form-control" id="inputCity" placeholder="Entrez la ville de votre entreprise ">
-  </div>
-  <div class="col-md-4">
-    <label for="inputState" class="form-label pt-2 m-2">Region</label>
-    <select id="inputState" class="form-select">
-    <option selected>Choisir votre region </option>
-    <option>Auvergne-Rhône-Alpes</option>
-    <option>Bourgogne-Franche-Comté</option>
-    <option>Bretagne</option>
-    <option>Centre-Val de Loire</option>
-    <option>Grand Est</option>
-    <option>Hauts-de-France</option>
-    <option>Ile-de-France</option> 
-    <option>Normandie</option>
-    <option>Nouvelle-Aquitaine</option>
-    <option>Occitanie</option>
-    <option>Pays de la Loire</option>
-    <option>Provence Alpes Côte d’Azur</option>
-    </select>
-  </div>
-  </form>
-  <div class="col-md-6">
-  <label for="formFile" class="form-label pt-2 m-2">Choisissez une image</label>
-  <input class="form-control" type="file" id="formFile" accept="image/*">
-</div>
- <div class="col-12 pt-4 m-2">
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </div>
-</form>
+				<div class="col">
+					<label for="Email de l'entreprise" class="form-label pt-2 m-2">Email</label>
+					<input type="email" class="form-control" id="Email de l'entreprise" placeholder="Entrez l'adresse email de contact de votre entreprise">
+				</div>
+			</div>
 
+
+			<div class="col">
+				<label for="Adresse de l'entreprise" class="form-label pt-2 m-2">Adresse Postal
+				</label>
+				<input type="text" class="form-control" id="Adresse de l'entreprise" placeholder="Entrez l'adresse Postal de votre entreprise">
+			</div>
+			<form class="row g-3">
+				<div class="col-md-6">
+					<label for="inputCity" class="form-label pt-2 m-2">Ville</label>
+					<input type="text" class="form-control" id="inputCity" placeholder="Entrez la ville de votre entreprise ">
+				</div>
+				<div class="col-md-4">
+					<label for="inputState" class="form-label pt-2 m-2">Region</label>
+					<select id="inputState" class="form-select">
+						<option selected>Choisir votre region
+						</option>
+						<option>Auvergne-Rhône-Alpes</option>
+						<option>Bourgogne-Franche-Comté</option>
+						<option>Bretagne</option>
+						<option>Centre-Val de Loire</option>
+						<option>Grand Est</option>
+						<option>Hauts-de-France</option>
+						<option>Ile-de-France</option>
+						<option>Normandie</option>
+						<option>Nouvelle-Aquitaine</option>
+						<option>Occitanie</option>
+						<option>Pays de la Loire</option>
+						<option>Provence Alpes Côte d’Azur</option>
+					</select>
+				</div>
+			</form>
+			<div class="col-md-6">
+				<label for="formFile" class="form-label pt-2 m-2">Choisissez une image</label>
+				<input class="form-control" type="file" id="formFile" accept="image/*">
+			</div>
+			<div class="col-12 pt-4 m-2">
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</div>
+		</div>
+	</div>
 {% endblock %}
