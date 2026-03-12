@@ -1,3 +1,37 @@
 {% extends "Bases/Base.html.twig" %}
 
-{% block title %}Supprimer Pilote - AdJob{% endblock %}
+{% block content %}
+
+<h1>Liste des pilotes</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Prénom</th>
+      <th scope="col">Nom</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td><a href="#" class="btn" style="background-color:#73986f; color:white; border-color:#73986f;">Supprimer</a></td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td><a href="#" class="btn" style="background-color:#73986f; color:white; border-color:#73986f;">Supprimer</a></td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>John</td>
+      <td>Doe</td>
+      <td><a href="#" class="btn" style="background-color:#73986f; color:white; border-color:#73986f;">Supprimer</a></td>
+    </tr>
+  </tbody>
+
+
+{% endblock %}
