@@ -29,16 +29,18 @@ return function (App $app) {
     $app->get('/Login', [LoginController::class, 'login']);
     
     $app->get('/Inscription-Entreprise', [EntrepriseController::class, 'inscription']);
-    $app->get('/Modifier-Entreprise', [EntrepriseController::class, 'modifier']);
+    $app->get('/Liste-Entreprises', [EntrepriseController::class, 'liste']);
     $app->get('/Supprimer-Entreprise', [EntrepriseController::class, 'supprimer']);
 
     $app->get('/Inscription-Étudiant', [ÉtudiantController::class, 'inscription']);
-    $app->get('/Modifier-Étudiant', [ÉtudiantController::class, 'modifier']);
+    $app->get('/Liste-Étudiants', [ÉtudiantController::class, 'liste']);
     $app->get('/Supprimer-Étudiant', [ÉtudiantController::class, 'supprimer']);
+    $app->get('/Modifier-Étudiant', [ÉtudiantController::class, 'modifier']);
 
     $app->get('/Inscription-Pilote', [PiloteController::class, 'inscription']);
-    $app->get('/Modifier-Pilote', [PiloteController::class, 'modifier']);
+    $app->get('/Liste-Pilotes', [PiloteController::class, 'liste']);
     $app->get('/Supprimer-Pilote', [PiloteController::class, 'supprimer']);
+    $app->get('/Modifier-Pilote', [PiloteController::class, 'modifier']);
 
     $app->get('/Whishlist', [WishlistController::class, 'wishlist']);
 

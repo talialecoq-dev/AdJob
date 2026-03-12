@@ -13,10 +13,10 @@ class EntrepriseController
         return $view->render($response, 'Entreprises/Page_Inscription_Entreprise.html.twig', []);
     }
 
-    public function modifier(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    public function liste(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $view = Twig::fromRequest($request);
-        return $view->render($response, 'Entreprises/Page_Modifier_Entreprise.html.twig', []);
+        return $view->render($response, 'Entreprises/Page_Liste_Entreprises.html.twig', []);
     }
 
     public function supprimer(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
