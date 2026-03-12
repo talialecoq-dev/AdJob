@@ -1,100 +1,76 @@
 {% extends "Bases/Base.html.twig" %}
 
-
-{% block style %}
-	<style>
-
-		.main-container .col {
-			background-color: #ffffff;
-			border: 2px solid #a0a890;
-			border-radius: 12px;
-			padding: 25px;
-			margin-bottom: 20px;
-
-			display: block;
-		}
-		.btn-primary {
-			background-color: #a0a890;
-			border: none;
-			padding: 10px 40px;
-			font-weight: bold;
-		}
-	</style>
-{% endblock %}
 {% block content %}
-	<div class="main-container">
-		<div class="container">
+
+	<div class="main-container" style="background-color: #eed4cb; padding: 50px ; ">
+
+
+		<div class="container" style="background-color: #ffffff; border-radius: 12px; padding: 30px; max-width: 700px; border: 1px solid #a0a890; margin: auto;">
+
+			<h2>Inscription</h2>
+
 			{% if type == "Etudiants" %}
-				<div class="col">
+				<div class="mb-3">
 					<label for="Nom de l'étudiant" class="form-label pt-2 m-2">Nom de l'étudiant</label>
-					<input type="text" class="form-control" id="Nom de l'étudiant" placeholder="Entrez le nom de l'étudiant">
+					<input type="text" class="form-control" id="Nom de l'étudiant" placeholder="Entrez le nom de l'étudiant" style="border: 1px solid #a0a890;">
 				</div>
-				<div class="col">
+				<div class="mb-3">
 					<label for="Prénom de l'étudiant" class="form-label pt-2 m-2">Prénom de l'étudiant</label>
-					<input type="text" class="form-control" id="Prénom de l'étudiant" placeholder="Entrez le prénom de l'étudiant">
+					<input type="text" class="form-control" id="Prénom de l'étudiant" placeholder="Entrez le prénom de l'étudiant" style="border: 1px solid #a0a890;">
 				</div>
 
 			{% elseif type == "Pilote" %}
-
-				<div class="col">
+				<div class="mb-3">
 					<label for="Nom du pilote" class="form-label pt-2 m-2">Nom du pilote</label>
-					<input type="text" class="form-control" id="Nom du pilote" placeholder="Entrez le nom du pilote">
+					<input type="text" class="form-control" id="Nom du pilote" placeholder="Entrez le nom du pilote" style="border: 1px solid #a0a890;">
 				</div>
-				<div class="col">
+				<div class="mb-3">
 					<label for="Prénom du pilote" class="form-label pt-2 m-2">Prénom du pilote</label>
-					<input type="text" class="form-control" id="Prénom du pilote" placeholder="Entrez le prénom du pilote">
+					<input type="text" class="form-control" id="Prénom du pilote" placeholder="Entrez le prénom du pilote" style="border: 1px solid #a0a890;">
 				</div>
 
 			{% else %}
-
-				<div class="col">
+				<div class="mb-3">
 					<label for="Nom de l'entreprise" class="form-label pt-2 m-2">Nom de l'entreprise</label>
-					<input type="text" class="form-control" id="Nom de l'entreprise" placeholder="Entrez le nom de votre entreprise">
+					<input type="text" class="form-control" id="Nom de l'entreprise" placeholder="Entrez le nom de votre entreprise" style="border: 1px solid #a0a890;">
 				</div>
 				<div class="row g-3">
-					<div class="col">
-						<label for="Nom de l'entreprise" class="form-label pt-2 m-2">Téléphone de l'entreprise</label>
-						<input type="num" class="form-control" id="Nom de l'entreprise" placeholder="Entrez le téléphone de votre entreprise">
+					<div class="col-md-12 mb-3">
+						<label for="Tel" class="form-label pt-2 m-2">Téléphone de l'entreprise</label>
+						<input type="num" class="form-control" id="Tel" placeholder="Entrez le téléphone de votre entreprise" style="border: 1px solid #a0a890;">
 					</div>
-
-					<div class="row g-3">
-						<div class="col">
-							<label for="Secteur d'activité de l'entreprise" class="form-label pt-2 m-2">Secteur d'activité
-							</label>
-							<input type="text" class="form-control" id="Adresse de l'entreprise" placeholder="Entrez le secteur d'activité de votre entreprise">
-						</div>
-						<div class="col">
-							<label for="Site internet de l'entreprise" class="form-label pt-2 m-2">Site Internet
-							</label>
-							<input type="text" class="form-control" id="Adresse de l'entreprise" placeholder="Entrez le site internet de votre entreprise">
-						</div>
-					</div>
-
-				{% endif %}
-
-
-				<div class="col">
-					<label for="Email de l'entreprise" class="form-label pt-2 m-2">Email</label>
-					<input type="email" class="form-control" id="Email de l'entreprise" placeholder="Entrez l'adresse email de contact de votre entreprise">
 				</div>
+				<div class="row g-3">
+					<div class="col-md-6 mb-3">
+						<label for="Secteur" class="form-label pt-2 m-2">Secteur d'activité</label>
+						<input type="text" class="form-control" id="Secteur" placeholder="Entrez le secteur" style="border: 1px solid #a0a890;">
+					</div>
+					<div class="col-md-6 mb-3">
+						<label for="Site" class="form-label pt-2 m-2">Site Internet</label>
+						<input type="text" class="form-control" id="Site" placeholder="Entrez le site" style="border: 1px solid #a0a890;">
+					</div>
+				</div>
+			{% endif %}
+
+			<div class="mb-3">
+				<label for="Email" class="form-label pt-2 m-2">Email</label>
+				<input type="email" class="form-control" id="Email" placeholder="Entrez l'adresse email" style="border: 1px solid #a0a890;">
 			</div>
 
-
-			<div class="col">
-				<label for="Adresse de l'entreprise" class="form-label pt-2 m-2">Adresse Postal
-				</label>
-				<input type="text" class="form-control" id="Adresse de l'entreprise" placeholder="Entrez l'adresse Postal de votre entreprise">
+			<div class="mb-3">
+				<label for="Adresse" class="form-label pt-2 m-2">Adresse Postale</label>
+				<input type="text" class="form-control" id="Adresse" placeholder="Entrez l'adresse" style="border: 1px solid #a0a890;">
 			</div>
-			<form class="row g-3">
-				<div class="col-md-6">
+
+			<div class="row g-3">
+				<div class="col-md-6 mb-3">
 					<label for="inputCity" class="form-label pt-2 m-2">Ville</label>
-					<input type="text" class="form-control" id="inputCity" placeholder="Entrez la ville de votre entreprise ">
+					<input type="text" class="form-control" id="inputCity" placeholder="Entrez la ville" style="border: 1px solid #a0a890;">
 				</div>
-				<div class="col-md-4">
-					<label for="inputState" class="form-label pt-2 m-2">Region</label>
-					<select id="inputState" class="form-select">
-						<option selected>Choisir votre region
-						</option>
+				<div class="col-md-6 mb-3">
+					<label for="inputState" class="form-label pt-2 m-2">Région</label>
+					<select id="inputState" class="form-select" style="border: 1px solid #a0a890;">
+						<option selected>Choisir...</option>
 						<option>Auvergne-Rhône-Alpes</option>
 						<option>Bourgogne-Franche-Comté</option>
 						<option>Bretagne</option>
@@ -109,14 +85,21 @@
 						<option>Provence Alpes Côte d’Azur</option>
 					</select>
 				</div>
-			</form>
-			<div class="col-md-6">
+			</div>
+
+			<div class="mb-3">
 				<label for="formFile" class="form-label pt-2 m-2">Choisissez une image</label>
-				<input class="form-control" type="file" id="formFile" accept="image/*">
+				<input class="form-control" type="file" id="formFile" accept="image/*" style="border: 1px solid #a0a890;">
 			</div>
-			<div class="col-12 pt-4 m-2">
-				<button type="submit" class="btn btn-primary">Submit</button>
+
+			<div
+				class="col-12 pt-4">
+				{# Bouton à votre couleur avec coins arrondis pour le style LinkedIn #}
+				<button type="submit" class="btn w-100" style="background-color: #a0a890; color: white; border: none; padding: 12px; font-weight: bold; border-radius: 25px;">
+					S'inscrire
+				</button>
 			</div>
+
 		</div>
 	</div>
 {% endblock %}
