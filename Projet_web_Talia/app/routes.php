@@ -14,6 +14,7 @@ use App\Application\Controller\ÉtudiantController;
 use App\Application\Controller\PiloteController;
 use App\Application\Controller\WishlistController;
 use App\Application\Controller\LoginController;
+use App\Application\Controller\Mentions_LegalesController;
 
 
 return function (App $app) {
@@ -23,6 +24,8 @@ return function (App $app) {
     });
 
     $app->get('/', [HomeController::class, 'home']);
+
+    $app->get('/Mentions_Legales', [Mentions_LegalesController::class, 'Mentions_Legales']);
 
     $app->get('/Profil', [ProfilController::class, 'profil']);
 
