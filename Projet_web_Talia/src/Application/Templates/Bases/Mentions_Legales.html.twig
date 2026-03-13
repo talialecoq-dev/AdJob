@@ -3,85 +3,159 @@
 {% set type = 'mentions_legales' %}
 
 {% block content %}
-    <div class="container">
-    <h1>Editeur du site</h1>
-    <p> Nom du site : ADJOB</p>
-    <p> Type de site : Plateforme de mise en relation entre étudiants et entreprises pour des stages et des emplois</p>
-    <p> Editeur : Web4All - Projet Etudiants</p>
-    <p> Etablissement : Cesi- campus de Reims</p>
-    <p> Adresse : 1 Rue de la Croix Saint-Marcel, 51100 Reims</p>
-    <h1>Hébergement du site</h1>
-    <p> Hébergeur : OVH</p>
-    <p> Adresse : 2 rue Kellermann, 59100 Roubaix, France
-    <p> Téléphone : +33 9 72 10 10 07</p>
-    <h1>Propriété intellectuelle</h1>
-    <p> Le contenu du site ADJOB, y compris les textes, les images,
-    les logos et les vidéos, est protégé par les lois sur la propriété intellectuelle. Toute reproduction, distribution ou utilisation du contenu sans autorisation préalable est strictement interdite.</p>
-    <h1>Responsabilité</h1>
-    <p> ADJOB s'efforce de fournir des informations précises et à jour, mais ne peut garantir l'exactitude ou l'exhaustivité du contenu. ADJOB ne peut être tenu responsable des dommages directs ou indirects résultant de l'utilisation du site ou de l'incapacité à utiliser le site.</p>
-    <h1>Liens externes</h1>
-    <p> Le site ADJOB peut contenir des liens vers des sites externes. ADJOB n'est pas responsable du contenu de ces sites et ne peut être tenu responsable de tout dommage résultant de l'utilisation de ces sites.</p>
-    <h1> Données collectées</h1>
-    <p> Dans le cadre de l'utilisation du site ADJOB, les données suivantes peuvent etre collectées:</p>
-    <h1>Pour les etudiants :</h1>
-    <ul>
-        <li>Nom et prénom</li>
-        <li>Adresse e-mail</li>
-        <li>Numéro de téléphone</li>
-        <li>Informations sur les candidatures et les offres d'emploi</li>
-    </ul>   
-    <h1>Pour les entreprises :</h1>
-    <ul>
-        <li>Nom de l'entreprise</li>
-        <li>Description de l'entreprise</li>
-        <li>Adresse e-mail</li>
-        <li>Numéro de téléphone</li>
-        <li>Evaluations des candidats</li>
-    </ul>
-    <h1> Pour les pilotes :</h1>
-    <ul>
-        <li>Nom et prénom</li>
-        <li>Adresse e-mail</li>
-        <li>Numéro de téléphone</li>
-        <li>Informations sur les étudiants suivis</li>
-    </ul>
-    <H1> Finalité du traitement des données</H1>
-    <p> Les données personnelles sont collectées uniquement pour : </p>
-    <ul>
-        <li>La gestion des comptes utilisateurs</li>
-        <li>La gestion des offres de stage</li>
-        <li>La gestion des candidats</li>
-        <li>Le suivi pédagogique des étudiants</li>
-        <li>Le bon fonctionnement de la plateforme</li>
-    </ul>
-    <h1> Base légale du traitement des données</h1>
-    <p> Le traitement de données repose sur :</p>
-    <ul>
-        <li>Le consentement des utilisateurs</li>
-        <li>L'interet pedagogique</li>
-    </ul>
-    <h1> Durée de conservation des données</h1>
-    <p> Les données personnelles sont conservées, pendant la durée du projet pédagogique, ou jusqu'a la demande de suppressionn par l'utilisateur. A l'issue du projet, les données pourront etre anonymisées ou supprimées.</p>
-    <h1> Securité des données</h1>
-    <p> Des mesures technique et organisationnelles sont mise en plase afin de garantir la securité des données personnelles :</p>
-    <ul>
-        <li>mot de passes chiffrés</li>
-        <li>Protection contre les injections SQL,XSS et CSRF</li>
-        <li>Accès restreint selon les roles</li>
-        <li>utilisation du protocole HTTPS </li>
-    </ul>
-    <h1> Droits des utilisateurs</h1>
-    <p> Conformément au Reglement Général sur la Protection des Données (RGPD), les utilisateurs dispose des droits suivants :</p>
-    <ul>
-        <li>Droit d'accès : les utilisateurs peuvent demander l'accès à leurs données personnelles</li>
-        <li>Droit de rectification : les utilisateurs peuvent demander la correction de leurs données personnelles inexactes ou incomplètes</li>
-        <li>Droit à l'effacement : les utilisateurs peuvent demander la suppression de leurs données personnelles, sous réserve des obligations légales de conservation</li>
-        <li>Droit à la limitation du traitement : les utilisateurs peuvent demander la limitation du traitement de leurs données personnelles dans certaines circonstances</li>
-        <li>Droit d'opposition : les utilisateurs peuvent s'opposer au traitement de leurs données personnelles pour des raisons tenant à leur situation particulière</li>
-    </ul>
-    <h1> Cookies</h1>
-    <p> Le site ADJOB utilise des cookies pour améliorer l'expérience utilisateur et collecter des données de navigation. Les utilisateurs peuvent gérer leurs préférences en matière de cookies via les paramètres de leur navigateur.</p>
-    <h1> Modifications de la politique de confidentialité</h1>
-    <p> ADJOB se réserve le droit de modifier cette politique de confidentialité à tout moment. Les utilisateurs seront informés de toute modification via une notification sur le site ou par e-mail.</p>
-    </div>
+
+<style>
+
+.page-mentions{
+background-color:#eed5db;
+padding:40px;
+border-radius:10px;
+}
+
+.section-title{
+color:#426e55;
+border-bottom:3px solid #73986f;
+padding-bottom:5px;
+margin-top:30px;
+}
+
+.card-mentions{
+background:#ffffff;
+border-left:6px solid #73986f;
+padding:25px;
+border-radius:8px;
+}
+
+.list-group-item{
+background:#b1b9ac;
+border:none;
+margin-bottom:4px;
+}
+
+</style>
+
+<div class="container my-5">
+
+<div class="page-mentions card-mentions shadow">
+
+<h1 class="text-center mb-4" style="color:#426e55;">Mentions Légales</h1>
+
+<h2 class="section-title">Editeur du site</h2>
+
+<p>Nom du site : ADJOB</p>
+<p>Type de site : Plateforme de mise en relation entre étudiants et entreprises pour des stages et des emplois</p>
+<p>Editeur : Web4All - Projet Etudiants</p>
+<p>Etablissement : Cesi- campus de Reims</p>
+<p>Adresse : 1 Rue de la Croix Saint-Marcel, 51100 Reims</p>
+
+<h2 class="section-title">Hébergement du site</h2>
+
+<p>Hébergeur : OVH</p>
+<p>Adresse : 2 rue Kellermann, 59100 Roubaix, France</p>
+<p>Téléphone : +33 9 72 10 10 07</p>
+
+<h2 class="section-title">Propriété intellectuelle</h2>
+
+<p>Le contenu du site ADJOB, y compris les textes, les images,
+les logos et les vidéos, est protégé par les lois sur la propriété intellectuelle. Toute reproduction, distribution ou utilisation du contenu sans autorisation préalable est strictement interdite.</p>
+
+<h2 class="section-title">Responsabilité</h2>
+
+<p>ADJOB s'efforce de fournir des informations précises et à jour, mais ne peut garantir l'exactitude ou l'exhaustivité du contenu. ADJOB ne peut être tenu responsable des dommages directs ou indirects résultant de l'utilisation du site ou de l'incapacité à utiliser le site.</p>
+
+<h2 class="section-title">Liens externes</h2>
+
+<p>Le site ADJOB peut contenir des liens vers des sites externes. ADJOB n'est pas responsable du contenu de ces sites et ne peut être tenu responsable de tout dommage résultant de l'utilisation de ces sites.</p>
+
+<h2 class="section-title">Données collectées</h2>
+
+<p>Dans le cadre de l'utilisation du site ADJOB, les données suivantes peuvent etre collectées:</p>
+
+<h5>Pour les etudiants :</h5>
+
+<ul class="list-group mb-3">
+<li class="list-group-item">Nom et prénom</li>
+<li class="list-group-item">Adresse e-mail</li>
+<li class="list-group-item">Numéro de téléphone</li>
+<li class="list-group-item">Informations sur les candidatures et les offres d'emploi</li>
+</ul>
+
+<h5>Pour les entreprises :</h5>
+
+<ul class="list-group mb-3">
+<li class="list-group-item">Nom de l'entreprise</li>
+<li class="list-group-item">Description de l'entreprise</li>
+<li class="list-group-item">Adresse e-mail</li>
+<li class="list-group-item">Numéro de téléphone</li>
+<li class="list-group-item">Evaluations des candidats</li>
+</ul>
+
+<h5>Pour les pilotes :</h5>
+
+<ul class="list-group mb-3">
+<li class="list-group-item">Nom et prénom</li>
+<li class="list-group-item">Adresse e-mail</li>
+<li class="list-group-item">Numéro de téléphone</li>
+<li class="list-group-item">Informations sur les étudiants suivis</li>
+</ul>
+
+<h2 class="section-title">Finalité du traitement des données</h2>
+
+<p>Les données personnelles sont collectées uniquement pour :</p>
+
+<ul class="list-group mb-3">
+<li class="list-group-item">La gestion des comptes utilisateurs</li>
+<li class="list-group-item">La gestion des offres de stage</li>
+<li class="list-group-item">La gestion des candidats</li>
+<li class="list-group-item">Le suivi pédagogique des étudiants</li>
+<li class="list-group-item">Le bon fonctionnement de la plateforme</li>
+</ul>
+
+<h2 class="section-title">Base légale du traitement des données</h2>
+
+<p>Le traitement de données repose sur :</p>
+
+<ul class="list-group mb-3">
+<li class="list-group-item">Le consentement des utilisateurs</li>
+<li class="list-group-item">L'interet pedagogique</li>
+</ul>
+
+<h2 class="section-title">Durée de conservation des données</h2>
+
+<p>Les données personnelles sont conservées, pendant la durée du projet pédagogique, ou jusqu'a la demande de suppressionn par l'utilisateur. A l'issue du projet, les données pourront etre anonymisées ou supprimées.</p>
+
+<h2 class="section-title">Securité des données</h2>
+
+<p>Des mesures technique et organisationnelles sont mise en plase afin de garantir la securité des données personnelles :</p>
+
+<ul class="list-group mb-3">
+<li class="list-group-item">mot de passes chiffrés</li>
+<li class="list-group-item">Protection contre les injections SQL,XSS et CSRF</li>
+<li class="list-group-item">Accès restreint selon les roles</li>
+<li class="list-group-item">utilisation du protocole HTTPS</li>
+</ul>
+
+<h2 class="section-title">Droits des utilisateurs</h2>
+
+<p>Conformément au Reglement Général sur la Protection des Données (RGPD), les utilisateurs dispose des droits suivants :</p>
+
+<ul class="list-group mb-3">
+<li class="list-group-item">Droit d'accès</li>
+<li class="list-group-item">Droit de rectification</li>
+<li class="list-group-item">Droit à l'effacement</li>
+<li class="list-group-item">Droit à la limitation du traitement</li>
+<li class="list-group-item">Droit d'opposition</li>
+</ul>
+
+<h2 class="section-title">Cookies</h2>
+
+<p>Le site ADJOB utilise des cookies pour améliorer l'expérience utilisateur et collecter des données de navigation. Les utilisateurs peuvent gérer leurs préférences en matière de cookies via les paramètres de leur navigateur.</p>
+
+<h2 class="section-title">Modifications de la politique de confidentialité</h2>
+
+<p>ADJOB se réserve le droit de modifier cette politique de confidentialité à tout moment. Les utilisateurs seront informés de toute modification via une notification sur le site ou par e-mail.</p>
+
+</div>
+</div>
+
 {% endblock %}
