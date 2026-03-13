@@ -70,5 +70,7 @@
 
 		{% block content %}{% endblock %}
 	</body>
-	{% include "Bases/footer.html.twig" %}
+	{% if type != 'mentions_legales' %}
+    {% include "Bases/footer.html.twig" %}
+	{% endif %}
 </html>
