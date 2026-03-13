@@ -70,12 +70,5 @@
 
 		{% block content %}{% endblock %}
 	</body>
-	<footer>
-		{% block footer %}
-			<a class="nav-link px-3" style="font-size: 1.5rem;" href="/Mentions_Legales">
-				Mentions Légales</a>
-
-
-		{% endblock %}
-	</footer>
+	{% extends "footer.html.twig" %}
 </html>
