@@ -1,11 +1,12 @@
 {% extends 'Bases/base.html.twig' %}
 
-{% block title %}Accueil - AdJob{% endblock %}
+{% block title %}Accueil - AdJob
+{% endblock %}
 
 {% block content %}
-  {% include 'Offres/Page_Filtres_Offre.html.twig' %}
-  {% include 'Offres/Page_Modal_Ajout_Offre.html.twig' %}
-  <a href="#" class="btn" style="background-color: #e0c7bf; color: white;">
-      Candidater
-  </a>
+	{% include 'Offres/Page_Filtres_Offre.html.twig' %}
+	{% include 'Offres/Page_Modal_Ajout_Offre.html.twig' %}
+	<a href="/Candidater" class="btn" style="background-color: #e0c7bf; color: white;">
+		Candidater
+	</a>
 {% endblock %}

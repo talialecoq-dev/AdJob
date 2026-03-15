@@ -12,4 +12,10 @@ class CandidaturesController
         $view = Twig::fromRequest($request);
         return $view->render($response, 'Candidatures/Candidatures.html.twig', []);
     }
+    
+    public function candidater(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+        $view = Twig::fromRequest($request);
+        return $view->render($response, 'Candidatures/Page_Modal_Candidature.html.twig', []);
+    }
 }

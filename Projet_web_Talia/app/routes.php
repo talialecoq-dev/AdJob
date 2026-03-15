@@ -48,6 +48,7 @@ return function (App $app) {
     $app->get('/Whishlist', [WishlistController::class, 'wishlist']);
 
     $app->get('/Candidatures', [CandidaturesController::class, 'candidatures']);
+    $app->get('/Candidater', [CandidaturesController::class, 'candidater']);
 
     /*
     $app->group('/users', function (Group $group) {Q
