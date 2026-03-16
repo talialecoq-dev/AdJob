@@ -14,7 +14,7 @@
 					{# --- BLOC ÉTUDIANT --- #}
 					<div class="mb-3">
 						<label for="nom_etudiant" class="form-label pt-2 m-2">Nom de l'étudiant</label>
-						<input type="text" name="nom" class="form-control" id="nom_etudiant" placeholder="Entrez le nom" style="border: 1px solid #a0a890;"required>
+						<input type="text" name="nom" class="form-control" id="nom_etudiant" placeholder="Entrez le nom" style="border: 1px solid #a0a890;" required>
 					</div>
 					<div class="mb-3">
 						<label for="prenom_etudiant" class="form-label pt-2 m-2">Prénom de l'étudiant</label>
@@ -51,18 +51,17 @@
 					</div>
 
 
-
 					{% if type == "Etudiants_ajout" %}
 						<div class="mb-3">
 							<label for="image_profil" class="form-label pt-2 m-2">Choisissez une image de profil</label>
-							<input class="form-control" type="file" name="image_profil" id="image_profil" accept="png, jpg, jpeg" required style="border: 1px solid #a0a890;"required>
+							<input class="form-control" type="file" name="image_profil" id="image_profil" accept="png, jpg, jpeg" required style="border: 1px solid #a0a890;" required>
 						</div>
 					{% endif %}
 
 					{% if type == "Etudiants" %}
 						<div class="mb-3">
 							<label for="image_profil" class="form-label pt-2 m-2">Choisissez une image de profil</label>
-							<input class="form-control" type="file" name="image_profil" id="image_profil" accept="png, jpg, jpeg" required style="border: 1px solid #a0a890;"required>
+							<input class="form-control" type="file" name="image_profil" id="image_profil" accept="png, jpg, jpeg" required style="border: 1px solid #a0a890;" required>
 						</div>
 					{% endif %}
 
@@ -77,10 +76,10 @@
 						<label for="prenom_pilote" class="form-label pt-2 m-2">Prénom du pilote</label>
 						<input type="text" name="prenom" class="form-control" id="prenom_pilote" placeholder="Prénom du pilote" style="border: 1px solid #a0a890;" required>
 					</div>
-						<div class="mb-3">
-							<label for="image_profil" class="form-label pt-2 m-2">Choisissez une image de profil</label>
-							<input class="form-control" type="file" name="image_profil" id="image_profil" accept="png, jpg, jpeg" required style="border: 1px solid #a0a890;"required>
-						</div>
+					<div class="mb-3">
+						<label for="image_profil" class="form-label pt-2 m-2">Choisissez une image de profil</label>
+						<input class="form-control" type="file" name="image_profil" id="image_profil" accept="png, jpg, jpeg" required style="border: 1px solid #a0a890;" required>
+					</div>
 
 				{% else %}
 					{# --- BLOC ENTREPRISE (PAR DÉFAUT) --- #}
@@ -97,7 +96,7 @@
 					<div class="row g-3">
 						<div class="col-md-6 mb-3">
 							<label for="secteur" class="form-label pt-2 m-2">Secteur d'activité</label>
-							<input type="text" name="secteur" class="form-control" id="secteur" placeholder="Ex: Informatique" style="border: 1px solid #a0a890;"required>
+							<input type="text" name="secteur" class="form-control" id="secteur" placeholder="Ex: Informatique" style="border: 1px solid #a0a890;" required>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="site" class="form-label pt-2 m-2">Site Internet</label>
@@ -109,18 +108,18 @@
 						<label for="email_ent" class="form-label pt-2 m-2">Email de contact</label>
 						<input type="email" name="email" class="form-control" id="email_ent" placeholder="contact@entreprise.com" style="border: 1px solid #a0a890;" required>
 					</div>
-						<div class="mb-3">
-							<label for="image_profil" class="form-label pt-2 m-2">Choisissez une image de profil</label>
-							<input class="form-control" type="file" name="image_profil" id="image_profil" accept="png, jpg, jpeg" required style="border: 1px solid #a0a890;"required>
-						</div>
+					<div class="mb-3">
+						<label for="image_profil" class="form-label pt-2 m-2">Choisissez une image de profil</label>
+						<input class="form-control" type="file" name="image_profil" id="image_profil" accept="png, jpg, jpeg" required style="border: 1px solid #a0a890;" required>
+					</div>
 				{% endif %}
 
 				{# 3. BOUTON DE VALIDATION UNIQUE #}
 				<div class="col-12 pt-4">
 					<button type="submit" class="btn w-100" accept=".png, .jpg, .jpeg" style="background-color: #a0a890; color: white; border: none; padding: 12px; font-weight: bold; border-radius: 25px;" required>
-					<div class="invalid-feedback">
-        Merci de sélectionner une image.
-    </div>
+						<div class="invalid-feedback">
+							Merci de sélectionner une image.
+						</div>
 						{% if type == "Etudiants_ajout" %}
 							Ajouter l'étudiant
 						{% elseif type == "Etudiants" %}
@@ -139,28 +138,28 @@
 
 
 	<script>
-document.querySelector("form").addEventListener("submit", function(e) {
+		document.querySelector("form").addEventListener("submit", function (e) {
 
-    const filesInputs = document.querySelectorAll("input[type='file']");
-    const allowedExtensions = ["png","jpg","jpeg"];
+const filesInputs = document.querySelectorAll("input[type='file']");
+const allowedExtensions = ["png", "jpg", "jpeg"];
 
-    for(let input of filesInputs){
+for (let input of filesInputs) {
 
-        if(input.files.length > 0){
+if (input.files.length > 0) {
 
-            const file = input.files[0];
-            const extension = file.name.split('.').pop().toLowerCase();
+const file = input.files[0];
+const extension = file.name.split('.').pop().toLowerCase();
 
-            if(!allowedExtensions.includes(extension)){
-                alert("Seuls les fichiers PNG, JPG ou JPEG sont autorisés.");
-                e.preventDefault();
-                return;
-            }
+if (! allowedExtensions.includes(extension)) {
+alert("Seuls les fichiers PNG, JPG ou JPEG sont autorisés.");
+e.preventDefault();
+return;
+}
 
-        }
+}
 
-    }
+}
 
 });
-</script>
+	</script>
 {% endblock %}
