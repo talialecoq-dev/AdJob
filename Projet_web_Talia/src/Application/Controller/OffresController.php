@@ -7,7 +7,13 @@ use Slim\Views\Twig;
 
 
 class OffresController
-{ public function ajouter(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+
+
+{ 
+    
+
+
+    public function ajouter(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $view = Twig::fromRequest($request);
         return $view->render($response, 'Offres/Page_Modal_Ajout_Offre.html.twig', []);

@@ -7,11 +7,7 @@ use Slim\Views\Twig;
 
 class EntrepriseController
 {
-    public function recherche_entreprise(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
-    {
-        $view = Twig::fromRequest($request);
-        return $view->render($response, 'Entreprises/Page_Consulter_Entreprises.html.twig', []);
-    }
+    
     
     public function inscription(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
@@ -67,10 +63,55 @@ foreach($_FILES as $file){
 
     }
 
-}
+    }
         
         return $response
             ->withHeader('Location', '/Liste-Entreprises')
             ->withStatus(302);
     }
+
+
+
+    public function recherche_entreprise(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+        {
+            $view = Twig::fromRequest($request);
+
+            $entreprises = [
+                [
+                    "id" => 1,
+                    "nom" => "LIMAGRIN",
+                    "image" => "Images/Image_Limagrin.png",
+                    "secteur" => "Agriculture",
+                    "type" => "Semancier",
+                    "description" => "LIMAGRIN est une coopérative semencière française spécialisée dans la sélection et la production de semences de grandes cultures.",
+                    "ville" => "Toulouse",
+                    "site_web" => "https://www.limagrain.com"
+                ],
+                [
+                    "id" => 2,
+                    "nom" => "TechCorp",
+                    "image" => "Images/Image_TechCorp.png",
+                    "secteur" => "Informatique",
+                    "type" => "ESN",
+                    "description" => "TechCorp est une entreprise de services numériques spécialisée dans le développement web et mobile pour grands comptes.",
+                    "ville" => "Paris",
+                    "site_web" => "https://techcorp.com"
+                ],
+                [
+                    "id" => 3,
+                    "nom" => "NetSolutions",
+                    "image" => "Images/Image_NetSolutions.png",
+                    "secteur" => "Réseaux",
+                    "type" => "Intégrateur",
+                    "description" => "NetSolutions conçoit et maintient des infrastructures réseau complexes pour des entreprises en environnement cloud hybride.",
+                    "ville" => "Lyon",
+                    "site_web" => "https://www.netsolutions.com"
+
+                ]
+            ];
+
+            return $view->render($response, 'Entreprises/Page_Consulter_Entreprises.html.twig', [
+                'entreprises' => $entreprises
+            ]);
+        }
 } 

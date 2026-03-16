@@ -62,6 +62,8 @@ return function (App $app) {
 
     
     $app->get('/Ajouter-Offre', [OffresController::class, 'ajouter']);
+    $app->get('/Offres', [OffresController::class, 'liste']);
+    
 
     /*
     $app->group('/users', function (Group $group) {Q

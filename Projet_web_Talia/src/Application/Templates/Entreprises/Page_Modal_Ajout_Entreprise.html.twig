@@ -1,0 +1,71 @@
+<div class="modal fade" id="Ajouter" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="Ajouter" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header" style="background-color: #ECEADE">
+        <h1 class="modal-title fs-5" id="titrefenetremodal">Ajouter une Entreprise</h1>
+      </div>
+
+      <div class="modal-body">
+        <div class="row g-3 px-2">
+
+          <div class="col-6">
+            <label class="form-label">Nom de l'Entreprise :</label>
+            <input type="text" class="form-control" placeholder="Entrez le nom de l'Entreprise" style="border-radius: 5px; border: 1px solid #A0A890">
+          </div>
+
+          <div class="col-4">
+            <label class="form-label">Domaine :</label>
+            <select class="form-select" style="border-radius: 5px; border: 1px solid #A0A890">
+              <option selected>Sélection du Domaine</option>
+              <option value="1">Informatique</option>
+              <option value="2">Mécanique</option>
+              <option value="3">Électronique</option>
+              <option value="4">Agriculture</option>
+            </select>
+          </div>
+
+          
+          <div class="col-12">
+            <label class="form-label">Description de l'entreprise :</label>
+            <textarea class="form-control" rows="5" placeholder="Entrez la description de l'entreprise" style="border-radius: 5px; border: 1px solid #A0A890; resize: vertical;"></textarea>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Contact :</label>
+            <input type="tel" class="form-control" placeholder="Numéro de téléphone" style="border-radius: 5px; border: 1px solid #A0A890">
+            <input type="email" class="form-control" placeholder="Adresse email" style="border-radius: 5px; border: 1px solid #A0A890">
+          </div>
+
+          <div class="mb-3">
+                        <label class="form-label">Statut initial</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="statut" id="statut1" value="Actif" checked>
+                            <label class="form-check-label" for="statut1">Actif</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="statut" id="statut2" value="En attente">
+                            <label class="form-check-label" for="statut2">En attente</label>
+                        </div>
+            </div>
+
+          <div class="col-12">
+            <label class="form-label">Logo de l'entreprise (PNG) :</label>
+            <div id="dropZone" class="border border-dashed rounded p-4 text-center" style="border: 2px dashed #A0A890 !important; cursor: pointer;" onclick="document.getElementById('logoInput').click()" ondragover="event.preventDefault()" ondrop="handleLogoDrop(event)">
+              <p class="text-muted mb-1" id="dropLabel">Glissez-déposez un fichier PNG ici, ou <u>cliquez pour parcourir</u></p>
+              <img id="logoPreview" src="" alt="Aperçu" class="mt-2 d-none" style="max-height: 80px; border-radius: 4px;">
+              <input type="file" id="logoInput" accept="image/png" class="d-none" onchange="previewLogo(this.files[0])">
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="modal-footer" style="background-color: #ECEADE">
+        <button type="button" class="btn" data-bs-dismiss="modal" style="background-color: #A0A890">Fermer</button>
+        <button type="button" class="btn" style="background-color: #EED4CB">Ajouter</button>
+      </div>
+
+    </div>
+  </div>
+</div>
