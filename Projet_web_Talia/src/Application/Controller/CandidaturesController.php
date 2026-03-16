@@ -9,34 +9,36 @@ class CandidaturesController
 {
     public function candidatures(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $candidature   = [ 
-[
-'offres'=> 'Developpeur Web',
+   $view = Twig::fromRequest($request);
+
+    return $view->render($response, 'Candidatures/Candidatures.html.twig', [
+'c1' =>[
+'nom'=> 'Developpeur Web',
 'color' =>'warning',
-'etat' => 'En Attente',
+'statut' => 'En Attente',
 'desc' => 'Intégration de maquettes Figma en React/Tailwind et optimisation de la performance Web sur les terminaux mobiles.',
 'image' => '\Image\Martin.png',
 ],
-[
-'offres'=> 'Developpeur C++',
-'color' =>'succes',
-'etat' => 'Acceptée',
+'c2' =>[
+'nom'=> 'Developpeur C++',
+'color' =>'success',
+'statut' => 'Acceptée',
 'desc' => 'Développement des mécaniques de gameplay et optimisation de la gestion de la mémoire pour notre prochain titre AAA. Travail en étroite collaboration avec les Game Designers. ',
 'image' => '\Image\Martin.png',
 ],
-[
-'offres'=> 'Expert Cybersécurité',
+'c3' => [
+'nom'=> 'Expert Cybersécurité',
 'color' =>'danger',
-'etat' => 'Refusée',
+'statut' => 'Refusée',
 'desc' => 'Surveillance des réseaux, audit de vulnérabilité et mise en place de protocoles de sécurité pour la protection des données sensibles.',
 'image' => '\Image\Martin.png',
 ],
 
 
 
-        ];
+        ]);
         $view = Twig::fromRequest($request);
-        return $view->render($response, 'Candidatures/Candidatures.html.twig', []);
+        return $view->render($response, 'Candidatures/Candidatures.html.twig', ['mes_candidatures' => $liste_candidatures]);
     }
     
     public function candidater(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
