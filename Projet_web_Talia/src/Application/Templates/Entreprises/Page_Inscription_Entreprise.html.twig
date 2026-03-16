@@ -51,6 +51,7 @@
 					</select>
 				</div>
 			</div>
+</div>
 			<div class="col-12 pt-4">
 				{# Bouton à votre couleur avec coins arrondis pour le style LinkedIn #}
 				<button type="submit" class="btn w-100" style="background-color: #a0a890; color: white; border: none; padding: 12px; font-weight: bold; border-radius: 25px;">
@@ -106,6 +107,14 @@
 					</select>
 				</div>
 			</div>
+			<div class="mb-3">
+    <label for="formFile" class="form-label pt-2 m-2">Choisissez une image</label>
+    <input class="form-control" type="file" id="formFile" accept="image/*" required style="border: 1px solid #a0a890;">
+    <div class="invalid-feedback">
+        Merci de sélectionner une image.
+    </div>
+</div>
+
 			<div class="col-12 pt-4">
 				{# Bouton à votre couleur avec coins arrondis pour le style LinkedIn #}
 				<button type="submit" class="btn w-100" style="background-color: #a0a890; color: white; border: none; padding: 12px; font-weight: bold; border-radius: 25px;">
@@ -148,11 +157,6 @@
 						<input type="text" class="form-control" id="Site" placeholder="Entrez le site" style="border: 1px solid #a0a890;">
 					</div>
 				</div>
-
-				<div class="mb-3">
-				<label for="formFile" class="form-label pt-2 m-2">Choisissez une image</label>
-				<input class="form-control" type="file" id="formFile" accept="image/*" style="border: 1px solid #a0a890;">
-			</div>
 
 			<div class="mb-3">
 				<label for="Email" class="form-label pt-2 m-2">Email</label>
