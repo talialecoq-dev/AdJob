@@ -15,8 +15,36 @@ class PiloteController
 
     public function liste(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
+                $view = Twig::fromRequest($request);
+
+    return $view->render($response, 'Pilotes/Page_Liste_Pilote.html.twig', [
+'c1' =>[
+'Id'=> '1',
+'Prénom' =>'Mark',
+'Nom' => 'Otto',
+'Email' => '@mdo',
+'Campus' => 'Cesi Ecole d"ingénieurs',
+'Localisation' => 'Paris',
+],
+'c2' =>[
+'Id'=> '2',
+'Prénom' =>'Jacob',
+'Nom' => 'Thornton',
+'Email' => '@fat',
+'Campus' => 'Cesi Ecole d"ingénieurs',
+'Localisation' => 'Lyon',
+],
+'c3' => [
+'Id'=> '3',
+'Prénom' =>'John',
+'Nom' => 'Doe',
+'Email' => '@social',
+'Campus' => 'Cesi Ecole d"ingénieurs',
+'Localisation' => 'Marseille',
+],
+        ]);
         $view = Twig::fromRequest($request);
-        return $view->render($response, 'Pilotes/Page_Liste_Pilote.html.twig', []);
+        return $view->render($response, 'Pilotes/Page_Liste_Pilote.html.twig', [['mes_étudiants' => $liste_étudiants]]);
     }
 
     public function supprimer(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface

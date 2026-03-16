@@ -2,84 +2,85 @@
 
 {% block content %}
 
-<style>
-  .btn-modifier {
-    background-color: #73986f;
-    color: white;
-    margin-right: 5px;
-  }
-  .btn-supprimer {
-    background-color: #e0c7bf;
-    color: white;
-  }
-  th, td {
-    text-align: center;
-    vertical-align: middle;
-  }
-  .actions-col {
-    text-align: right;
-    white-space: nowrap;
-  }
-</style>
+	<style>
+		.btn-modifier {
+			background-color: #73986f;
+			color: white;
+			margin-right: 5px;
+		}
+		.btn-supprimer {
+			background-color: #e0c7bf;
+			color: white;
+		}
+		th,
+		td {
+			text-align: center;
+			vertical-align: middle;
+		}
+		.actions-col {
+			text-align: right;
+			white-space: nowrap;
+		}
+	</style>
 
-<h1>Liste de tous les Pilotes</h1>
+	<h1>Liste de tous les Pilotes</h1>
 
-<div class="text-center my-4">
-  <a href="/Inscription-Pilote" class="btn btn-modifier">
-      Ajouter un(e) pilote
-  </a>
-</div>
+	<div class="text-center my-4">
+		<a href="/Inscription-Pilote" class="btn btn-modifier">
+			Ajouter un(e) pilote
+		</a>
+	</div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Id</th>
-      <th scope="col">Prénom</th>
-      <th scope="col">Nom</th>
-      <th scope="col">Email</th>
-      <th scope="col">Campus</th>
-      <th scope="col">Localisation</th>
-      <th scope="col" class="actions-col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>Cesi École d'Ingéneurs</td>
-      <td>Paris</td>
-      <td class="actions-col">
-        <a href="/Modifier-Pilote" class="btn btn-modifier">Modifier</a>
-        <a href="#" class="btn btn-supprimer">Supprimer</a>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <td>Cesi École d'Ingéneurs</td>
-      <td>Lyon</td>
-      <td class="actions-col">
-        <a href="/Modifier-Pilote" class="btn btn-modifier">Modifier</a>
-        <a href="#" class="btn btn-supprimer">Supprimer</a>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>John</td>
-      <td>Doe</td>
-      <td>@social</td>
-      <td>Cesi École d'Ingéneurs</td>
-      <td>Marseille</td>
-      <td class="actions-col">
-        <a href="/Modifier-Pilote" class="btn btn-modifier">Modifier</a>
-        <a href="#" class="btn btn-supprimer">Supprimer</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">Id</th>
+				<th scope="col">Prénom</th>
+				<th scope="col">Nom</th>
+				<th scope="col">Email</th>
+				<th scope="col">Campus</th>
+				<th scope="col">Localisation</th>
+				<th scope="col" class="actions-col"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th scope="row">{{c1.Id}}</th>
+				<td>{{c1.Prénom}}</td>
+				<td>{{c1.Nom}}</td>
+				<td>{{c1.Email}}</td>
+				<td>{{c1.Campus}}</td>
+				<td>{{c1.Localisation}}</td>
+				<td class="actions-col">
+					<a href="/Modifier-Pilote" class="btn btn-modifier">Modifier</a>
+					<a href="#" class="btn btn-supprimer">Supprimer</a>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">{{c2.Id}}</th>
+				<td>{{c2.Prénom}}</td>
+				<td>{{c2.Nom}}</td>
+				<td>{{c2.Email}}</td>
+				<td>{{c2.Campus}}</td>
+				<td>{{c2.Localisation}}</td>
+				<td class="actions-col">
+					<a href="/Modifier-Pilote" class="btn btn-modifier">Modifier</a>
+					<a href="#" class="btn btn-supprimer">Supprimer</a>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">{{c3.Id}}</th>
+				<td>{{c3.Prénom}}</td>
+				<td>{{c3.Nom}}</td>
+				<td>{{c3.Email}}</td>
+				<td>{{c3.Campus}}</td>
+				<td>{{c3.Localisation}}</td>
+				<td class="actions-col">
+					<a href="/Modifier-Pilote" class="btn btn-modifier">Modifier</a>
+					<a href="#" class="btn btn-supprimer">Supprimer</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 
 {% endblock %}
