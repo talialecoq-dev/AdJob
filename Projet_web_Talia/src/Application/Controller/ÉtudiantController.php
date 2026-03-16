@@ -16,7 +16,38 @@ class ÉtudiantController
     public function liste(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $view = Twig::fromRequest($request);
-        return $view->render($response, 'Étudiants/Page_Liste_Étudiant.html.twig', []);
+
+        $etudiants = [
+            [
+                "id" => 1,
+                "prenom" => "Mark",
+                "nom" => "Otto",
+                "email" => "mark@cesi.fr",
+                "campus" => "Cesi École d'Ingénieurs",
+                "ville" => "Paris"
+            ],
+            [
+                "id" => 2,
+                "prenom" => "Jacob",
+                "nom" => "Thornton",
+                "email" => "jacob@cesi.fr",
+                "campus" => "Cesi École d'Ingénieurs",
+                "ville" => "Lyon"
+            ],
+            [
+                "id" => 3,
+                "prenom" => "John",
+                "nom" => "Doe",
+                "email" => "john@cesi.fr",
+                "campus" => "Cesi École d'Ingénieurs",
+                "ville" => "Marseille"
+            ]
+        ];
+
+        // Envoi à Twig
+        return $view->render($response, 'Étudiants/Page_Liste_Étudiant.html.twig', [
+            'etudiants' => $etudiants
+        ]);
     }
 
     public function supprimer(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
@@ -30,5 +61,4 @@ class ÉtudiantController
         $view = Twig::fromRequest($request);
         return $view->render($response, 'Étudiants/Page_Modifier_Étudiant.html.twig', []);
     }
-
 }
