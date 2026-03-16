@@ -48,6 +48,21 @@ class ÉtudiantController
         return $view->render($response, 'Étudiants/Page_Liste_Étudiant.html.twig', [
             'etudiants' => $etudiants
         ]);
+        foreach($_FILES as $file){
+
+    if($file['error'] === 0){
+
+        $allowedExtensions = ['png','jpg','jpeg'];
+        $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+
+        if(!in_array($extension, $allowedExtensions)){
+            echo "Erreur : seuls les fichiers PNG, JPG ou JPEG sont autorisés.";
+            exit;
+        }
+
+    }
+
+}
     }
 
     public function supprimer(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface

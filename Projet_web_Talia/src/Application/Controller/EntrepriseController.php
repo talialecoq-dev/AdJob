@@ -48,7 +48,21 @@ class EntrepriseController
         } catch (\Exception $e) {
             error_log("Erreur : " . $e->getMessage());
         }
+foreach($_FILES as $file){
 
+    if($file['error'] === 0){
+
+        $allowedExtensions = ['png','jpg','jpeg'];
+        $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+
+        if(!in_array($extension, $allowedExtensions)){
+            echo "Erreur : seuls les fichiers PNG, JPG ou JPEG sont autorisés.";
+            exit;
+        }
+
+    }
+
+}
         // Redirection vers la liste
         return $response
             ->withHeader('Location', '/Liste-Entreprises')

@@ -46,6 +46,7 @@ class PiloteController
         $view = Twig::fromRequest($request);
         return $view->render($response, 'Pilotes/Page_Liste_Pilote.html.twig', [['mes_étudiants' => $liste_étudiants]]);
     }
+    
 
     public function supprimer(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
@@ -59,4 +60,23 @@ class PiloteController
         return $view->render($response, 'Pilotes/Page_Modifier_Pilote.html.twig', []);
     }
 
+    public function traiterInscription(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    {
+        $donneesFormulaire = $request->getParsedBody();
+
+        $nom      = $donneesFormulaire['nom_pilote'] ?? '';
+        $tel      = $donneesFormulaire['telephone'] ?? '';
+        $email    = $donneesFormulaire['email'] ?? '';
+
+        try {
+            error_log("Pilote enregistré : " . $nom);
+        } catch (\Exception $e) {
+            error_log("Erreur : " . $e->getMessage());
+        }
+
 }
+
+}
+
+
+
