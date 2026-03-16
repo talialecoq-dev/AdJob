@@ -15,6 +15,7 @@ use App\Application\Controller\PiloteController;
 use App\Application\Controller\WishlistController;
 use App\Application\Controller\LoginController;
 use App\Application\Controller\Mentions_LegalesController;
+use App\Application\Controller\OffresController;
 
 
 return function (App $app) {
@@ -51,6 +52,9 @@ return function (App $app) {
 
     $app->get('/Candidatures', [CandidaturesController::class, 'candidatures']);
     $app->get('/Candidater', [CandidaturesController::class, 'candidater']);
+
+    
+    $app->get('/Ajouter-Offre', [OffresController::class, 'ajouter']);
 
     /*
     $app->group('/users', function (Group $group) {Q
