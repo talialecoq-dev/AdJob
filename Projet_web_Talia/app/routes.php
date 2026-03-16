@@ -35,8 +35,15 @@ return function (App $app) {
     $app->get('/Inscription-Entreprise', [EntrepriseController::class, 'inscription']);
     $app->get('/Liste-Entreprises', [EntrepriseController::class, 'liste']);
     $app->get('/Supprimer-Entreprise', [EntrepriseController::class, 'supprimer']);
+    $app->get('/Rechercher-Entreprise', [EntrepriseController::class, 'recherche_entreprise']);
+    
+
+
+
     $app->post('/inscription-entreprise', [EntrepriseController::class, 'traiterInscription']);
     $app->post('/traitement-inscription', [EntrepriseController::class, 'traiterInscription']);
+
+
 
     $app->get('/Inscription-Étudiant', [ÉtudiantController::class, 'inscription']);
     $app->get('/Liste-Étudiants', [ÉtudiantController::class, 'liste']);

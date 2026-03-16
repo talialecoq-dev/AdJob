@@ -55,9 +55,18 @@
 								<a class="nav-link px-3" style="font-size: 1.5rem;" href="/Liste-Pilotes"><img src="Images/Image_Pilote.png" alt="Pilotes" width="30" height="30" class="d-inline-block align-text-top">
 									Pilotes</a>
 							</li>
-							<li class="nav-item">
-								<a class="nav-link px-3" style="font-size: 1.5rem;" href="/Liste-Entreprises"><img src="Images/Image_Entreprise.png" alt="Entreprise" width="30" height="30" class="d-inline-block align-text-top">
+							
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle px-3" style="font-size: 1.5rem;" role="button" data-bs-toggle="dropdown"><img src="Images/Image_Entreprise.png" alt="Entreprises" width="30" height="30" class="d-inline-block align-text-top">
 									Entreprises</a>
+								<ul class="dropdown-menu">
+									<li>
+										<a class="dropdown-item" href="/Rechercher-Entreprise">Consulter les Entreprises</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="/Liste-Entreprises">Les Entreprises</a>
+									</li>
+								</ul>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link px-3" style="font-size: 1.5rem;" href="/Login">Connexion</a>
@@ -70,7 +79,7 @@
 
 		{% block content %}{% endblock %}
 	</body>
-	{% if type != 'mentions_legales' %}
-		{% include "Bases/footer.html.twig" %}
-	{% endif %}
+
+  <h1>Mentions Légales</h1>
+
 </html>
