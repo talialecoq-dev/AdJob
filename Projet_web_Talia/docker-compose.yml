@@ -9,10 +9,21 @@ services:
     image: php:8-alpine
     working_dir: /var/www
     command: php -S 0.0.0.0:8080 -t public
-    environment:
-      docker: "true"
+  db:
+    image: mysql
+    restart: always
     ports:
       - "8070:8080"
-    volumes:
-      - .:/var/www
-      - logs:/var/www/logs
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: toto
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 99:80
+    environment:
+      - PMA_HOST=db
+      - PMA_USER=root
+      - PMA_PASSWORD=example
