@@ -7,14 +7,13 @@ use App\Application\Settings\SettingsInterface;
 use DI\ContainerBuilder;
 use Monolog\Logger;
 
-return function (ContainerBuilder $containerBuilder) {
+define('APP_ROOT', __DIR__);
 
-    // On définit la racine de l'app pour les chemins Doctrine
-    $appRoot = __DIR__ . '/..';
+return function (ContainerBuilder $containerBuilder) {
 
     // Global Settings Object
     $containerBuilder->addDefinitions([
-        SettingsInterface::class => function () use ($appRoot) {
+        SettingsInterface::class => function () {
             return new Settings([
                 'displayErrorDetails' => true, 
                 'logError'            => true,
@@ -25,26 +24,29 @@ return function (ContainerBuilder $containerBuilder) {
                     'level' => Logger::DEBUG,
                 ],
                 
-                // --- AJOUT DE DOCTRINE ICI ---
+          
                 'doctrine' => [
                     // Passe à false en production
                     'dev_mode' => true,
                     
-                    // Chemin vers le cache (assure-toi que le dossier var/ existe)
-                    'cache_dir' => $appRoot . '/var/doctrine',
-                    
-                    // Chemin vers tes Entités (tes classes PHP Doctrine)
-                    'metadata_dirs' => [$appRoot . '/src/Domain'],
+            // Path where Doctrine will cache the processed metadata
+            // when 'dev_mode' is false.
+            'cache_dir' => APP_ROOT . '/var/doctrine',
+
+            // List of paths where Doctrine will search for metadata.
+            // Metadata can be either YML/XML files or PHP classes annotated
+            // with comments or PHP8 attributes.
+            'metadata_dirs' => [APP_ROOT . '/src/Domain'],
                     
                     // Configuration de ta base de données
                     'connection' => [
                         'driver'   => 'pdo_mysql',
                         'host'     => 'localhost',
                         'port'     => 3306,
-                        'dbname'   => 'ton_nom_de_bdd',
+                        'dbname'   => 'Adjob',
                         'user'     => 'root',
-                        'password' => '',
-                        'charset'  => 'utf8' // Attention : 'utf8', pas 'utf-8' pour MySQL
+                        'password' => 'Azerty',
+                        'charset'  => 'utf8mb4'
                     ]
                 ]
                 // --- FIN DE DOCTRINE ---
