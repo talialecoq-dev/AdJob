@@ -52,6 +52,7 @@ class ComposerStaticInitef6ee5ae07256ca9b7d9a63ce569b7b2
             'Psr\\Http\\Server\\' => 16,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
+            'Psr\\Cache\\' => 10,
             'Prophecy\\PhpUnit\\' => 17,
             'Prophecy\\' => 9,
             'PhpParser\\' => 10,
@@ -84,6 +85,8 @@ class ComposerStaticInitef6ee5ae07256ca9b7d9a63ce569b7b2
         array (
             'Doctrine\\Instantiator\\' => 22,
             'Doctrine\\Deprecations\\' => 22,
+            'Doctrine\\Common\\Lexer\\' => 22,
+            'Doctrine\\Common\\Annotations\\' => 28,
             'DeepCopy\\' => 9,
             'DI\\' => 3,
         ),
@@ -154,6 +157,10 @@ class ComposerStaticInitef6ee5ae07256ca9b7d9a63ce569b7b2
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
+        'Psr\\Cache\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/psr/cache/src',
+        ),
         'Prophecy\\PhpUnit\\' =>
         array (
             0 => __DIR__ . '/..' . '/phpspec/prophecy-phpunit/src',
@@ -209,6 +216,14 @@ class ComposerStaticInitef6ee5ae07256ca9b7d9a63ce569b7b2
         'Doctrine\\Deprecations\\' =>
         array (
             0 => __DIR__ . '/..' . '/doctrine/deprecations/src',
+        ),
+        'Doctrine\\Common\\Lexer\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/lexer/src',
+        ),
+        'Doctrine\\Common\\Annotations\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/annotations/lib/Doctrine/Common/Annotations',
         ),
         'DeepCopy\\' =>
         array (
