@@ -31,6 +31,7 @@ return function (App $app) {
     $app->get('/Profil', [ProfilController::class, 'profil']);
 
     $app->get('/Login', [LoginController::class, 'login']);
+    $app->post('/Login-utilisateur', [EntrepriseController::class, 'traiteConnexion']);
     
     $app->get('/Inscription-Entreprise', [EntrepriseController::class, 'inscription']);
     $app->get('/Liste-Entreprises', [EntrepriseController::class, 'liste']);
