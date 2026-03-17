@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
 use Slim\Container;
+use App\Application\Settings\SettingsInterface;
 
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -20,6 +21,7 @@ if (false) { // Should be set to true in production
 // Set up settings
 $settings = require __DIR__ . '/../app/settings.php';
 $settings($containerBuilder);
+
 
 // Set up dependencies
 $dependencies = require __DIR__ . '/../app/dependencies.php';
