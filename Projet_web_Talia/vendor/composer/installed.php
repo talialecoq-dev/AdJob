@@ -1,13 +1,266 @@
+Brr_Brr_Skibidi_Crampté_Pagnan
+leboxeur
+Invisible
+
+Dorian [HTB],  — Hier à 21:32
+je t'aime bebou
+c'est passé comme dans papa dans maman
+ [HTB], 
+Kira4T — Hier à 21:32
+nn
+Dorian [HTB],  — Hier à 21:32
+:/
+Kira4T — Hier à 21:32
+; ) 
+Dorian [HTB],  — Hier à 21:33
+j'ai push : une page de consulter les entreprises avec barre de recherche , bouton ajout entreprise ( avec votre formulaire ) , et  des fausses entreprises  ,  il y a aussi des fausses offres *
+j'essayerais demain matin de faire une page d'entreprise  comme sur hellowork un peu  avec un carrousel pour les stats   et voir avec vous qui avais la fonctionnalité laisser un commentaire /avis
+ [HTB], 
+Brr_Brr_Skibidi_Crampté_Pagnan — Hier à 21:39
+ah... moi aussi mais que d'amitié mon reuf
+Dorian [HTB],  — Hier à 21:39
+🙁
+Kira4T — Hier à 22:07
+voilà
+Dorian [HTB],  — 13:55
+Image
+je push
+Brr_Brr_Skibidi_Crampté_Pagnan — 13:59
+"doctrine/orm": "^3",
+        "doctrine/dbal": "^4",
+        "symfony/cache": "^7"
+les require
+composer require doctrine/annotations
+Le composer .json
+{
+  "name": "slim/slim-skeleton",
+  "description": "A Slim Framework skeleton application for rapid development",
+  "keywords": [
+    "microframework",
+    "rest",
+
+message.txt
+2 Ko
+Brr_Brr_Skibidi_Crampté_Pagnan — 14:05
+la commande
+Dorian [HTB],  — 14:05
+la commande j'ai deja tape dc j'ai juste a prendre ce que tu as envoyer
+copi colle dans le terminal
+?
+Brr_Brr_Skibidi_Crampté_Pagnan — 14:05
+nan mais t'avais pas les requires
+fallait mettre les require avant
+refais
+tu remplace ton composer.json par le notre
+puis après tu fais la commande dans le terminal
+Dorian [HTB],  — 14:06
+j'ai ça moi dans je .json : {
+    "name": "slim/slim-skeleton",
+    "description": "A Slim Framework skeleton application for rapid development",
+    "keywords": [
+        "microframework",
+        "rest",
+        "router",
+        "psr7"
+    ],
+    "homepage": "http://github.com/slimphp/Slim-Skeleton",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Josh Lockhart",
+            "email": "info@joshlockhart.com",
+            "homepage": "http://www.joshlockhart.com/"
+        },
+        {
+            "name": "Pierre Berube",
+            "email": "pierre@lgse.com",
+            "homepage": "http://www.lgse.com/"
+        }
+    ],
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "ext-json": "*",
+        "doctrine/annotations": "^2.0",
+        "monolog/monolog": "^2.8",
+        "php-di/php-di": "^6.4",
+        "slim/psr7": "^1.5",
+        "slim/slim": "^4.10",
+        "slim/twig-view": "^3.4"
+    },
+    "require-dev": {
+        "jangregor/phpstan-prophecy": "^1.0.0",
+        "phpspec/prophecy-phpunit": "^2.0",
+        "phpstan/extension-installer": "^1.2.0",
+        "phpstan/phpstan": "^1.8",
+        "phpunit/phpunit": "^9.5.26",
+        "squizlabs/php_codesniffer": "^3.7"
+    },
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        },
+        "process-timeout": 0,
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "App\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\": "tests/"
+        }
+    },
+    "scripts": {
+        "start": "php -S localhost:8080 -t public",
+        "test": "phpunit"
+    }
+}
+Brr_Brr_Skibidi_Crampté_Pagnan — 14:07
+oe t'as pas les require qu'il a demandé
+Dorian [HTB],  — 14:07
+dacc
+Brr_Brr_Skibidi_Crampté_Pagnan — 14:21
+tu peux envoyer installed.php
+Dorian [HTB],  — 14:21
+vsy il est où
+Brr_Brr_Skibidi_Crampté_Pagnan — 14:21
+jsp chercher
+Dorian [HTB],  — 14:22
+vsyy
+Brr_Brr_Skibidi_Crampté_Pagnan — 14:22
+mais il y a un problème a cause de ça
+Dorian [HTB],  — 14:22
+boss
+je t'aime
+Brr_Brr_Skibidi_Crampté_Pagnan — 14:22
+et apparament c'est le tient
+ [HTB], 
+Brr_Brr_Skibidi_Crampté_Pagnan — 14:22
+moi aussi d'amitié
+Dorian [HTB],  — 14:22
+lntm
+je l'ai trouvé :
 <?php return array(
     'root' => array(
         'name' => 'slim/slim-skeleton',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-<<<<<<< HEAD
-        'reference' => 'b6cb2b237a8481a5bd424090b1156d254898cc94',
-=======
         'reference' => 'e75b22cfbf636d5238b9508328953c54b3105d4a',
->>>>>>> 3230243fc6e7c71e0df505f01c140f8fae0692ff
+        'type' => 'library',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'dev' => true,
+    ),
+    'versions' => array(
+        'doctrine/annotations' => array(
+            'pretty_version' => '2.0.2',
+            'version' => '2.0.2.0',
+            'reference' => '901c2ee5d26eb64ff43c47976e114bf00843acf7',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../doctrine/annotations',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'doctrine/collections' => array(
+            'pretty_version' => '2.6.0',
+            'version' => '2.6.0.0',
+            'reference' => '7713da39d8e237f28411d6a616a3dce5e20d5de2',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../doctrine/collections',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'doctrine/dbal' => array(
+            'pretty_version' => '4.4.2',
+            'version' => '4.4.2.0',
+            'reference' => '476f7f0fa6ea4aa5364926db7fabdf6049075722',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../doctrine/dbal',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'doctrine/deprecations' => array(
+            'pretty_version' => '1.1.6',
+            'version' => '1.1.6.0',
+            'reference' => 'd4fe3e6fd9bb9e72557a19674f44d8ac7db4c6ca',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../doctrine/deprecations',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'doctrine/event-manager' => array(
+            'pretty_version' => '2.1.1',
+            'version' => '2.1.1.0',
+            'reference' => 'dda33921b198841ca8dbad2eaa5d4d34769d18cf',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../doctrine/event-manager',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'doctrine/inflector' => array(
+            'pretty_version' => '2.1.0',
+            'version' => '2.1.0.0',
+            'reference' => '6d6c96277ea252fc1304627204c3d5e6e15faa3b',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../doctrine/inflector',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'doctrine/instantiator' => array(
+            'pretty_version' => '2.1.0',
+            'version' => '2.1.0.0',
+            'reference' => '23da848e1a2308728fe5fdddabf4be17ff9720c7',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../doctrine/instantiator',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'doctrine/lexer' => array(
+            'pretty_version' => '3.0.1',
+            'version' => '3.0.1.0',
+            'reference' => '31ad66abc0fc9e1a1f2d9bc6a42668d2fbbcd6dd',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../doctrine/lexer',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'doctrine/orm' => array(
+            'pretty_version' => '3.6.2',
+            'version' => '3.6.2.0',
+            'reference' => '4262eb495b4d2a53b45de1ac58881e0091f2970f',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../doctrine/orm',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'doctrine/persistence' => array(
+            'pretty_version' => '4.1.1',
+            'version' => '4.1.1.0',
+            'reference' => 'b9c49ad3558bb77ef973f4e173f2e9c2eca9be09',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../doctrine/persistence',
+            'aliases' => array(),
+... (687lignes restantes)
+
+message.txt
+33 Ko
+c'est quoi le problème ?
+Brr_Brr_Skibidi_Crampté_Pagnan — 14:23
+jsp mais talia peut pas push
+Dorian [HTB],  — 14:24
+il est dans vendor ->  composer
+Brr_Brr_Skibidi_Crampté_Pagnan — 14:24
+vient a coté de nous en despit
+le miens a 700 ligne
+﻿
+<?php return array(
+    'root' => array(
+        'name' => 'slim/slim-skeleton',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => 'e75b22cfbf636d5238b9508328953c54b3105d4a',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -612,11 +865,7 @@
         'slim/slim-skeleton' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-<<<<<<< HEAD
-            'reference' => 'b6cb2b237a8481a5bd424090b1156d254898cc94',
-=======
             'reference' => 'e75b22cfbf636d5238b9508328953c54b3105d4a',
->>>>>>> 3230243fc6e7c71e0df505f01c140f8fae0692ff
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
