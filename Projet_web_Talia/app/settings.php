@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <?php
+=======
+<?php 
+>>>>>>> db947b057b8a8972b916efc576b76d71dec2dcc8
 declare(strict_types=1);
 
     use App\Application\Settings\Settings;
