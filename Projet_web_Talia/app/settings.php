@@ -43,9 +43,9 @@ return function (ContainerBuilder $containerBuilder) {
                         'driver'   => 'pdo_mysql',
                         'host'     => 'localhost',
                         'port'     => 3306,
-                        'dbname'   => 'Adjob',
+                        'dbname'   => 'toto',
                         'user'     => 'root',
-                        'password' => 'Azerty',
+                        'password' => 'example',
                         'charset'  => 'utf8mb4'
                     ]
                 ]
