@@ -1,12 +1,7 @@
-
-
-{% block content %}
-
 <div class="container-fluid px-4 my-5">
   <div class="row row-cols-1 row-cols-md-3 g-4">
 
     {% for offre in offres %}
-
     <div class="col">
       <div class="card h-100 border-0 p-4" style="background-color: #97a48a; border-radius: 2rem;">
 
@@ -48,10 +43,36 @@
 
       </div>
     </div>
-
     {% endfor %}
 
   </div>
-</div>
 
-{% endblock %}
+  {# Pagination #}
+  {% if totalPages > 1 %}
+  <div class="d-flex justify-content-center mt-4">
+    <nav>
+      <ul class="pagination">
+
+        <li class="page-item {% if page == 1 %}disabled{% endif %}">
+          <a class="page-link" href="?page={{ page - 1 }}">«</a>
+        </li>
+
+        {% for p in 1..totalPages %}
+        <li class="page-item {% if p == page %}active{% endif %}">
+          <a class="page-link" href="?page={{ p }}"
+             style="{% if p == page %}background-color: #97a48a; border-color: #97a48a;{% endif %}">
+            {{ p }}
+          </a>
+        </li>
+        {% endfor %}
+
+        <li class="page-item {% if page == totalPages %}disabled{% endif %}">
+          <a class="page-link" href="?page={{ page + 1 }}">»</a>
+        </li>
+
+      </ul>
+    </nav>
+  </div>
+  {% endif %}
+
+</div>
