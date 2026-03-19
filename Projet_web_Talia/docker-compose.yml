@@ -8,15 +8,15 @@ services:
     working_dir: /var/www
     command: php -S 0.0.0.0:8080 -t public
     ports:
-      - "8080:8080"        # ✅ site accessible
+      - "8080:8080"        
     volumes:
-      - .:/var/www         # ✅ ton code monté
+      - .:/var/www        
 
   db:
     image: mysql
     restart: always
     ports:
-      - "3307:3306"        # ✅ port MySQL correct (3307 car 3306 déjà pris)
+      - "3307:3306"       
     environment:
       MYSQL_ROOT_PASSWORD: example
       MYSQL_DATABASE: toto
