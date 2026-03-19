@@ -47,25 +47,38 @@ class HomeController
         ]);
     }
 
-    public function ajouter(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
-{
-    $data = $request->getParsedBody();
+        public function ajouter(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+        $data = $request->getParsedBody();
 
-    $offre = new Offre(
-        $data['titre']       ?? '',
-        $data['entreprise']  ?? '',
-        $data['duree']       ?? '',
-        $data['remuneration'] ?? '',
-        $data['domaine']     ?? '',
-        $data['genre']       ?? '',
-        $data['description'] ?? '',
-        $data['logo']        ?? null
-    );
+        $offre = new Offre(
+            $data['titre']       ?? '',
+            $data['entreprise']  ?? '',
+            $data['duree']       ?? '',
+            $data['remuneration'] ?? '',
+            $data['domaine']     ?? '',
+            $data['genre']       ?? '',
+            $data['description'] ?? '',
+            $data['logo']        ?? null
+        );
 
-    $this->em->persist($offre);
-    $this->em->flush();
+        $this->em->persist($offre);
+        $this->em->flush();
 
-    
-    return $response->withHeader('Location', '/')->withStatus(302);
-}
+        
+        return $response->withHeader('Location', '/')->withStatus(302);
+    }
+
+        public function supprimer(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+        $id = (int) $args['id'];
+        $offre = $this->em->find(Offre::class, $id);
+
+        if ($offre) {
+            $this->em->remove($offre);
+            $this->em->flush();
+        }
+
+        return $response->withHeader('Location', '/')->withStatus(302);
+    }
 }
