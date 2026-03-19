@@ -46,4 +46,26 @@ class HomeController
             'total'      => $total,
         ]);
     }
+
+    public function ajouter(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+{
+    $data = $request->getParsedBody();
+
+    $offre = new Offre(
+        $data['titre']       ?? '',
+        $data['entreprise']  ?? '',
+        $data['duree']       ?? '',
+        $data['remuneration'] ?? '',
+        $data['domaine']     ?? '',
+        $data['genre']       ?? '',
+        $data['description'] ?? '',
+        $data['logo']        ?? null
+    );
+
+    $this->em->persist($offre);
+    $this->em->flush();
+
+    
+    return $response->withHeader('Location', '/')->withStatus(302);
+}
 }

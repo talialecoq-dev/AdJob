@@ -3,84 +3,79 @@
     <div class="modal-content">
 
       <div class="modal-header" style="background-color: #ECEADE">
-        <h1 class="modal-title fs-5" id="titrefenetremodal">Ajouter une Offre</h1>
+        <h1 class="modal-title fs-5">Ajouter une Offre</h1>
       </div>
 
-      <div class="modal-body">
-        <div class="row g-3 px-2">
+      
+      <form method="POST" action="/offre/ajouter">
 
-          <div class="col-6">
-            <label class="form-label">Nom de l'Offre :</label>
-            <input type="text" class="form-control" placeholder="Entrez le nom de l'Offre" style="border-radius: 5px; border: 1px solid #A0A890">
-          </div>
+        <div class="modal-body">
+          <div class="row g-3 px-2">
 
-          <div class="col-6">
-            <label class="form-label">Salaire :</label>
-            <input type="text" class="form-control" placeholder="Ex: 600 €/mois" style="border-radius: 5px; border: 1px solid #A0A890">
-          </div>
-
-          <div class="col-4">
-            <label class="form-label">Durée :</label>
-            <select class="form-select" style="border-radius: 5px; border: 1px solid #A0A890">
-              <option selected>Sélection de la Durée</option>
-              <option value="1">2 mois</option>
-              <option value="2">3 mois</option>
-              <option value="3">6 mois</option>
-            </select>
-          </div>
-
-          <div class="col-4">
-            <label class="form-label">Domaine :</label>
-            <select class="form-select" style="border-radius: 5px; border: 1px solid #A0A890">
-              <option selected>Sélection du Domaine</option>
-              <option value="1">Informatique</option>
-              <option value="2">Mécanique</option>
-              <option value="3">Électronique</option>
-            </select>
-          </div>
-
-          <div class="col-4">
-            <label class="form-label">Genre :</label>
-            <select class="form-select" style="border-radius: 5px; border: 1px solid #A0A890">
-              <option selected>Sélection du Genre</option>
-              <option value="1">H (Homme)</option>
-              <option value="2">F (Femme)</option>
-              <option value="3">H|F (Homme/Femme)</option>
-            </select>
-          </div>
-
-          <div class="col-12">
-            <label class="form-label">Description :</label>
-            <textarea class="form-control" rows="5" placeholder="Entrez la description de l'Offre" style="border-radius: 5px; border: 1px solid #A0A890; resize: vertical;"></textarea>
-          </div>
-
-          <div class="col-12">
-            <label class="form-label">Profil recherché :</label>
-            <textarea class="form-control" rows="5" placeholder="Entrez la description du profil recherché" style="border-radius: 5px; border: 1px solid #A0A890; resize: vertical;"></textarea>
-          </div>
-
-          <div class="col-12">
-            <label class="form-label">Mission pendant le stage :</label>
-            <textarea class="form-control" rows="5" placeholder="Entrez la liste des missions" style="border-radius: 5px; border: 1px solid #A0A890; resize: vertical;"></textarea>
-          </div>
-
-          <div class="col-12">
-            <label class="form-label">Logo de l'entreprise (PNG) :</label>
-            <div id="dropZone" class="border border-dashed rounded p-4 text-center" style="border: 2px dashed #A0A890 !important; cursor: pointer;" onclick="document.getElementById('logoInput').click()" ondragover="event.preventDefault()" ondrop="handleLogoDrop(event)">
-              <p class="text-muted mb-1" id="dropLabel">Glissez-déposez un fichier PNG ici, ou <u>cliquez pour parcourir</u></p>
-              <img id="logoPreview" src="" alt="Aperçu" class="mt-2 d-none" style="max-height: 80px; border-radius: 4px;">
-              <input type="file" id="logoInput" accept="image/png" class="d-none" onchange="previewLogo(this.files[0])">
+            <div class="col-6">
+              <label class="form-label">Nom de l'Offre :</label>
+              <input type="text" name="titre" class="form-control" placeholder="Entrez le nom de l'Offre" style="border-radius: 5px; border: 1px solid #A0A890">
             </div>
+
+            <div class="col-6">
+              <label class="form-label">Salaire :</label>
+              <input type="text" name="remuneration" class="form-control" placeholder="Ex: 600 €/mois" style="border-radius: 5px; border: 1px solid #A0A890">
+            </div>
+
+            <div class="col-4">
+              <label class="form-label">Durée :</label>
+              <select name="duree" class="form-select" style="border-radius: 5px; border: 1px solid #A0A890">
+                <option value="" disabled selected>Sélection de la Durée</option>
+                <option value="2 mois">2 mois</option>
+                <option value="3 mois">3 mois</option>
+                <option value="6 mois">6 mois</option>
+              </select>
+            </div>
+
+            <div class="col-4">
+              <label class="form-label">Domaine :</label>
+              <select name="domaine" class="form-select" style="border-radius: 5px; border: 1px solid #A0A890">
+                <option value="" disabled selected>Sélection du Domaine</option>
+                <option value="Informatique">Informatique</option>
+                <option value="Mécanique">Mécanique</option>
+                <option value="Électronique">Électronique</option>
+              </select>
+            </div>
+
+            <div class="col-4">
+              <label class="form-label">Genre :</label>
+              <select name="genre" class="form-select" style="border-radius: 5px; border: 1px solid #A0A890">
+                <option value="" disabled selected>Sélection du Genre</option>
+                <option value="H">H (Homme)</option>
+                <option value="F">F (Femme)</option>
+                <option value="H|F">H|F (Homme/Femme)</option>
+              </select>
+            </div>
+
+            <div class="col-6">
+              <label class="form-label">Entreprise :</label>
+              <input type="text" name="entreprise" class="form-control" placeholder="Nom de l'entreprise" style="border-radius: 5px; border: 1px solid #A0A890">
+            </div>
+
+            <div class="col-6">
+              <label class="form-label">Logo (URL ou chemin) :</label>
+              <input type="text" name="logo" class="form-control" placeholder="Ex: Images/logo.png" style="border-radius: 5px; border: 1px solid #A0A890">
+            </div>
+
+            <div class="col-12">
+              <label class="form-label">Description :</label>
+              <textarea name="description" class="form-control" rows="5" placeholder="Entrez la description de l'Offre" style="border-radius: 5px; border: 1px solid #A0A890; resize: vertical;"></textarea>
+            </div>
+
           </div>
-
         </div>
-      </div>
 
-      <div class="modal-footer" style="background-color: #ECEADE">
-        <button type="button" class="btn" data-bs-dismiss="modal" style="background-color: #A0A890">Fermer</button>
-        <button type="button" class="btn" style="background-color: #EED4CB">Ajouter</button>
-      </div>
+        <div class="modal-footer" style="background-color: #ECEADE">
+          <button type="button" class="btn" data-bs-dismiss="modal" style="background-color: #A0A890">Fermer</button>
+          <button type="submit" class="btn" style="background-color: #EED4CB">Ajouter</button>
+        </div>
 
+      </form>
     </div>
   </div>
 </div>
