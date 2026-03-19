@@ -1,5 +1,3 @@
-version: "3.7"
-
 volumes:
   logs:
     driver: local
@@ -9,11 +7,16 @@ services:
     image: php:8-alpine
     working_dir: /var/www
     command: php -S 0.0.0.0:8080 -t public
+    ports:
+      - "8080:8080"        # ✅ site accessible
+    volumes:
+      - .:/var/www         # ✅ ton code monté
+
   db:
     image: mysql
     restart: always
     ports:
-      - "8070:8080"
+      - "3307:3306"        # ✅ port MySQL correct (3307 car 3306 déjà pris)
     environment:
       MYSQL_ROOT_PASSWORD: example
       MYSQL_DATABASE: toto
