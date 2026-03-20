@@ -6,7 +6,7 @@
 
 			{# 1. CALCUL DE L'URL D'ACTION #}
 			{# Si le type est Entreprise, on va vers /inscription-entreprise, sinon vers /traitement-inscription #}
-			{% if type == "Entreprise" %}
+				{% if type == "Entreprise" %}
 				{% set action_url = "/inscription-entreprise" %}
 			{% elseif type == "Etudiants" or type == "Etudiants_ajout" %}
 				{% set action_url = "/Inscription-Étudiant" %}
@@ -18,7 +18,8 @@
 
 			{# 2. DÉBUT DU FORMULAIRE #}
 			{# enctype est nécessaire seulement si on ajoute un étudiant avec une photo #}
-				<form method="POST" action="{{ action_url }}" {% if type == "Etudiants_ajout" %} enctype="multipart/form-data" {% endif %}> {% if type == "Etudiants" or type == "Etudiants_ajout" %}
+			<form method="POST" action="{{ action_url }}" {% if type == "Etudiants_ajout" %} enctype="multipart/form-data" {% endif %}>
+				{% if type == "Etudiants" or type == "Etudiants_ajout" %}
 					{# --- BLOC ÉTUDIANT --- #}
 					<div class="mb-3">
 						<label for="nom_etudiant" class="form-label pt-2 m-2">Nom de l'étudiant</label>
