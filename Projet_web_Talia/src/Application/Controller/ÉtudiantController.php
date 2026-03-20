@@ -54,25 +54,25 @@ class ÉtudiantController
         ]);
     }
 
-    public function ajouter(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
-    {
-        $data = $request->getParsedBody();
-        $this->verifierUpload();
+   public function ajouter(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+{
+    $data = $request->getParsedBody();
+    $this->verifierUpload();
 
-        $etudiant = new Etudiant(
-            $data['prenom'] ?? '',
-            $data['nom'] ?? '',
-            $data['email'] ?? '',
-            $data['ville'] ?? '',   
-            $data['adresse'] ?? '', 
-            $data['region'] ?? '',  
-        );
+    $etudiant = new Etudiant(
+        $data['prenom'] ?? '',
+        $data['nom'] ?? '',
+        $data['email'] ?? '',
+        $data['ville'] ?? '',   
+        $data['adresse'] ?? '', 
+        $data['region'] ?? ''
+    );
 
-        $this->em->persist($etudiant);
-        $this->em->flush();
+    $this->em->persist($etudiant);
+    $this->em->flush();
 
-        return $response->withHeader('Location', '/Liste-Étudiants')->withStatus(302);
-    }
+    return $response->withHeader('Location', '/Liste-Étudiants')->withStatus(302);
+}
 
     public function supprimer(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
@@ -97,11 +97,38 @@ class ÉtudiantController
         ]);
     }
 
-    public function modifier(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
-    {
-        $view = Twig::fromRequest($request);
-        return $view->render($response, 'Étudiants/Page_Modifier_Étudiant.html.twig', []);
+  public function modifier(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+{
+    $view = Twig::fromRequest($request);
+
+    $id = (int) $args['id'];
+    $etudiant = $this->em->find(Etudiant::class, $id);
+
+    return $view->render($response, 'Étudiants/Page_Modifier_Étudiant.html.twig', [
+        'etudiant' => $etudiant
+    ]);
+}
+
+public function update(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+{
+    $id = (int) $args['id'];
+    $data = $request->getParsedBody();
+
+    $etudiant = $this->em->find(Etudiant::class, $id);
+
+    if ($etudiant) {
+        $etudiant->setPrenom($data['prenom'] ?? '');
+        $etudiant->setNom($data['nom'] ?? '');
+        $etudiant->setEmail($data['email'] ?? '');
+        $etudiant->setVille($data['ville'] ?? '');
+        $etudiant->setAdresse($data['adresse'] ?? '');
+        $etudiant->setRegion($data['region'] ?? '');
+
+        $this->em->flush();
     }
+
+    return $response->withHeader('Location', '/Liste-Étudiants')->withStatus(302);
+}
 
     public function verifierUpload(): void
     {

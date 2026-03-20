@@ -51,8 +51,9 @@ return function (App $app) {
     $app->get('/Inscription-Étudiant', [ÉtudiantController::class, 'inscription']);
     $app->post('/Inscription-Étudiant', [ÉtudiantController::class, 'ajouter']); 
     $app->get('/Liste-Étudiants', [ÉtudiantController::class, 'liste']);
-    $app->post('/Supprimer-Étudiant/{id}', [ÉtudiantController::class, 'supprimer']);
     $app->get('/Modifier-Étudiant/{id}', [ÉtudiantController::class, 'modifier']);
+    $app->post('/Modifier-Étudiant/{id}', [ÉtudiantController::class, 'update']);
+    $app->post('/Supprimer-Étudiant/{id}', [ÉtudiantController::class, 'supprimer']);
 
     $app->get('/Inscription-Pilote', [PiloteController::class, 'inscription']);
     $app->get('/Liste-Pilotes', [PiloteController::class, 'liste']);
