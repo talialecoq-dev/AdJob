@@ -46,26 +46,32 @@ class ÉtudiantController
         ]);
     }
 
+    public function inscription(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+        $view = Twig::fromRequest($request);
+        return $view->render($response, 'Entreprises/Page_Inscription_Entreprise.html.twig', [
+            'type' => 'Etudiants_ajout'
+        ]);
+    }
+
     public function ajouter(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $data = $request->getParsedBody();
-
-        $this->verifierUpload(); 
+        $this->verifierUpload();
 
         $etudiant = new Etudiant(
             $data['prenom'] ?? '',
             $data['nom'] ?? '',
             $data['email'] ?? '',
-            $data['campus'] ?? '',
-            $data['ville'] ?? '',
-            $data['description'] ?? '',
-            $data['logo'] ?? null
+            $data['ville'] ?? '',   
+            $data['adresse'] ?? '', 
+            $data['region'] ?? '',  
         );
 
         $this->em->persist($etudiant);
         $this->em->flush();
 
-        return $response->withHeader('Location', '/')->withStatus(302);
+        return $response->withHeader('Location', '/Liste-Étudiants')->withStatus(302);
     }
 
     public function supprimer(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface

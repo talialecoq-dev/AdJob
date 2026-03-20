@@ -4,9 +4,20 @@
 	<div class="main-container" style="background-color: #eed4cb; padding: 50px;">
 		<div class="container" style="background-color: #ffffff; border-radius: 12px; padding: 30px; max-width: 700px; border: 1px solid #a0a890; margin: auto;">
 
-			{% set action_url = (type == "Entreprise") ? "/inscription-entreprise" : "/traitement-inscription" %}
+			{# 1. CALCUL DE L'URL D'ACTION #}
+			{# Si le type est Entreprise, on va vers /inscription-entreprise, sinon vers /traitement-inscription #}
+				{% if type == "Entreprise" %}
+				{% set action_url = "/inscription-entreprise" %}
+			{% elseif type == "Etudiants" or type == "Etudiants_ajout" %}
+				{% set action_url = "/Inscription-Étudiant" %}
+			{% elseif type == "Pilote" %}
+				{% set action_url = "/Inscription-Pilote" %}
+			{% else %}
+				{% set action_url = "/traitement-inscription" %}
+			{% endif %}
 
-
+			{# 2. DÉBUT DU FORMULAIRE #}
+			{# enctype est nécessaire seulement si on ajoute un étudiant avec une photo #}
 			<form method="POST" action="{{ action_url }}" {% if type == "Etudiants_ajout" %} enctype="multipart/form-data" {% endif %}>
 				{% if type == "Etudiants" or type == "Etudiants_ajout" %}
 					{# --- BLOC ÉTUDIANT --- #}
@@ -80,7 +91,7 @@
 					</div>
 
 				{% else %}
-
+					{# --- BLOC ENTREPRISE (PAR DÉFAUT) --- #}
 					<div class="mb-3">
 						<label for="nom_entreprise" class="form-label pt-2 m-2">Nom de l'entreprise</label>
 						<input type="text" name="nom_entreprise" class="form-control" id="nom_entreprise" placeholder="Nom de votre entreprise" style="border: 1px solid #a0a890;" required>

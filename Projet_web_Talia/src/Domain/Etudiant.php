@@ -24,14 +24,14 @@ class Etudiant
     #[Column(type: 'string', nullable: false)]
     private string $email;
 
-    #[Column(type: 'string', nullable: false)]
-    private string $campus;
+    #[Column(type: 'string', nullable: true)]
+    private ?string $adresse;
 
-    #[Column(type: 'string', nullable: false)]
-    private string $ville;
+    #[Column(type: 'string', nullable: true)]
+    private ?string $ville;
 
-    #[Column(type: 'text', nullable: true)]
-    private ?string $description;
+    #[Column(type: 'string', nullable: true)]
+    private ?string $region;
 
     #[Column(type: 'string', nullable: true)]
     private ?string $logo;
@@ -43,19 +43,19 @@ class Etudiant
         string $prenom,
         string $nom,
         string $email,
-        string $campus,
-        string $ville,
-        ?string $description = null,
+        ?string $adresse = null,
+        ?string $ville = null,
+        ?string $region = null,
         ?string $logo = null
     ) {
-        $this->prenom      = $prenom;
-        $this->nom         = $nom;
-        $this->email       = $email;
-        $this->campus      = $campus;
-        $this->ville       = $ville;
-        $this->description = $description;
-        $this->logo        = $logo;
-        $this->createdAt   = new DateTimeImmutable('now');
+        $this->prenom    = $prenom;
+        $this->nom       = $nom;
+        $this->email     = $email;
+        $this->adresse   = $adresse;
+        $this->ville     = $ville;
+        $this->region    = $region;
+        $this->logo      = $logo;
+        $this->createdAt = new DateTimeImmutable('now');
     }
 
     public function getId(): int { return $this->id; }
@@ -69,14 +69,14 @@ class Etudiant
     public function getEmail(): string { return $this->email; }
     public function setEmail(string $email): void { $this->email = $email; }
 
-    public function getCampus(): string { return $this->campus; }
-    public function setCampus(string $campus): void { $this->campus = $campus; }
+    public function getAdresse(): ?string { return $this->adresse; }
+    public function setAdresse(?string $adresse): void { $this->adresse = $adresse; }
 
-    public function getVille(): string { return $this->ville; }
-    public function setVille(string $ville): void { $this->ville = $ville; }
+    public function getVille(): ?string { return $this->ville; }
+    public function setVille(?string $ville): void { $this->ville = $ville; }
 
-    public function getDescription(): ?string { return $this->description; }
-    public function setDescription(?string $description): void { $this->description = $description; }
+    public function getRegion(): ?string { return $this->region; }
+    public function setRegion(?string $region): void { $this->region = $region; }
 
     public function getLogo(): ?string { return $this->logo; }
     public function setLogo(?string $logo): void { $this->logo = $logo; }
