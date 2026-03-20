@@ -12,7 +12,7 @@ class EntrepriseController
 {
     private EntityManager $em;
 
-    // Exactement comme son HomeController
+
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
@@ -29,7 +29,9 @@ class EntrepriseController
     public function liste(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $view = Twig::fromRequest($request);
-        return $view->render($response, 'Entreprises/Page_Liste_Entreprises.html.twig', []);
+            $repository  = $this->em->getRepository(Entreprise::class);
+            $entreprises = $repository->findAll(); 
+        return $view->render($response, 'Entreprises/Page_Liste_Entreprises.html.twig', ['entreprises' => $entreprises ]);
     }
 
     public function supprimer(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
@@ -37,7 +39,35 @@ class EntrepriseController
         $view = Twig::fromRequest($request);
         return $view->render($response, 'Entreprises/Page_Supprimer_Entreprise.html.twig', []);
     }
+    public function home(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+        $view = Twig::fromRequest($request);
 
+        $parPage = 9;
+        $page    = isset($args['page']) ? (int)$args['page'] : 1;
+        $offset  = ($page - 1) * $parPage;
+
+        $repository = $this->em->getRepository(Entreprise::class);
+
+        $total = $repository->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $offres = $repository->createQueryBuilder('o')
+            ->orderBy('o.id', 'DESC')
+            ->setFirstResult($offset)
+            ->setMaxResults($parPage)
+            ->getQuery()
+            ->getResult();
+
+        return $view->render($response, 'Page_Liste_Entreprises.html.twig', [
+            'offres'     => $offres,
+            'page'       => $page,
+            'totalPages' => (int) ceil($total / $parPage),
+            'total'      => $total,
+        ]);
+    }
     public function traiterInscription(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $data = $request->getParsedBody();
