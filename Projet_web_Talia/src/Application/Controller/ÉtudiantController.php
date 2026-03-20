@@ -49,6 +49,7 @@ class ÉtudiantController
     public function ajouter(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $data = $request->getParsedBody();
+        $view = Twig::fromRequest($request);
 
         $this->verifierUpload(); 
 
@@ -65,7 +66,9 @@ class ÉtudiantController
         $this->em->persist($etudiant);
         $this->em->flush();
 
-        return $response->withHeader('Location', '/')->withStatus(302);
+        return $view->render($response, 'Entreprises/Page_Inscription_Entreprise.html.twig', [
+            'type' => 'Etudiants_ajout'
+        ]);
     }
 
     public function supprimer(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
