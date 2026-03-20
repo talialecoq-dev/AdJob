@@ -40,8 +40,8 @@ declare(strict_types=1);
                         // Configuration de ta base de données
                         'connection' => [
                             'driver'   => 'pdo_mysql',
-                            'host'     => 'db',
-                            'port'     => 3306,
+                            'host'     => 'localhost',
+                            'port'     => 3307,
                             'dbname'   => 'toto',
                             'user'     => 'root',
                             'password' => 'example',

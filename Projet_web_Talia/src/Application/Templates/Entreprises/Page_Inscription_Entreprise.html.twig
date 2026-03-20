@@ -4,9 +4,8 @@
 	<div class="main-container" style="background-color: #eed4cb; padding: 50px;">
 		<div class="container" style="background-color: #ffffff; border-radius: 12px; padding: 30px; max-width: 700px; border: 1px solid #a0a890; margin: auto;">
 
-			{# 1. CALCUL DE L'URL D'ACTION #}
-			{# Si le type est Entreprise, on va vers /inscription-entreprise, sinon vers /traitement-inscription #}
-				{% if type == "Entreprise" %}
+
+			{% if type == "Entreprise" %}
 				{% set action_url = "/inscription-entreprise" %}
 			{% elseif type == "Etudiants" or type == "Etudiants_ajout" %}
 				{% set action_url = "/Inscription-Étudiant" %}
@@ -16,11 +15,10 @@
 				{% set action_url = "/traitement-inscription" %}
 			{% endif %}
 
-			{# 2. DÉBUT DU FORMULAIRE #}
-			{# enctype est nécessaire seulement si on ajoute un étudiant avec une photo #}
+
 			<form method="POST" action="{{ action_url }}" {% if type == "Etudiants_ajout" %} enctype="multipart/form-data" {% endif %}>
 				{% if type == "Etudiants" or type == "Etudiants_ajout" %}
-					{# --- BLOC ÉTUDIANT --- #}
+
 					<div class="mb-3">
 						<label for="nom_etudiant" class="form-label pt-2 m-2">Nom de l'étudiant</label>
 						<input type="text" name="nom" class="form-control" id="nom_etudiant" placeholder="Entrez le nom" style="border: 1px solid #a0a890;" required>
@@ -76,7 +74,7 @@
 
 
 				{% elseif type == "Pilote" %}
-					{# --- BLOC PILOTE --- #}
+
 					<div class="mb-3">
 						<label for="nom_pilote" class="form-label pt-2 m-2">Nom du pilote</label>
 						<input type="text" name="nom" class="form-control" id="nom_pilote" placeholder="Nom du pilote" style="border: 1px solid #a0a890;" required>
@@ -91,7 +89,6 @@
 					</div>
 
 				{% else %}
-					{# --- BLOC ENTREPRISE (PAR DÉFAUT) --- #}
 					<div class="mb-3">
 						<label for="nom_entreprise" class="form-label pt-2 m-2">Nom de l'entreprise</label>
 						<input type="text" name="nom_entreprise" class="form-control" id="nom_entreprise" placeholder="Nom de votre entreprise" style="border: 1px solid #a0a890;" required>
@@ -123,7 +120,7 @@
 					</div>
 				{% endif %}
 
-				{# 3. BOUTON DE VALIDATION UNIQUE #}
+
 				<div class="col-12 pt-4">
 					<button type="submit" class="btn w-100" accept=".png, .jpg, .jpeg" style="background-color: #a0a890; color: white; border: none; padding: 12px; font-weight: bold; border-radius: 25px;" required>
 						<div class="invalid-feedback">

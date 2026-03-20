@@ -81,7 +81,7 @@ class EntrepriseController
             $data['image_entreprise']       ?? null, 
         );
 
-        // On persiste et on flush comme lui
+      
         $this->em->persist($entreprise);
         $this->em->flush();
 
