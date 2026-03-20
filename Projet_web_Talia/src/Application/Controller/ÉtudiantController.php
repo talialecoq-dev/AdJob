@@ -4,76 +4,111 @@ namespace App\Application\Controller;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Views\Twig;
+use Doctrine\ORM\EntityManager;
+use App\Domain\Etudiant;
 
 class ÉtudiantController
 {
-    public function inscription(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    private EntityManager $em;
+
+    public function __construct(EntityManager $em)
     {
-        $view = Twig::fromRequest($request);
-        return $view->render($response, 'Étudiants/Page_Inscription_Étudiant.html.twig', []);
+        $this->em = $em;
     }
 
-    public function liste(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    public function home(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $view = Twig::fromRequest($request);
 
-        $etudiants = [
-            [
-                "id" => 1,
-                "prenom" => "Mark",
-                "nom" => "Otto",
-                "email" => "mark@cesi.fr",
-                "campus" => "Cesi École d'Ingénieurs",
-                "ville" => "Paris"
-            ],
-            [
-                "id" => 2,
-                "prenom" => "Jacob",
-                "nom" => "Thornton",
-                "email" => "jacob@cesi.fr",
-                "campus" => "Cesi École d'Ingénieurs",
-                "ville" => "Lyon"
-            ],
-            [
-                "id" => 3,
-                "prenom" => "John",
-                "nom" => "Doe",
-                "email" => "john@cesi.fr",
-                "campus" => "Cesi École d'Ingénieurs",
-                "ville" => "Marseille"
-            ]
-        ];
+        $parPage = 100;
+        $page = max(1, (int)($args['page'] ?? 1)); 
+        $offset  = ($page - 1) * $parPage;
 
-        // Envoi à Twig
-        return $view->render($response, 'Étudiants/Page_Liste_Étudiant.html.twig', [
-            'etudiants' => $etudiants
+        $repository = $this->em->getRepository(Etudiant::class);
+
+        $total = $repository->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $offres = $repository->createQueryBuilder('o')
+            ->orderBy('o.id', 'DESC')
+            ->setFirstResult($offset)
+            ->setMaxResults($parPage)
+            ->getQuery()
+            ->getResult();
+
+        return $view->render($response, 'Accueil.html.twig', [
+            'offres'     => $offres,
+            'page'       => $page,
+            'totalPages' => (int) ceil($total / $parPage),
+            'total'      => $total,
         ]);
-        foreach($_FILES as $file){
-
-    if($file['error'] === 0){
-
-        $allowedExtensions = ['png','jpg','jpeg'];
-        $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-
-        if(!in_array($extension, $allowedExtensions)){
-            echo "Erreur : seuls les fichiers PNG, JPG ou JPEG sont autorisés.";
-            exit;
-        }
-
     }
 
-}
+    public function ajouter(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+        $data = $request->getParsedBody();
+
+        $this->verifierUpload(); 
+
+        $etudiant = new Etudiant(
+            $data['prenom'] ?? '',
+            $data['nom'] ?? '',
+            $data['email'] ?? '',
+            $data['campus'] ?? '',
+            $data['ville'] ?? '',
+            $data['description'] ?? '',
+            $data['logo'] ?? null
+        );
+
+        $this->em->persist($etudiant);
+        $this->em->flush();
+
+        return $response->withHeader('Location', '/')->withStatus(302);
     }
 
     public function supprimer(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
+        $id = (int) $args['id'];
+        $etudiant = $this->em->find(Etudiant::class, $id);
+
+        if ($etudiant) {
+            $this->em->remove($etudiant);
+            $this->em->flush();
+        }
+
+        return $response->withHeader('Location', '/')->withStatus(302);
+    }
+
+    public function liste(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    {
         $view = Twig::fromRequest($request);
-        return $view->render($response, 'Étudiants/Page_Supprimer_Étudiant.html.twig', []);
+        $etudiants = $this->em->getRepository(Etudiant::class)->findAll();
+
+        return $view->render($response, 'Étudiants/Page_Liste_Étudiant.html.twig', [
+            'etudiants' => $etudiants
+        ]);
     }
 
     public function modifier(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $view = Twig::fromRequest($request);
         return $view->render($response, 'Étudiants/Page_Modifier_Étudiant.html.twig', []);
+    }
+
+    public function verifierUpload(): void
+    {
+        foreach ($_FILES as $file) {
+            if ($file['error'] === 0) {
+                $allowedExtensions = ['png', 'jpg', 'jpeg'];
+                $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+
+                if (!in_array($extension, $allowedExtensions)) {
+                    echo "Erreur : seuls les fichiers PNG, JPG ou JPEG sont autorisés.";
+                    exit;
+                }
+            }
+        }
     }
 }
