@@ -84,7 +84,7 @@ class ÉtudiantController
             $this->em->flush();
         }
 
-        return $response->withHeader('Location', '/')->withStatus(302);
+        return $response->withHeader('Location', '/Liste-Étudiants')->withStatus(302);
     }
 
     public function liste(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
