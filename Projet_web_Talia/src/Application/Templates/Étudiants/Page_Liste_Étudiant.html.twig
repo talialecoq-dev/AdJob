@@ -43,8 +43,12 @@
   <td>{{ etudiant.ville }}</td>
 
   <td class="actions-col">
-    <a href="/Modifier-Étudiant" class="btn btn-modifier">Modifier</a>
-    <a href="#" class="btn btn-supprimer">Supprimer</a>
+    <form method="POST" action="/Modifier-Étudiant/{{ etudiant.id }}">
+      <button type="submit" class="btn btn-modifier">Modifier</button>
+    </form>
+    <form method="POST" action="/Supprimer-Étudiant/{{ etudiant.id }}" style="display:inline;">
+    <button type="submit" class="btn btn-supprimer">Supprimer</button>
+</form>
   </td>
 
 </tr>
