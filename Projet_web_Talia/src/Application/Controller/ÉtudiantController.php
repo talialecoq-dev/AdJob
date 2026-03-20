@@ -50,7 +50,7 @@ class ÉtudiantController
     {
         $view = Twig::fromRequest($request);
         return $view->render($response, 'Entreprises/Page_Inscription_Entreprise.html.twig', [
-            'type' => 'Etudiants'
+            'type' => 'Etudiants_ajout'
         ]);
     }
 
