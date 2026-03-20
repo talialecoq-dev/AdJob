@@ -5,7 +5,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Views\Twig;
 use Doctrine\ORM\EntityManager;
-use App\Domain\Entity\Etudiant;
+use App\Domain\Etudiant;
 
 class ÉtudiantController
 {
