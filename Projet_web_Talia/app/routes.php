@@ -27,6 +27,8 @@ return function (App $app) {
     $app->get('/', [HomeController::class, 'home']);
 
     $app->get('/Mentions_Legales', [Mentions_LegalesController::class, 'Mentions_Legales']);
+    $app->post('/offre/ajouter', [HomeController::class, 'ajouter']);
+    $app->post('/offre/supprimer/{id}', [HomeController::class, 'supprimer']);
 
     $app->get('/Profil', [ProfilController::class, 'profil']);
 

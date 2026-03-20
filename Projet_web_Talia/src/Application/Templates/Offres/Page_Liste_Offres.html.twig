@@ -41,13 +41,20 @@
           </a>
         </div>
 
+        <form method="POST" action="/offre/supprimer/{{ offre.id }}">
+          <button type="submit" class="btn btn-sm text-black flex-fill"
+                  style="background-color: #e07070; color: white; border: none; padding: 8px 12px;">
+            Supprimer
+          </button>
+      </form>
+
       </div>
     </div>
     {% endfor %}
 
   </div>
 
-  {# Pagination #}
+ 
   {% if totalPages > 1 %}
   <div class="d-flex justify-content-center mt-4">
     <nav>

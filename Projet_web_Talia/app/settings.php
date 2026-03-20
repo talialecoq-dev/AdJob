@@ -35,12 +35,12 @@ declare(strict_types=1);
                 // List of paths where Doctrine will search for metadata.
                 // Metadata can be either YML/XML files or PHP classes annotated
                 // with comments or PHP8 attributes.
-                'metadata_dirs' => [APP_ROOT . '/src/Domain'],
+                'metadata_dirs' => [APP_ROOT . '/../src/Domain'],
                         
                         // Configuration de ta base de données
                         'connection' => [
                             'driver'   => 'pdo_mysql',
-                            'host'     => 'localhost',
+                            'host'     => 'db',
                             'port'     => 3306,
                             'dbname'   => 'toto',
                             'user'     => 'root',
