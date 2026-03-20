@@ -48,7 +48,8 @@ return function (App $app) {
 
 
 
-    $app->get('/Inscription-Étudiant', [ÉtudiantController::class, 'ajouter']);
+    $app->get('/Inscription-Étudiant', [ÉtudiantController::class, 'inscription']);
+    $app->post('/Inscription-Étudiant', [ÉtudiantController::class, 'ajouter']); 
     $app->get('/Liste-Étudiants', [ÉtudiantController::class, 'liste']);
     $app->get('/Supprimer-Étudiant', [ÉtudiantController::class, 'supprimer']);
     $app->get('/Modifier-Étudiant', [ÉtudiantController::class, 'modifier']);

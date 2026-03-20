@@ -6,7 +6,15 @@
 
 			{# 1. CALCUL DE L'URL D'ACTION #}
 			{# Si le type est Entreprise, on va vers /inscription-entreprise, sinon vers /traitement-inscription #}
-			{% set action_url = (type == "Entreprise") ? "/inscription-entreprise" : "/traitement-inscription" %}
+			{% if type == "Entreprise" %}
+				{% set action_url = "/inscription-entreprise" %}
+			{% elseif type == "Etudiants" or type == "Etudiants_ajout" %}
+				{% set action_url = "/Inscription-Étudiant" %}
+			{% elseif type == "Pilote" %}
+				{% set action_url = "/Inscription-Pilote" %}
+			{% else %}
+				{% set action_url = "/traitement-inscription" %}
+			{% endif %}
 
 			{# 2. DÉBUT DU FORMULAIRE #}
 			{# enctype est nécessaire seulement si on ajoute un étudiant avec une photo #}
