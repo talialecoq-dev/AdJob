@@ -6,7 +6,16 @@
         <h1 class="modal-title fs-5">Ajouter une Offre</h1>
       </div>
 
-      
+      {% if errors is defined and errors is not empty %}
+        <div class="alert alert-danger mx-3 mt-3 mb-0">
+          <ul class="mb-0">
+            {% for error in errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
       <form method="POST" action="/offre/ajouter">
 
         <div class="modal-body">
@@ -14,57 +23,121 @@
 
             <div class="col-6">
               <label class="form-label">Nom de l'Offre :</label>
-              <input type="text" name="titre" class="form-control" placeholder="Entrez le nom de l'Offre" style="border-radius: 5px; border: 1px solid #A0A890">
+              <input type="text" name="titre"
+                     class="form-control {% if errors is defined and errors.titre is defined %}is-invalid{% endif %}"
+                     placeholder="Entrez le nom de l'Offre"
+                     value="{{ old.titre ?? '' }}"
+                     style="border-radius: 5px; border: 1px solid #A0A890">
+              {% if errors is defined and errors.titre is defined %}
+                <div class="invalid-feedback">{{ errors.titre }}</div>
+              {% endif %}
             </div>
 
             <div class="col-6">
               <label class="form-label">Salaire :</label>
-              <input type="text" name="remuneration" class="form-control" placeholder="Ex: 600 €/mois" style="border-radius: 5px; border: 1px solid #A0A890">
+              <input type="text" name="remuneration"
+                     class="form-control {% if errors is defined and errors.remuneration is defined %}is-invalid{% endif %}"
+                     placeholder="Ex: 600 €/mois"
+                     value="{{ old.remuneration ?? '' }}"
+                     style="border-radius: 5px; border: 1px solid #A0A890">
+              {% if errors is defined and errors.remuneration is defined %}
+                <div class="invalid-feedback">{{ errors.remuneration }}</div>
+              {% endif %}
             </div>
 
-            <div class="col-4">
+            <div class="col-6">
               <label class="form-label">Durée :</label>
-              <select name="duree" class="form-select" style="border-radius: 5px; border: 1px solid #A0A890">
-                <option value="" disabled selected>Sélection de la Durée</option>
-                <option value="2 mois">2 mois</option>
-                <option value="3 mois">3 mois</option>
-                <option value="6 mois">6 mois</option>
+              <select name="duree"
+                      class="form-select {% if errors is defined and errors.duree is defined %}is-invalid{% endif %}"
+                      style="border-radius: 5px; border: 1px solid #A0A890">
+                <option value="" disabled {% if (old.duree ?? '') == '' %}selected{% endif %}>Sélection de la Durée</option>
+                <option value="2 mois" {% if (old.duree ?? '') == '2 mois' %}selected{% endif %}>2 mois</option>
+                <option value="3 mois" {% if (old.duree ?? '') == '3 mois' %}selected{% endif %}>3 mois</option>
+                <option value="6 mois" {% if (old.duree ?? '') == '6 mois' %}selected{% endif %}>6 mois</option>
               </select>
+              {% if errors is defined and errors.duree is defined %}
+                <div class="invalid-feedback">{{ errors.duree }}</div>
+              {% endif %}
             </div>
 
-            <div class="col-4">
+            <div class="col-6">
               <label class="form-label">Domaine :</label>
-              <select name="domaine" class="form-select" style="border-radius: 5px; border: 1px solid #A0A890">
-                <option value="" disabled selected>Sélection du Domaine</option>
-                <option value="Informatique">Informatique</option>
-                <option value="Mécanique">Mécanique</option>
-                <option value="Électronique">Électronique</option>
+              <select name="domaine"
+                      class="form-select {% if errors is defined and errors.domaine is defined %}is-invalid{% endif %}"
+                      style="border-radius: 5px; border: 1px solid #A0A890">
+                <option value="" disabled {% if (old.domaine ?? '') == '' %}selected{% endif %}>Sélection du Domaine</option>
+                <option value="Informatique" {% if (old.domaine ?? '') == 'Informatique' %}selected{% endif %}>Informatique</option>
+                <option value="Mécanique" {% if (old.domaine ?? '') == 'Mécanique' %}selected{% endif %}>Mécanique</option>
+                <option value="Électronique" {% if (old.domaine ?? '') == 'Électronique' %}selected{% endif %}>Électronique</option>
               </select>
-            </div>
-
-            <div class="col-4">
-              <label class="form-label">Genre :</label>
-              <select name="genre" class="form-select" style="border-radius: 5px; border: 1px solid #A0A890">
-                <option value="" disabled selected>Sélection du Genre</option>
-                <option value="H">H (Homme)</option>
-                <option value="F">F (Femme)</option>
-                <option value="H|F">H|F (Homme/Femme)</option>
-              </select>
+              {% if errors is defined and errors.domaine is defined %}
+                <div class="invalid-feedback">{{ errors.domaine }}</div>
+              {% endif %}
             </div>
 
             <div class="col-6">
               <label class="form-label">Entreprise :</label>
-              <input type="text" name="entreprise" class="form-control" placeholder="Nom de l'entreprise" style="border-radius: 5px; border: 1px solid #A0A890">
+              <input type="text" name="entreprise"
+                     class="form-control {% if errors is defined and errors.entreprise is defined %}is-invalid{% endif %}"
+                     placeholder="Nom de l'entreprise"
+                     value="{{ old.entreprise ?? '' }}"
+                     style="border-radius: 5px; border: 1px solid #A0A890">
+              {% if errors is defined and errors.entreprise is defined %}
+                <div class="invalid-feedback">{{ errors.entreprise }}</div>
+              {% endif %}
             </div>
 
             <div class="col-6">
               <label class="form-label">Logo (URL ou chemin) :</label>
-              <input type="text" name="logo" class="form-control" placeholder="Ex: Images/logo.png" style="border-radius: 5px; border: 1px solid #A0A890">
+              <input type="text" name="logo" class="form-control"
+                     placeholder="Ex: Images/logo.png"
+                     value="{{ old.logo ?? '' }}"
+                     style="border-radius: 5px; border: 1px solid #A0A890">
+            </div>
+
+            
+            <div class="col-12">
+              <label class="form-label fw-semibold">Compétences <span class="text-muted fw-normal" style="font-size:0.85rem;">(3 minimum)</span> :</label>
+
+              {% if errors is defined and errors.competences is defined %}
+                <div class="alert alert-danger py-1 px-2 mb-2" style="font-size:0.875rem;">{{ errors.competences }}</div>
+              {% endif %}
+
+              <div class="row g-2">
+                {% for i in 0..2 %}
+                  <div class="col-12">
+                    <input type="text" name="competences[]"
+                           class="form-control {% if errors is defined and errors.competences is defined %}is-invalid{% endif %}"
+                           placeholder="Compétence {{ i + 1 }}"
+                           value="{{ old.competences[i] ?? '' }}"
+                           style="border-radius: 5px; border: 1px solid #A0A890">
+                  </div>
+                {% endfor %}
+
+                
+                {% if old.competences is defined and old.competences|length > 3 %}
+                  {% for i in 3..(old.competences|length - 1) %}
+                    <div class="col-12">
+                      <input type="text" name="competences[]"
+                             class="form-control"
+                             placeholder="Compétence {{ i + 1 }}"
+                             value="{{ old.competences[i] }}"
+                             style="border-radius: 5px; border: 1px solid #A0A890">
+                    </div>
+                  {% endfor %}
+                {% endif %}
+              </div>
             </div>
 
             <div class="col-12">
               <label class="form-label">Description :</label>
-              <textarea name="description" class="form-control" rows="5" placeholder="Entrez la description de l'Offre" style="border-radius: 5px; border: 1px solid #A0A890; resize: vertical;"></textarea>
+              <textarea name="description"
+                        class="form-control {% if errors is defined and errors.description is defined %}is-invalid{% endif %}"
+                        rows="5" placeholder="Entrez la description de l'Offre"
+                        style="border-radius: 5px; border: 1px solid #A0A890; resize: vertical;">{{ old.description ?? '' }}</textarea>
+              {% if errors is defined and errors.description is defined %}
+                <div class="invalid-feedback">{{ errors.description }}</div>
+              {% endif %}
             </div>
 
           </div>

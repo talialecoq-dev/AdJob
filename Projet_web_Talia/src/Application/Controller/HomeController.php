@@ -49,23 +49,81 @@ class HomeController
 
         public function ajouter(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
+        $view = Twig::fromRequest($request);
         $data = $request->getParsedBody();
 
+        $errors = [];
+
+        if (empty(trim($data['titre'] ?? '')))
+            $errors['titre'] = 'Le nom de l\'offre est obligatoire.';
+
+        if (empty(trim($data['entreprise'] ?? '')))
+            $errors['entreprise'] = 'Le nom de l\'entreprise est obligatoire.';
+
+        if (empty($data['duree'] ?? ''))
+            $errors['duree'] = 'Veuillez sélectionner une durée.';
+
+        if (empty($data['domaine'] ?? ''))
+            $errors['domaine'] = 'Veuillez sélectionner un domaine.';
+
+        if (empty(trim($data['remuneration'] ?? '')))
+            $errors['remuneration'] = 'La rémunération est obligatoire.';
+
+        if (empty(trim($data['description'] ?? '')))
+            $errors['description'] = 'La description est obligatoire.';
+
+        // Validation compétences — min 3 non vides
+        $competences = array_values(array_filter(
+            array_map('trim', $data['competences'] ?? []),
+            fn($c) => $c !== ''
+        ));
+
+        if (count($competences) < 3)
+            $errors['competences'] = 'Veuillez renseigner au moins 3 compétences.';
+
+        // Si erreurs → on réaffiche avec les anciennes valeurs
+        if (!empty($errors)) {
+            $parPage = 9;
+            $repository = $this->em->getRepository(Offre::class);
+
+            $total = $repository->createQueryBuilder('o')
+                ->select('COUNT(o.id)')
+                ->getQuery()
+                ->getSingleScalarResult();
+
+            $offres = $repository->createQueryBuilder('o')
+                ->orderBy('o.id', 'DESC')
+                ->setFirstResult(0)
+                ->setMaxResults($parPage)
+                ->getQuery()
+                ->getResult();
+
+            $data['competences'] = $competences;
+
+            return $view->render($response, 'Accueil.html.twig', [
+                'offres'     => $offres,
+                'page'       => 1,
+                'totalPages' => (int) ceil($total / $parPage),
+                'total'      => $total,
+                'errors'     => $errors,
+                'old'        => $data,
+            ]);
+        }
+
         $offre = new Offre(
-            $data['titre']       ?? '',
-            $data['entreprise']  ?? '',
-            $data['duree']       ?? '',
-            $data['remuneration'] ?? '',
-            $data['domaine']     ?? '',
-            $data['genre']       ?? '',
-            $data['description'] ?? '',
-            $data['logo']        ?? null
+            $data['titre'],
+            $data['entreprise'],
+            $data['duree'],
+            $data['remuneration'],
+            $data['domaine'],
+            implode(', ', $competences),  // stocké en string dans la BDD
+            $data['description'],
+            $data['logo'] ?? null
         );
 
         $this->em->persist($offre);
         $this->em->flush();
 
-        
         return $response->withHeader('Location', '/')->withStatus(302);
     }
 

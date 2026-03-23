@@ -34,7 +34,7 @@ class Offre
     private string $domaine;
 
     #[Column(type: 'string', nullable: false)]
-    private string $genre;
+    private string $competences;
 
     #[Column(type: 'text', nullable: false)]
     private string $description;
@@ -48,7 +48,7 @@ class Offre
         string $duree,
         string $remuneration,
         string $domaine,
-        string $genre,
+        string $competences,
         string $description,
         ?string $logo = null
     ) {
@@ -57,7 +57,7 @@ class Offre
         $this->duree        = $duree;
         $this->remuneration = $remuneration;
         $this->domaine      = $domaine;
-        $this->genre        = $genre;
+        $this->competences  = $competences;
         $this->description  = $description;
         $this->logo         = $logo;
         $this->createdAt    = new DateTimeImmutable('now');
@@ -83,8 +83,7 @@ class Offre
     public function getDomaine(): string { return $this->domaine; }
     public function setDomaine(string $domaine): void { $this->domaine = $domaine; }
 
-    public function getGenre(): string { return $this->genre; }
-    public function setGenre(string $genre): void { $this->genre = $genre; }
+    public function getCompetences(): string{ return $this->competences;}
 
     public function getDescription(): string { return $this->description; }
     public function setDescription(string $description): void { $this->description = $description; }
