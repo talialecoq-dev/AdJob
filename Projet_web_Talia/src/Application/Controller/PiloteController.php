@@ -7,6 +7,12 @@ use Slim\Views\Twig;
 
 class PiloteController
 {
+        private EntityManager $em;
+
+    public function __construct(EntityManager $em)
+    {
+        $this->em = $em;
+    }
     public function inscription(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $view = Twig::fromRequest($request);
@@ -50,10 +56,16 @@ class PiloteController
 
     public function supprimer(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $view = Twig::fromRequest($request);
-        return $view->render($response, 'Pilotes/Page_Supprimer_Pilote.html.twig', []);
-    }
+    $id = (int) $args['id'];
+    $pilote = $this->em->find(Pilote::class,$id);
 
+    if ($pilote) {
+        $this->em->remove($pilote);
+        $this->em->flush();
+    }
+    return $reponse->withHeader('Location','/')->withStatus(302);
+    }
+    
     public function modifier(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $view = Twig::fromRequest($request);
