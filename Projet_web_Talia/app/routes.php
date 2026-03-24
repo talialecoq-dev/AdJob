@@ -58,6 +58,7 @@ return function (App $app) {
     $app->get('/Inscription-Pilote', [PiloteController::class, 'inscription']);
     $app->get('/Liste-Pilotes', [PiloteController::class, 'liste']);
     $app->get('/Supprimer-Pilote/{id}', [PiloteController::class, 'supprimer']);
+    $app->post('/Supprimer-Pilote/{id}', [PiloteController::class, 'supprimer']);
     $app->get('/Modifier-Pilote/{id}', [PiloteController::class, 'modifier']);
 
     $app->get('/Whishlist', [WishlistController::class, 'wishlist']);
