@@ -13,7 +13,6 @@ class CandidaturesController
         array $args
     ): ResponseInterface {
 
-        
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
@@ -38,22 +37,55 @@ class CandidaturesController
 
         $data = $request->getParsedBody();
 
-        
-        $nouvelleCandidature = [
-            'nom'    => trim($data['nom'] ?? ''),
-            'prenom' => trim($data['prenom'] ?? ''),
-            'email'  => trim($data['email'] ?? ''),
-            'titre'  => trim($data['offre_titre'] ?? 'Offre inconnue'),
-            'statut' => 'En attente',
-            'color'  => 'warning',       
-            'image'  => 'Image/Martin.png',
-            'desc'   => 'Candidature soumise par ' . trim($data['prenom'] ?? '') . ' ' . trim($data['nom'] ?? ''),
+        // Récupérer les compétences en tableau
+        $competences = $data['competences'] ?? [];
+
+        // Créer l'ID unique pour chaque candidature
+        $index = count($_SESSION['candidatures'] ?? []);
+
+          $nouvelleCandidature = [
+            'nom'         => trim($data['nom'] ?? ''),
+            'prenom'      => trim($data['prenom'] ?? ''),
+            'email'       => trim($data['email'] ?? ''),
+            'titre'       => trim($data['titre'] ?? 'Offre inconnue'),
+            'remuneration'=> trim($data['remuneration'] ?? ''),
+            'duree'       => trim($data['duree'] ?? ''),
+            'domaine'     => trim($data['domaine'] ?? ''),
+            'entreprise'  => trim($data['entreprise'] ?? ''),
+            'logo'        => trim($data['logo'] ?? ''),
+            'competences' => array_map('trim', $data['competences'] ?? []),
+            'description' => trim($data['description'] ?? ''),
+
+            'statut'      => 'En attente',
+            'color'       => 'warning',
+            'image'       => 'Image/Martin.png',
+            'desc'        => 'Candidature soumise par ' . trim($data['nom'] ?? '') . ' pour l\'offre ' . trim($data['titre'] ?? ''),
         ];
 
-        
-        $_SESSION['candidatures'][] = $nouvelleCandidature;
+        $_SESSION['candidatures'][$index] = $nouvelleCandidature;
 
-        
+        return $response
+            ->withHeader('Location', '/Candidatures')
+            ->withStatus(302);
+    }
+
+    public function supprimer(
+        ServerRequestInterface $request,
+        ResponseInterface $response,
+        array $args
+    ): ResponseInterface {
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $id = (int) $args['id'];
+
+        if (isset($_SESSION['candidatures'][$id])) {
+            unset($_SESSION['candidatures'][$id]);
+            $_SESSION['candidatures'] = array_values($_SESSION['candidatures']); // réindexer
+        }
+
         return $response
             ->withHeader('Location', '/Candidatures')
             ->withStatus(302);

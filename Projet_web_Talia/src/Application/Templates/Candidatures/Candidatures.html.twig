@@ -20,6 +20,10 @@
           <h5 class="card-title" style="color: #8fa882">{{ c.titre }}</h5>
           <span class="badge rounded-pill bg-{{ c.color }} text-dark">{{ c.statut }}</span>
           <p class="card-text mt-2">{{ c.desc }}</p>
+		  <form method="POST" action="/Supprimer-Candidature/{{ loop.index0 }}">
+		  <button type="submit" class="btn btn-sm" style="background-color: #e07070; color: white; border: none; padding: 8px 12px;">
+			Supprimer
+		  </button>
         </div>
       </div>
     </div>

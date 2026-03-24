@@ -67,6 +67,8 @@ return function (App $app) {
     $app->post('/Candidatures', [CandidaturesController::class, 'candidatures']);
     $app->get('/Candidater', [CandidaturesController::class, 'candidater']);
     $app->post('/Candidatures/ajouter', [CandidaturesController::class, 'ajouter']);
+    $app->post('/Supprimer-Candidature/{id}', [CandidaturesController::class, 'supprimer']);
+    
 
     
     $app->get('/Ajouter-Offre', [OffresController::class, 'ajouter']);
