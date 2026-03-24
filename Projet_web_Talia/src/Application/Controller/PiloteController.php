@@ -4,10 +4,12 @@ namespace App\Application\Controller;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Views\Twig;
+use Doctrine\ORM\EntityManager;
+use App\Domain\Pilote;
 
 class PiloteController
 {
-        private EntityManager $em;
+    private EntityManager $em;
 
     public function __construct(EntityManager $em)
     {
