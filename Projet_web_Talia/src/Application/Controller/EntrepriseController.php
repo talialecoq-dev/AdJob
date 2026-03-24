@@ -36,8 +36,16 @@ class EntrepriseController
 
     public function supprimer(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $view = Twig::fromRequest($request);
-        return $view->render($response, 'Entreprises/Page_Supprimer_Entreprise.html.twig', []);
+        $id = (int) $args['id'];
+        $entreprise = $this->em->find(Entreprise::class, $id);
+
+        if ($entreprise) {
+            $this->em->remove($entreprise);
+            $this->em->flush();
+        }
+
+        return $response->withHeader('Location', '/')->withStatus(302);
+
     }
     public function home(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
