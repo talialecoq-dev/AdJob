@@ -74,7 +74,52 @@
                        {% if type == "Etudiants_ajout" %} required {% endif %}>
             </div>
 
-        {% endif %}
+            {% elseif type == "Pilote" %}
+
+					<div class="mb-3">
+						<label for="nom_pilote" class="form-label pt-2 m-2">Nom du pilote</label>
+						<input type="text" name="nom" class="form-control" id="nom_pilote" placeholder="Nom du pilote" style="border: 1px solid #a0a890;" required>
+					</div>
+					<div class="mb-3">
+						<label for="prenom_pilote" class="form-label pt-2 m-2">Prénom du pilote</label>
+						<input type="text" name="prenom" class="form-control" id="prenom_pilote" placeholder="Prénom du pilote" style="border: 1px solid #a0a890;" required>
+					</div>
+					<div class="mb-3">
+						<label for="image_profil" class="form-label pt-2 m-2">Choisissez une image de profil</label>
+						<input class="form-control" type="file" name="image_profil" id="image_profil" accept="png, jpg, jpeg" required style="border: 1px solid #a0a890;" required>
+					</div>
+
+				{% else %}
+					<div class="mb-3">
+						<label for="nom_entreprise" class="form-label pt-2 m-2">Nom de l'entreprise</label>
+						<input type="text" name="nom_entreprise" class="form-control" id="nom_entreprise" placeholder="Nom de votre entreprise" style="border: 1px solid #a0a890;" required>
+					</div>
+
+					<div class="mb-3">
+						<label for="tel" class="form-label pt-2 m-2">Téléphone de l'entreprise</label>
+						<input type="tel" name="telephone" class="form-control" id="tel" placeholder="0102030405" style="border: 1px solid #a0a890;" required>
+					</div>
+
+					<div class="row g-3">
+						<div class="col-md-6 mb-3">
+							<label for="secteur" class="form-label pt-2 m-2">Secteur d'activité</label>
+							<input type="text" name="secteur" class="form-control" id="secteur" placeholder="Ex: Informatique" style="border: 1px solid #a0a890;" required>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="site" class="form-label pt-2 m-2">Site Internet</label>
+							<input type="url" name="site_web" class="form-control" id="site" placeholder="https://..." style="border: 1px solid #a0a890;" required>
+						</div>
+					</div>
+
+					<div class="mb-3">
+						<label for="email_ent" class="form-label pt-2 m-2">Email de contact</label>
+						<input type="email" name="email" class="form-control" id="email_ent" placeholder="contact@entreprise.com" style="border: 1px solid #a0a890;" required>
+					</div>
+					<div class="mb-3">
+						<label for="image_profil" class="form-label pt-2 m-2">Choisissez une image de profil</label>
+						<input class="form-control" type="file" name="image_profil" id="image_profil" accept="png, jpg, jpeg" required style="border: 1px solid #a0a890;" required>
+					</div>
+				{% endif %}
 
         <div class="col-12 pt-4">
             <button type="submit" class="btn w-100"
