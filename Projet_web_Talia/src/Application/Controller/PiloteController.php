@@ -65,7 +65,7 @@ class PiloteController
         $this->em->remove($pilote);
         $this->em->flush();
     }
-    return $reponse->withHeader('Location','/')->withStatus(302);
+    return $response->withHeader('Location','/')->withStatus(302);
     }
     
     public function modifier(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
@@ -87,7 +87,7 @@ class PiloteController
         } catch (\Exception $e) {
             error_log("Erreur : " . $e->getMessage());
         }
-
+  return $response->withHeader('Location', '/')->withStatus(302);
 }
 
 }
