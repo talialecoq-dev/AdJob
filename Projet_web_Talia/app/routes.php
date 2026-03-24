@@ -73,6 +73,9 @@ return function (App $app) {
     
     $app->get('/Ajouter-Offre', [OffresController::class, 'ajouter']);
     $app->get('/Offres', [OffresController::class, 'liste']);
+
+    $app->post('/wishlist/ajouter/{id}', [WishlistController::class, 'ajouter']);
+    $app->post('/wishlist/retirer/{id}', [WishlistController::class, 'retirer']);
     
 
     /*
