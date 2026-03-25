@@ -45,20 +45,28 @@
 			</tr>
 		</thead>
 		<tbody>
-			<th scope="row">{{pilotes.Id}}</th>
-			<td>{{pilotes.prénom}}</td>
-			<td>{{pilotes.nom}}</td>
-			<td>{{pilotes.email}}</td>
-			<td>{{pilotes.campus}}</td>
-			<td>{{pilotes.localisation}}</td>
-			<td>{{pilotes.image}}</td>
-			<td class="actions-col">
+			{% for pilote in pilotes %}
+				<tr>
+					<th scope="row">{{pilote.id}}</th>
+					<td>{{pilote.prenom}}</td>
+					<td>{{pilote.nom}}</td>
+					<td>{{pilote.email}}</td>
+					<td>{{pilote.campus}}</td>
+					<td>{{pilote.localisation}}</td>
+					<td>{{pilote.image}}</td>
+					<td class="actions-col">
 
-				<a href="/Modifier-Pilote" class="btn btn-modifier">Modifier</a>
-				<form method="POST" action="/Supprimer-Pilote/{{ pilote.id }}">
-					<button type="submit" class="btn btn-supprimer">Supprimer</button>
-				</form>
-			</td>
+						<a href="/Modifier-Pilote" class="btn btn-modifier">Modifier</a>
+						<form method="POST" action="/Supprimer-Pilote/{{ pilote.id }}">
+							<button type="submit" class="btn btn-supprimer">Supprimer</button>
+						</form>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="8">Aucun pilote trouvé dans la base de données.</td>
+				</tr>
+			{% endfor %}
 		</tbody>
-	</tr>
-</tbody></table>{% endblock %}
+	</tbody>
+</tr></tbody></table>{% endblock %}

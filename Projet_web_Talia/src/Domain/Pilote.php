@@ -41,7 +41,7 @@ class Pilote {
     }
     public function getId(): int { return $this->id; }
 
-    public function getPrenom(): int { return $this->prenom; }
+    public function getPrenom(): string { return $this->prenom; }
     public function setPrenom(string $prenom): void { $this->prenom = $prenom; }
 
     public function getNom(): string { return $this->nom; }
