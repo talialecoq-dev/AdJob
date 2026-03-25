@@ -69,31 +69,37 @@
 
   </div>
 
-  {% if totalPages > 1 %}
-  <div class="d-flex justify-content-center mt-4">
-    <nav>
-      <ul class="pagination">
+{% set filtreQuery = '' %}
+{% if filtres.recherche %}{% set filtreQuery = filtreQuery ~ '&recherche=' ~ filtres.recherche|url_encode %}{% endif %}
+{% if filtres.domaine %}{% set filtreQuery = filtreQuery ~ '&domaine=' ~ filtres.domaine|url_encode %}{% endif %}
+{% if filtres.duree %}{% set filtreQuery = filtreQuery ~ '&duree=' ~ filtres.duree|url_encode %}{% endif %}
+{% if filtres.ville %}{% set filtreQuery = filtreQuery ~ '&ville=' ~ filtres.ville|url_encode %}{% endif %}
 
-        <li class="page-item {% if page == 1 %}disabled{% endif %}">
-          <a class="page-link" href="?page={{ page - 1 }}">«</a>
-        </li>
+{% if totalPages > 1 %}
+<div class="d-flex justify-content-center mt-4">
+  <nav>
+    <ul class="pagination">
 
-        {% for p in 1..totalPages %}
-        <li class="page-item {% if p == page %}active{% endif %}">
-          <a class="page-link" href="?page={{ p }}"
-             style="{% if p == page %}background-color: #97a48a; border-color: #97a48a;{% endif %}">
-            {{ p }}
-          </a>
-        </li>
-        {% endfor %}
+      <li class="page-item {% if page == 1 %}disabled{% endif %}">
+        <a class="page-link" href="?page={{ page - 1 }}{{ filtreQuery }}">«</a>
+      </li>
 
-        <li class="page-item {% if page == totalPages %}disabled{% endif %}">
-          <a class="page-link" href="?page={{ page + 1 }}">»</a>
-        </li>
+      {% for p in 1..totalPages %}
+      <li class="page-item {% if p == page %}active{% endif %}">
+        <a class="page-link" href="?page={{ p }}{{ filtreQuery }}"
+           style="{% if p == page %}background-color: #97a48a; border-color: #97a48a;{% endif %}">
+          {{ p }}
+        </a>
+      </li>
+      {% endfor %}
 
-      </ul>
-    </nav>
-  </div>
-  {% endif %}
+      <li class="page-item {% if page == totalPages %}disabled{% endif %}">
+        <a class="page-link" href="?page={{ page + 1 }}{{ filtreQuery }}">»</a>
+      </li>
+
+    </ul>
+  </nav>
+</div>
+{% endif %}
 
 </div>
