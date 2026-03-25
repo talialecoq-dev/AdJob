@@ -109,7 +109,17 @@ class EntrepriseController
             ->withHeader('Location', '/Liste-Entreprises')
             ->withStatus(302);
     }
+  public function modifier(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+{
+    $view = Twig::fromRequest($request);
 
+    $id = (int) $args['id'];
+    $entreprise = $this->em->find(Entreprise::class, $id);
+
+    return $view->render($response, 'Entreprises/Page_Modifier_Entreprise.html.twig', [
+        'entreprise' => $entreprise
+    ]);
+}
     public function recherche_entreprise(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $view = Twig::fromRequest($request);
@@ -122,4 +132,24 @@ class EntrepriseController
             'entreprises' => $entreprises
         ]);
     }
+     public function update(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+{
+    $id = (int) $args['id'];
+    $data = $request->getParsedBody();
+
+    $entreprise = $this->em->find(Entreprise::class, $id);
+
+    if ($entreprise) {
+        $entreprise->setPrenom($data['prenom'] ?? '');
+        $entreprise->setNom($data['nom'] ?? '');
+        $entreprise->setEmail($data['email'] ?? '');
+        $entreprise->setVille($data['ville'] ?? '');
+        $entreprise->setAdresse($data['adresse'] ?? '');
+        $entreprise->setRegion($data['region'] ?? '');
+
+        $this->em->flush();
+    }
+
+    return $response->withHeader('Location', '/Liste-Étudiants')->withStatus(302);
+}
 }

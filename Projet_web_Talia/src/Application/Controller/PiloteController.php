@@ -92,15 +92,15 @@ class PiloteController
     $id = (int) $args['id'];
     $data = $request->getParsedBody();
 
-    $etudiant = $this->em->find(Pilote::class, $id);
+    $pilote = $this->em->find(Pilote::class, $id);
 
-    if ($etudiant) {
-        $etudiant->setPrenom($data['prenom'] ?? '');
-        $etudiant->setNom($data['nom'] ?? '');
-        $etudiant->setEmail($data['email'] ?? '');
-        $etudiant->setVille($data['ville'] ?? '');
-        $etudiant->setAdresse($data['adresse'] ?? '');
-        $etudiant->setRegion($data['region'] ?? '');
+    if ($pilote) {
+        $pilote->setPrenom($data['prenom'] ?? '');
+        $pilote->setNom($data['nom'] ?? '');
+        $pilote->setEmail($data['email'] ?? '');
+        $pilote->setVille($data['ville'] ?? '');
+        $pilote->setAdresse($data['adresse'] ?? '');
+        $pilote->setRegion($data['region'] ?? '');
 
         $this->em->flush();
     }

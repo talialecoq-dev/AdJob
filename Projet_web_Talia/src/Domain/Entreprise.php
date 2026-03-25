@@ -44,12 +44,16 @@ class Entreprise
     public function getId(): int { return $this->id; }
 
     public function getNom(): string { return $this->nom; }
+    public function setNom(?string $nom): void { $this->nom = $nom; }
 
     public function getSecteur(): string { return $this->secteur; }
+    public function setSecteur(?string $secteur): void { $this->secteur = $secteur; }
 
     public function getEmail(): string { return $this->email; }
+    public function setEmail(?string $email): void { $this->email = $email; }
 
     public function getSiteWeb(): string { return $this->siteWeb; }
+    public function setSiteWeb(?string $siteWeb): void { $this->siteWeb = $siteWeb; }
 
     public function getImage(): ?string { return $this->image; }
 }
