@@ -39,7 +39,7 @@ class PiloteController
     $id = (int) $args['id'];
     $pilote = $this->em->find(Pilote::class, $id);
 
-    return $view->render($response, 'Étudiants/Page_Modifier_Pilote.html.twig', [
+    return $view->render($response, 'Pilotes/Page_Modifier_Pilote.html.twig', [
         'pilote' => $pilote
     ]);
 }
