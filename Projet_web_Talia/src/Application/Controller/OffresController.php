@@ -11,8 +11,6 @@ class OffresController
 
 { 
     
-
-
     public function ajouter(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $view = Twig::fromRequest($request);

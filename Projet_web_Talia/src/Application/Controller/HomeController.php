@@ -44,6 +44,7 @@ class HomeController
             'page'       => $page,
             'totalPages' => (int) ceil($total / $parPage),
             'total'      => $total,
+            'wishlist'   => $_SESSION['wishlist'] ?? [],
         ]);
     }
 
@@ -107,6 +108,7 @@ class HomeController
                 'total'      => $total,
                 'errors'     => $errors,
                 'old'        => $data,
+                'wishlist'   => $_SESSION['wishlist'] ?? [],
             ]);
         }
 
@@ -139,4 +141,7 @@ class HomeController
 
         return $response->withHeader('Location', '/')->withStatus(302);
     }
+
+
+    
 }

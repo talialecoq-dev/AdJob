@@ -1,59 +1,34 @@
 {% extends "Bases/Base.html.twig" %}
 
-{% block title %}Candidatures - AdJob
-{% endblock %}
+{% block title %}Candidatures - AdJob{% endblock %}
+
 {% block content %}
-	<div class="container-fluid p-0 " style="background-color: #eed4cb; ">
-		<div class="card mb-3" style="max-width: 750px; padding: 20px; border: 3px solid #a0a890;border-radius: 15px;">
-			<div class="row g-0 align-items-center">
-				<div class="col-md-2">
-					<img src="{{c1.image}}" class="img-fluid rounded" style="max-height: 200px">
-				</div>
-				<div class="col-md-10">
-					<div class="card-body">
-						<h5 class="card-title" style="color : #8fa882">{{ c1.nom }}</h5>
-						<span class="badge rounded-pill bg-{{ c1.color }} text-dark">{{ c1.statut }}</span>
+<div class="container-fluid p-4" style="background-color: #eed4cb; min-height: 100vh;">
 
-						<p class="card-text">{{ c1.desc }}</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="card mb-3" style="max-width: 750px; padding: 20px; border: 3px solid #a0a890;border-radius: 15px; ">
-			<div class="row g-0">
-				<div class="col-md-2">
-					<img src="{{c2.image}}" class="img-fluid rounded-start" style="max-height: 200px">
-				</div>
-				<div class="col-md-10">
-					<div class="card-body">
-						<h5 class="card-title" style="color : #8fa882">{{ c2.nom }}</h5>
+  {% if candidatures is empty %}
+    <p class="text-muted">Aucune candidature pour le moment.</p>
+  {% endif %}
 
-						<span class="badge rounded-pill bg-{{ c2.color }} text-dark">{{ c2.statut }}</span>
+  {% for c in candidatures %}
+  <div class="card mb-3" style="max-width: 750px; padding: 20px; border: 3px solid #a0a890; border-radius: 15px;">
+    <div class="row g-0 align-items-center">
+      <div class="col-md-2">
+        <img src="{{ c.image }}" class="img-fluid rounded" style="max-height: 200px">
+      </div>
+      <div class="col-md-10">
+        <div class="card-body">
+          <h5 class="card-title" style="color: #8fa882">{{ c.titre }}</h5>
+          <span class="badge rounded-pill bg-{{ c.color }} text-dark">{{ c.statut }}</span>
+          <p class="card-text mt-2">{{ c.desc }}</p>
+		  <form method="POST" action="/Supprimer-Candidature/{{ loop.index0 }}">
+		  <button type="submit" class="btn btn-sm" style="background-color: #e07070; color: white; border: none; padding: 8px 12px;">
+			Supprimer
+		  </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
 
-						<p class="card-text">{{ c2.desc }}</p>
-
-
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="card mb-3" style="max-width: 750px; padding: 20px; border: 3px solid #a0a890;border-radius: 15px; ">
-			<div class="row g-0">
-				<div class="col-md-2">
-					<img src="{{c3.image}}" class="img-fluid rounded-start" style="max-height: 200px">
-				</div>
-				<div class="col-md-10">
-					<div class="card-body">
-						<h5 class="card-title" style="color : #8fa882">{{ c3.nom }}</h5>
-
-						<span class="badge rounded-pill bg-{{ c3.color }} text-dark">{{ c3.statut }}</span>
-
-						<p class="card-text">{{ c3.desc }}</p>
-
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+</div>
 {% endblock %}
