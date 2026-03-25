@@ -22,17 +22,48 @@ class HomeController
         $view = Twig::fromRequest($request);
 
         $parPage = 9;
-        $page    = isset($args['page']) ? (int)$args['page'] : 1;
-        $offset  = ($page - 1) * $parPage;
+
+        
+        $queryParams = $request->getQueryParams();
+        $recherche   = trim($queryParams['recherche'] ?? '');
+        $domaine     = trim($queryParams['domaine'] ?? '');
+        $duree       = trim($queryParams['duree'] ?? '');
+        $ville       = trim($queryParams['ville'] ?? '');
+        $page        = isset($queryParams['page']) ? (int)$queryParams['page'] : 1;
+        $offset      = ($page - 1) * $parPage;
 
         $repository = $this->em->getRepository(Offre::class);
 
-        $total = $repository->createQueryBuilder('o')
-            ->select('COUNT(o.id)')
-            ->getQuery()
-            ->getSingleScalarResult();
+        
+        $qb = $repository->createQueryBuilder('o');
 
-        $offres = $repository->createQueryBuilder('o')
+        if ($recherche !== '') {
+            $qb->andWhere('o.titre LIKE :recherche OR o.description LIKE :recherche OR o.entreprise LIKE :recherche')
+            ->setParameter('recherche', '%' . $recherche . '%');
+        }
+
+        if ($domaine !== '') {
+            $qb->andWhere('o.domaine = :domaine')
+            ->setParameter('domaine', $domaine);
+        }
+
+        if ($duree !== '') {
+            $qb->andWhere('o.duree = :duree')
+            ->setParameter('duree', $duree);
+        }
+
+        
+        if ($ville !== '') {
+            $qb->andWhere('o.ville = :ville')
+            ->setParameter('ville', $ville);
+        }
+
+        
+        $countQb = clone $qb;
+        $total = $countQb->select('COUNT(o.id)')->getQuery()->getSingleScalarResult();
+
+        
+        $offres = $qb->select('o')
             ->orderBy('o.id', 'DESC')
             ->setFirstResult($offset)
             ->setMaxResults($parPage)
@@ -45,6 +76,12 @@ class HomeController
             'totalPages' => (int) ceil($total / $parPage),
             'total'      => $total,
             'wishlist'   => $_SESSION['wishlist'] ?? [],
+            'filtres'    => [
+                'recherche' => $recherche,
+                'domaine'   => $domaine,
+                'duree'     => $duree,
+                'ville'     => $ville,
+            ],
         ]);
     }
 
