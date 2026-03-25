@@ -36,14 +36,11 @@ class CandidaturesController
         }
 
         $data = $request->getParsedBody();
-
-        // Récupérer les compétences en tableau
         $competences = $data['competences'] ?? [];
 
-        // Créer l'ID unique pour chaque candidature
         $index = count($_SESSION['candidatures'] ?? []);
 
-          $nouvelleCandidature = [
+        $nouvelleCandidature = [
             'nom'         => trim($data['nom'] ?? ''),
             'prenom'      => trim($data['prenom'] ?? ''),
             'email'       => trim($data['email'] ?? ''),
@@ -53,7 +50,7 @@ class CandidaturesController
             'domaine'     => trim($data['domaine'] ?? ''),
             'entreprise'  => trim($data['entreprise'] ?? ''),
             'logo'        => trim($data['logo'] ?? ''),
-            'competences' => array_map('trim', $data['competences'] ?? []),
+            'competences' => array_map('trim', $competences),
             'description' => trim($data['description'] ?? ''),
 
             'statut'      => 'En attente',
@@ -83,7 +80,7 @@ class CandidaturesController
 
         if (isset($_SESSION['candidatures'][$id])) {
             unset($_SESSION['candidatures'][$id]);
-            $_SESSION['candidatures'] = array_values($_SESSION['candidatures']); // réindexer
+            $_SESSION['candidatures'] = array_values($_SESSION['candidatures']);
         }
 
         return $response
@@ -96,7 +93,23 @@ class CandidaturesController
         ResponseInterface $response,
         array $args
     ): ResponseInterface {
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $offres = $_SESSION['offres'] ?? [];
+        $id = isset($args['id']) ? (int)$args['id'] : null;
+
+        $offre = null;
+
+        if ($id !== null && isset($offres[$id])) {
+            $offre = $offres[$id];
+        }
+
         $view = Twig::fromRequest($request);
-        return $view->render($response, 'Candidatures/Page_Modal_Candidature.html.twig', []);
+        return $view->render($response, 'Candidatures/Page_Modal_Candidature.html.twig', [
+            'offre' => $offre
+        ]);
     }
 }
