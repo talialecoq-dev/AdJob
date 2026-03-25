@@ -55,18 +55,6 @@ class PiloteController
         return $view->render($response, 'Pilotes/Page_Liste_Pilote.html.twig', [['mes_étudiants' => $liste_étudiants]]);
     }
     
-
-    public function supprimer(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
-    {
-    $id = (int) $args['id'];
-    $pilote = $this->em->find(Pilote::class,$id);
-
-    if ($pilote) {
-        $this->em->remove($pilote);
-        $this->em->flush();
-    }
-    return $response->withHeader('Location','/')->withStatus(302);
-    }
     
     public function modifier(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
@@ -89,6 +77,17 @@ class PiloteController
         }
   return $response->withHeader('Location', '/')->withStatus(302);
 }
+    public function supprimer(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+    $id = (int) $args['id'];
+    $pilote = $this->em->find(Pilote::class,$id);
+
+    if ($pilote) {
+        $this->em->remove($pilote);
+        $this->em->flush();
+    }
+    return $response->withHeader('Location','/')->withStatus(302);
+    }
 
 }
 

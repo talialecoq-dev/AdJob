@@ -44,46 +44,19 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<th scope="row">{{c1.Id}}</th>
-				<td>{{c1.Prénom}}</td>
-				<td>{{c1.Nom}}</td>
-				<td>{{c1.Email}}</td>
-				<td>{{c1.Campus}}</td>
-				<td>{{c1.Localisation}}</td>
-				<td class="actions-col">
-					<a href="/Modifier-Pilote" class="btn btn-modifier">Modifier</a>
-					<a href="#" class="btn btn-supprimer">Supprimer</a>
-				</td>
-			</tr>
-			<tr>
-				<th scope="row">{{c2.Id}}</th>
-				<td>{{c2.Prénom}}</td>
-				<td>{{c2.Nom}}</td>
-				<td>{{c2.Email}}</td>
-				<td>{{c2.Campus}}</td>
-				<td>{{c2.Localisation}}</td>
-				<td class="actions-col">
-					<a href="/Modifier-Pilote" class="btn btn-modifier">Modifier</a>
-					<a href="#" class="btn btn-supprimer">Supprimer</a>
-				</td>
-			</tr>
-			<tr>
-				<th scope="row">{{c3.Id}}</th>
-				<td>{{c3.Prénom}}</td>
-				<td>{{c3.Nom}}</td>
-				<td>{{c3.Email}}</td>
-				<td>{{c3.Campus}}</td>
-				<td>{{c3.Localisation}}</td>
-				<td class="actions-col">
+			<th scope="row">{{pilote.Id}}</th>
+			<td>{{pilote.Prénom}}</td>
+			<td>{{pilote.Nom}}</td>
+			<td>{{pilote.Email}}</td>
+			<td>{{pilote.Campus}}</td>
+			<td>{{pilote.Localisation}}</td>
+			<td class="actions-col">
 
-					<a href="/Modifier-Pilote" class="btn btn-modifier">Modifier</a>
-					<form method="POST" action="/Supprimer-Pilote/{{ pilote.id }}">
-						<button type="submit" class="btn btn-supprimer">Supprimer</button>
-					</form>
-				</td>
-			</tr>
+				<a href="/Modifier-Pilote" class="btn btn-modifier">Modifier</a>
+				<form method="POST" action="/Supprimer-Pilote/{{ pilote.id }}">
+					<button type="submit" class="btn btn-supprimer">Supprimer</button>
+				</form>
+			</td>
 		</tbody>
-	</table>
-
-{% endblock %}
+	</tr>
+</tbody></table>{% endblock %}
