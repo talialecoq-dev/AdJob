@@ -46,7 +46,9 @@
 								<form method="POST" action="/Supprimer-Entreprise/{{ entreprise.id }}">
 									<button type="submit" class="btn btn-supprimer">Supprimer</button>
 								</form>
-								<a href="/Modifier-Étudiant" class="btn btn-modifier">Modifier</a>
+								<form method="POST" action="/Modifier-Entreprise/{{ entreprise.id }}">
+									<button href="/Modifier-Entreprise" class="btn btn-modifier">Modifier</button>
+								</form>
 							</td>
 
 						</tr>
