@@ -33,10 +33,16 @@ class PiloteController
     
     
     public function modifier(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
-    {
-        $view = Twig::fromRequest($request);
-        return $view->render($response, 'Pilotes/Page_Modifier_Pilote.html.twig', []);
-    }
+{
+    $view = Twig::fromRequest($request);
+
+    $id = (int) $args['id'];
+    $pilote = $this->em->find(Pilote::class, $id);
+
+    return $view->render($response, 'Étudiants/Page_Modifier_Pilote.html.twig', [
+        'pilote' => $pilote
+    ]);
+}
 
     public function ajouter(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
