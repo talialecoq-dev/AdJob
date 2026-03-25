@@ -18,41 +18,17 @@ class PiloteController
     public function inscription(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $view = Twig::fromRequest($request);
-        return $view->render($response, 'Pilotes/Page_Inscription_Pilote.html.twig', []);
+        return $view->render($response, 'Pilotes/Page_Inscription_Pilote.html.twig', [  'type' => 'Pilote_ajout']);
     }
+
 
     public function liste(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
                 $view = Twig::fromRequest($request);
+                $repository = $this->em->getRepository(Pilote::class);
+                $pilotes = $repository->findAll(); 
+    return $view->render($response, 'Pilotes/Page_Liste_Pilote.html.twig', ['pilotes'=>$pilotes ]);
 
-    return $view->render($response, 'Pilotes/Page_Liste_Pilote.html.twig', [
-'c1' =>[
-'Id'=> '1',
-'Prénom' =>'Mark',
-'Nom' => 'Otto',
-'Email' => '@mdo',
-'Campus' => 'Cesi Ecole d"ingénieurs',
-'Localisation' => 'Paris',
-],
-'c2' =>[
-'Id'=> '2',
-'Prénom' =>'Jacob',
-'Nom' => 'Thornton',
-'Email' => '@fat',
-'Campus' => 'Cesi Ecole d"ingénieurs',
-'Localisation' => 'Lyon',
-],
-'c3' => [
-'Id'=> '3',
-'Prénom' =>'John',
-'Nom' => 'Doe',
-'Email' => '@social',
-'Campus' => 'Cesi Ecole d"ingénieurs',
-'Localisation' => 'Marseille',
-],
-        ]);
-        $view = Twig::fromRequest($request);
-        return $view->render($response, 'Pilotes/Page_Liste_Pilote.html.twig', [['mes_étudiants' => $liste_étudiants]]);
     }
     
     
@@ -62,20 +38,22 @@ class PiloteController
         return $view->render($response, 'Pilotes/Page_Modifier_Pilote.html.twig', []);
     }
 
-    public function traiterInscription(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    public function ajouter(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $donneesFormulaire = $request->getParsedBody();
+        $data = $request->getParsedBody();
+        $this->verifierUpload();
 
-        $nom      = $donneesFormulaire['nom_pilote'] ?? '';
-        $tel      = $donneesFormulaire['telephone'] ?? '';
-        $email    = $donneesFormulaire['email'] ?? '';
+        $pilote = new Pilote(
+            $data['prenom'] ?? '',
+            $data['nom'] ?? '',
+            $data['email'] ?? '',
+            $data['campus'] ?? '',
+            $data['localisation'] ?? '',
+        );
 
-        try {
-            error_log("Pilote enregistré : " . $nom);
-        } catch (\Exception $e) {
-            error_log("Erreur : " . $e->getMessage());
-        }
-  return $response->withHeader('Location', '/')->withStatus(302);
+    $this->em->persist($pilote);
+    $this->em->flush();
+  return $response->withHeader('Location', '/Liste-Pilotes')->withStatus(302);
 }
     public function supprimer(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
@@ -89,6 +67,40 @@ class PiloteController
     return $response->withHeader('Location','/')->withStatus(302);
     }
 
+    public function verifierUpload(): void
+    {
+        foreach ($_FILES as $file) {
+            if ($file['error'] === 0) {
+                $allowedExtensions = ['png', 'jpg', 'jpeg'];
+                $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+
+                if (!in_array($extension, $allowedExtensions)) {
+                    echo "Erreur : seuls les fichiers PNG, JPG ou JPEG sont autorisés.";
+                    exit;
+                }
+            }
+        }
+    }
+    public function update(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+{
+    $id = (int) $args['id'];
+    $data = $request->getParsedBody();
+
+    $etudiant = $this->em->find(Pilote::class, $id);
+
+    if ($etudiant) {
+        $etudiant->setPrenom($data['prenom'] ?? '');
+        $etudiant->setNom($data['nom'] ?? '');
+        $etudiant->setEmail($data['email'] ?? '');
+        $etudiant->setVille($data['ville'] ?? '');
+        $etudiant->setAdresse($data['adresse'] ?? '');
+        $etudiant->setRegion($data['region'] ?? '');
+
+        $this->em->flush();
+    }
+
+    return $response->withHeader('Location', '/Liste-Étudiants')->withStatus(302);
+}
 }
 
 
