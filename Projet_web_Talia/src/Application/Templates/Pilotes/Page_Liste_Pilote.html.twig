@@ -55,9 +55,7 @@
 					<td>{{pilote.localisation}}</td>
 					<td>{{pilote.image}}</td>
 					<td class="actions-col">
-						<form method="POST" action="/Modifier-Pilote/{{ pilote.id }}">
-							<button href="/Modifier-Pilote" class="btn btn-modifier">Modifier</button>
-						</form>
+						<a href="/Modifier-Pilote/{{ pilote.id }}" class="btn btn-modifier">Modifier</a>
 						<form method="POST" action="/Supprimer-Pilote/{{ pilote.id }}">
 							<button type="submit" class="btn btn-supprimer">Supprimer</button>
 						</form>
