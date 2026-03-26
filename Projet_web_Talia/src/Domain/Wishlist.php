@@ -20,11 +20,11 @@ class Wishlist
     #[JoinColumn(nullable: false)]
     private User $user;
 
-    #[ManyToOne(targetEntity: OffreStage::class)]
+    #[ManyToOne(targetEntity: Offre::class)]
     #[JoinColumn(nullable: false)]
-    private OffreStage $offre;
+    private Offre $offre;
 
-    public function __construct(User $user, OffreStage $offre)
+    public function __construct(User $user, Offre $offre)
     {
         $this->user  = $user;
         $this->offre = $offre;
@@ -33,5 +33,5 @@ class Wishlist
     public function getId(): int { return $this->id; }
 
     public function getUser(): User { return $this->user; }
-    public function getOffre(): OffreStage { return $this->offre; }
+    public function getOffre(): Offre { return $this->offre; }
 }
