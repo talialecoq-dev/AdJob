@@ -1,4 +1,6 @@
+{% extends "Bases/Base.html.twig" %}
+
 {% block content %}
-	{% set type = "Entreprises" %}
-	{% include "Entreprises/Page_Inscription_Entreprise.html.twig" %}
+	{% set type = "Entreprise_Modifier" %}
+	{% include "Entreprises/Page_Inscription_Entreprise.html.twig" with { 'entreprise': entreprise } %}
 {% endblock %}

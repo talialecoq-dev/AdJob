@@ -4,14 +4,18 @@
 	<div class="main-container" style="background-color: #eed4cb; padding: 50px;">
 		<div class="container" style="background-color: #ffffff; border-radius: 12px; padding: 30px; max-width: 700px; border: 1px solid #a0a890; margin: auto;">
 
-			{% if type == "Entreprise" %}
+			{% if type == "Entreprise" or type == "Entreprise_Ajout" %}
 				{% set action_url = "/inscription-entreprise" %}
+			{% elseif type == "Entreprise_Modifier" %}
+				{% set action_url = "/Update-Entreprise/" ~ entreprise.id %}
 			{% elseif type == "Etudiants_ajout" %}
 				{% set action_url = "/Inscription-Étudiant" %}
 			{% elseif type == "Etudiants" %}
 				{% set action_url = "/Update-Étudiant/" ~ etudiant.id %}
 			{% elseif type == "Pilote" %}
 				{% set action_url = "/Inscription-Pilote" %}
+			{% elseif type == "Pilote_Modifier" %}
+				{% set action_url = "/Update-Pilote/" ~ pilote.id %}
 			{% else %}
 				{% set action_url = "/traitement-inscription" %}
 			{% endif %}
@@ -67,63 +71,60 @@
 						<input type="file" name="image_profil" class="form-control" accept="png, jpg, jpeg" {% if type == "Etudiants_ajout" %} required {% endif %}>
 					</div>
 
-				{% elseif type == "Pilote"%}
+				{% elseif type == "Pilote" or type == "Pilote_Modifier" %}
 
 					<div class="mb-3">
-						<label for="nom_pilote" class="form-label pt-2 m-2">Nom du pilote</label>
-						<input type="text" name="nom" class="form-control" id="nom_pilote" placeholder="Nom du pilote" style="border: 1px solid #a0a890;" required>
+						<label class="form-label pt-2 m-2">Nom du pilote</label>
+						<input type="text" name="nom" class="form-control" value="{{ pilote.nom ?? '' }}" placeholder="Nom du pilote" style="border: 1px solid #a0a890;" required>
 					</div>
 					<div class="mb-3">
-						<label for="prenom_pilote" class="form-label pt-2 m-2">Prénom du pilote</label>
-						<input type="text" name="prenom" class="form-control" id="prenom_pilote" placeholder="Prénom du pilote" style="border: 1px solid #a0a890;" required>
+						<label class="form-label pt-2 m-2">Prénom du pilote</label>
+						<input type="text" name="prenom" class="form-control" value="{{ pilote.prenom ?? '' }}" placeholder="Prénom du pilote" style="border: 1px solid #a0a890;" required>
 					</div>
 					<div class="mb-3">
-						<label for="prenom_pilote" class="form-label pt-2 m-2">Email du pilote</label>
-						<input type="email" name="email" class="form-control" id="email_pilote" placeholder="Mail du pilote" style="border: 1px solid #a0a890;" required>
+						<label class="form-label pt-2 m-2">Email du pilote</label>
+						<input type="email" name="email" class="form-control" value="{{ pilote.email ?? '' }}" placeholder="Mail du pilote" style="border: 1px solid #a0a890;" required>
 					</div>
 					<div class="mb-3">
-						<label for="prenom_pilote" class="form-label pt-2 m-2">Campus du pilote</label>
-						<input type="text" name="campus" class="form-control" id="campus_pilote" placeholder="Campus du pilote" style="border: 1px solid #a0a890;" required>
+						<label class="form-label pt-2 m-2">Campus du pilote</label>
+						<input type="text" name="campus" class="form-control" value="{{ pilote.campus ? pilote.campus.nomVille : '' }}" placeholder="Campus du pilote" style="border: 1px solid #a0a890;" required>
 					</div>
 					<div class="mb-3">
-						<label for="Localisation_pilote" class="form-label pt-2 m-2">Localisation du pilote</label>
-						<input type="text" name="localisation" class="form-control" id="localisation_pilote" placeholder="Localisation du pilote" style="border: 1px solid #a0a890;" required>
+						<label class="form-label pt-2 m-2">Localisation du pilote</label>
+						<input type="text" name="localisation" class="form-control" value="{{ pilote.localisation ?? '' }}" placeholder="Localisation du pilote" style="border: 1px solid #a0a890;" required>
 					</div>
 					<div class="mb-3">
-						<label for="image_profil" class="form-label pt-2 m-2">Choisissez une image de profil</label>
-						<input class="form-control" type="file" name="image_profil" id="image_profil" accept="png, jpg, jpeg" required style="border: 1px solid #a0a890;" required>
+						<label class="form-label pt-2 m-2">Choisissez une image de profil</label>
+						<input class="form-control" type="file" name="image_profil" accept="png, jpg, jpeg" style="border: 1px solid #a0a890;" {% if type == "Pilote" %} required {% endif %}>
 					</div>
 
 
 				{% else %}
 					<div class="mb-3">
-						<label for="nom_entreprise" class="form-label pt-2 m-2">Nom de l'entreprise</label>
-						<input type="text" name="nom_entreprise" class="form-control" id="nom_entreprise" placeholder="Nom de votre entreprise" style="border: 1px solid #a0a890;" required>
+						<label class="form-label pt-2 m-2">Nom de l'entreprise</label>
+						<input type="text" name="nom_entreprise" class="form-control" value="{{ entreprise.nom ?? '' }}" placeholder="Nom de votre entreprise" style="border: 1px solid #a0a890;" required>
 					</div>
-
 					<div class="mb-3">
-						<label for="tel" class="form-label pt-2 m-2">Téléphone de l'entreprise</label>
-						<input type="tel" name="telephone" class="form-control" id="tel" placeholder="0102030405" style="border: 1px solid #a0a890;" required>
+						<label class="form-label pt-2 m-2">Téléphone de l'entreprise</label>
+						<input type="tel" name="telephone" class="form-control" value="{{ entreprise.telephone ?? '' }}" placeholder="0102030405" style="border: 1px solid #a0a890;">
 					</div>
-
 					<div class="row g-3">
 						<div class="col-md-6 mb-3">
-							<label for="secteur" class="form-label pt-2 m-2">Secteur d'activité</label>
-							<input type="text" name="secteur" class="form-control" id="secteur" placeholder="Ex: Informatique" style="border: 1px solid #a0a890;" required>
+							<label class="form-label pt-2 m-2">Secteur d'activité</label>
+							<input type="text" name="secteur" class="form-control" value="{{ entreprise.secteur ?? '' }}" placeholder="Ex: Informatique" style="border: 1px solid #a0a890;" required>
 						</div>
 						<div class="col-md-6 mb-3">
-							<label for="site" class="form-label pt-2 m-2">Site Internet</label>
-							<input type="url" name="site_web" class="form-control" id="site" placeholder="https://..." style="border: 1px solid #a0a890;" required>
+							<label class="form-label pt-2 m-2">Site Internet</label>
+							<input type="url" name="site_web" class="form-control" value="{{ entreprise.siteWeb ?? '' }}" placeholder="https://..." style="border: 1px solid #a0a890;" required>
 						</div>
 					</div>
-
 					<div class="mb-3">
-						<label for="email_ent" class="form-label pt-2 m-2">Email de contact</label>
-						<input type="email" name="email" class="form-control" id="email_ent" placeholder="contact@entreprise.com" style="border: 1px solid #a0a890;" required>
+						<label class="form-label pt-2 m-2">Email de contact</label>
+						<input type="email" name="email" class="form-control" value="{{ entreprise.email ?? '' }}" placeholder="contact@entreprise.com" style="border: 1px solid #a0a890;" required>
 					</div>
 					<div class="mb-3">
-						<label for="image_profil" class="form-label pt-2 m-2">Choisissez une image de profil</label>
-						<input class="form-control" type="file" name="image_profil" id="image_profil" accept="png, jpg, jpeg" required style="border: 1px solid #a0a890;" required>
+						<label class="form-label pt-2 m-2">Choisissez une image de profil</label>
+						<input class="form-control" type="file" name="image_profil" accept="png, jpg, jpeg" style="border: 1px solid #a0a890;" {% if type != "Entreprise_Modifier" %} required {% endif %}>
 					</div>
 				{% endif %}
 
@@ -133,13 +134,13 @@
 							Ajouter l'étudiant
 						{% elseif type == "Etudiants" %}
 							Enregistrer les modifications
-						{% elseif type == "Pilote_Ajout" %}
-							Ajouter le pilote
 						{% elseif type == "Pilote" %}
+							Ajouter le pilote
+						{% elseif type == "Pilote_Modifier" %}
 							Enregistrer les modifications
-						{% elseif type == "Entreprise_Ajout" %}
+						{% elseif type == "Entreprise" or type == "Entreprise_Ajout" %}
 							S'inscrire
-						{% elseif type == "Entreprise" %}
+						{% elseif type == "Entreprise_Modifier" %}
 							Enregistrer les modifications
 						{% else %}
 							S'inscrire
