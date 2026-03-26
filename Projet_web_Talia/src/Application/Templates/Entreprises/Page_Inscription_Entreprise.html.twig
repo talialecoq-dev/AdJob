@@ -67,7 +67,7 @@
 						<input type="file" name="image_profil" class="form-control" accept="png, jpg, jpeg" {% if type == "Etudiants_ajout" %} required {% endif %}>
 					</div>
 
-				{% elseif type == "Pilote" %}
+				{% elseif type == "Pilote"%}
 
 					<div class="mb-3">
 						<label for="nom_pilote" class="form-label pt-2 m-2">Nom du pilote</label>
@@ -133,10 +133,14 @@
 							Ajouter l'étudiant
 						{% elseif type == "Etudiants" %}
 							Enregistrer les modifications
-						{% elseif type == "Pilote" %}
+						{% elseif type == "Pilote_Ajout" %}
 							Ajouter le pilote
-						{% elseif type == "Entreprise" %}
+						{% elseif type == "Pilote" %}
+							Enregistrer les modifications
+						{% elseif type == "Entreprise_Ajout" %}
 							S'inscrire
+						{% elseif type == "Entreprise" %}
+							Enregistrer les modifications
 						{% else %}
 							S'inscrire
 						{% endif %}

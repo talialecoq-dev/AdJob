@@ -40,7 +40,8 @@ class PiloteController
     $pilote = $this->em->find(Pilote::class, $id);
 
     return $view->render($response, 'Pilotes/Page_Modifier_Pilote.html.twig', [
-        'pilote' => $pilote
+        'pilote' => $pilote,
+        'type'   => 'Pilote_Modif'
     ]);
 }
 
@@ -98,10 +99,8 @@ class PiloteController
         $pilote->setPrenom($data['prenom'] ?? '');
         $pilote->setNom($data['nom'] ?? '');
         $pilote->setEmail($data['email'] ?? '');
-        $pilote->setVille($data['ville'] ?? '');
-        $pilote->setAdresse($data['adresse'] ?? '');
-        $pilote->setRegion($data['region'] ?? '');
-
+        $pilote->setcampus($data['campus'] ?? '');
+        $pilote->setAdresse($data['localisation'] ?? '');
         $this->em->flush();
     }
 

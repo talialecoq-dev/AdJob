@@ -1,4 +1,5 @@
+{% extends "Bases/Base.html.twig" %}
 {% block content %}
-	{% set type = "Pilote" %}
-	{% include "Entreprises/Page_Inscription_Entreprise.html.twig" %}
+	{% include "Entreprises/Page_Inscription_Entreprise.html.twig" 
+       with {'type': 'Pilote_Modif', 'pilote': pilote} %}
 {% endblock %}

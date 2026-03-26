@@ -22,7 +22,7 @@ class EntrepriseController
     {
         $view = Twig::fromRequest($request);
         return $view->render($response, 'Entreprises/Page_Inscription_Entreprise.html.twig', [
-            'type' => 'Entreprise'
+            'type' => 'Entreprise_Ajout'
         ]);
     }
 
@@ -117,7 +117,8 @@ class EntrepriseController
     $entreprise = $this->em->find(Entreprise::class, $id);
 
     return $view->render($response, 'Entreprises/Page_Modifier_Entreprise.html.twig', [
-        'entreprise' => $entreprise
+        'entreprise' => $entreprise,
+        'type'       => 'Entreprise_Modif'
     ]);
 }
     public function recherche_entreprise(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface

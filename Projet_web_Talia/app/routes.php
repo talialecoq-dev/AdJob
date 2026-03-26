@@ -40,7 +40,7 @@ return function (App $app) {
     $app->get('/Supprimer-Entreprise/{id}', [EntrepriseController::class, 'supprimer']);
     $app->post('/Supprimer-Entreprise/{id}', [EntrepriseController::class, 'supprimer']);
     $app->get('/Modifier-Entreprise/{id}', [EntrepriseController::class, 'modifier']);
-    $app->post('/Modifier-Entreprise/{id}', [EntrepriseController::class, 'modifier']);   
+    $app->post('/Update-Entreprise/{id}', [EntrepriseController::class, 'update']);  
     $app->get('/Rechercher-Entreprise', [EntrepriseController::class, 'recherche_entreprise']);
     
 
@@ -64,7 +64,7 @@ return function (App $app) {
     $app->get('/Supprimer-Pilote/{id}', [PiloteController::class, 'supprimer']);
     $app->post('/Supprimer-Pilote/{id}', [PiloteController::class, 'supprimer']);
     $app->get('/Modifier-Pilote/{id}', [PiloteController::class, 'modifier']);
-    $app->post('/Modifier-Pilote/{id}', [PiloteController::class, 'modifier']);
+    $app->post('/Update-Pilote/{id}', [PiloteController::class, 'update']);
 
     $app->get('/Whishlist', [WishlistController::class, 'wishlist']);
 
