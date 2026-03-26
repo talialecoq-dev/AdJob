@@ -30,7 +30,7 @@ class User
     #[Column(name: 'est_actif', type: 'boolean', nullable: false)]
     private bool $estActif = true;
 
-    // Champs communs anciennement dans Etudiant
+    
     #[Column(type: 'string', nullable: true)]
     private ?string $adresse = null;
 
@@ -40,7 +40,7 @@ class User
     #[Column(type: 'string', nullable: true)]
     private ?string $region = null;
 
-    // Champ anciennement dans Pilote
+    
     #[Column(type: 'string', nullable: true)]
     private ?string $localisation = null;
 

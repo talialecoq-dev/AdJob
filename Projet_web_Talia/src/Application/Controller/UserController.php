@@ -18,9 +18,7 @@ class UserController
         $this->em = $em;
     }
 
-    // -------------------------------------------------------------------------
-    // ÉTUDIANTS
-    // -------------------------------------------------------------------------
+   
 
     public function inscriptionEtudiant(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
@@ -109,9 +107,7 @@ class UserController
         return $response->withHeader('Location', '/Liste-Étudiants')->withStatus(302);
     }
 
-    // -------------------------------------------------------------------------
-    // PILOTES
-    // -------------------------------------------------------------------------
+  
 
     public function inscriptionPilote(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
@@ -142,7 +138,7 @@ class UserController
         );
         $user->setRole($role);
 
-        // Campus : on cherche par nom si fourni
+        
         if (!empty($data['campus'])) {
             $campus = $this->em->getRepository(\App\Domain\Campus::class)
                 ->findOneBy(['nomVille' => $data['campus']]);
@@ -216,9 +212,7 @@ class UserController
         return $response->withHeader('Location', '/Liste-Pilotes')->withStatus(302);
     }
 
-    // -------------------------------------------------------------------------
-    // UTILITAIRE
-    // -------------------------------------------------------------------------
+   
 
     private function traiterUpload(): ?string
     {
