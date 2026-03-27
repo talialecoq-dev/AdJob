@@ -1,27 +1,38 @@
 {% extends 'Bases/Base.html.twig' %}
 
 {% block content %}
-	<div class="main-container" style="background-color: #eed4cb; padding : 50px; min-height: 100vh; ">
+<div class="main-container" style="background-color: #eed4cb; padding: 50px; min-height: 100vh;">
 
+    <div class="container" style="background-color: #ffffff; border-radius: 12px; padding: 30px; max-width: 600px; border: 1px solid #a0a890; margin: auto;">
 
-		<div class="container" style="background-color: #ffffff; border-radius: 12px; padding: 30px; max-width: 600px; border: 1px solid #a0a890; margin: auto;">
+        {# 🔹 Formulaire POST vers la route qui gère le login #}
+        <form method="POST" action="/Login">  
 
-			<center>
-				<div class="col-5">
-					<label for="Nom de l'étudiant" class="form-label pt-2 m-2">Email</label>
-					<input type="email" class="form-control" id="Email de connexion" placeholder="Entrez votre adresse mail" required>
-				</div>
-				<div class="col-5">
-					<label for="Prénom de l'étudiant" class="form-label pt-2 m-2">Mot de passe
-					</label>
-					<input type="password" class="form-control" id="Mdp de connexion" placeholder="Entrez votre mot de passe" required>
-				</div>
-			</center>
-			<center>
-				<div class="col-12 pt-4 m-2">
-					<button type="submit"  style="background-color: #a0a890; color: white; border: none; padding: 12px; font-weight: bold; border-radius: 25px;"><a href="/Login {{ login.id }}" class="btn btn-login">Se connecter</a></button>
-				</div>
-			</center>
-		</div>
-	</div>
+            <center>
+                <div class="col-5">
+                    <label class="form-label pt-2 m-2">Email</label>
+                    <input type="email" name="email" class="form-control" placeholder="Entrez votre adresse mail" required>
+                </div>
+
+                <div class="col-5">
+                    <label class="form-label pt-2 m-2">Mot de passe</label>
+                    <input type="password" name="password" class="form-control" placeholder="Entrez votre mot de passe" required>
+                </div>
+            </center>
+
+			{% if error is defined and error %}
+				<div class="alert alert-danger">{{ error }}</div>
+			{% endif %}
+
+            <center>
+                <div class="col-12 pt-4 m-2">
+                    <button type="submit" style="background-color: #a0a890; color: white; border: none; padding: 12px; font-weight: bold; border-radius: 25px;">
+                        Se connecter
+                    </button>
+                </div>
+            </center>
+
+        </form>
+    </div>
+</div>
 {% endblock %}

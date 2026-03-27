@@ -33,13 +33,7 @@ class UserController
         $data = $request->getParsedBody();
 
         $imageName = $this->traiterUpload();
-        $role = $this->em->getRepository(Role::class)->findOneBy(['role' => 'etudiant']);
-        if ($role === null) {
-        $role = new Role('etudiant');
-        $this->em->persist($role);
-        $this->em->flush();
-}
-
+     
         $user = new User(
             $data['nom']     ?? '',
             $data['prenom']  ?? '',
@@ -51,7 +45,7 @@ class UserController
             null,
             $imageName
         );
-        $user->setRole($role);
+        $user->setRole(Role::ETUDIANT);
 
         $this->em->persist($user);
         $this->em->flush();
@@ -63,8 +57,7 @@ class UserController
     {
         $view = Twig::fromRequest($request);
 
-        $role     = $this->em->getRepository(Role::class)->findOneBy(['role' => 'etudiant']);
-        $etudiants = $this->em->getRepository(User::class)->findBy(['role' => $role]);
+        $etudiants = $this->em->getRepository(User::class)->findBy(['role' => Role::ETUDIANT]);
 
         return $view->render($response, 'Étudiants/Page_Liste_Étudiant.html.twig', [
             'etudiants' => $etudiants
