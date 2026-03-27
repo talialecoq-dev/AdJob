@@ -2,6 +2,7 @@
 
 namespace App\Domain;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
@@ -47,8 +48,8 @@ class User
     #[Column(type: 'string', nullable: true)]
     private ?string $logo = null;
 
-    #[ManyToOne(targetEntity: Role::class)]
-    private ?Role $role = null;
+    #[Column(type: Types::STRING, enumType: Role::class)]
+    private Role $role = Role::ETUDIANT;
 
     #[ManyToOne(targetEntity: Campus::class)]
     private ?Campus $campus = null;
@@ -107,8 +108,8 @@ class User
     public function getLogo(): ?string { return $this->logo; }
     public function setLogo(?string $logo): void { $this->logo = $logo; }
 
-    public function getRole(): ?Role { return $this->role; }
-    public function setRole(?Role $role): void { $this->role = $role; }
+    public function getRole(): Role { return $this->role; }
+    public function setRole(Role $role): void { $this->role = $role; }
 
     public function getCampus(): ?Campus { return $this->campus; }
     public function setCampus(?Campus $campus): void { $this->campus = $campus; }

@@ -23,28 +23,28 @@
 					<div class="collapse navbar-collapse justify-content-center">
 						<ul class="navbar-nav mb-2 mb-lg-0">
 							<li class="nav-item">
-								<a class="nav-link px-3" style="font-size: 1.5rem;" href="/"><img src="Images/Image_Maison.png" alt="Accueil" width="30" height="30" class="d-inline-block align-text-top">
+								<a class="nav-link px-3" style="font-size: 1.5rem;" href="/"><img src="/Images/Image_Maison.png" alt="Accueil" width="30" height="30" class="d-inline-block align-text-top">
 									Accueil</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link px-3" style="font-size: 1.5rem;" href="/Profil"><img src="Images/Image_Profil.png" alt="Profil" width="30" height="30" class="d-inline-block align-text-top">
+								<a class="nav-link px-3" style="font-size: 1.5rem;" href="/Profil"><img src="/Images/Image_Profil.png" alt="Profil" width="30" height="30" class="d-inline-block align-text-top">
 									Profil</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link px-3" style="font-size: 1.5rem;" href="/Candidatures"><img src="Images/Image_Candidature.png" alt="Candidatures" width="30" height="30" class="d-inline-block align-text-top">
+								<a class="nav-link px-3" style="font-size: 1.5rem;" href="/Candidatures"><img src="/Images/Image_Candidature.png" alt="Candidatures" width="30" height="30" class="d-inline-block align-text-top">
 									Candidatures</a>
 							</li>
 
 							<li class="nav-item">
-								<a class="nav-link px-3" style="font-size: 1.5rem;" href="/Whishlist"><img src="Images/Image_Offre.png" alt="Offres" width="30" height="30" class="d-inline-block align-text-top">
+								<a class="nav-link px-3" style="font-size: 1.5rem;" href="/Whishlist"><img src="/Images/Image_Offre.png" alt="Offres" width="30" height="30" class="d-inline-block align-text-top">
 									Ma wishlist</a>
 							</li>
 							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle px-3" style="font-size: 1.5rem;" role="button" data-bs-toggle="dropdown"><img src="Images/Image_Etudiant.png" alt="Étudiants" width="30" height="30" class="d-inline-block align-text-top">
+								<a class="nav-link dropdown-toggle px-3" style="font-size: 1.5rem;" role="button" data-bs-toggle="dropdown"><img src="/Images/Image_Etudiant.png" alt="Étudiants" width="30" height="30" class="d-inline-block align-text-top">
 									Étudiants</a>
 								<ul class="dropdown-menu">
 									<li>
-										<a class="dropdown-item" href="/Liste-Étudiants">Les Étudiants</a>
+										<a class="dropdown-item" href="{{ url_for('liste_etudiants') }}">Les Étudiants</a>
 									</li>
 									<li>
 										<a class="dropdown-item" href="#">Mes Étudiants</a>
@@ -52,12 +52,12 @@
 								</ul>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link px-3" style="font-size: 1.5rem;" href="/Liste-Pilotes"><img src="Images/Image_Pilote.png" alt="Pilotes" width="30" height="30" class="d-inline-block align-text-top">
+								<a class="nav-link px-3" style="font-size: 1.5rem;" href="/Liste-Pilotes"><img src="/Images/Image_Pilote.png" alt="Pilotes" width="30" height="30" class="d-inline-block align-text-top">
 									Pilotes</a>
 							</li>
 
 							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle px-3" style="font-size: 1.5rem;" role="button" data-bs-toggle="dropdown"><img src="Images/Image_Entreprise.png" alt="Entreprises" width="30" height="30" class="d-inline-block align-text-top">
+								<a class="nav-link dropdown-toggle px-3" style="font-size: 1.5rem;" role="button" data-bs-toggle="dropdown"><img src="/Images/Image_Entreprise.png" alt="Entreprises" width="30" height="30" class="d-inline-block align-text-top">
 									Entreprises</a>
 								<ul class="dropdown-menu">
 									<li>
@@ -69,7 +69,11 @@
 								</ul>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link px-3" style="font-size: 1.5rem;" href="/Login">Connexion </a>
+								{% if user %}
+									Bonjour {{ user.prenom }}
+								{% else %}
+									<a class="nav-link px-3" style="font-size: 1.5rem;" href="/Login">Connexion </a>
+								{% endif %}
 							</li>
 						</ul>
 					</div>

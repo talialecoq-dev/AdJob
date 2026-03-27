@@ -14,23 +14,32 @@ use App\Application\Controller\WishlistController;
 use App\Application\Controller\LoginController;
 use App\Application\Controller\Mentions_LegalesController;
 use App\Application\Controller\OffresController;
+use App\Application\Middleware\LoggedMiddleware;
+use App\Application\Middleware\RoleCheckMiddleware;
+use App\Domain\Role;
+use Psr\Http\Message\ResponseFactoryInterface;
+use Slim\Routing\RouteCollectorProxy;
 
 return function (App $app) {
     $app->options('/{routes:.*}', function (Request $request, Response $response) {
         return $response;
     });
 
+    $factory = $app->getContainer()->get(ResponseFactoryInterface::class);
+    
     // --- Accueil ---
     $app->get('/', [HomeController::class, 'home']);
     $app->post('/offre/ajouter', [HomeController::class, 'ajouter']);
+
     $app->post('/offre/supprimer/{id}', [HomeController::class, 'supprimer']);
 
     // --- Pages statiques ---
     $app->get('/Mentions_Legales', [Mentions_LegalesController::class, 'Mentions_Legales']);
-    $app->get('/Profil', [ProfilController::class, 'profil']);
+    $app->get('/Profil', [ProfilController::class, 'profil'])->add(new LoggedMiddleware($factory));
 
     // --- Login ---
     $app->get('/Login', [LoginController::class, 'login']);
+    $app->post('/Login', [LoginController::class, 'login']);
 
     // --- Entreprises ---
     $app->get('/Inscription-Entreprise', [EntrepriseController::class, 'inscription']);
@@ -44,12 +53,20 @@ return function (App $app) {
     $app->post('/Supprimer-Entreprise/{id}', [EntrepriseController::class, 'supprimer']);
 
     // --- Étudiants (via UserController) ---
-    $app->get('/Inscription-Étudiant', [UserController::class, 'inscriptionEtudiant']);
-    $app->post('/Inscription-Étudiant', [UserController::class, 'ajouterEtudiant']);
-    $app->get('/Liste-Étudiants', [UserController::class, 'listeEtudiants']);
-    $app->get('/Modifier-Étudiant/{id}', [UserController::class, 'modifierEtudiant']);
-    $app->post('/Update-Étudiant/{id}', [UserController::class, 'updateEtudiant']);
-    $app->post('/Supprimer-Étudiant/{id}', [UserController::class, 'supprimerEtudiant']);
+    $app->group('/etudiant', function (RouteCollectorProxy $group) use ($factory) {
+
+        $group->get('/inscription', [UserController::class, 'inscriptionEtudiant'])->setName('inscription_etudiants');
+        $group->post('/inscription', [UserController::class, 'ajouterEtudiant']);
+
+        $group->get('/liste', [UserController::class, 'listeEtudiants'])->setName('liste_etudiants');
+        
+        $group->get('/modifier/{id}', [UserController::class, 'modifierEtudiant']);
+        $group->post('/modifier/{id}', [UserController::class, 'updateEtudiant']);
+
+        $group->post('/supprimer/{id}', [UserController::class, 'supprimerEtudiant']);
+        
+    })->add(new RoleCheckMiddleware($factory, [Role::PILOTE, Role::ADMIN]));
+
 
     // --- Pilotes (via UserController) ---
     $app->get('/Inscription-Pilote', [UserController::class, 'inscriptionPilote']);

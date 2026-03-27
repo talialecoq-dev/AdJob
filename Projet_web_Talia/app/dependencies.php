@@ -14,7 +14,8 @@ use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Doctrine\ORM\ORMSetup;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
-
+use Psr\Http\Message\ResponseFactoryInterface;
+use Slim\Psr7\Factory\ResponseFactory;
 
 return function (ContainerBuilder $containerBuilder) {
     $containerBuilder->addDefinitions([
@@ -53,6 +54,10 @@ return function (ContainerBuilder $containerBuilder) {
             $connection = DriverManager::getConnection($doctrine['connection']);
 
             return new EntityManager($connection, $config);
+        },
+        
+        ResponseFactoryInterface::class => function (ContainerInterface $container) {
+            return $container->get(ResponseFactory::class);
         },
     ]);
 };
