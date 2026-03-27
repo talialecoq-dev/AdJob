@@ -33,8 +33,12 @@ class UserController
         $data = $request->getParsedBody();
 
         $imageName = $this->traiterUpload();
-
         $role = $this->em->getRepository(Role::class)->findOneBy(['role' => 'etudiant']);
+        if ($role === null) {
+        $role = new Role('etudiant');
+        $this->em->persist($role);
+        $this->em->flush();
+}
 
         $user = new User(
             $data['nom']     ?? '',
@@ -97,10 +101,10 @@ class UserController
 
     public function supprimerEtudiant(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $user = $this->em->find(User::class, (int) $args['id']);
+        $user_Etudiant = $this->em->find(User::class, (int) $args['id']);
 
-        if ($user) {
-            $this->em->remove($user);
+        if ($user_Etudiant) {
+            $this->em->remove($user_Etudiant);
             $this->em->flush();
         }
 
@@ -124,8 +128,13 @@ class UserController
         $imageName = $this->traiterUpload();
 
         $role = $this->em->getRepository(Role::class)->findOneBy(['role' => 'pilote']);
+        if ($role === null) {
+        $role = new Role('pilote');
+        $this->em->persist($role);
+        $this->em->flush();
+}
 
-        $user = new User(
+        $user_Pilote = new User(
             $data['nom']    ?? '',
             $data['prenom'] ?? '',
             $data['email']  ?? '',
@@ -136,18 +145,18 @@ class UserController
             $data['localisation'] ?? null,
             $imageName
         );
-        $user->setRole($role);
+        $user_Pilote->setRole($role);
 
         
         if (!empty($data['campus'])) {
             $campus = $this->em->getRepository(\App\Domain\Campus::class)
                 ->findOneBy(['nomVille' => $data['campus']]);
             if ($campus) {
-                $user->setCampus($campus);
+                $user_Pilote->setCampus($campus);
             }
         }
 
-        $this->em->persist($user);
+        $this->em->persist($user_Pilote);
         $this->em->flush();
 
         return $response->withHeader('Location', '/Liste-Pilotes')->withStatus(302);
@@ -158,10 +167,10 @@ class UserController
         $view = Twig::fromRequest($request);
 
         $role   = $this->em->getRepository(Role::class)->findOneBy(['role' => 'pilote']);
-        $pilotes = $this->em->getRepository(User::class)->findBy(['role' => $role]);
+        $user = $this->em->getRepository(User::class)->findBy(['role' => $role]);
 
         return $view->render($response, 'Pilotes/Page_Liste_Pilote.html.twig', [
-            'pilotes' => $pilotes
+            'pilotes' => $user
         ]);
     }
 
