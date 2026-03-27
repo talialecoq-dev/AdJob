@@ -7,6 +7,8 @@ use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Views\Twig;
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 
 class LoginController
 {
@@ -44,4 +46,18 @@ class LoginController
         $view = Twig::fromRequest($request);
         return $view->render($response, 'Bases/Page_Login.html.twig', $model);
     }
+    public function logout(Request $request, Response $response) {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $_SESSION = [];
+        session_destroy();
+
+      
+        return $response
+            ->withHeader('Location', '/Login')
+            ->withStatus(302);
+    }
 }
+

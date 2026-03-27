@@ -40,6 +40,9 @@ return function (App $app) {
     // --- Login ---
     $app->get('/Login', [LoginController::class, 'login']);
     $app->post('/Login', [LoginController::class, 'login']);
+    $app->get('/Logout', [LoginController::class, 'logout']);
+    $app->post('/Logout', [LoginController::class, 'logout']);
+
 
     // --- Entreprises ---
     $app->get('/Inscription-Entreprise', [EntrepriseController::class, 'inscription']);
@@ -78,8 +81,12 @@ return function (App $app) {
     $app->post('/Supprimer-Pilote/{id}', [UserController::class, 'supprimerPilote']);
 
     // --- Offres ---
+
+
     $app->get('/Ajouter-Offre', [OffresController::class, 'ajouter']);
     $app->post('/Ajouter-Offre', [OffresController::class, 'ajouter']);
+
+
     $app->get('/Offres', [OffresController::class, 'liste']);
 
     // --- Wishlist ---

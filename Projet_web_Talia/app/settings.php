@@ -6,7 +6,7 @@ declare(strict_types=1);
     use DI\ContainerBuilder;
     use Monolog\Logger;
 
-    define('APP_ROOT', __DIR__);
+    define('APP_ROOT', __DIR__);    
 
     return function (ContainerBuilder $containerBuilder) {
 
