@@ -43,7 +43,7 @@ class EntrepriseController
             $this->em->flush();
         }
 
-        return $response->withHeader('Location', '/Liste-Entreprises')->withStatus(302);
+        return $response->withHeader('Location', '/entreprise/Liste-Entreprises')->withStatus(302);
     }
 
     public function home(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
@@ -110,7 +110,7 @@ class EntrepriseController
         $this->em->flush();
 
         return $response
-            ->withHeader('Location', '/Liste-Entreprises')
+            ->withHeader('Location', '/entreprise/Liste-Entreprises')
             ->withStatus(302);
     }
 
@@ -122,7 +122,8 @@ class EntrepriseController
         $entreprise = $this->em->find(Entreprise::class, $id);
 
         return $view->render($response, 'Entreprises/Page_Modifier_Entreprise.html.twig', [
-            'entreprise' => $entreprise
+            'entreprise' => $entreprise,
+            'type' => 'Entreprise_Modifier'
         ]);
     }
 
@@ -156,6 +157,6 @@ class EntrepriseController
         }
 
         
-        return $response->withHeader('Location', '/Liste-Entreprises')->withStatus(302);
+        return $response->withHeader('Location', '/entreprise/Liste-Entreprises')->withStatus(302);
     }
 }

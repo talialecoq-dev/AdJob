@@ -5,19 +5,25 @@
 		<div class="container" style="background-color: #ffffff; border-radius: 12px; padding: 30px; max-width: 700px; border: 1px solid #a0a890; margin: auto;">
 
 			{% if type == "Entreprise" or type == "Entreprise_Ajout" %}
-				{% set action_url = "/inscription-entreprise" %}
+
+				{% set action_url = "/entreprise/inscription-entreprise" %}
 			{% elseif type == "Entreprise_Modifier" %}
-				{% set action_url = "/Update-Entreprise/" ~ entreprise.id %}
+
+				{% set action_url = "/entreprise/Update-Entreprise/" ~ entreprise.id %}
 			{% elseif type == "Etudiants_ajout" %}
-				{% set action_url = "/Inscription-Étudiant" %}
+
+				{% set action_url = "/etudiant/inscription" %}
 			{% elseif type == "Etudiants" %}
-				{% set action_url = "/Update-Étudiant/" ~ etudiant.id %}
+
+				{% set action_url = "/etudiant/modifier/" ~ etudiant.id %}
 			{% elseif type == "Pilote" %}
-				{% set action_url = "/Inscription-Pilote" %}
+
 			{% elseif type == "Pilote_Modifier" %}
+
 				{% set action_url = "/Update-Pilote/" ~ pilote.id %}
 			{% else %}
-				{% set action_url = "/traitement-inscription" %}
+
+				{% set action_url = "/entreprise/traitement-inscription" %}
 			{% endif %}
 
 			<form method="POST" action="{{ action_url }}" enctype="multipart/form-data">

@@ -45,16 +45,23 @@ return function (App $app) {
 
 
     // --- Entreprises ---
-    $app->get('/Inscription-Entreprise', [EntrepriseController::class, 'inscription']);
-    $app->post('/inscription-entreprise', [EntrepriseController::class, 'traiterInscription']);
-    $app->post('/traitement-inscription', [EntrepriseController::class, 'traiterInscription']);
-    $app->get('/Liste-Entreprises', [EntrepriseController::class, 'liste']);
-    $app->get('/Rechercher-Entreprise', [EntrepriseController::class, 'recherche_entreprise']);
-    $app->get('/Modifier-Entreprise/{id}', [EntrepriseController::class, 'modifier']);
-    $app->post('/Update-Entreprise/{id}', [EntrepriseController::class, 'update']);
-    $app->get('/Supprimer-Entreprise/{id}', [EntrepriseController::class, 'supprimer']);
-    $app->post('/Supprimer-Entreprise/{id}', [EntrepriseController::class, 'supprimer']);
+    $app->group('/entreprise', function (RouteCollectorProxy $group) use ($factory) {
+    $group->get('/Inscription-Entreprise', [EntrepriseController::class, 'inscription'])->setName('inscription_entreprises');
 
+    $group->post('/inscription-entreprise', [EntrepriseController::class, 'traiterInscription']);
+    $group->post('/traitement-inscription', [EntrepriseController::class, 'traiterInscription']);
+
+    $group->get('/Liste-Entreprises', [EntrepriseController::class, 'liste'])->setName('liste_entreprises');
+
+    $group->get('/Rechercher-Entreprise', [EntrepriseController::class, 'recherche_entreprise']);
+
+    $group->get('/Modifier-Entreprise/{id}', [EntrepriseController::class, 'modifier'])->setName('modifier_entreprises');
+    $group->post('/Update-Entreprise/{id}', [EntrepriseController::class, 'update']);
+
+    $group->get('/Supprimer-Entreprise/{id}', [EntrepriseController::class, 'supprimer']);
+    $group->post('/Supprimer-Entreprise/{id}', [EntrepriseController::class, 'supprimer']);
+
+    })->add(new RoleCheckMiddleware($factory, [Role::PILOTE, Role::ADMIN]));
     // --- Étudiants (via UserController) ---
     $app->group('/etudiant', function (RouteCollectorProxy $group) use ($factory) {
 
@@ -89,12 +96,17 @@ return function (App $app) {
 
     $app->get('/Offres', [OffresController::class, 'liste']);
 
-    // --- Wishlist ---
-    $app->get('/Whishlist', [WishlistController::class, 'wishlist']);
-    $app->post('/wishlist/ajouter/{id}', [WishlistController::class, 'ajouter']);
-    $app->post('/wishlist/retirer/{id}', [WishlistController::class, 'retirer']);
 
+    // --- Wishlist ---
+       $app->group('/wishlist', function (RouteCollectorProxy $group) use ($factory) {
+    $group->get('/Whishlist', [WishlistController::class, 'wishlist']);
+
+    $group->post('/wishlist/ajouter/{id}', [WishlistController::class, 'ajouter']);
+
+    $group->post('/wishlist/retirer/{id}', [WishlistController::class, 'retirer']);
+    }) ->add(new RoleCheckMiddleware($factory, [Role::ETUDIANT, Role::PILOTE, Role::ADMIN]));
     // --- Candidatures ---
+
     $app->get('/Candidatures', [CandidaturesController::class, 'candidatures']);
     $app->post('/Candidatures', [CandidaturesController::class, 'candidatures']);
     $app->get('/Candidater', [CandidaturesController::class, 'candidater']);

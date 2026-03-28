@@ -7,7 +7,7 @@
 
 	<h1>Liste des Entreprises</h1>
 	<div class="text-center my-4">
-		<a href="/Inscription-Entreprise" class="btn" style="background-color: #73986f; color: white;">
+		<a href="{{ url_for('inscription_entreprises') }}" class="btn" style="background-color: #73986f; color: white;">
 			Ajouter une entreprise
 		</a>
 	</div>
@@ -43,10 +43,10 @@
 								<img src="/uploads/{{ entreprise.image }}" alt="logo" style="height:40px;">
 							</td>
 							<td class="actions-col">
-								<form method="POST" action="/Supprimer-Entreprise/{{ entreprise.id }}">
+								<form method="POST" action="/entreprise/Supprimer-Entreprise/{{ entreprise.id }}">
 									<button type="submit" class="btn btn-supprimer">Supprimer</button>
 								</form>
-								<a href="/Modifier-Entreprise/{{ entreprise.id }}" class="btn btn-modifier">Modifier</a>
+								<a href="{{ url_for('modifier_entreprises', {id: entreprise.id}) }}" class="btn btn-modifier">Modifier</a>
 							</td>
 
 						</tr>

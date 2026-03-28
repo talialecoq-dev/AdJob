@@ -25,11 +25,11 @@
 
 	<h1>Liste de tous les Étudiants</h1>
 
-<div class="text-center my-4">
-  <a href="{{ url_for('inscription_etudiants') }}" class="btn btn-modifier">
-      Ajouter un(e) étudiant(e)
-  </a>
-</div>
+	<div class="text-center my-4">
+		<a href="{{ url_for('inscription_etudiants') }}" class="btn btn-modifier">
+			Ajouter un(e) étudiant(e)
+		</a>
+	</div>
 
 	<table class="table table-bordered table-hover">
 		<table class="table">
@@ -56,10 +56,10 @@
 					<td>{{ etudiant.region }}</td>
 					<td>{{ etudiant.image }}</td>
 					<td class="actions-col">
-						<a href="/Modifier-Étudiant/{{ etudiant.id }}" class="btn btn-modifier">
+						<a href="{{ url_for('modifier_etudiant', {id: etudiant.id}) }}" class="btn btn-modifier">
 							Modifier
 						</a>
-						<form method="POST" action="/Supprimer-Étudiant/{{ etudiant.id }}" style="display:inline;">
+						<form method="POST" action="etudiant/Supprimer-Étudiant/{{ etudiant.id }}" style="display:inline;">
 							<button type="submit" class="btn btn-supprimer">Supprimer</button>
 						</form>
 					</td>
