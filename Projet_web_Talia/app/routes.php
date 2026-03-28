@@ -63,7 +63,7 @@ return function (App $app) {
 
         $group->get('/liste', [UserController::class, 'listeEtudiants'])->setName('liste_etudiants');
         
-        $group->get('/modifier/{id}', [UserController::class, 'modifierEtudiant']);
+        $group->get('/modifier/{id}', [UserController::class, 'modifierEtudiant'])->setName('modifier_etudiant');
         $group->post('/modifier/{id}', [UserController::class, 'updateEtudiant']);
 
         $group->post('/supprimer/{id}', [UserController::class, 'supprimerEtudiant']);
@@ -72,10 +72,10 @@ return function (App $app) {
 
 
     // --- Pilotes (via UserController) ---
-    $app->get('/Inscription-Pilote', [UserController::class, 'inscriptionPilote']);
+    $app->get('/Inscription-Pilote', [UserController::class, 'inscriptionPilote'])->setName('inscription_pilotes');
     $app->post('/Inscription-Pilote', [UserController::class, 'ajouterPilote']);
-    $app->get('/Liste-Pilotes', [UserController::class, 'listePilotes']);
-    $app->get('/Modifier-Pilote/{id}', [UserController::class, 'modifierPilote']);
+    $app->get('/Liste-Pilotes', [UserController::class, 'listePilotes'])->setName('liste_pilotes');
+    $app->get('/Modifier-Pilote/{id}', [UserController::class, 'modifierPilote'])->setName('modifier_pilote');
     $app->post('/Update-Pilote/{id}', [UserController::class, 'updatePilote']);
     $app->get('/Supprimer-Pilote/{id}', [UserController::class, 'supprimerPilote']);
     $app->post('/Supprimer-Pilote/{id}', [UserController::class, 'supprimerPilote']);

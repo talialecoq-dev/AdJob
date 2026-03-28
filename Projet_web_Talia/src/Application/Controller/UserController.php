@@ -120,12 +120,7 @@ class UserController
 
         $imageName = $this->traiterUpload();
 
-        $role = $this->em->getRepository(Role::class)->findOneBy(['role' => 'pilote']);
-        if ($role === null) {
-        $role = new Role('pilote');
-        $this->em->persist($role);
-        $this->em->flush();
-}
+        $role = Role::PILOTE;
 
         $user_Pilote = new User(
             $data['nom']    ?? '',
@@ -159,8 +154,7 @@ class UserController
     {
         $view = Twig::fromRequest($request);
 
-        $role   = $this->em->getRepository(Role::class)->findOneBy(['role' => 'pilote']);
-        $user = $this->em->getRepository(User::class)->findBy(['role' => $role]);
+        $user = $this->em->getRepository(User::class)->findBy(['role' => Role::PILOTE]);
 
         return $view->render($response, 'Pilotes/Page_Liste_Pilote.html.twig', [
             'pilotes' => $user
