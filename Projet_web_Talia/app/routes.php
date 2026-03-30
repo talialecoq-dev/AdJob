@@ -109,11 +109,11 @@ return function (App $app) {
 
     // --- Wishlist ---
     $app->group('/wishlist', function (RouteCollectorProxy $group) use ($factory) {
-    $group->get('/Whishlist', [WishlistController::class, 'wishlist'])->setName('consulter_wishlist');
+    $group->get('/', [WishlistController::class, 'wishlist'])->setName('consulter_wishlist');
 
-    $group->post('/wishlist/ajouter/{id}', [WishlistController::class, 'ajouter'])->setName('ajouter_wishlist');
+    $group->post('/ajouter/{id}', [WishlistController::class, 'ajouter'])->setName('ajouter_wishlist');
 
-    $group->post('/wishlist/retirer/{id}', [WishlistController::class, 'retirer'])->setName('retirer_wishlist');
+    $group->post('/retirer/{id}', [WishlistController::class, 'retirer'])->setName('retirer_wishlist');
     }) ->add(new RoleCheckMiddleware($factory, [Role::ETUDIANT, Role::PILOTE, Role::ADMIN]));
     // --- Candidatures ---
 
