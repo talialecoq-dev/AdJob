@@ -53,7 +53,7 @@ return function (App $app) {
 
     $group->get('/Liste-Entreprises', [EntrepriseController::class, 'liste'])->setName('liste_entreprises');
 
-    $group->get('/Rechercher-Entreprise', [EntrepriseController::class, 'recherche_entreprise']);
+    $group->get('/Rechercher-Entreprise', [EntrepriseController::class, 'recherche_entreprise'])->setName('recherche_entreprise');
 
     $group->get('/Modifier-Entreprise/{id}', [EntrepriseController::class, 'modifier'])->setName('modifier_entreprises');
     $group->post('/Update-Entreprise/{id}', [EntrepriseController::class, 'update']);
