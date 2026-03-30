@@ -1,0 +1,74 @@
+{% extends "Bases/Base.html.twig" %}
+
+{% block content %}
+
+	<style>
+		.btn-modifier {
+			background-color: #73986f;
+			color: white;
+			margin-right: 5px;
+		}
+		.btn-supprimer {
+			background-color: #e0c7bf;
+			color: white;
+		}
+		th,
+		td {
+			text-align: center;
+			vertical-align: middle;
+		}
+		.actions-col {
+			text-align: right;
+			white-space: nowrap;
+		}
+	</style>
+
+	<h1>Liste de tous les Utilisateurss</h1>
+
+
+	<div class="text-center my-4">
+		<a href="{{ url_for('inscription_etudiants') }}" class="btn btn-modifier" style:"">
+			Ajouter un(e) étudiant(e)
+		</a>
+		<a href="{{ url_for('inscription_pilotes') }}" class="btn btn-modifier" style:"">
+			Ajouter un(e) pilote
+		</a>
+	</div>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th scope="col">Id</th>
+				<th scope="col">Prénom</th>
+				<th scope="col">Nom</th>
+				<th scope="col">Email</th>
+				<th scope="col">Campus</th>
+				<th scope="col">Region</th>
+				<th scope="col">Roloe</th>
+				<th scope="col" class="actions-col">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for user in users %}
+				<td>{{ user.id }}</td>
+				<td>{{ user.prenom }}</td>
+				<td>{{ user.nom }}</td>
+				<td>{{ user.email}}</td>
+				<td>{{ user.campus }}</td>
+				<td>{{ user.region }}</td>
+				<td>{{ user.role.value }}</td>
+
+				<td class="text-right">
+					<a href="/users/{{ user.role.value|lower }}/modifier/{{ user.id }}" class="btn btn-sm btn-modifier">Modifier</a>
+
+					<form method="POST" action="/users/{{ user.role.value|lower }}/supprimer/{{ user.id }}" style="color-background:#eed4cb ">
+						<button type="submit" class="btn btn-sm btn-supprimer">Supprimer</button>
+					</form>
+				</td>
+			</tbody>
+		</tbody>
+	</tr>
+{% else %}
+	<tr>
+		<td colspan="7">Aucun utilisateur trouvé.</td>
+	</tr>
+{% endfor %}</tbody></table>{% endblock %}

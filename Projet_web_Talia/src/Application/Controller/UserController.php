@@ -50,10 +50,10 @@ class UserController
         $this->em->persist($user);
         $this->em->flush();
 
-        return $response->withHeader('Location', '/Liste-Étudiants')->withStatus(302);
+        return $response->withHeader('Location', '/Liste-Utilisateurs')->withStatus(302);
     }
 
-    public function listeEtudiants(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    /*public function listeEtudiants(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $view = Twig::fromRequest($request);
 
@@ -63,7 +63,7 @@ class UserController
             'etudiants' => $etudiants
         ]);
     }
-
+*/
     public function modifierEtudiant(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $view = Twig::fromRequest($request);
@@ -89,7 +89,7 @@ class UserController
             $this->em->flush();
         }
 
-        return $response->withHeader('Location', '/Liste-Étudiants')->withStatus(302);
+        return $response->withHeader('Location', '/Liste-Utilisateurs')->withStatus(302);
     }
 
     public function supprimerEtudiant(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
@@ -101,7 +101,7 @@ class UserController
             $this->em->flush();
         }
 
-        return $response->withHeader('Location', '/Liste-Étudiants')->withStatus(302);
+        return $response->withHeader('Location', '/Liste-Utilisateurs')->withStatus(302);
     }
 
   
@@ -147,10 +147,10 @@ class UserController
         $this->em->persist($user_Pilote);
         $this->em->flush();
 
-        return $response->withHeader('Location', '/Liste-Pilotes')->withStatus(302);
+        return $response->withHeader('Location', '/Liste-Utilisateurs')->withStatus(302);
     }
 
-    public function listePilotes(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    /*public function listePilotes(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $view = Twig::fromRequest($request);
 
@@ -160,6 +160,18 @@ class UserController
             'pilotes' => $user
         ]);
     }
+*/
+public function listeUsers(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+{
+    $view = Twig::fromRequest($request);
+
+
+    $users = $this->em->getRepository(User::class)->findAll();
+
+    return $view->render($response, 'Users/Page_Liste_User.html.twig', [
+        'users' => $users
+    ]);
+}
 
     public function modifierPilote(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
@@ -169,6 +181,7 @@ class UserController
         return $view->render($response, 'Pilotes/Page_Modifier_Pilote.html.twig', [
             'pilote' => $user
         ]);
+   
     }
 
     public function updatePilote(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
@@ -193,7 +206,7 @@ class UserController
             $this->em->flush();
         }
 
-        return $response->withHeader('Location', '/Liste-Pilotes')->withStatus(302);
+        return $response->withHeader('Location', '/Liste-Utilisateurs')->withStatus(302);
     }
 
     public function supprimerPilote(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
@@ -205,7 +218,7 @@ class UserController
             $this->em->flush();
         }
 
-        return $response->withHeader('Location', '/Liste-Pilotes')->withStatus(302);
+        return $response->withHeader('Location', '/Liste-Utilisateurs')->withStatus(302);
     }
 
    

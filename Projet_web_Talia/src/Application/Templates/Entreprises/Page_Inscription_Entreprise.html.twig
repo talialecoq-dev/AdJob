@@ -12,15 +12,15 @@
 				{% set action_url = "/entreprise/Update-Entreprise/" ~ entreprise.id %}
 			{% elseif type == "Etudiants_ajout" %}
 
-				{% set action_url = "/etudiant/inscription" %}
+				{% set action_url = "/users/inscription-etudiant" %}
 			{% elseif type == "Etudiants" %}
 
-				{% set action_url = "/etudiant/modifier/" ~ etudiant.id %}
+				{% set action_url = "/users/etudiant/modifier/" ~ etudiant.id %}
 			{% elseif type == "Pilote" %}
-
+				{% set action_url = "/users/inscription-pilote" %}
 			{% elseif type == "Pilote_Modifier" %}
 
-				{% set action_url = "/Update-Pilote/" ~ pilote.id %}
+				{% set action_url = "/users/pilote/modifier/" ~ pilote.id %}
 			{% else %}
 
 				{% set action_url = "/entreprise/traitement-inscription" %}

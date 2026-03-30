@@ -62,33 +62,43 @@ return function (App $app) {
     $group->post('/Supprimer-Entreprise/{id}', [EntrepriseController::class, 'supprimer']);
 
     })->add(new RoleCheckMiddleware($factory, [Role::PILOTE, Role::ADMIN]));
-    // --- Étudiants (via UserController) ---
-    $app->group('/etudiant', function (RouteCollectorProxy $group) use ($factory) {
 
-        $group->get('/inscription', [UserController::class, 'inscriptionEtudiant'])->setName('inscription_etudiants');
-        $group->post('/inscription', [UserController::class, 'ajouterEtudiant']);
+ // --- GESTION DES UTILISATEURS ---
 
-        $group->get('/liste', [UserController::class, 'listeEtudiants'])->setName('liste_etudiants');
-        
-        $group->get('/modifier/{id}', [UserController::class, 'modifierEtudiant'])->setName('modifier_etudiant');
-        $group->post('/modifier/{id}', [UserController::class, 'updateEtudiant']);
+    $app->get('/Liste-Utilisateurs', [UserController::class, 'listeUsers'])
+    ->add(new RoleCheckMiddleware($factory, [Role::PILOTE, Role::ADMIN]))
+    ->setName('liste_utilisateurs');
 
-        $group->post('/supprimer/{id}', [UserController::class, 'supprimerEtudiant']);
-        
+    $app->get('/users/inscription-etudiant', [UserController::class, 'inscriptionEtudiant'])
+    ->add(new RoleCheckMiddleware($factory, [Role::PILOTE, Role::ADMIN]))
+    ->setName('inscription_etudiants');
+
+    $app->post('/users/inscription-etudiant', [UserController::class, 'ajouterEtudiant'])
+    ->add(new RoleCheckMiddleware($factory, [Role::PILOTE, Role::ADMIN]));
+
+    $app->get('/users/inscription-pilote', [UserController::class, 'inscriptionPilote'])
+    ->add(new RoleCheckMiddleware($factory, [Role::PILOTE, Role::ADMIN]))
+    ->setName('inscription_pilotes');
+
+    $app->post('/users/inscription-pilote', [UserController::class, 'ajouterPilote'])
+    ->add(new RoleCheckMiddleware($factory, [Role::PILOTE, Role::ADMIN]));
+
+
+    $app->group('/users', function (RouteCollectorProxy $group) {
+
+        // Modifications & Suppressions (Étudiants)
+        $group->get('/etudiant/modifier/{id}', [UserController::class, 'modifierEtudiant'])->setName('modifier_etudiant');
+        $group->post('/etudiant/modifier/{id}', [UserController::class, 'updateEtudiant']);
+        $group->post('/etudiant/supprimer/{id}', [UserController::class, 'supprimerEtudiant']);
+
+        // Modifications & Suppressions (Pilotes)
+        $group->get('/pilote/modifier/{id}', [UserController::class, 'modifierPilote'])->setName('modifier_pilote');
+        $group->post('/pilote/modifier/{id}', [UserController::class, 'updatePilote']);
+        $group->post('/pilote/supprimer/{id}', [UserController::class, 'supprimerPilote']);
+
     })->add(new RoleCheckMiddleware($factory, [Role::PILOTE, Role::ADMIN]));
 
-
-    // --- Pilotes (via UserController) ---
-    $app->get('/Inscription-Pilote', [UserController::class, 'inscriptionPilote'])->setName('inscription_pilotes');
-    $app->post('/Inscription-Pilote', [UserController::class, 'ajouterPilote']);
-    $app->get('/Liste-Pilotes', [UserController::class, 'listePilotes'])->setName('liste_pilotes');
-    $app->get('/Modifier-Pilote/{id}', [UserController::class, 'modifierPilote'])->setName('modifier_pilote');
-    $app->post('/Update-Pilote/{id}', [UserController::class, 'updatePilote']);
-    $app->get('/Supprimer-Pilote/{id}', [UserController::class, 'supprimerPilote']);
-    $app->post('/Supprimer-Pilote/{id}', [UserController::class, 'supprimerPilote']);
-
     // --- Offres ---
-
 
     $app->get('/Ajouter-Offre', [OffresController::class, 'ajouter']);
     $app->post('/Ajouter-Offre', [OffresController::class, 'ajouter']);
