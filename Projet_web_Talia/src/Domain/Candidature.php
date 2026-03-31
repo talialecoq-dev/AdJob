@@ -3,6 +3,8 @@
 namespace App\Domain;
 
 use DateTimeImmutable;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
@@ -12,6 +14,11 @@ use Doctrine\ORM\Mapping\Table;
 #[Entity, Table(name: 'candidatures')]
 class Candidature
 {
+
+   #[ManyToOne(targetEntity: User::class)]
+    #[JoinColumn(nullable: false)]
+    private User $user;
+
     #[Id, Column(type: 'integer'), GeneratedValue(strategy: 'AUTO')]
     private int $id;
     #[Column(type: 'string', nullable: false)]
@@ -59,10 +66,12 @@ class Candidature
         ?string $logo,
         string $competences,
         string $description,
+        User $user, 
         string $statut = 'En attente',
         string $color = 'warning',
         string $image = 'Image/Martin.png',
         string $desc = ''
+        
     ) {
         $this->nom          = $nom;
         $this->prenom       = $prenom;
@@ -97,6 +106,7 @@ class Candidature
     public function getLogo(): ?string { return $this->logo; }
     public function getCompetences(): array { return array_map('trim', explode(',', $this->competences)); }
     public function getDescription(): string { return $this->description; }
+    public function getUser(): User {return $this->user;}
     public function getStatut(): string { return $this->statut; }
     public function getColor(): string { return $this->color; }
     public function getImage(): string { return $this->image; }

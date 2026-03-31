@@ -16,8 +16,7 @@ class SessionMiddleware implements Middleware
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-
-
+     
         $request = $request->withAttribute('session', $_SESSION);
 
         return $handler->handle($request);
