@@ -3,76 +3,43 @@
 
     {% for entreprise in entreprises %}
     <div class="col">
+      <div class="card border-0 overflow-hidden h-100"
+           style="border-radius:2rem; background-color:#97a48a;">
 
-      <div class="card border-0 overflow-hidden" style="border-radius: 2rem; background-color: #97a48a;">
-
-        
-        <div style="height: 220px; overflow: hidden; border-radius: 2rem 2rem 0 0;">
-          <img src="{{ entreprise.image }}"
+        <div style="height:220px; overflow:hidden; border-radius:2rem 2rem 0 0;">
+          <img src="/uploads/{{ entreprise.image }}"
                alt="Image de {{ entreprise.nom }}"
-               style="width: 100%; height: 100%; object-fit: cover;">
+               style="width:100%; height:100%; object-fit:cover;">
         </div>
 
         <div class="card-body px-5 pt-4 pb-4 d-flex flex-column gap-3">
 
-         
-          <div class="d-flex justify-content-between align-items-center">
-            <h1 class="text-white fw-bold mb-0" style="font-size: 1.5rem;">
-              {{ entreprise.nom }}
-            </h1>
-            <span class="text-white fst-italic" style="font-size: 0.95rem;">
-               {{ entreprise.ville }}
-            </span>
-          </div>
+          <h1 class="text-white fw-bold mb-0" style="font-size:1.5rem;">
+            {{ entreprise.nom }}
+          </h1>
 
-          
           <div class="d-flex flex-wrap gap-2">
-            <span class="badge rounded-pill border text-dark fw-normal px-3 py-2" style="background-color: #ffffff;">{{ entreprise.type }}</span>
-            <span class="badge rounded-pill border text-dark fw-normal px-3 py-2" style="background-color: #ffffff;">{{ entreprise.secteur }}</span>
+            <span class="badge rounded-pill border text-dark fw-normal px-3 py-2"
+                  style="background-color:#ffffff;">{{ entreprise.secteur }}</span>
           </div>
 
-          
-          <div class="p-4 fst-italic"
-               style="background-color: #ffffff; border-radius: 1.5rem; color: #4a5d43; font-size: 0.95rem; line-height: 1.7;">
-            {{ entreprise.description }}
-          </div>
-
-          
-          <div class="d-flex gap-2 mt-1">
+          <div class="d-flex gap-2 mt-auto">
             <button type="button" class="btn flex-fill"
-                    data-bs-toggle="modal" data-bs-target="#modalDetail{{ entreprise.id }}"
-                    style="background-color: #e0c7bf; color: black; border: none; border-radius: 0.6rem;">
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal{{ entreprise.id }}"
+                    style="background-color:#e0c7bf; color:black; border:none; border-radius:0.6rem;">
               En savoir plus
             </button>
-            <a href="{{ entreprise.site_web }}" target="_blank"
+            <a href="{{ entreprise.siteWeb }}" target="_blank"
                class="btn flex-fill"
-               style="background-color: #e0c7bf; color: black; border: none; border-radius: 0.6rem;">
+               style="background-color:#e0c7bf; color:black; border:none; border-radius:0.6rem;">
               Visiter le site
             </a>
           </div>
 
         </div>
       </div>
-
     </div>
-
-   
-    <div class="modal fade" id="modalDetail{{ entreprise.id }}" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0" style="border-radius: 1.5rem;">
-          <div class="modal-header border-0">
-            <h5 class="modal-title fw-bold">{{ entreprise.nom }}</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body">
-            <p>{{ entreprise.description }}</p>
-            <p><strong>Ville :</strong> {{ entreprise.ville }}</p>
-            <p><strong>Site web :</strong> <a href="{{ entreprise.site_web }}" target="_blank">{{ entreprise.site_web }}</a></p>
-          </div>
-        </div>
-      </div>
-    </div>
-
     {% endfor %}
 
   </div>

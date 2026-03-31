@@ -1,0 +1,120 @@
+<div class="modal fade" id="modal{{ entreprise.id }}"
+     tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content border-0" style="border-radius:1.5rem; overflow:hidden;">
+
+      <div class="modal-header border-0" style="background:#eceade;">
+        <h5 class="modal-title fw-bold">{{ entreprise.nom }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body p-4">
+
+        
+        <div class="d-flex align-items-center gap-3 mb-4">
+          <img src="/uploads/{{ entreprise.image }}"
+               alt="Logo {{ entreprise.nom }}"
+               class="rounded-3 p-2 bg-light"
+               style="width:90px; height:90px; object-fit:contain;
+                      border:1px solid #ddd; flex-shrink:0;">
+          <div>
+            <h6 class="fw-bold mb-1">{{ entreprise.nom }}</h6>
+            <p class="mb-1 text-muted" style="font-size:0.9rem;">
+              <strong>Secteur :</strong> {{ entreprise.secteur }}
+            </p>
+            <p class="mb-1 text-muted" style="font-size:0.9rem;">
+              <strong>Email :</strong>
+              <a href="mailto:{{ entreprise.email }}" style="color:#73986f;">
+                {{ entreprise.email }}
+              </a>
+            </p>
+            <a href="{{ entreprise.siteWeb }}" target="_blank"
+               style="font-size:0.9rem; color:#73986f;">
+              {{ entreprise.siteWeb }}
+            </a>
+          </div>
+        </div>
+
+        
+        <div id="carousel{{ entreprise.id }}" class="carousel slide"
+             style="background:#f0ede6; border-radius:1rem; overflow:hidden;">
+
+          <div class="carousel-indicators" style="bottom:-5px;">
+            <button type="button"
+                    data-bs-target="#carousel{{ entreprise.id }}"
+                    data-bs-slide-to="0" class="active"
+                    style="background-color:#73986f; width:8px; height:8px; border-radius:50%;"></button>
+            <button type="button"
+                    data-bs-target="#carousel{{ entreprise.id }}"
+                    data-bs-slide-to="1"
+                    style="background-color:#73986f; width:8px; height:8px; border-radius:50%;"></button>
+          </div>
+
+          <div class="carousel-inner px-4 pt-4 pb-5">
+
+            
+            <div class="carousel-item active">
+              <div class="row g-3 text-center">
+                <div class="col-6">
+                  <div class="p-3 rounded-3 bg-white">
+                    <div class="fw-bold" style="font-size:1.2rem; color:#4a5d43;">
+                      {{ entreprise.secteur }}
+                    </div>
+                    <div class="text-muted" style="font-size:0.8rem;">Secteur</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="p-3 rounded-3 bg-white">
+                    <div class="fw-bold" style="font-size:1.2rem; color:#4a5d43;">✓</div>
+                    <div class="text-muted" style="font-size:0.8rem;">Vérifiée</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            
+            <div class="carousel-item">
+              <div class="text-center py-3">
+                <p class="mb-3">
+                  <span class="fw-bold" style="color:#4a5d43;">Email</span><br>
+                  <a href="mailto:{{ entreprise.email }}" style="color:#73986f;">
+                    {{ entreprise.email }}
+                  </a>
+                </p>
+                <p class="mb-0">
+                  <span class="fw-bold" style="color:#4a5d43;">Site web</span><br>
+                  <a href="{{ entreprise.siteWeb }}" target="_blank" style="color:#73986f;">
+                    {{ entreprise.siteWeb }}
+                  </a>
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          <button class="carousel-control-prev" type="button"
+                  data-bs-target="#carousel{{ entreprise.id }}" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"
+                  style="filter:invert(1) sepia(1) saturate(2) hue-rotate(80deg);"></span>
+          </button>
+          <button class="carousel-control-next" type="button"
+                  data-bs-target="#carousel{{ entreprise.id }}" data-bs-slide="next">
+            <span class="carousel-control-next-icon"
+                  style="filter:invert(1) sepia(1) saturate(2) hue-rotate(80deg);"></span>
+          </button>
+
+        </div>
+      </div>
+
+      <div class="modal-footer border-0" style="background:#eceade;">
+        <button type="button" class="btn" data-bs-dismiss="modal"
+                style="background-color:#a0a890; color:white;">Fermer</button>
+        <a href="{{ entreprise.siteWeb }}" target="_blank"
+           class="btn" style="background-color:#e0c7bf; color:black;">
+          Visiter le site
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
