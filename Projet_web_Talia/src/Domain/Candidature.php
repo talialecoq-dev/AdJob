@@ -42,7 +42,7 @@ class Candidature
     private string $color;
     #[Column(type: 'string', nullable: false)]
     private string $image;
-    #[Column(type: 'string', nullable: false)]
+   #[Column(name: 'description_card', type: 'string', nullable: false)]
     private string $desc;
     #[Column(name: 'created_at', type: 'datetimetz_immutable', nullable: false)]
     private DateTimeImmutable $createdAt;

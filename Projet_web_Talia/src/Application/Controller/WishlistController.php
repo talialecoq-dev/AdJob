@@ -3,6 +3,7 @@
 namespace App\Application\Controller;
 
 use App\Domain\Offre;
+use App\Domain\Wishlist;
 use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -19,44 +20,45 @@ class WishlistController
 
     public function wishlist(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
+         $wishlistItems = $this->em->getRepository(Wishlist::class)->findAll();
+
         $view = Twig::fromRequest($request);
-
-        $ids = $_SESSION['wishlist'] ?? [];
-        $offres = [];
-
-        foreach ($ids as $id) {
-            $offre = $this->em->find(Offre::class, $id);
-            if ($offre) $offres[] = $offre;
-        }
-
+      
         return $view->render($response, 'Étudiants/Page_Wishlist.html.twig', [
-            'offres' => $offres,
+            'wishlistItems' => $wishlistItems,
         ]);
     }
 
     public function ajouter(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $id = (int) $args['id'];
+        $idOffre = (int) $args['id'];
 
-        if (!isset($_SESSION['wishlist'])) {
-            $_SESSION['wishlist'] = [];
-        }
+         $offre = $this->em->find(Offre::class, $idOffre);
 
-        if (!in_array($id, $_SESSION['wishlist'])) {
-            $_SESSION['wishlist'][] = $id;
+        if ($offre) {
+        $wishlist = new Wishlist($offre);
+        $this->em->persist($wishlist);
+        $this->em->flush();
         }
 
         return $response->withHeader('Location', '/')->withStatus(302);
     }
 
-    public function retirer(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
-    {
-        $id = (int) $args['id'];
+ public function retirer(
+        ServerRequestInterface $request,
+        ResponseInterface $response,
+        array $args
+    ): ResponseInterface {
+        $idOffre = (int) $args['id'];
 
-        $_SESSION['wishlist'] = array_values(
-            array_filter($_SESSION['wishlist'] ?? [], fn($i) => $i !== $id)
-        );
+        $wishlistItem = $this->em->getRepository(Wishlist::class)->findOneBy(['offre' => $idOffre]);
+
+        if ($wishlistItem) {
+            $this->em->remove($wishlistItem);
+            $this->em->flush();
+        }
 
         return $response->withHeader('Location', '/')->withStatus(302);
-    }
+
+}
 }
