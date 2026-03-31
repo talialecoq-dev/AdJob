@@ -16,20 +16,22 @@ class Wishlist
     #[Id, Column(type: 'integer'), GeneratedValue(strategy: 'AUTO')]
     private int $id;
 
-    #[ManyToOne(targetEntity: User::class)]
-    #[JoinColumn(nullable: true)]
-    private ?User $user = null; 
-
     #[ManyToOne(targetEntity: Offre::class)]
-    #[JoinColumn(nullable: false)]
+    #[JoinColumn(name: 'offre_id', referencedColumnName: 'id', nullable: false)]
     private Offre $offre;
 
     public function __construct(Offre $offre)
     {
-   
         $this->offre = $offre;
     }
 
-    public function getId(): int { return $this->id; }
-    public function getOffre(): Offre { return $this->offre; }
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function getOffre(): Offre
+    {
+        return $this->offre;
+    }
 }

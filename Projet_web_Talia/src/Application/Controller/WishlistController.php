@@ -45,19 +45,20 @@ class WishlistController
     }
 
  public function retirer(
-    ServerRequestInterface $request,
-    ResponseInterface $response,
-    array $args
-): ResponseInterface {
-    $id = (int) $args['id'];
+        ServerRequestInterface $request,
+        ResponseInterface $response,
+        array $args
+    ): ResponseInterface {
+        $idOffre = (int) $args['id'];
 
-    $wishlist = $this->em->find(Wishlist::class, $id); // Wishlist pas Offre !
+        $wishlistItem = $this->em->getRepository(Wishlist::class)->findOneBy(['offre' => $idOffre]);
 
-    if ($wishlist) {
-        $this->em->remove($wishlist); // $wishlist pas $offres !
-        $this->em->flush();
-    }
+        if ($wishlistItem) {
+            $this->em->remove($wishlistItem);
+            $this->em->flush();
+        }
 
-    return $response->withHeader('Location', '/')->withStatus(302);
+        return $response->withHeader('Location', '/')->withStatus(302);
+
 }
 }
