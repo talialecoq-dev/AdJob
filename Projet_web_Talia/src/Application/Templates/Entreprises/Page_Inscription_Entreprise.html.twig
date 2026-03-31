@@ -1,160 +1,232 @@
 {% extends "Bases/Base.html.twig" %}
 
 {% block content %}
-	<div class="main-container" style="background-color: #eed4cb; padding: 50px;">
-		<div class="container" style="background-color: #ffffff; border-radius: 12px; padding: 30px; max-width: 700px; border: 1px solid #a0a890; margin: auto;">
+<div class="main-container" style="background-color: #eed4cb; padding: 50px;">
+    <div class="container" style="background-color: #ffffff; border-radius: 12px; padding: 30px; max-width: 700px; border: 1px solid #a0a890; margin: auto;">
 
-			{% if type == "Entreprise" or type == "Entreprise_Ajout" %}
+        {% if type == "Entreprise" or type == "Entreprise_Ajout" %}
+            {% set action_url = "/entreprise/inscription-entreprise" %}
+        {% elseif type == "Entreprise_Modifier" %}
+            {% set action_url = "/entreprise/Update-Entreprise/" ~ entreprise.id %}
+        {% elseif type == "Etudiants_ajout" %}
+            {% set action_url = "/users/inscription-etudiant" %}
+        {% elseif type == "Etudiants" %}
+            {% set action_url = "/users/etudiant/modifier/" ~ etudiant.id %}
+        {% elseif type == "Pilote" %}
+            {% set action_url = "/users/inscription-pilote" %}
+        {% elseif type == "Pilote_Modifier" %}
+            {% set action_url = "/users/pilote/modifier/" ~ pilote.id %}
+        {% else %}
+            {% set action_url = "/entreprise/traitement-inscription" %}
+        {% endif %}
 
-				{% set action_url = "/entreprise/inscription-entreprise" %}
-			{% elseif type == "Entreprise_Modifier" %}
+        <form method="POST" action="{{ action_url }}" enctype="multipart/form-data">
 
-				{% set action_url = "/entreprise/Update-Entreprise/" ~ entreprise.id %}
-			{% elseif type == "Etudiants_ajout" %}
+            {# ── ÉTUDIANT ── #}
+            {% if type == "Etudiants" or type == "Etudiants_ajout" %}
 
-				{% set action_url = "/users/inscription-etudiant" %}
-			{% elseif type == "Etudiants" %}
+                <div class="mb-3">
+                    <label class="form-label pt-2 m-2">Nom</label>
+                    <input type="text" name="nom" class="form-control"
+                           value="{{ etudiant.nom ?? '' }}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label pt-2 m-2">Prénom</label>
+                    <input type="text" name="prenom" class="form-control"
+                           value="{{ etudiant.prenom ?? '' }}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label pt-2 m-2">Email</label>
+                    <input type="email" name="email" class="form-control"
+                           value="{{ etudiant.email ?? '' }}" required>
+                </div>
+                {% if type == "Etudiants_ajout" %}
+                <div class="mb-3">
+                    <label class="form-label pt-2 m-2">Mot de passe</label>
+                    <input type="password" name="mot_de_passe" class="form-control" required>
+                </div>
+                {% endif %}
+                <div class="mb-3">
+                    <label class="form-label pt-2 m-2">Adresse</label>
+                    <input type="text" name="adresse" class="form-control"
+                           value="{{ etudiant.adresse ?? '' }}">
+                </div>
+                <div class="row g-3">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label pt-2 m-2">Ville</label>
+                        <input type="text" name="ville" class="form-control"
+                               value="{{ etudiant.ville ?? '' }}">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label pt-2 m-2">Région</label>
+                        <select name="region" class="form-select">
+                            <option value="">Choisir...</option>
+                            <option value="ARA" {{ (etudiant is defined and etudiant.region == 'ARA') ? 'selected' : '' }}>Auvergne-Rhône-Alpes</option>
+                            <option value="BFC" {{ (etudiant is defined and etudiant.region == 'BFC') ? 'selected' : '' }}>Bourgogne-Franche-Comté</option>
+                            <option value="BRE" {{ (etudiant is defined and etudiant.region == 'BRE') ? 'selected' : '' }}>Bretagne</option>
+                            <option value="IDF" {{ (etudiant is defined and etudiant.region == 'IDF') ? 'selected' : '' }}>Île-de-France</option>
+                            <option value="NOR" {{ (etudiant is defined and etudiant.region == 'NOR') ? 'selected' : '' }}>Normandie</option>
+                            <option value="NAQ" {{ (etudiant is defined and etudiant.region == 'NAQ') ? 'selected' : '' }}>Nouvelle-Aquitaine</option>
+                            <option value="OCC" {{ (etudiant is defined and etudiant.region == 'OCC') ? 'selected' : '' }}>Occitanie</option>
+                            <option value="PAC" {{ (etudiant is defined and etudiant.region == 'PAC') ? 'selected' : '' }}>Provence-Alpes-Côte d'Azur</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label pt-2 m-2">Campus</label>
+                    <select name="campus" class="form-select" required>
+                        <option value="">Choisir un campus...</option>
+                        {% for c in campusList %}
+                            <option value="{{ c.nomVille }}"
+                                {{ (etudiant is defined and etudiant.campus and etudiant.campus.nomVille == c.nomVille) ? 'selected' : '' }}>
+                                {{ c.nomVille }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label pt-2 m-2">Image de profil</label>
+                    <input type="file" name="image_profil" class="form-control"
+                           accept=".png,.jpg,.jpeg"
+                           {{ type == "Etudiants_ajout" ? 'required' : '' }}>
+                </div>
 
-				{% set action_url = "/users/etudiant/modifier/" ~ etudiant.id %}
-			{% elseif type == "Pilote" %}
-				{% set action_url = "/users/inscription-pilote" %}
-			{% elseif type == "Pilote_Modifier" %}
+            {# ── PILOTE ── #}
+            {% elseif type == "Pilote" or type == "Pilote_Modifier" %}
 
-				{% set action_url = "/users/pilote/modifier/" ~ pilote.id %}
-			{% else %}
+                <div class="mb-3">
+                    <label class="form-label pt-2 m-2">Nom du pilote</label>
+                    <input type="text" name="nom" class="form-control"
+                           value="{{ pilote.nom ?? '' }}"
+                           placeholder="Nom du pilote"
+                           style="border:1px solid #a0a890;" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label pt-2 m-2">Prénom du pilote</label>
+                    <input type="text" name="prenom" class="form-control"
+                           value="{{ pilote.prenom ?? '' }}"
+                           placeholder="Prénom du pilote"
+                           style="border:1px solid #a0a890;" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label pt-2 m-2">Email du pilote</label>
+                    <input type="email" name="email" class="form-control"
+                           value="{{ pilote.email ?? '' }}"
+                           placeholder="Mail du pilote"
+                           style="border:1px solid #a0a890;" required>
+                </div>
+                {% if type == "Pilote" %}
+                <div class="mb-3">
+                    <label class="form-label pt-2 m-2">Mot de passe</label>
+                    <input type="password" name="mot_de_passe" class="form-control"
+                           style="border:1px solid #a0a890;" required>
+                </div>
+                {% endif %}
+                <div class="mb-3">
+                    <label class="form-label pt-2 m-2">Campus du pilote</label>
+                    <select name="campus" class="form-select"
+                            style="border:1px solid #a0a890;" required>
+                        <option value="">Choisir un campus...</option>
+                        {% for c in campusList %}
+                            <option value="{{ c.nomVille }}"
+                                {{ (pilote is defined and pilote.campus and pilote.campus.nomVille == c.nomVille) ? 'selected' : '' }}>
+                                {{ c.nomVille }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label pt-2 m-2">Localisation du pilote</label>
+                    <input type="text" name="localisation" class="form-control"
+                           value="{{ pilote.localisation ?? '' }}"
+                           placeholder="Localisation du pilote"
+                           style="border:1px solid #a0a890;">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label pt-2 m-2">Image de profil</label>
+                    <input class="form-control" type="file" name="image_profil"
+                           accept=".png,.jpg,.jpeg"
+                           style="border:1px solid #a0a890;"
+                           {{ type == "Pilote" ? 'required' : '' }}>
+                </div>
 
-				{% set action_url = "/entreprise/traitement-inscription" %}
-			{% endif %}
+            {# ── ENTREPRISE ── #}
+            {% else %}
 
-			<form method="POST" action="{{ action_url }}" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label class="form-label pt-2 m-2">Nom de l'entreprise</label>
+                    <input type="text" name="nom_entreprise" class="form-control"
+                           value="{{ entreprise.nom ?? '' }}"
+                           placeholder="Nom de votre entreprise"
+                           style="border:1px solid #a0a890;" required>
+                </div>
+                <div class="row g-3">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label pt-2 m-2">Secteur d'activité</label>
+                        <input type="text" name="secteur" class="form-control"
+                               value="{{ entreprise.secteur ?? '' }}"
+                               placeholder="Ex: Informatique"
+                               style="border:1px solid #a0a890;" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label pt-2 m-2">Site Internet</label>
+                        <input type="url" name="site_web" class="form-control"
+                               value="{{ entreprise.siteWeb ?? '' }}"
+                               placeholder="https://..."
+                               style="border:1px solid #a0a890;" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label pt-2 m-2">Email de contact</label>
+                    <input type="email" name="email" class="form-control"
+                           value="{{ entreprise.email ?? '' }}"
+                           placeholder="contact@entreprise.com"
+                           style="border:1px solid #a0a890;" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label pt-2 m-2">Campus rattaché</label>
+                    <select name="campus" class="form-select" style="border:1px solid #a0a890;">
+                        <option value="">Aucun campus...</option>
+                        {% for c in campusList %}
+                            <option value="{{ c.nomVille }}"
+                                {{ (entreprise is defined and entreprise.campus and entreprise.campus.nomVille == c.nomVille) ? 'selected' : '' }}>
+                                {{ c.nomVille }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label pt-2 m-2">Image de l'entreprise</label>
+                    <input class="form-control" type="file" name="image_profil"
+                           accept=".png,.jpg,.jpeg"
+                           style="border:1px solid #a0a890;"
+                           {{ type != "Entreprise_Modifier" ? 'required' : '' }}>
+                </div>
 
-				{% if type == "Etudiants" or type == "Etudiants_ajout" %}
+            {% endif %}
 
-					<div class="mb-3">
-						<label class="form-label pt-2 m-2">Nom</label>
-						<input type="text" name="nom" class="form-control" value="{{ etudiant.nom ?? '' }}" required>
-					</div>
+            <div class="col-12 pt-4">
+                <button type="submit" class="btn w-100"
+                        style="background-color:#a0a890; color:white; padding:12px; border-radius:25px;">
+                    {% if type == "Etudiants_ajout" %}
+                        Ajouter l'étudiant
+                    {% elseif type == "Etudiants" %}
+                        Enregistrer les modifications
+                    {% elseif type == "Pilote" %}
+                        Ajouter le pilote
+                    {% elseif type == "Pilote_Modifier" %}
+                        Enregistrer les modifications
+                    {% elseif type == "Entreprise" or type == "Entreprise_Ajout" %}
+                        Ajouter l'entreprise
+                    {% elseif type == "Entreprise_Modifier" %}
+                        Enregistrer les modifications
+                    {% else %}
+                        Enregistrer
+                    {% endif %}
+                </button>
+            </div>
 
-					<div class="mb-3">
-						<label class="form-label pt-2 m-2">Prénom</label>
-						<input type="text" name="prenom" class="form-control" value="{{ etudiant.prenom ?? '' }}" required>
-					</div>
-
-					<div class="mb-3">
-						<label class="form-label pt-2 m-2">Email</label>
-						<input type="email" name="email" class="form-control" value="{{ etudiant.email ?? '' }}" required>
-					</div>
-
-					<div class="mb-3">
-						<label class="form-label pt-2 m-2">Adresse</label>
-						<input type="text" name="adresse" class="form-control" value="{{ etudiant.adresse ?? '' }}" required>
-					</div>
-
-					<div class="row g-3">
-						<div class="col-md-6 mb-3">
-							<label class="form-label pt-2 m-2">Ville</label>
-							<input type="text" name="ville" class="form-control" value="{{ etudiant.ville ?? '' }}" required>
-						</div>
-
-						<div class="col-md-6 mb-3">
-							<label class="form-label pt-2 m-2">Région</label>
-							<select name="region" class="form-select" required>
-								<option value="">Choisir...</option>
-								<option value="ARA" {{ etudiant.region == 'ARA' ? 'selected' : '' }}>Auvergne-Rhône-Alpes</option>
-								<option value="BFC" {{ etudiant.region == 'BFC' ? 'selected' : '' }}>Bourgogne-Franche-Comté</option>
-								<option value="BRE" {{ etudiant.region == 'BRE' ? 'selected' : '' }}>Bretagne</option>
-								<option value="IDF" {{ etudiant.region == 'IDF' ? 'selected' : '' }}>Île-de-France</option>
-								<option value="NOR" {{ etudiant.region == 'NOR' ? 'selected' : '' }}>Normandie</option>
-								<option value="NAQ" {{ etudiant.region == 'NAQ' ? 'selected' : '' }}>Nouvelle-Aquitaine</option>
-								<option value="OCC" {{ etudiant.region == 'OCC' ? 'selected' : '' }}>Occitanie</option>
-								<option value="PAC" {{ etudiant.region == 'PAC' ? 'selected' : '' }}>Provence-Alpes-Côte d'Azur</option>
-							</select>
-						</div>
-					</div>
-
-					<div class="mb-3">
-						<label class="form-label pt-2 m-2">Image de profil</label>
-						<input type="file" name="image_profil" class="form-control" accept="png, jpg, jpeg" {% if type == "Etudiants_ajout" %} required {% endif %}>
-					</div>
-
-				{% elseif type == "Pilote" or type == "Pilote_Modifier" %}
-
-					<div class="mb-3">
-						<label class="form-label pt-2 m-2">Nom du pilote</label>
-						<input type="text" name="nom" class="form-control" value="{{ pilote.nom ?? '' }}" placeholder="Nom du pilote" style="border: 1px solid #a0a890;" required>
-					</div>
-					<div class="mb-3">
-						<label class="form-label pt-2 m-2">Prénom du pilote</label>
-						<input type="text" name="prenom" class="form-control" value="{{ pilote.prenom ?? '' }}" placeholder="Prénom du pilote" style="border: 1px solid #a0a890;" required>
-					</div>
-					<div class="mb-3">
-						<label class="form-label pt-2 m-2">Email du pilote</label>
-						<input type="email" name="email" class="form-control" value="{{ pilote.email ?? '' }}" placeholder="Mail du pilote" style="border: 1px solid #a0a890;" required>
-					</div>
-					<div class="mb-3">
-						<label class="form-label pt-2 m-2">Campus du pilote</label>
-						<input type="text" name="campus" class="form-control" value="{{ pilote.campus ? pilote.campus.nomVille : '' }}" placeholder="Campus du pilote" style="border: 1px solid #a0a890;" required>
-					</div>
-					<div class="mb-3">
-						<label class="form-label pt-2 m-2">Localisation du pilote</label>
-						<input type="text" name="localisation" class="form-control" value="{{ pilote.localisation ?? '' }}" placeholder="Localisation du pilote" style="border: 1px solid #a0a890;" required>
-					</div>
-					<div class="mb-3">
-						<label class="form-label pt-2 m-2">Choisissez une image de profil</label>
-						<input class="form-control" type="file" name="image_profil" accept="png, jpg, jpeg" style="border: 1px solid #a0a890;" {% if type == "Pilote" %} required {% endif %}>
-					</div>
-
-
-				{% else %}
-					<div class="mb-3">
-						<label class="form-label pt-2 m-2">Nom de l'entreprise</label>
-						<input type="text" name="nom_entreprise" class="form-control" value="{{ entreprise.nom ?? '' }}" placeholder="Nom de votre entreprise" style="border: 1px solid #a0a890;" required>
-					</div>
-					<div class="mb-3">
-						<label class="form-label pt-2 m-2">Téléphone de l'entreprise</label>
-						<input type="tel" name="telephone" class="form-control" value="{{ entreprise.telephone ?? '' }}" placeholder="0102030405" style="border: 1px solid #a0a890;">
-					</div>
-					<div class="row g-3">
-						<div class="col-md-6 mb-3">
-							<label class="form-label pt-2 m-2">Secteur d'activité</label>
-							<input type="text" name="secteur" class="form-control" value="{{ entreprise.secteur ?? '' }}" placeholder="Ex: Informatique" style="border: 1px solid #a0a890;" required>
-						</div>
-						<div class="col-md-6 mb-3">
-							<label class="form-label pt-2 m-2">Site Internet</label>
-							<input type="url" name="site_web" class="form-control" value="{{ entreprise.siteWeb ?? '' }}" placeholder="https://..." style="border: 1px solid #a0a890;" required>
-						</div>
-					</div>
-					<div class="mb-3">
-						<label class="form-label pt-2 m-2">Email de contact</label>
-						<input type="email" name="email" class="form-control" value="{{ entreprise.email ?? '' }}" placeholder="contact@entreprise.com" style="border: 1px solid #a0a890;" required>
-					</div>
-					<div class="mb-3">
-						<label class="form-label pt-2 m-2">Choisissez une image de profil</label>
-						<input class="form-control" type="file" name="image_profil" accept="png, jpg, jpeg" style="border: 1px solid #a0a890;" {% if type != "Entreprise_Modifier" %} required {% endif %}>
-					</div>
-				{% endif %}
-
-				<div class="col-12 pt-4">
-					<button type="submit" class="btn w-100" style="background-color: #a0a890; color: white; padding: 12px; border-radius: 25px;">
-						{% if type == "Etudiants_ajout" %}
-							Ajouter l'étudiant
-						{% elseif type == "Etudiants" %}
-							Enregistrer les modifications
-						{% elseif type == "Pilote" %}
-							Ajouter le pilote
-						{% elseif type == "Pilote_Modifier" %}
-							Enregistrer les modifications
-						{% elseif type == "Entreprise" or type == "Entreprise_Ajout" %}
-							S'inscrire
-						{% elseif type == "Entreprise_Modifier" %}
-							Enregistrer les modifications
-						{% else %}
-							S'inscrire
-						{% endif %}
-					</button>
-				</div>
-
-			</form>
-		</div>
-	</div>
+        </form>
+    </div>
+</div>
 {% endblock %}

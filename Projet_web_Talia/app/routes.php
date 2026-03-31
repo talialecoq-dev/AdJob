@@ -122,4 +122,9 @@ return function (App $app) {
     $app->get('/Candidater', [CandidaturesController::class, 'candidater']);
     $app->post('/Candidatures/ajouter', [CandidaturesController::class, 'ajouter']);
     $app->post('/Supprimer-Candidature/{id}', [CandidaturesController::class, 'supprimer']);
+
+
+    $app->get('/mon-campus/etudiants', [UserController::class, 'etudiantsDuCampus'])
+    ->add(new RoleCheckMiddleware($factory, [Role::PILOTE, Role::ADMIN]))
+    ->setName('etudiants_campus');
 };

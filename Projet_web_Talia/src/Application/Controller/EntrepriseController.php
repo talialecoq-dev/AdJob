@@ -20,17 +20,20 @@ class EntrepriseController
     public function inscription(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $view = Twig::fromRequest($request);
+        $campusList = $this->em->getRepository(\App\Domain\Campus::class)->findAll();
         return $view->render($response, 'Entreprises/Page_Inscription_Entreprise.html.twig', [
-            'type' => 'Entreprise'
+            'type'       => 'Entreprise',
+            'campusList' => $campusList,
         ]);
     }
 
     public function liste(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $view = Twig::fromRequest($request);
-        $repository  = $this->em->getRepository(Entreprise::class);
-        $entreprises = $repository->findAll();
-        return $view->render($response, 'Entreprises/Page_Liste_Entreprises.html.twig', ['entreprises' => $entreprises]);
+        $entreprises = $this->em->getRepository(Entreprise::class)->findAll();
+        return $view->render($response, 'Entreprises/Page_Liste_Entreprises.html.twig', [
+            'entreprises' => $entreprises
+        ]);
     }
 
     public function supprimer(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
@@ -48,8 +51,7 @@ class EntrepriseController
 
     public function home(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $view = Twig::fromRequest($request);
-
+        $view    = Twig::fromRequest($request);
         $parPage = 9;
         $page    = isset($args['page']) ? (int) $args['page'] : 1;
         $offset  = ($page - 1) * $parPage;
@@ -80,7 +82,6 @@ class EntrepriseController
     {
         $data = $request->getParsedBody();
 
-        
         $imageName = null;
         if (isset($_FILES['image_profil']) && $_FILES['image_profil']['error'] === 0) {
             $allowedExtensions = ['png', 'jpg', 'jpeg'];
@@ -106,33 +107,38 @@ class EntrepriseController
             $imageName,
         );
 
+        if (!empty($data['campus'])) {
+            $campus = $this->em->getRepository(\App\Domain\Campus::class)
+                ->findOneBy(['nomVille' => $data['campus']]);
+            if ($campus) {
+                $entreprise->setCampus($campus);
+            }
+        }
+
         $this->em->persist($entreprise);
         $this->em->flush();
 
-        return $response
-            ->withHeader('Location', '/entreprise/Liste-Entreprises')
-            ->withStatus(302);
+        return $response->withHeader('Location', '/entreprise/Liste-Entreprises')->withStatus(302);
     }
 
     public function modifier(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $view = Twig::fromRequest($request);
-
         $id = (int) $args['id'];
         $entreprise = $this->em->find(Entreprise::class, $id);
+        $campusList = $this->em->getRepository(\App\Domain\Campus::class)->findAll();
 
         return $view->render($response, 'Entreprises/Page_Modifier_Entreprise.html.twig', [
             'entreprise' => $entreprise,
-            'type' => 'Entreprise_Modifier'
+            'type'       => 'Entreprise_Modifier',
+            'campusList' => $campusList,
         ]);
     }
 
     public function recherche_entreprise(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $view = Twig::fromRequest($request);
-
-        $repository  = $this->em->getRepository(Entreprise::class);
-        $entreprises = $repository->findAll();
+        $entreprises = $this->em->getRepository(Entreprise::class)->findAll();
 
         return $view->render($response, 'Entreprises/Page_Consulter_Entreprises.html.twig', [
             'entreprises' => $entreprises
@@ -147,16 +153,22 @@ class EntrepriseController
         $entreprise = $this->em->find(Entreprise::class, $id);
 
         if ($entreprise) {
-            
             $entreprise->setNom($data['nom_entreprise'] ?? '');
             $entreprise->setSecteur($data['secteur']    ?? '');
             $entreprise->setEmail($data['email']        ?? '');
             $entreprise->setSiteWeb($data['site_web']   ?? '');
 
+            if (!empty($data['campus'])) {
+                $campus = $this->em->getRepository(\App\Domain\Campus::class)
+                    ->findOneBy(['nomVille' => $data['campus']]);
+                if ($campus) {
+                    $entreprise->setCampus($campus);
+                }
+            }
+
             $this->em->flush();
         }
 
-        
         return $response->withHeader('Location', '/entreprise/Liste-Entreprises')->withStatus(302);
     }
 }

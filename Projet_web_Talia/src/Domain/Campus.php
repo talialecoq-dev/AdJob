@@ -32,4 +32,9 @@ class Campus
 
     public function isEstActif(): bool { return $this->estActif; }
     public function setEstActif(bool $estActif): void { $this->estActif = $estActif; }
+
+    public function __toString(): string
+    {
+        return $this->nomVille;
+    }
 }

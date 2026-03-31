@@ -6,10 +6,12 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\Table;
 
-#[Entity] 
-#[Table(name: 'entreprises')] 
+#[Entity]
+#[Table(name: 'entreprises')]
 class Entreprise
 {
     #[Id, Column(type: 'integer'), GeneratedValue(strategy: 'AUTO')]
@@ -30,16 +32,18 @@ class Entreprise
     #[Column(type: 'string', nullable: true)]
     private ?string $image;
 
+    #[ManyToOne(targetEntity: Campus::class)]
+    #[JoinColumn(name: 'campus_id', nullable: true)]
+    private ?Campus $campus = null;
 
     public function __construct(string $nom, string $secteur, string $email, string $siteWeb, ?string $image = null)
     {
-        $this->nom = $nom;
+        $this->nom     = $nom;
         $this->secteur = $secteur;
-        $this->email = $email;
+        $this->email   = $email;
         $this->siteWeb = $siteWeb;
-        $this->image = $image;
+        $this->image   = $image;
     }
-
 
     public function getId(): int { return $this->id; }
 
@@ -56,4 +60,8 @@ class Entreprise
     public function setSiteWeb(?string $siteWeb): void { $this->siteWeb = $siteWeb; }
 
     public function getImage(): ?string { return $this->image; }
+    public function setImage(?string $image): void { $this->image = $image; }
+
+    public function getCampus(): ?Campus { return $this->campus; }
+    public function setCampus(?Campus $campus): void { $this->campus = $campus; }
 }

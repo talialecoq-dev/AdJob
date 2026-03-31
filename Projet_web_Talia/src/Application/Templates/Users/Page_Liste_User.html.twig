@@ -53,7 +53,7 @@
 				<td>{{ user.prenom }}</td>
 				<td>{{ user.nom }}</td>
 				<td>{{ user.email}}</td>
-				<td>{{ user.campus }}</td>
+				<td>{{ user.campus ? user.campus.nomVille : '—' }}</td>
 				<td>{{ user.region }}</td>
 				<td>{{ user.role.value }}</td>
 
