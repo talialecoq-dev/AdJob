@@ -1,25 +1,29 @@
 <?php
+
 namespace App\Application\Controller;
 
+use App\Domain\Candidature;
+use App\Domain\Offre;
+use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Views\Twig;
 
 class CandidaturesController
 {
-    public function candidatures(
-        ServerRequestInterface $request,
-        ResponseInterface $response,
-        array $args
-    ): ResponseInterface {
+    private EntityManager $em;
 
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
+    public function __construct(EntityManager $em)
+    {
+        $this->em = $em;
+    }
 
-        $candidatures = $_SESSION['candidatures'] ?? [];
+    public function candidatures(ServerRequestInterface $request,ResponseInterface $response,array $args): ResponseInterface
+    {
+        $candidatures = $this->em->getRepository(Candidature::class)->findAll();
 
         $view = Twig::fromRequest($request);
+
         return $view->render($response, 'Candidatures/Candidatures.html.twig', [
             'candidatures' => $candidatures,
         ]);
@@ -30,36 +34,26 @@ class CandidaturesController
         ResponseInterface $response,
         array $args
     ): ResponseInterface {
-
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-
+        
         $data = $request->getParsedBody();
         $competences = $data['competences'] ?? [];
 
-        $index = count($_SESSION['candidatures'] ?? []);
+        $candidature = new Candidature(
+            trim($data['nom'] ?? ''),
+            trim($data['prenom'] ?? ''),
+            trim($data['email'] ?? ''),
+            trim($data['titre'] ?? 'Offre inconnue'),
+            trim($data['remuneration'] ?? ''),
+            trim($data['duree'] ?? ''),
+            trim($data['domaine'] ?? ''),
+            trim($data['entreprise'] ?? ''),
+            trim($data['logo'] ?? '') ?: null,
+            implode(', ', array_map('trim', $competences)),
+            trim($data['description'] ?? ''),
+        );
 
-        $nouvelleCandidature = [
-            'nom'         => trim($data['nom'] ?? ''),
-            'prenom'      => trim($data['prenom'] ?? ''),
-            'email'       => trim($data['email'] ?? ''),
-            'titre'       => trim($data['titre'] ?? 'Offre inconnue'),
-            'remuneration'=> trim($data['remuneration'] ?? ''),
-            'duree'       => trim($data['duree'] ?? ''),
-            'domaine'     => trim($data['domaine'] ?? ''),
-            'entreprise'  => trim($data['entreprise'] ?? ''),
-            'logo'        => trim($data['logo'] ?? ''),
-            'competences' => array_map('trim', $competences),
-            'description' => trim($data['description'] ?? ''),
-
-            'statut'      => 'En attente',
-            'color'       => 'warning',
-            'image'       => 'Image/Martin.png',
-            'desc'        => 'Candidature soumise par ' . trim($data['nom'] ?? '') . ' pour l\'offre ' . trim($data['titre'] ?? ''),
-        ];
-
-        $_SESSION['candidatures'][$index] = $nouvelleCandidature;
+        $this->em->persist($candidature);
+        $this->em->flush();
 
         return $response
             ->withHeader('Location', '/Candidatures')
@@ -71,16 +65,12 @@ class CandidaturesController
         ResponseInterface $response,
         array $args
     ): ResponseInterface {
-
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-
         $id = (int) $args['id'];
+        $candidature = $this->em->find(Candidature::class, $id);
 
-        if (isset($_SESSION['candidatures'][$id])) {
-            unset($_SESSION['candidatures'][$id]);
-            $_SESSION['candidatures'] = array_values($_SESSION['candidatures']);
+        if ($candidature) {
+            $this->em->remove($candidature);
+            $this->em->flush();
         }
 
         return $response
@@ -93,18 +83,11 @@ class CandidaturesController
         ResponseInterface $response,
         array $args
     ): ResponseInterface {
-
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-
-        $offres = $_SESSION['offres'] ?? [];
         $id = isset($args['id']) ? (int)$args['id'] : null;
-
         $offre = null;
 
-        if ($id !== null && isset($offres[$id])) {
-            $offre = $offres[$id];
+        if ($id !== null) {
+            $offre = $this->em->find(Offre::class, $id);
         }
 
         $view = Twig::fromRequest($request);

@@ -2,11 +2,13 @@
 
 namespace App\Application\Controller;
 
+use App\Domain\Wishlist;
 use App\Domain\Offre;
 use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Views\Twig;
+
 
 class HomeController
 {
@@ -75,7 +77,7 @@ class HomeController
             'page'       => $page,
             'totalPages' => (int) ceil($total / $parPage),
             'total'      => $total,
-            'wishlist'   => $_SESSION['wishlist'] ?? [],
+            'wishlist' => array_map(fn($item) => $item->getOffre()->getId(),$this->em->getRepository(Wishlist::class)->findAll()),
             'filtres'    => [
                 'recherche' => $recherche,
                 'domaine'   => $domaine,
@@ -145,7 +147,7 @@ class HomeController
                 'total'      => $total,
                 'errors'     => $errors,
                 'old'        => $data,
-                'wishlist'   => $_SESSION['wishlist'] ?? [],
+                'wishlist' => array_map(fn($item) => $item->getOffre()->getId(),$this->em->getRepository(Wishlist::class)->findAll()),
             ]);
         }
 
