@@ -22,10 +22,9 @@ class HomeController
     public function home(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $view = Twig::fromRequest($request);
+        $conn = $this->em->getConnection();
 
-        $parPage = 9;
-
-        
+        $parPage     = 9;
         $queryParams = $request->getQueryParams();
         $recherche   = trim($queryParams['recherche'] ?? '');
         $domaine     = trim($queryParams['domaine'] ?? '');
@@ -35,36 +34,25 @@ class HomeController
         $offset      = ($page - 1) * $parPage;
 
         $repository = $this->em->getRepository(Offre::class);
-
-        
         $qb = $repository->createQueryBuilder('o');
 
         if ($recherche !== '') {
             $qb->andWhere('o.titre LIKE :recherche OR o.description LIKE :recherche OR o.entreprise LIKE :recherche')
             ->setParameter('recherche', '%' . $recherche . '%');
         }
-
         if ($domaine !== '') {
-            $qb->andWhere('o.domaine = :domaine')
-            ->setParameter('domaine', $domaine);
+            $qb->andWhere('o.domaine = :domaine')->setParameter('domaine', $domaine);
         }
-
         if ($duree !== '') {
-            $qb->andWhere('o.duree = :duree')
-            ->setParameter('duree', $duree);
+            $qb->andWhere('o.duree = :duree')->setParameter('duree', $duree);
         }
-
-        
         if ($ville !== '') {
-            $qb->andWhere('o.ville = :ville')
-            ->setParameter('ville', $ville);
+            $qb->andWhere('o.ville = :ville')->setParameter('ville', $ville);
         }
 
-        
         $countQb = clone $qb;
-        $total = $countQb->select('COUNT(o.id)')->getQuery()->getSingleScalarResult();
+        $total   = $countQb->select('COUNT(o.id)')->getQuery()->getSingleScalarResult();
 
-        
         $offres = $qb->select('o')
             ->orderBy('o.id', 'DESC')
             ->setFirstResult($offset)
@@ -72,18 +60,48 @@ class HomeController
             ->getQuery()
             ->getResult();
 
+        
+        $repartitionDuree = $conn->fetchAllAssociative('
+            SELECT duree, COUNT(*) as total
+            FROM offres
+            GROUP BY duree
+            ORDER BY total DESC
+        ');
+
+        $topWishlist = $conn->fetchAllAssociative('
+            SELECT o.titre, o.entreprise, COUNT(w.offre_id) as nb_wishlist
+            FROM wishlists w
+            JOIN offres o ON o.id = w.offre_id
+            GROUP BY w.offre_id, o.titre, o.entreprise
+            ORDER BY nb_wishlist DESC
+            LIMIT 5
+        ');
+
+        $totalOffres         = $conn->fetchOne('SELECT COUNT(*) FROM offres');
+        $moyenneCandidatures = $conn->fetchOne('
+            SELECT ROUND(COUNT(*) / NULLIF((SELECT COUNT(*) FROM offres), 0), 1)
+            FROM candidatures
+        ') ?? 0;
+
+        
+        $user = $request->getAttribute('user');
+        $wishlistIds = [];
+        if ($user) {
+            $entries = $this->em->getRepository(\App\Domain\Wishlist::class)->findBy(['user' => $user]);
+            $wishlistIds = array_map(fn($w) => $w->getOffre()->getId(), $entries);
+        }
+
         return $view->render($response, 'Accueil.html.twig', [
-            'offres'     => $offres,
-            'page'       => $page,
-            'totalPages' => (int) ceil($total / $parPage),
-            'total'      => $total,
-            'wishlist' => array_map(fn($item) => $item->getOffre()->getId(),$this->em->getRepository(Wishlist::class)->findAll()),
-            'filtres'    => [
-                'recherche' => $recherche,
-                'domaine'   => $domaine,
-                'duree'     => $duree,
-                'ville'     => $ville,
-            ],
+            'offres'              => $offres,
+            'page'                => $page,
+            'totalPages'          => (int) ceil($total / $parPage),
+            'total'               => $total,
+            'wishlist'            => $wishlistIds,
+            'filtres'             => compact('recherche', 'domaine', 'duree', 'ville'),
+            'repartitionDuree'    => $repartitionDuree,
+            'topWishlist'         => $topWishlist,
+            'totalOffres'         => $totalOffres,
+            'moyenneCandidatures' => $moyenneCandidatures,
         ]);
     }
 
@@ -112,7 +130,7 @@ class HomeController
         if (empty(trim($data['description'] ?? '')))
             $errors['description'] = 'La description est obligatoire.';
 
-        // Validation compétences — min 3 non vides
+        
         $competences = array_values(array_filter(
             array_map('trim', $data['competences'] ?? []),
             fn($c) => $c !== ''
@@ -121,7 +139,7 @@ class HomeController
         if (count($competences) < 3)
             $errors['competences'] = 'Veuillez renseigner au moins 3 compétences.';
 
-        // Si erreurs → on réaffiche avec les anciennes valeurs
+        
         if (!empty($errors)) {
             $parPage = 9;
             $repository = $this->em->getRepository(Offre::class);
@@ -157,7 +175,7 @@ class HomeController
             $data['duree'],
             $data['remuneration'],
             $data['domaine'],
-            implode(', ', $competences),  // stocké en string dans la BDD
+            implode(', ', $competences),  
             $data['description'],
             $data['logo'] ?? null
         );
