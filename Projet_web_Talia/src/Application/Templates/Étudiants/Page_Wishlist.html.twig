@@ -1,39 +1,60 @@
-{% extends "Bases/Base.html.twig" %}    
+{% extends "Bases/Base.html.twig" %}
 {% block title %}Ma wishlist - AdJob{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
     <h1 class="mb-4">Ma Wishlist</h1>
 
- <div class="row">
+    {% if offres is empty %}
+        <p class="text-muted">Aucune offre dans votre wishlist.</p>
+    {% else %}
+    <div class="row g-4">
+        {% for offre in offres %}
+        <div class="col-md-4">
+            <div class="card h-100 border-0 p-4"
+                 style="background-color:#97a48a; border-radius:2rem;">
 
+                <div class="d-flex align-items-center mb-3">
+                    <img src="{{ offre.logo }}" alt="Logo"
+                         class="rounded-3 bg-white p-1"
+                         style="width:60px; height:60px; object-fit:contain; flex-shrink:0;">
+                    <h5 class="text-white fw-bold ms-3 mb-0">{{ offre.titre }}</h5>
+                </div>
 
-{% for item in wishlistItems %}
+                <div class="d-flex flex-wrap gap-2 mb-3">
+                    <span class="badge rounded-pill px-3 py-2 fw-normal text-dark"
+                          style="background:#fff;">{{ offre.duree }}</span>
+                    <span class="badge rounded-pill px-3 py-2 fw-normal text-dark"
+                          style="background:#fff;">{{ offre.remuneration }}</span>
+                    <span class="badge rounded-pill px-3 py-2 fw-normal text-dark"
+                          style="background:#fff;">{{ offre.domaine }}</span>
+                </div>
 
-<div class="col-md-4">
+                <div class="p-3 mb-3 fst-italic"
+                     style="background:#fff; border-radius:1.5rem; color:#4a5d43;
+                            font-size:0.9rem; line-height:1.6;">
+                    {{ offre.description|slice(0, 100) }}...
+                </div>
 
-<div class="card">
+                <div class="d-flex gap-2 mt-auto">
+                    <a href="/?recherche={{ offre.titre|url_encode }}"
+                       class="btn flex-fill"
+                       style="background-color:#e0c7bf; color:black; border-radius:0.6rem;">
+                        Voir l'offre
+                    </a>
+                    <form method="POST"
+                          action="{{ url_for('retirer_wishlist', {'id': offre.id}) }}">
+                        <button type="submit" class="btn"
+                                style="background-color:#e07070; color:white; border-radius:0.6rem;">
+                            ✕
+                        </button>
+                    </form>
+                </div>
 
-<div class="card-body">
-
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gold" class="bi bi-star-fill" viewBox="0 0 16 16">
-  <path d="M3.612 15.443c-.396.2-.86-.149-.746-.592l.83-4.73L.173 6.765c-.33-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.35.792-.746.592L8 13.187l-4.389 2.256z"/>
-</svg>
-
-<h5>{{ item.offre.titre }}</h5>
-
-
-
-<p>{{ item.offre.entreprise }} - {{ item.offre.ville }}</p>
-
-<a href="#" class="btn" style="background-color:#73986f; color:white;">
-Voir l'offre
-</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 </div>
-
-</div>
-
-</div>
-
-{% endfor %}
 {% endblock %}
