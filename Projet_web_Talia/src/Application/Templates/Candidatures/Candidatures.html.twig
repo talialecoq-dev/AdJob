@@ -7,8 +7,7 @@
 
   {% if candidatures is empty %}
     <p class="text-muted">Aucune candidature pour le moment.</p>
-  {% endif %}
-
+{% else %}
   {% for c in candidatures %}
   <div class="card mb-3" style="max-width: 750px; padding: 20px; border: 3px solid #a0a890; border-radius: 15px;">
     <div class="row g-0 align-items-center">
@@ -19,10 +18,11 @@
 
       <div class="col-md-10">
         <div class="card-body">
-          <h5 class="card-title" style="color: #8fa882">{{ c.titre }}</h5>
+          <h5 class="card-title" style="color: #8fa882">{{ c.titre}}</h5>
           <p class="text-muted mb-1" style="font-size: 0.9rem;">{{ c.entreprise }}</p>
-          <span class="badge rounded-pill bg-{{ c.color }} text-dark">{{ c.statut }}</span>
-          <p class="card-text mt-2">{{ c.description_card }}</p>
+          <p class="mb-1" style="front-style">{{o.domaine}}</p>
+          <span class="badge rounded-pill bg-{{ c.color }} text-dark">{{c.statut }}</span>
+          <p class="card-text mt-2">{{ c.desc }}</p>
 
           <div class="d-flex gap-2 mt-3">
 
@@ -49,4 +49,5 @@
   {% endfor %}
 
 </div>
+{% endif %}
 {% endblock %}

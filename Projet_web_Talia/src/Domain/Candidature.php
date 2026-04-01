@@ -46,13 +46,20 @@ class Candidature
     private string $desc;
     #[Column(name: 'created_at', type: 'datetimetz_immutable', nullable: false)]
     private DateTimeImmutable $createdAt;
-    #[Column(name: 'user_id', type: 'integer', nullable: false)]  // ← AJOUTÉ
+    #[Column(name: 'user_id', type: 'integer', nullable: false)] 
     private int $userId;
+    #[Column(type: 'string', nullable: false)]
+    private string $telephone;
+    #[Column(type: 'string', nullable: true)]
+    private ?string $cv;
+    #[Column(name: 'lettre_motivation', type: 'string', nullable: true)]
+        private ?string $lettreMotivation;
 
     public function __construct(
         string $nom,
         string $prenom,
         string $email,
+        string $telephone,
         string $titre,
         string $remuneration,
         string $duree,
@@ -65,7 +72,9 @@ class Candidature
         string $statut = 'En attente',
         string $color = 'warning',
         string $image = 'Image/Martin.png',
-        string $desc = ''
+        string $desc = '',
+        ?string $cv = null,
+        ?string $lettreMotivation = null, 
     ) {
         $this->nom          = $nom;
         $this->prenom       = $prenom;
@@ -82,6 +91,9 @@ class Candidature
         $this->statut       = $statut;
         $this->color        = $color;
         $this->image        = $image;
+        $this->telephone        = $telephone;
+        $this->cv               = $cv;
+        $this->lettreMotivation = $lettreMotivation;
         if (empty($desc)) {
             $desc = "Candidature soumise par {$prenom} {$nom} pour l'offre {$titre}";
         }
@@ -107,4 +119,7 @@ class Candidature
     public function getDesc(): string { return $this->desc; }
     public function getCreatedAt(): DateTimeImmutable { return $this->createdAt; }
     public function getUserId(): int { return $this->userId; }
+    public function getTelephone(): string { return $this->telephone; }
+    public function getCv(): ?string { return $this->cv; }
+    public function getLettreMotivation(): ?string { return $this->lettreMotivation; }
 }

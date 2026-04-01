@@ -20,7 +20,14 @@ class CandidaturesController
 
     public function candidatures(ServerRequestInterface $request,ResponseInterface $response,array $args): ResponseInterface
     {
-        $candidatures = $this->em->getRepository(Candidature::class)->findAll();
+        $user = $request->getAttribute('user');  // ← comme la wishlist
+        $candidatures = [];
+
+        if ($user) {
+            $candidatures = $this->em->getRepository(Candidature::class)->findBy([
+                'userId' => $user->getId()  // ← seulement les candidatures de l'utilisateur connecté
+            ]);
+        }
 
         $view = Twig::fromRequest($request);
 
@@ -35,13 +42,39 @@ class CandidaturesController
         array $args
     ): ResponseInterface {
         
+        $user = $request->getAttribute('user');  
+
+        if (!$user) {
+            return $response->withHeader('Location', '/Login')->withStatus(302);
+        }
+
         $data = $request->getParsedBody();
+        $files = $request->getUploadedFiles();
+
+        
+        $cvPath = null;
+        if (isset($files['cv']) && $files['cv']->getError() === UPLOAD_ERR_OK) {
+        $cvFilename = uniqid('cv_') . '_' . $files['cv']->getClientFilename();
+        $files['cv']->moveTo(__DIR__ . '/../../../public/uploads/' . $cvFilename);
+        $cvPath = 'uploads/' . $cvFilename;
+        }
+
+    
+        $lettrePath = null;
+        if (isset($files['lettre']) && $files['lettre']->getError() === UPLOAD_ERR_OK) {
+        $lettreFilename = uniqid('lettre_') . '_' . $files['lettre']->getClientFilename();
+        $files['lettre']->moveTo(__DIR__ . '/../../../public/uploads/' . $lettreFilename);
+        $lettrePath = 'uploads/' . $lettreFilename;
+        }
+
         $competences = $data['competences'] ?? [];
+
 
         $candidature = new Candidature(
             trim($data['nom'] ?? ''),
             trim($data['prenom'] ?? ''),
             trim($data['email'] ?? ''),
+            trim($data['telephone'] ?? ''),
             trim($data['titre'] ?? 'Offre inconnue'),
             trim($data['remuneration'] ?? ''),
             trim($data['duree'] ?? ''),
@@ -50,7 +83,9 @@ class CandidaturesController
             trim($data['logo'] ?? '') ?: null,
             implode(', ', array_map('trim', $competences)),
             trim($data['description'] ?? ''),
-            (int) $_SESSION['user_id'],
+            $user->getId(),
+            cv: $cvPath,                     
+            lettreMotivation: $lettrePath,
         );
 
         $this->em->persist($candidature);
@@ -66,10 +101,11 @@ class CandidaturesController
         ResponseInterface $response,
         array $args
     ): ResponseInterface {
+        $user = $request->getAttribute('user');
         $id = (int) $args['id'];
         $candidature = $this->em->find(Candidature::class, $id);
 
-        if ($candidature) {
+        if ($candidature && $user && $candidature->getUserId() === $user->getId()) {
             $this->em->remove($candidature);
             $this->em->flush();
         }
