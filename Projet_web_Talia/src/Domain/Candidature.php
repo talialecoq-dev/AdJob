@@ -103,7 +103,4 @@ class Candidature
     public function getDesc(): string { return $this->desc; }
     public function getCreatedAt(): DateTimeImmutable { return $this->createdAt; }
 
-
-
-
 }

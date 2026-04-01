@@ -89,7 +89,6 @@ class CandidaturesController
         if ($id !== null) {
             $offre = $this->em->find(Offre::class, $id);
         }
-
         $view = Twig::fromRequest($request);
         return $view->render($response, 'Candidatures/Page_Modal_Candidature.html.twig', [
             'offre' => $offre
