@@ -46,6 +46,8 @@ class Candidature
     private string $desc;
     #[Column(name: 'created_at', type: 'datetimetz_immutable', nullable: false)]
     private DateTimeImmutable $createdAt;
+    #[Column(name: 'user_id', type: 'integer', nullable: false)]  // ← AJOUTÉ
+    private int $userId;
 
     public function __construct(
         string $nom,
@@ -59,6 +61,7 @@ class Candidature
         ?string $logo,
         string $competences,
         string $description,
+        int $userId,
         string $statut = 'En attente',
         string $color = 'warning',
         string $image = 'Image/Martin.png',
@@ -75,6 +78,7 @@ class Candidature
         $this->logo         = $logo;
         $this->competences  = implode(',', array_map('trim', explode(',', $competences)));
         $this->description  = $description;
+        $this->userId       = $userId;
         $this->statut       = $statut;
         $this->color        = $color;
         $this->image        = $image;
@@ -102,8 +106,5 @@ class Candidature
     public function getImage(): string { return $this->image; }
     public function getDesc(): string { return $this->desc; }
     public function getCreatedAt(): DateTimeImmutable { return $this->createdAt; }
-
-
-
-
+    public function getUserId(): int { return $this->userId; }
 }
