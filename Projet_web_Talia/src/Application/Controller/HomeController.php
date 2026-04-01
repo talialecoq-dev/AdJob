@@ -87,8 +87,11 @@ class HomeController
         $user = $request->getAttribute('user');
         $wishlistIds = [];
         if ($user) {
-            $entries = $this->em->getRepository(\App\Domain\Wishlist::class)->findBy(['user' => $user]);
-            $wishlistIds = array_map(fn($w) => $w->getOffre()->getId(), $entries);
+            $rows = $conn->fetchAllAssociative(
+                'SELECT offre_id FROM wishlists WHERE user_id = ?',
+                [$user->getId()]
+            );
+            $wishlistIds = array_column($rows, 'offre_id');
         }
 
         return $view->render($response, 'Accueil.html.twig', [

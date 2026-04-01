@@ -18,47 +18,73 @@ class WishlistController
         $this->em = $em;
     }
 
+    public function ajouter(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+        $user = $request->getAttribute('user');
+        $id   = (int) $args['id'];
+
+        if ($user) {
+            $conn = $this->em->getConnection();
+
+            
+            $exists = $conn->fetchOne(
+                'SELECT COUNT(*) FROM wishlists WHERE user_id = ? AND offre_id = ?',
+                [$user->getId(), $id]
+            );
+
+            if (!$exists) {
+                $conn->executeStatement(
+                    'INSERT INTO wishlists (user_id, offre_id) VALUES (?, ?)',
+                    [$user->getId(), $id]
+                );
+            }
+        }
+
+        return $response->withHeader('Location', '/')->withStatus(302);
+    }
+
+    public function retirer(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+        $user = $request->getAttribute('user');
+        $id   = (int) $args['id'];
+
+        if ($user) {
+            $this->em->getConnection()->executeStatement(
+                'DELETE FROM wishlists WHERE user_id = ? AND offre_id = ?',
+                [$user->getId(), $id]
+            );
+        }
+
+        return $response->withHeader('Location', '/')->withStatus(302);
+    }
+
     public function wishlist(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-         $wishlistItems = $this->em->getRepository(Wishlist::class)->findAll();
-
         $view = Twig::fromRequest($request);
-      
+        $user = $request->getAttribute('user');
+        $offres = [];
+
+        if ($user) {
+            $conn = $this->em->getConnection();
+            $rows = $conn->fetchAllAssociative(
+                'SELECT offre_id FROM wishlists WHERE user_id = ?',
+                [$user->getId()]
+            );
+            $ids = array_column($rows, 'offre_id');
+
+            foreach ($ids as $offreId) {
+                $offre = $this->em->find(\App\Domain\Offre::class, $offreId);
+                if ($offre) {
+                    $offres[] = $offre;
+                }
+            }
+        }
+
         return $view->render($response, 'Étudiants/Page_Wishlist.html.twig', [
-            'wishlistItems' => $wishlistItems,
+            'offres' => $offres,
         ]);
     }
 
-    public function ajouter(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
-    {
-        $idOffre = (int) $args['id'];
 
-         $offre = $this->em->find(Offre::class, $idOffre);
 
-        if ($offre) {
-        $wishlist = new Wishlist($offre);
-        $this->em->persist($wishlist);
-        $this->em->flush();
-        }
-
-        return $response->withHeader('Location', '/')->withStatus(302);
-    }
-
- public function retirer(
-        ServerRequestInterface $request,
-        ResponseInterface $response,
-        array $args
-    ): ResponseInterface {
-        $idOffre = (int) $args['id'];
-
-        $wishlistItem = $this->em->getRepository(Wishlist::class)->findOneBy(['offre' => $idOffre]);
-
-        if ($wishlistItem) {
-            $this->em->remove($wishlistItem);
-            $this->em->flush();
-        }
-
-        return $response->withHeader('Location', '/')->withStatus(302);
-
-}
 }
