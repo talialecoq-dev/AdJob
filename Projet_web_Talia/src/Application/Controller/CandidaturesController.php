@@ -50,6 +50,7 @@ class CandidaturesController
             trim($data['logo'] ?? '') ?: null,
             implode(', ', array_map('trim', $competences)),
             trim($data['description'] ?? ''),
+            (int) $_SESSION['user_id'],
         );
 
         $this->em->persist($candidature);
