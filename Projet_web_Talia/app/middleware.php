@@ -15,5 +15,5 @@ return function (App $app) {
     $twig->getEnvironment()->addExtension(new DebugExtension());
     $app->add(TwigMiddleware::create($app, $twig));
     $app->add(new UserTwigMiddleware($twig, $app->getContainer()->get(EntityManager::class)));
-    $app->add(SessionMiddleware::class);;
+    $app->add(SessionMiddleware::class);
 };

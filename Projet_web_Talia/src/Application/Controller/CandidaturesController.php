@@ -4,7 +4,6 @@ namespace App\Application\Controller;
 
 use App\Domain\Candidature;
 use App\Domain\Offre;
-use App\Domain\User;
 use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -19,33 +18,10 @@ class CandidaturesController
         $this->em = $em;
     }
 
-        private function getUserConnecte(ServerRequestInterface $request): ?User
-    {
-        if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
-        $userId  = $session['user_id'] ?? null;
-          
-
-        if (!$userId) return null;
-
-        return $this->em->find(User::class, (int) $userId);
-    }
-
     public function candidatures(ServerRequestInterface $request,ResponseInterface $response,array $args): ResponseInterface
     {
-
-        $user = $this->getUserConnecte($request);
-
-        if ($user) {
-            $candidatures = $this->em->getRepository(Candidature::class)->findBy([
-                'user' => $user
-            ]);
-        } else {
-
         $candidatures = $this->em->getRepository(Candidature::class)->findAll();
-        
-    }
+
         $view = Twig::fromRequest($request);
 
         return $view->render($response, 'Candidatures/Candidatures.html.twig', [
@@ -58,15 +34,6 @@ class CandidaturesController
         ResponseInterface $response,
         array $args
     ): ResponseInterface {
-
-
-        $user = $this->getUserConnecte($request);
-
-        if (!$user) {
-            return $response
-                ->withHeader('Location', '/Login')
-                ->withStatus(302);
-        }
         
         $data = $request->getParsedBody();
         $competences = $data['competences'] ?? [];
@@ -83,8 +50,6 @@ class CandidaturesController
             trim($data['logo'] ?? '') ?: null,
             implode(', ', array_map('trim', $competences)),
             trim($data['description'] ?? ''),
-            $user,
-
         );
 
         $this->em->persist($candidature);
@@ -118,10 +83,8 @@ class CandidaturesController
         ResponseInterface $response,
         array $args
     ): ResponseInterface {
-        $queryParams = $request->getQueryParams();
         $id = isset($args['id']) ? (int)$args['id'] : null;
         $offre = null;
-
 
         if ($id !== null) {
             $offre = $this->em->find(Offre::class, $id);
