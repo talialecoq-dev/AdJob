@@ -28,6 +28,18 @@ class OffresController
             'offres' => $offres
         ]);
     }
+    public function infos_offres (ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+
+        $view       = Twig::fromRequest($request);
+        $repository = $this->em->getRepository(Offre::class);
+        $offres     = $repository->findAll();
+
+
+    return $view->render($response, 'Offres/Page_Infos_Offres.html.twig', [
+            'offres' => $offres
+        ]);
+    }
 
     public function ajouter(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {

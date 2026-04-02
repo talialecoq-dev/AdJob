@@ -139,6 +139,16 @@
                 <div class="invalid-feedback">{{ errors.description }}</div>
               {% endif %}
             </div>
+            <div class="col-12">
+              <label class="form-label">Informations Complémentaire  :</label>
+              <textarea name="Informations Complémentaires"
+                        class="form-control {% if errors is defined and errors.informations is defined %}is-invalid{% endif %}"
+                        rows="5" placeholder="Entrez des Informations complémentaire de l'Offre"
+                        style="border-radius: 5px; border: 1px solid #A0A890; resize: vertical;">{{ old.informations ?? '' }}</textarea>
+              {% if errors is defined and errors.informations is defined %}
+                <div class="invalid-feedback">{{ errors.informations }}</div>
+              {% endif %}
+            </div>
 
           </div>
         </div>
