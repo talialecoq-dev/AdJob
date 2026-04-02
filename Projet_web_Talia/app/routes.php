@@ -15,7 +15,8 @@
     use App\Application\Controller\OffresController;
     use App\Application\Middleware\LoggedMiddleware;
     use App\Application\Middleware\RoleCheckMiddleware;
-    use App\Domain\Role;
+use App\Domain\Evaluation;
+use App\Domain\Role;
     use Psr\Http\Message\ResponseFactoryInterface;
     use Slim\Routing\RouteCollectorProxy;
 
@@ -122,4 +123,10 @@
         $app->get('/Candidater', [CandidaturesController::class, 'candidater']);
         $app->post('/Candidatures/ajouter', [CandidaturesController::class, 'ajouter']);
         $app->post('/Supprimer-Candidature/{id}', [CandidaturesController::class, 'supprimer']);
+
+
+        // --- Avis sur les offres ---
+       // $app->get('/Offres/{id}/avis', [EvaluationsController::class, 'listeAvis'])->setName('liste_avis_offre');
+        // $app->post('/Offres/{id}/avis', [EvaluationsController::class, 'ajouterAvis']);
+
     };
