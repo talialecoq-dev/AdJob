@@ -28,18 +28,20 @@ class OffresController
             'offres' => $offres
         ]);
     }
-    public function infos_offres (ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
-    {
+  public function infosOffre(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+{
+    $id    = (int) $args['id'];
+    $offre = $this->em->find(Offre::class, $id);
 
-        $view       = Twig::fromRequest($request);
-        $repository = $this->em->getRepository(Offre::class);
-        $offres     = $repository->findAll();
-
-
-    return $view->render($response, 'Offres/Page_Infos_Offres.html.twig', [
-            'offres' => $offres
-        ]);
+    if (!$offre) {
+        return $response->withHeader('Location', '/Offres')->withStatus(302);
     }
+
+    $view = Twig::fromRequest($request);
+    return $view->render($response, 'Offres/Page_Infos_Offres.html.twig', [
+        'offre' => $offre
+    ]);
+}
 
     public function ajouter(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
@@ -97,7 +99,8 @@ class OffresController
                 $data['domaine'],
                 implode(', ', $competences),
                 $data['description'],
-                $data['logo'] ?? null
+                $data['logo'] ?? null,
+                $data['informations'] ?? null
             );
 
             $this->em->persist($offre);

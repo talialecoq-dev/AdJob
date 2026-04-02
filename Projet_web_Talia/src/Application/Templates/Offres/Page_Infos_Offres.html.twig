@@ -1,2 +1,44 @@
 {% extends "Bases/Base.html.twig" %}
 
+{% block title %}{{ offre.titre }} - AdJob{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-4" style="background-color: #eed4cb; min-height: 100vh;">
+  <div class="card mx-auto mt-4" style="max-width: 800px; border-radius: 1.5rem; border: 3px solid #a0a890;">
+    <div class="card-body p-5">
+
+      <div class="d-flex align-items-center mb-4">
+        <img src="{{ offre.logo }}" alt="Logo {{ offre.entreprise }}"
+             class="rounded-3 bg-white p-1 me-4"
+             style="width: 100px; height: 100px; object-fit: contain;">
+        <div>
+          <h1 class="fw-bold mb-1" style="color: #4a5d43;">{{ offre.titre }}</h1>
+          <p class="text-muted mb-0">{{ offre.entreprise }}</p>
+        </div>
+      </div>
+
+      <div class="d-flex flex-wrap gap-2 mb-4">
+        <span class="badge rounded-pill px-3 py-2 text-dark" style="background-color: #97a48a; color: white !important;">{{ offre.duree }}</span>
+        <span class="badge rounded-pill px-3 py-2 text-dark" style="background-color: #97a48a; color: white !important;">{{ offre.remuneration }}</span>
+        <span class="badge rounded-pill px-3 py-2 text-dark" style="background-color: #97a48a; color: white !important;">{{ offre.domaine }}</span>
+      </div>
+
+      <h5 class="fw-semibold mb-2" style="color: #4a5d43;">Compétences requises</h5>
+      <p class="mb-4">{{ offre.competences }}</p>
+
+      <h5 class="fw-semibold mb-2" style="color: #4a5d43;">Description</h5>
+      <p class="mb-4" style="white-space: pre-line;">{{ offre.description }}</p>
+
+      {% if offre.informations %}
+      <h5 class="fw-semibold mb-2" style="color: #4a5d43;">Informations complémentaires</h5>
+      <p style="white-space: pre-line;">{{ offre.informations }}</p>
+      {% endif %}
+
+      <div class="mt-4">
+        <a href="/Offres" class="btn" style="background-color: #a0a890; color: white;">← Retour aux offres</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -39,6 +39,9 @@ class Offre
     #[Column(type: 'text', nullable: false)]
     private string $description;
 
+        #[Column(type: 'text', nullable: false)]
+    private string $informations;
+
     #[Column(name: 'created_at', type: 'datetimetz_immutable', nullable: false)]
     private DateTimeImmutable $createdAt;
 
@@ -50,7 +53,9 @@ class Offre
         string $domaine,
         string $competences,
         string $description,
+        ?string $informations,
         ?string $logo = null
+        
     ) {
         $this->titre        = $titre;
         $this->entreprise   = $entreprise;
@@ -59,8 +64,10 @@ class Offre
         $this->domaine      = $domaine;
         $this->competences  = $competences;
         $this->description  = $description;
+        $this->informations = $informations;
         $this->logo         = $logo;
         $this->createdAt    = new DateTimeImmutable('now');
+        
     }
 
     public function getId(): int { return $this->id; }
@@ -89,4 +96,5 @@ class Offre
     public function setDescription(string $description): void { $this->description = $description; }
 
     public function getCreatedAt(): DateTimeImmutable { return $this->createdAt; }
+    public function getInformations(): string {return $this->informations;}
 }

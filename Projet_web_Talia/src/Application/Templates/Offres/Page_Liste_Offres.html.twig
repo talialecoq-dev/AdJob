@@ -50,17 +50,10 @@
                   style="background-color: #e0c7bf; color: black;">
             Candidater
           </button>
-
-          <a href="/Offres/{{ offre.id }}/avis" class="btn btn-sm text-black flex-fill"
-             style="background-color: #e0c7bf; border: none; padding: 8px 0;">
-            Avis sur l'offre
-          </a>
-
-          <a href="/Offres/{{ offre.id }}/infos_offres" class="btn btn-sm text-black flex-fill"
-             style="background-color: #e0c7bf; border: none; padding: 8px 0;">
-            En savoir plus sur l'entreprise
-          </a>
-        </div>
+           <a href="/Offres/{{ offre.id }}/infos" class="btn btn-sm text-black flex-fill"
+          style="background-color: #e0c7bf; border: none; padding: 8px 0;">
+          En savoir plus sur l'offre
+        </a>
 
         <form method="POST" action="/offre/supprimer/{{ offre.id }}" class="mt-2">
           <button type="submit" class="btn btn-sm text-white w-100"

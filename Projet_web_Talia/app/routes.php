@@ -103,7 +103,7 @@
         $app->get('/Ajouter-Offre', [OffresController::class, 'ajouter']);
         $app->post('/Ajouter-Offre', [OffresController::class, 'ajouter']);
 
-        $app->get('/InfosOffres', [OffresController::class, 'infosOffres'])->setName('infos_offres');
+        $app->get('/Offres/{id}/infos', [OffresController::class, 'infosOffre']);
 
         $app->get('/Offres', [OffresController::class, 'liste']);
 
