@@ -20,6 +20,10 @@ class Wishlist
     #[JoinColumn(name: 'offre_id', referencedColumnName: 'id', nullable: false)]
     private Offre $offre;
 
+    #[ManyToOne(targetEntity: User::class)]
+    #[JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
+    private User $user;
+
     public function __construct(Offre $offre)
     {
         $this->offre = $offre;
