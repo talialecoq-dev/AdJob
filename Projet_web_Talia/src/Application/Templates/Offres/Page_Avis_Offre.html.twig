@@ -1,0 +1,57 @@
+
+{% extends 'Bases/base.html.twig' %}
+{% block content %}
+<div class="container mt-5" style="background-color: #ffffff; padding: 30px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+
+    <h2 class="mb-4 text-center" style="color: #a0a890;">Avis sur l'offre</h2>
+
+    <!-- Formulaire -->
+    <div class="card mb-4" style="background-color: #eed4cb; border: none;">
+        <div class="card-body">
+            <form method="POST" action="/Offres/{{ offre.id }}/avis">
+                <div class="mb-3">
+                    <label class="form-label" style="color: #a0a890;">Votre avis</label>
+                    <textarea name="commentaire" class="form-control" required style="border-radius: 10px;"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" style="color: #a0a890;">Note</label>
+                    <select name="note" class="form-select" required style="border-radius: 10px;">
+                        <option value="">Choisir</option>
+                        <option value="5">⭐⭐⭐⭐⭐</option>
+                        <option value="4">⭐⭐⭐⭐</option>
+                        <option value="3">⭐⭐⭐</option>
+                        <option value="2">⭐⭐</option>
+                        <option value="1">⭐</option>
+                    </select>
+                </div>
+
+                <button class="btn" style="background-color: #a0a890; color: #ffffff; border-radius: 10px;">Envoyer</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Liste des avis -->
+    <h3 class="mb-3" style="color: #a0a890;">Avis déjà publiés</h3>
+    {% if evaluations is not empty %}
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            {% for avis in evaluations %}
+                <div class="col">
+                    <div class="card h-100" style="background-color: #eed4cb; border-radius: 15px;">
+                        <div class="card-body">
+                            <h5 class="card-title" style="color: #a0a890;">Note : {{ avis.note }} / 5</h5>
+                            <p class="card-text">{{ avis.commentaire }}</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            {% endfor %}
+        </div>
+    {% else %}
+        <p style="color: #a0a890;">Aucun avis pour cette offre.</p>
+    {% endif %}
+
+</div>
+{% endblock %}

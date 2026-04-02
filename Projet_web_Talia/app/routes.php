@@ -15,8 +15,8 @@
     use App\Application\Controller\OffresController;
     use App\Application\Middleware\LoggedMiddleware;
     use App\Application\Middleware\RoleCheckMiddleware;
-use App\Domain\Evaluation;
-use App\Domain\Role;
+    use App\Application\Controller\EvaluationsController;
+    use App\Domain\Role;
     use Psr\Http\Message\ResponseFactoryInterface;
     use Slim\Routing\RouteCollectorProxy;
 
@@ -126,7 +126,10 @@ use App\Domain\Role;
 
 
         // --- Avis sur les offres ---
-       // $app->get('/Offres/{id}/avis', [EvaluationsController::class, 'listeAvis'])->setName('liste_avis_offre');
-        // $app->post('/Offres/{id}/avis', [EvaluationsController::class, 'ajouterAvis']);
+        $app->get('/Offres/{id}/avis', [EvaluationsController::class, 'listeAvis'])->setName('liste_avis_offre');
+        $app->post('/Offres/{id}/avis', [EvaluationsController::class, 'ajouterAvis'])->setName('ajouter_avis_offre');  
+
+
+
 
     };
