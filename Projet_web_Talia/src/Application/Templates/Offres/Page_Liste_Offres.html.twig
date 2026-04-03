@@ -52,15 +52,17 @@
 						</a>
 
 						<a href="/Offres/{{ offre.id }}/infos_offres" class="btn btn-sm text-black flex-fill" style="background-color: #e0c7bf; border: none; padding: 8px 0;">
-							En savoir plus sur l'offre 
+							En savoir plus sur l'offre
 						</a>
 					</div>
 
-					<form method="POST" action="/offre/supprimer/{{ offre.id }}" class="mt-2">
-						<button type="submit" class="btn btn-sm text-white w-100" style="background-color: #e07070; border: none; padding: 8px 12px;">
-							Supprimer
-						</button>
-					</form>
+					{% if user and user.role.value in ['pilote', 'admin'] %}
+						<form method="POST" action="/offre/supprimer/{{ offre.id }}" class="mt-2">
+							<button type="submit" class="btn btn-sm text-white w-100" style="background-color: #e07070; border: none; padding: 8px 12px;">
+								Supprimer
+							</button>
+						</form>
+					{% endif %}
 
 				</div>
 			</div>

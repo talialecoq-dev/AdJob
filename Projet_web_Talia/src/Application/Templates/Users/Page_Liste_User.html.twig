@@ -44,7 +44,7 @@
 					<th scope="col">Nom</th>
 					<th scope="col">Email</th>
 					<th scope="col">Campus</th>
-					<th scope="col">Région</th>
+					
 					<th scope="col">Rôle</th>
 					<th scope="col" class="actions-col">Actions</th>
 				</tr>
@@ -57,7 +57,6 @@
 						<td>{{ user.nom }}</td>
 						<td>{{ user.email }}</td>
 						<td>{{ user.campus ? user.campus.nomVille : '—' }}</td>
-						<td>{{ user.region ?? '—' }}</td>
 						<td>{{ user.role.value }}</td>
 						<td class="actions-col">
 							<a href="/users/{{ user.role.value|lower }}/modifier/{{ user.id }}" class="btn btn-sm btn-modifier">Modifier</a>

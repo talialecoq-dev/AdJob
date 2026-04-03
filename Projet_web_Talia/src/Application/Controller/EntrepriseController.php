@@ -125,7 +125,7 @@ class EntrepriseController
         $this->em->persist($entreprise);
         $this->em->flush();
 
-        return $response->withHeader('Location', '/entreprise/Liste-Entreprises')->withStatus(302);
+        return $response->withHeader('Location', '/entreprise/Rechercher-Entreprise')->withStatus(302);
     }
 
     public function modifier(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
