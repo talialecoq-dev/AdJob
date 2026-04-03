@@ -28,15 +28,15 @@ return function (App $app) {
 
     $factory = $app->getContainer()->get(ResponseFactoryInterface::class);
 
-    // --- Accueil ---
+    
     $app->get('/', [HomeController::class, 'home']);
     $app->post('/offre/ajouter', [HomeController::class, 'ajouter']);
     $app->post('/offre/supprimer/{id}', [HomeController::class, 'supprimer']);
 
-    // --- Pages générales ---
+    
     $app->get('/Mentions_Legales', [Mentions_LegalesController::class, 'Mentions_Legales']);
 
-    // --- Profil ---
+    
     $app->get('/Profil', [ProfilController::class, 'profil'])
         ->add(new LoggedMiddleware($factory));
     $app->get('/Profil/Modifier', [ProfilController::class, 'modifierProfil'])
@@ -44,20 +44,20 @@ return function (App $app) {
     $app->post('/Profil/Modifier', [ProfilController::class, 'updateProfil'])
         ->add(new LoggedMiddleware($factory));
 
-    // --- Auth ---
+    
     $app->get('/Login', [LoginController::class, 'login']);
     $app->post('/Login', [LoginController::class, 'login']);
     $app->get('/Logout', [LoginController::class, 'logout']);
     $app->post('/Logout', [LoginController::class, 'logout']);
 
-    // --- Entreprises publiques (tout le monde, même non connecté) ---
+    
     $app->get('/entreprise/Rechercher-Entreprise', [EntrepriseController::class, 'recherche_entreprise'])
         ->setName('recherche_entreprise');
 
     $app->get('/entreprise/{nom}/offres', [EntrepriseController::class, 'offresParEntreprise'])
         ->setName('offres_entreprise');
 
-    // --- Entreprises protégées 
+    
     $app->group('/entreprise', function (RouteCollectorProxy $group) {
         $group->get('/Inscription-Entreprise', [EntrepriseController::class, 'inscription'])
             ->setName('inscription_entreprises');
@@ -76,7 +76,7 @@ return function (App $app) {
         $group->post('/Supprimer-Entreprise/{id}', [EntrepriseController::class, 'supprimer']);
     })->add(new RoleCheckMiddleware($factory, [Role::PILOTE, Role::ADMIN]));
 
-    // --- Utilisateurs ---
+   
     $app->get('/Liste-Utilisateurs', [UserController::class, 'listeUsers'])
         ->add(new RoleCheckMiddleware($factory, [Role::PILOTE, Role::ADMIN]))
         ->setName('liste_utilisateurs');
@@ -111,13 +111,13 @@ return function (App $app) {
         $group->post('/pilote/supprimer/{id}', [UserController::class, 'supprimerPilote']);
     })->add(new RoleCheckMiddleware($factory, [Role::PILOTE, Role::ADMIN]));
 
-    // --- Offres ---
+    
     $app->get('/Ajouter-Offre', [OffresController::class, 'ajouter']);
     $app->post('/Ajouter-Offre', [OffresController::class, 'ajouter']);
     $app->get('/Offres/{id}/infos_offres', [OffresController::class, 'infosOffre']);
     $app->get('/Offres', [OffresController::class, 'liste']);
 
-    // --- Wishlist ---
+    
     $app->group('/wishlist', function (RouteCollectorProxy $group) {
         $group->get('/', [WishlistController::class, 'wishlist'])
             ->setName('consulter_wishlist');
@@ -127,7 +127,7 @@ return function (App $app) {
             ->setName('retirer_wishlist');
     })->add(new RoleCheckMiddleware($factory, [Role::ETUDIANT, Role::PILOTE, Role::ADMIN]));
 
-    // --- Candidatures ---
+    
     $app->get('/Candidatures', [CandidaturesController::class, 'candidatures']);
     $app->post('/Candidatures', [CandidaturesController::class, 'candidatures']);
     $app->get('/Candidater', [CandidaturesController::class, 'candidater']);
@@ -136,7 +136,7 @@ return function (App $app) {
     $app->post('/Candidatures/etat/{id}', [CandidaturesController::class, 'changerEtat'])
     ->add(new RoleCheckMiddleware($factory, [Role::PILOTE, Role::ADMIN]));
 
-    // --- Avis sur les offres ---
+    
     $app->get('/Offres/{id}/avis', [EvaluationsController::class, 'listeAvis'])
         ->setName('liste_avis_offre');
     $app->post('/Offres/{id}/avis', [EvaluationsController::class, 'ajouterAvis'])
