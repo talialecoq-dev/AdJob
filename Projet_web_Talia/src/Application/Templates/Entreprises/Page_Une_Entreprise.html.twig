@@ -26,9 +26,9 @@
 						</div>
 
 						<div class="d-flex gap-2 mt-auto flex-wrap">
-							<button type="button" class="btn flex-fill" data-bs-toggle="modal" data-bs-target="#modal{{ entreprise.id }}" style="background-color:#e0c7bf; color:black; border-radius:0.6rem;">
+							<a href="/entreprise/{{ entreprise.nom|url_encode }}/offres" class="btn flex-fill" style="background-color:#e0c7bf; color:black; border-radius:0.6rem;">
 								En savoir plus
-							</button>
+							</a>
 							<a href="{{ entreprise.siteWeb }}" target="_blank" class="btn flex-fill" style="background-color:#e0c7bf; color:black; border:none; border-radius:0.6rem;">
 								Visiter le site
 							</a>

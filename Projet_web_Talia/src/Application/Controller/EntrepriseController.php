@@ -125,7 +125,7 @@ class EntrepriseController
         $this->em->persist($entreprise);
         $this->em->flush();
 
-        return $response->withHeader('Location', '/entreprise/Rechercher-Entreprise')->withStatus(302);
+        return $response->withHeader('Location', '/entreprise/Liste-Entreprises')->withStatus(302);
     }
 
     public function modifier(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
@@ -188,9 +188,13 @@ class EntrepriseController
         $view          = Twig::fromRequest($request);
         $nomEntreprise = urldecode($args['nom']);
 
-        $offres = $this->em->getRepository(\App\Domain\Offre::class)->findBy([
-            'entreprise' => $nomEntreprise
-        ]);
+        $offres = $this->em->getRepository(\App\Domain\Offre::class)
+            ->createQueryBuilder('o')
+            ->where('LOWER(o.entreprise) = LOWER(:nom)')
+            ->setParameter('nom', $nomEntreprise)
+            ->orderBy('o.id', 'DESC')
+            ->getQuery()
+            ->getResult();
 
         return $view->render($response, 'Entreprises/Page_Offres_Entreprise.html.twig', [
             'offres'     => $offres,
