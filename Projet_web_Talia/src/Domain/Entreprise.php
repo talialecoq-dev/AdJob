@@ -45,23 +45,62 @@ class Entreprise
         $this->image   = $image;
     }
 
-    public function getId(): int { return $this->id; }
+    public function getId(): int
+    {
+        return $this->id;
+    }
 
-    public function getNom(): string { return $this->nom; }
-    public function setNom(?string $nom): void { $this->nom = $nom; }
+    public function getNom(): string
+    {
+        return $this->nom;
+    }
+    public function setNom(?string $nom): void
+    {
+        $this->nom = $nom;
+    }
 
-    public function getSecteur(): string { return $this->secteur; }
-    public function setSecteur(?string $secteur): void { $this->secteur = $secteur; }
+    public function getSecteur(): string
+    {
+        return $this->secteur;
+    }
+    public function setSecteur(?string $secteur): void
+    {
+        $this->secteur = $secteur;
+    }
 
-    public function getEmail(): string { return $this->email; }
-    public function setEmail(?string $email): void { $this->email = $email; }
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+    public function setEmail(?string $email): void
+    {
+        $this->email = $email;
+    }
 
-    public function getSiteWeb(): string { return $this->siteWeb; }
-    public function setSiteWeb(?string $siteWeb): void { $this->siteWeb = $siteWeb; }
+    public function getSiteWeb(): string
+    {
+        return $this->siteWeb;
+    }
+    public function setSiteWeb(?string $siteWeb): void
+    {
+        $this->siteWeb = $siteWeb;
+    }
 
-    public function getImage(): ?string { return $this->image; }
-    public function setImage(?string $image): void { $this->image = $image; }
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+    public function setImage(?string $image): void
+    {
+        $this->image = $image;
+    }
 
-    public function getCampus(): ?Campus { return $this->campus; }
-    public function setCampus(?Campus $campus): void { $this->campus = $campus; }
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+    public function setCampus(?Campus $campus): void
+    {
+        $this->campus = $campus;
+    }
 }

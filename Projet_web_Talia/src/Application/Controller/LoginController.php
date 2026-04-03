@@ -18,7 +18,7 @@ class LoginController
     {
         $this->em = $em;
     }
-    
+
     public function login(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
 
@@ -32,10 +32,10 @@ class LoginController
 
             $userRepo  = $this->em->getRepository(User::class);
             $user = $userRepo->findOneBy(['email' => $email]);
-            if($user == NULL){   
+            if ($user == NULL) {
                 $model['error'] = "Email introuvable";
             } else if (password_verify($password, $user->getMotDePasse())) {
-                // Authentification réussie
+               
                 $_SESSION['user_id'] = $user->getId();
                 return $response->withHeader('Location', '/')->withStatus(302);
             } else {
@@ -46,7 +46,8 @@ class LoginController
         $view = Twig::fromRequest($request);
         return $view->render($response, 'Bases/Page_Login.html.twig', $model);
     }
-    public function logout(Request $request, Response $response) {
+    public function logout(Request $request, Response $response)
+    {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
@@ -54,10 +55,9 @@ class LoginController
         $_SESSION = [];
         session_destroy();
 
-      
+
         return $response
             ->withHeader('Location', '/Login')
             ->withStatus(302);
     }
 }
-

@@ -18,14 +18,14 @@ class CandidaturesController
         $this->em = $em;
     }
 
-    public function candidatures(ServerRequestInterface $request,ResponseInterface $response,array $args): ResponseInterface
+    public function candidatures(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $user = $request->getAttribute('user');  // ← comme la wishlist
+        $user = $request->getAttribute('user');  
         $candidatures = [];
 
         if ($user) {
             $candidatures = $this->em->getRepository(Candidature::class)->findBy([
-                'userId' => $user->getId()  // ← seulement les candidatures de l'utilisateur connecté
+                'userId' => $user->getId()  
             ]);
         }
 
@@ -41,8 +41,8 @@ class CandidaturesController
         ResponseInterface $response,
         array $args
     ): ResponseInterface {
-        
-        $user = $request->getAttribute('user');  
+
+        $user = $request->getAttribute('user');
 
         if (!$user) {
             return $response->withHeader('Location', '/Login')->withStatus(302);
@@ -51,20 +51,20 @@ class CandidaturesController
         $data = $request->getParsedBody();
         $files = $request->getUploadedFiles();
 
-        
+
         $cvPath = null;
         if (isset($files['cv']) && $files['cv']->getError() === UPLOAD_ERR_OK) {
-        $cvFilename = uniqid('cv_') . '_' . $files['cv']->getClientFilename();
-        $files['cv']->moveTo(__DIR__ . '/../../../public/uploads/' . $cvFilename);
-        $cvPath = 'uploads/' . $cvFilename;
+            $cvFilename = uniqid('cv_') . '_' . $files['cv']->getClientFilename();
+            $files['cv']->moveTo(__DIR__ . '/../../../public/uploads/' . $cvFilename);
+            $cvPath = 'uploads/' . $cvFilename;
         }
 
-    
+
         $lettrePath = null;
         if (isset($files['lettre']) && $files['lettre']->getError() === UPLOAD_ERR_OK) {
-        $lettreFilename = uniqid('lettre_') . '_' . $files['lettre']->getClientFilename();
-        $files['lettre']->moveTo(__DIR__ . '/../../../public/uploads/' . $lettreFilename);
-        $lettrePath = 'uploads/' . $lettreFilename;
+            $lettreFilename = uniqid('lettre_') . '_' . $files['lettre']->getClientFilename();
+            $files['lettre']->moveTo(__DIR__ . '/../../../public/uploads/' . $lettreFilename);
+            $lettrePath = 'uploads/' . $lettreFilename;
         }
 
         $competences = $data['competences'] ?? [];
@@ -84,7 +84,7 @@ class CandidaturesController
             implode(', ', array_map('trim', $competences)),
             trim($data['description'] ?? ''),
             $user->getId(),
-            cv: $cvPath,                     
+            cv: $cvPath,
             lettreMotivation: $lettrePath,
         );
 

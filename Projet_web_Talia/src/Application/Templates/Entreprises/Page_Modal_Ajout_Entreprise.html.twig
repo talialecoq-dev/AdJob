@@ -1,61 +1,49 @@
 <div class="modal fade" id="Ajouter" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
 
-      <div class="modal-header" style="background-color: #ECEADE">
-        <h1 class="modal-title fs-5">Ajouter une Entreprise</h1>
-      </div>
+			<div class="modal-header" style="background-color: #ECEADE">
+				<h1 class="modal-title fs-5">Ajouter une Entreprise</h1>
+			</div>
 
-      <form method="POST" action="/entreprise/inscription-entreprise" enctype="multipart/form-data">
-        <div class="modal-body">
-          <div class="row g-3 px-2">
+			<form method="POST" action="/entreprise/inscription-entreprise" enctype="multipart/form-data">
+				<div class="modal-body">
+					<div class="row g-3 px-2">
 
-            <div class="col-6">
-              <label class="form-label">Nom de l'Entreprise :</label>
-              <input type="text" name="nom_entreprise" class="form-control"
-                     placeholder="Entrez le nom de l'Entreprise"
-                     style="border-radius:5px; border:1px solid #A0A890" required>
-            </div>
+						<div class="col-6">
+							<label class="form-label">Nom de l'Entreprise :</label>
+							<input type="text" name="nom_entreprise" class="form-control" placeholder="Entrez le nom de l'Entreprise" style="border-radius:5px; border:1px solid #A0A890" required>
+						</div>
 
-            <div class="col-6">
-              <label class="form-label">Secteur d'activité :</label>
-              <input type="text" name="secteur" class="form-control"
-                     placeholder="Ex: Informatique"
-                     style="border-radius:5px; border:1px solid #A0A890" required>
-            </div>
+						<div class="col-6">
+							<label class="form-label">Secteur d'activité :</label>
+							<input type="text" name="secteur" class="form-control" placeholder="Ex: Informatique" style="border-radius:5px; border:1px solid #A0A890" required>
+						</div>
 
-            <div class="col-6">
-              <label class="form-label">Email de contact :</label>
-              <input type="email" name="email" class="form-control"
-                     placeholder="contact@entreprise.com"
-                     style="border-radius:5px; border:1px solid #A0A890" required>
-            </div>
+						<div class="col-6">
+							<label class="form-label">Email de contact :</label>
+							<input type="email" name="email" class="form-control" placeholder="contact@entreprise.com" style="border-radius:5px; border:1px solid #A0A890" required>
+						</div>
 
-            <div class="col-6">
-              <label class="form-label">Site Internet :</label>
-              <input type="url" name="site_web" class="form-control"
-                     placeholder="https://..."
-                     style="border-radius:5px; border:1px solid #A0A890" required>
-            </div>
+						<div class="col-6">
+							<label class="form-label">Site Internet :</label>
+							<input type="url" name="site_web" class="form-control" placeholder="https://..." style="border-radius:5px; border:1px solid #A0A890" required>
+						</div>
 
-            <div class="col-12">
-              <label class="form-label">Logo (PNG, JPG, JPEG) :</label>
-              <input type="file" name="image_profil" class="form-control"
-                     accept=".png,.jpg,.jpeg"
-                     style="border-radius:5px; border:1px solid #A0A890" required>
-            </div>
+						<div class="col-12">
+							<label class="form-label">Logo (PNG, JPG, JPEG) :</label>
+							<input type="file" name="image_profil" class="form-control" accept=".png,.jpg,.jpeg" style="border-radius:5px; border:1px solid #A0A890" required>
+						</div>
 
-          </div>
-        </div>
+					</div>
+				</div>
 
-        <div class="modal-footer" style="background-color: #ECEADE">
-          <button type="button" class="btn" data-bs-dismiss="modal"
-                  style="background-color:#A0A890; color:white;">Fermer</button>
-          <button type="submit" class="btn"
-                  style="background-color:#EED4CB; color:black;">Ajouter</button>
-        </div>
-      </form>
+				<div class="modal-footer" style="background-color: #ECEADE">
+					<button type="button" class="btn" data-bs-dismiss="modal" style="background-color:#A0A890; color:white;">Fermer</button>
+					<button type="submit" class="btn" style="background-color:#EED4CB; color:black;">Ajouter</button>
+				</div>
+			</form>
 
-    </div>
-  </div>
+		</div>
+	</div>
 </div>

@@ -1,104 +1,111 @@
 <div class="container-fluid px-4 my-5">
-  <div class="row row-cols-1 row-cols-md-3 g-4">
+	<div class="row row-cols-1 row-cols-md-3 g-4">
 
-    {% for offre in offres %}
-    <div class="col">
-      <div class="card h-100 border-0 p-4 position-relative" style="background-color: #97a48a; border-radius: 2rem;">
+		{% for offre in offres %}
+			<div class="col">
+				<div class="card h-100 border-0 p-4 position-relative" style="background-color: #97a48a; border-radius: 2rem;">
 
-        
-        {% if offre.id in wishlist %}
-          <form method="POST" action="{{ url_for('retirer_wishlist', {'id': offre.id}) }}" style="position: absolute; top: 15px; right: 15px;">
-            <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="gold" viewBox="0 0 16 16">
-                <path d="M3.612 15.443c-.396.2-.86-.149-.746-.592l.83-4.73L.173 6.765c-.33-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.35.792-.746.592L8 13.187l-4.389 2.256z"/>
-              </svg>
-            </button>
-          </form>
-        {% else %}
-          <form method="POST" action="{{ url_for('ajouter_wishlist', {'id' : offre.id}) }}" style="position: absolute; top: 15px; right: 15px;">
-            <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="gold" stroke-width="1.2" viewBox="0 0 16 16">
-                <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73z"/>
-              </svg>
-            </button>
-          </form>
-        {% endif %}
 
-        <div class="d-flex align-items-center mb-3">
-          <img src="{{ offre.logo }}" alt="Logo de {{ offre.entreprise }}"
-               class="rounded-3 bg-white p-1"
-               style="width: 80px; height: 80px; object-fit: contain; flex-shrink: 0;">
-          <h1 class="text-white fw-bold ms-3 mb-0" style="font-size: 1.3rem;">
-            {{ offre.titre }} 
-          </h1>
-        </div>
+					{% if offre.id in wishlist %}
+						<form method="POST" action="{{ url_for('retirer_wishlist', {'id': offre.id}) }}" style="position: absolute; top: 15px; right: 15px;">
+							<button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+								<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="gold" viewbox="0 0 16 16">
+									<path d="M3.612 15.443c-.396.2-.86-.149-.746-.592l.83-4.73L.173 6.765c-.33-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.35.792-.746.592L8 13.187l-4.389 2.256z"/>
+								</svg>
+							</button>
+						</form>
+					{% else %}
+						<form method="POST" action="{{ url_for('ajouter_wishlist', {'id' : offre.id}) }}" style="position: absolute; top: 15px; right: 15px;">
+							<button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+								<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="gold" stroke-width="1.2" viewbox="0 0 16 16">
+									<path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73z"/>
+								</svg>
+							</button>
+						</form>
+					{% endif %}
 
-        <div class="d-flex flex-wrap gap-2 mb-3">
-          <span class="badge rounded-pill border text-dark fw-normal px-3 py-2" style="background-color: #ffffff;">{{ offre.duree }}</span>
-          <span class="badge rounded-pill border text-dark fw-normal px-3 py-2" style="background-color: #ffffff;">{{ offre.remuneration }}</span>
-          <span class="badge rounded-pill border text-dark fw-normal px-3 py-2" style="background-color: #ffffff;">{{ offre.domaine }}</span>
-          <span class="badge rounded-pill border text-dark fw-normal px-3 py-2" style="background-color: #ffffff;">{{ offre.competences }}</span>
-        </div>
+					<div class="d-flex align-items-center mb-3">
+						<img src="{{ offre.logo }}" alt="Logo de {{ offre.entreprise }}" class="rounded-3 bg-white p-1" style="width: 80px; height: 80px; object-fit: contain; flex-shrink: 0;">
+						<h1 class="text-white fw-bold ms-3 mb-0" style="font-size: 1.3rem;">
+							{{ offre.titre }}
+						</h1>
+					</div>
 
-        <div class="p-4 mb-3 flex-grow-1 text-center fst-italic"
-             style="background-color: #ffffff; border-radius: 1.5rem; color: #4a5d43; font-size: 1rem; line-height: 1.7;">
-          {{ offre.description }}
-        </div>
+					<div class="d-flex flex-wrap gap-2 mb-3">
+						<span class="badge rounded-pill border text-dark fw-normal px-3 py-2" style="background-color: #ffffff;">{{ offre.duree }}</span>
+						<span class="badge rounded-pill border text-dark fw-normal px-3 py-2" style="background-color: #ffffff;">{{ offre.remuneration }}</span>
+						<span class="badge rounded-pill border text-dark fw-normal px-3 py-2" style="background-color: #ffffff;">{{ offre.domaine }}</span>
+						<span class="badge rounded-pill border text-dark fw-normal px-3 py-2" style="background-color: #ffffff;">{{ offre.competences }}</span>
+					</div>
 
-        <div class="d-flex gap-2">
-          <button type="button" class="btn flex-fill" data-bs-toggle="modal" data-bs-target="#Candidater"
-                  style="background-color: #e0c7bf; color: black;">
-            Candidater
-          </button>
-           <a href="/Offres/{{ offre.id }}/infos" class="btn btn-sm text-black flex-fill"
-          style="background-color: #e0c7bf; border: none; padding: 8px 0;">
-          En savoir plus sur l'offre
-        </a>
+					<div class="p-4 mb-3 flex-grow-1 text-center fst-italic" style="background-color: #ffffff; border-radius: 1.5rem; color: #4a5d43; font-size: 1rem; line-height: 1.7;">
+						{{ offre.description }}
+					</div>
 
-        <form method="POST" action="/offre/supprimer/{{ offre.id }}" class="mt-2">
-          <button type="submit" class="btn btn-sm text-white w-100"
-                  style="background-color: #e07070; border: none; padding: 8px 12px;">
-            Supprimer
-          </button>
-        </form>
+					<div class="d-flex gap-2">
+						<button type="button" class="btn flex-fill" data-bs-toggle="modal" data-bs-target="#Candidater" style="background-color: #e0c7bf; color: black;">
+							Candidater
+						</button>
 
-      </div>
-    </div>
-    {% endfor %}
+						<a href="/Offres/{{ offre.id }}/avis" class="btn btn-sm text-black flex-fill" style="background-color: #e0c7bf; border: none; padding: 8px 0;">
+							Avis sur l'offre
+						</a>
 
-  </div>
+						<a href="/Offres/{{ offre.id }}/infos_offres" class="btn btn-sm text-black flex-fill" style="background-color: #e0c7bf; border: none; padding: 8px 0;">
+							En savoir plus sur l'entreprise
+						</a>
+					</div>
 
-{% set filtreQuery = '' %}
-{% if filtres.recherche %}{% set filtreQuery = filtreQuery ~ '&recherche=' ~ filtres.recherche|url_encode %}{% endif %}
-{% if filtres.domaine %}{% set filtreQuery = filtreQuery ~ '&domaine=' ~ filtres.domaine|url_encode %}{% endif %}
-{% if filtres.duree %}{% set filtreQuery = filtreQuery ~ '&duree=' ~ filtres.duree|url_encode %}{% endif %}
-{% if filtres.ville %}{% set filtreQuery = filtreQuery ~ '&ville=' ~ filtres.ville|url_encode %}{% endif %}
+					<form method="POST" action="/offre/supprimer/{{ offre.id }}" class="mt-2">
+						<button type="submit" class="btn btn-sm text-white w-100" style="background-color: #e07070; border: none; padding: 8px 12px;">
+							Supprimer
+						</button>
+					</form>
 
-{% if totalPages > 1 %}
-<div class="d-flex justify-content-center mt-4">
-  <nav>
-    <ul class="pagination">
+				</div>
+			</div>
+		{% endfor %}
 
-      <li class="page-item {% if page == 1 %}disabled{% endif %}">
-        <a class="page-link" href="?page={{ page - 1 }}{{ filtreQuery }}">«</a>
-      </li>
+	</div>
 
-      {% for p in 1..totalPages %}
-      <li class="page-item {% if p == page %}active{% endif %}">
-        <a class="page-link" href="?page={{ p }}{{ filtreQuery }}"
-           style="{% if p == page %}background-color: #97a48a; border-color: #97a48a;{% endif %}">
-          {{ p }}
-        </a>
-      </li>
-      {% endfor %}
+	{% set filtreQuery = '' %}
+	{% if filtres.recherche %}
+		{% set filtreQuery = filtreQuery ~ '&recherche=' ~ filtres.recherche|url_encode %}
+	{% endif %}
+	{% if filtres.domaine %}
+		{% set filtreQuery = filtreQuery ~ '&domaine=' ~ filtres.domaine|url_encode %}
+	{% endif %}
+	{% if filtres.duree %}
+		{% set filtreQuery = filtreQuery ~ '&duree=' ~ filtres.duree|url_encode %}
+	{% endif %}
+	{% if filtres.ville %}
+		{% set filtreQuery = filtreQuery ~ '&ville=' ~ filtres.ville|url_encode %}
+	{% endif %}
 
-      <li class="page-item {% if page == totalPages %}disabled{% endif %}">
-        <a class="page-link" href="?page={{ page + 1 }}{{ filtreQuery }}">»</a>
-      </li>
+	{% if totalPages > 1 %}
+		<div class="d-flex justify-content-center mt-4">
+			<nav>
+				<ul class="pagination">
 
-    </ul>
-  </nav>
-</div>
-{% endif %}
+					<li class="page-item {% if page == 1 %}disabled{% endif %}">
+						<a class="page-link" href="?page={{ page - 1 }}{{ filtreQuery }}">«</a>
+					</li>
+
+					{% for p in 1..totalPages %}
+						<li class="page-item {% if p == page %}active{% endif %}">
+							<a class="page-link" href="?page={{ p }}{{ filtreQuery }}" style="{% if p == page %}background-color: #97a48a; border-color: #97a48a;{% endif %}">
+								{{ p }}
+							</a>
+						</li>
+					{% endfor %}
+
+					<li class="page-item {% if page == totalPages %}disabled{% endif %}">
+						<a class="page-link" href="?page={{ page + 1 }}{{ filtreQuery }}">»</a>
+					</li>
+
+				</ul>
+			</nav>
+		</div>
+	{% endif %}
 
 </div>

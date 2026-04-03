@@ -23,7 +23,7 @@ class Evaluation
     private User $user;
 
     #[ORM\ManyToOne(targetEntity: Offre::class)]
-    #[ORM\JoinColumn(nullable: false)]  
+    #[ORM\JoinColumn(nullable: false)]
     private Offre $offre;
 
     #[Column(type: 'integer', nullable: false)]
@@ -39,20 +39,47 @@ class Evaluation
         $this->note       = $note;
     }
 
-    public function getId(): int { return $this->id; }
+    public function getId(): int
+    {
+        return $this->id;
+    }
 
-    public function getUser(): User { return $this->user; }
+    public function getUser(): User
+    {
+        return $this->user;
+    }
 
-    public function getNote(): int { return $this->note; }
-    public function setNote(int $note): void { $this->note = $note; }
+    public function getNote(): int
+    {
+        return $this->note;
+    }
+    public function setNote(int $note): void
+    {
+        $this->note = $note;
+    }
 
-    public function getOffre(): Offre { return $this->offre; }
-    public function setOffre(Offre $offre): void { $this->offre = $offre; }
+    public function getOffre(): Offre
+    {
+        return $this->offre;
+    }
+    public function setOffre(Offre $offre): void
+    {
+        $this->offre = $offre;
+    }
 
-    public function setUser(User $user): void { $this->user = $user; }
+    public function setUser(User $user): void
+    {
+        $this->user = $user;
+    }
 
 
 
-    public function getCommentaire(): ?string { return $this->commentaire; }
-    public function setCommentaire(?string $commentaire): void { $this->commentaire = $commentaire; }
+    public function getCommentaire(): ?string
+    {
+        return $this->commentaire;
+    }
+    public function setCommentaire(?string $commentaire): void
+    {
+        $this->commentaire = $commentaire;
+    }
 }

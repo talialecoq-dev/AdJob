@@ -26,7 +26,7 @@ class WishlistController
         if ($user) {
             $conn = $this->em->getConnection();
 
-            
+
             $exists = $conn->fetchOne(
                 'SELECT COUNT(*) FROM wishlists WHERE user_id = ? AND offre_id = ?',
                 [$user->getId(), $id]
@@ -84,7 +84,4 @@ class WishlistController
             'offres' => $offres,
         ]);
     }
-
-
-
 }

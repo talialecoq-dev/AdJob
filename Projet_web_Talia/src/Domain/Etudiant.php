@@ -12,8 +12,8 @@ use Doctrine\ORM\Mapping\Table;
 #[Entity, Table(name: 'etudiants')]
 class Etudiant
 {
-        #[Id, Column(type: 'integer'), GeneratedValue(strategy: 'AUTO')]
-        private int $id;
+    #[Id, Column(type: 'integer'), GeneratedValue(strategy: 'AUTO')]
+    private int $id;
 
     #[Column(type: 'string', nullable: false)]
     private string $prenom;
@@ -58,28 +58,76 @@ class Etudiant
         $this->createdAt = new DateTimeImmutable('now');
     }
 
-    public function getId(): int { return $this->id; }
+    public function getId(): int
+    {
+        return $this->id;
+    }
 
-    public function getPrenom(): string { return $this->prenom; }
-    public function setPrenom(string $prenom): void { $this->prenom = $prenom; }
+    public function getPrenom(): string
+    {
+        return $this->prenom;
+    }
+    public function setPrenom(string $prenom): void
+    {
+        $this->prenom = $prenom;
+    }
 
-    public function getNom(): string { return $this->nom; }
-    public function setNom(string $nom): void { $this->nom = $nom; }
+    public function getNom(): string
+    {
+        return $this->nom;
+    }
+    public function setNom(string $nom): void
+    {
+        $this->nom = $nom;
+    }
 
-    public function getEmail(): string { return $this->email; }
-    public function setEmail(string $email): void { $this->email = $email; }
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
 
-    public function getAdresse(): ?string { return $this->adresse; }
-    public function setAdresse(?string $adresse): void { $this->adresse = $adresse; }
+    public function getAdresse(): ?string
+    {
+        return $this->adresse;
+    }
+    public function setAdresse(?string $adresse): void
+    {
+        $this->adresse = $adresse;
+    }
 
-    public function getVille(): ?string { return $this->ville; }
-    public function setVille(?string $ville): void { $this->ville = $ville; }
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+    public function setVille(?string $ville): void
+    {
+        $this->ville = $ville;
+    }
 
-    public function getRegion(): ?string { return $this->region; }
-    public function setRegion(?string $region): void { $this->region = $region; }
+    public function getRegion(): ?string
+    {
+        return $this->region;
+    }
+    public function setRegion(?string $region): void
+    {
+        $this->region = $region;
+    }
 
-    public function getLogo(): ?string { return $this->logo; }
-    public function setLogo(?string $logo): void { $this->logo = $logo; }
+    public function getLogo(): ?string
+    {
+        return $this->logo;
+    }
+    public function setLogo(?string $logo): void
+    {
+        $this->logo = $logo;
+    }
 
-    public function getCreatedAt(): DateTimeImmutable { return $this->createdAt; }
+    public function getCreatedAt(): DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
 }

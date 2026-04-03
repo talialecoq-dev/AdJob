@@ -1,61 +1,83 @@
 {% extends "Bases/Base.html.twig" %}
 
-{% block title %}Liste des Entreprises
-{% endblock %}
+{% block title %}Liste des Entreprises - AdJob{% endblock %}
 
 {% block content %}
 
-	<h1>Liste des Entreprises</h1>
-	<div class="text-center my-4">
-		<a href="{{ url_for('inscription_entreprises') }}" class="btn" style="background-color: #73986f; color: white;">
-			Ajouter une entreprise
-		</a>
-	</div>
+<style>
+    .btn-modifier  { background-color: #73986f; color: white; margin-right: 5px; }
+    .btn-supprimer { background-color: #e0c7bf; color: white; }
+    th, td { text-align: center; vertical-align: middle; }
+    .actions-col { text-align: right; white-space: nowrap; }
+</style>
 
+<div class="container my-4">
 
-	<div class="card shadow-sm">
-		<div class="card-body p-0">
-			<table class="table table-hover mb-0">
-				<thead class="table-light">
-					<tr>
-						<th>ID</th>
-						<th>Nom</th>
-						<th>Secteur</th>
-						<th>Email</th>
-						<th>Site Web</th>
-						<th>Image</th>
+    <h1>Liste des Entreprises</h1>
 
+    {# Bouton Ajouter : uniquement pilote et admin #}
+    {% if user and user.role.value in ['pilote', 'admin'] %}
+    <div class="text-center my-4">
+        <a href="{{ url_for('inscription_entreprises') }}" class="btn"
+           style="background-color: #73986f; color: white;">
+            Ajouter une entreprise
+        </a>
+    </div>
+    {% endif %}
 
-						<th class="text-end">Actions</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for entreprise in entreprises %}
-						<tr>
-							<td>{{ entreprise.id }}</td>
-							<td>
-								<strong>{{ entreprise.nom }}</strong>
-							</td>
-							<td>{{ entreprise.secteur }}</td>
-							<td>{{ entreprise.email }}</td>
-							<td>{{ entreprise.siteWeb }}</td>
-							<td>
-								<img src="/uploads/{{ entreprise.image }}" alt="logo" style="height:40px;">
-							</td>
-							<td class="actions-col">
-								<form method="POST" action="/entreprise/Supprimer-Entreprise/{{ entreprise.id }}">
-									<button type="submit" class="btn btn-supprimer">Supprimer</button>
-								</form>
-								<a href="{{ url_for('modifier_entreprises', {id: entreprise.id}) }}" class="btn btn-modifier">Modifier</a>
-							</td>
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Secteur</th>
+                        <th>Email</th>
+                        <th>Site Web</th>
+                        <th>Image</th>
+                        {# Colonne Actions uniquement pour pilote/admin #}
+                        {% if user and user.role.value in ['pilote', 'admin'] %}
+                            <th class="text-end">Actions</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entreprise in entreprises %}
+                    <tr>
+                        <td>{{ entreprise.id }}</td>
+                        <td><strong>{{ entreprise.nom }}</strong></td>
+                        <td>{{ entreprise.secteur }}</td>
+                        <td>{{ entreprise.email }}</td>
+                        <td>
+                            <a href="{{ entreprise.siteWeb }}" target="_blank">{{ entreprise.siteWeb }}</a>
+                        </td>
+                        <td>
+                            <img src="/uploads/{{ entreprise.image }}" alt="logo" style="height:40px;">
+                        </td>
+                        {# Boutons Modifier/Supprimer : uniquement pilote et admin #}
+                        {% if user and user.role.value in ['pilote', 'admin'] %}
+                        <td class="actions-col">
+                            <a href="{{ url_for('modifier_entreprises', {id: entreprise.id}) }}"
+                               class="btn btn-sm btn-modifier">Modifier</a>
+                            <form method="POST"
+                                  action="/entreprise/Supprimer-Entreprise/{{ entreprise.id }}"
+                                  style="display:inline;">
+                                <button type="submit" class="btn btn-sm btn-supprimer">Supprimer</button>
+                            </form>
+                        </td>
+                        {% endif %}
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="7">Aucune entreprise trouvée.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-						</tr>
-
-					{% endfor %}
-				</tbody>
-			</table>
-		</div>
-	</div>
-
+</div>
 
 {% endblock %}

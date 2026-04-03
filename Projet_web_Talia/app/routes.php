@@ -26,110 +26,111 @@
         });
 
         $factory = $app->getContainer()->get(ResponseFactoryInterface::class);
-        
+
         // --- Accueil ---
         $app->get('/', [HomeController::class, 'home']);
         $app->post('/offre/ajouter', [HomeController::class, 'ajouter']);
-
         $app->post('/offre/supprimer/{id}', [HomeController::class, 'supprimer']);
 
-        // --- Pages statiques ---
+        // --- Pages générales ---
         $app->get('/Mentions_Legales', [Mentions_LegalesController::class, 'Mentions_Legales']);
         $app->get('/Profil', [ProfilController::class, 'profil'])->add(new LoggedMiddleware($factory));
 
-        // --- Login ---
+        // --- Auth ---
         $app->get('/Login', [LoginController::class, 'login']);
         $app->post('/Login', [LoginController::class, 'login']);
         $app->get('/Logout', [LoginController::class, 'logout']);
         $app->post('/Logout', [LoginController::class, 'logout']);
 
+        // --- Entreprises publiques (tout le monde, même non connecté) ---
+        $app->get('/entreprise/Rechercher-Entreprise', [EntrepriseController::class, 'recherche_entreprise'])
+            ->setName('recherche_entreprise');
 
-        // --- Entreprises ---
-        $app->group('/entreprise', function (RouteCollectorProxy $group) use ($factory) {
-        $group->get('/Inscription-Entreprise', [EntrepriseController::class, 'inscription'])->setName('inscription_entreprises');
+        $app->get('/entreprise/{nom}/offres', [EntrepriseController::class, 'offresParEntreprise'])
+            ->setName('offres_entreprise');
 
-        $group->post('/inscription-entreprise', [EntrepriseController::class, 'traiterInscription']);
-        $group->post('/traitement-inscription', [EntrepriseController::class, 'traiterInscription']);
+        // --- Entreprises protégées (pilote + admin uniquement) ---
+        $app->group('/entreprise', function (RouteCollectorProxy $group) {
+            $group->get('/Inscription-Entreprise', [EntrepriseController::class, 'inscription'])
+                ->setName('inscription_entreprises');
 
-        $group->get('/Liste-Entreprises', [EntrepriseController::class, 'liste'])->setName('liste_entreprises');
+            $group->post('/inscription-entreprise', [EntrepriseController::class, 'traiterInscription']);
+            $group->post('/traitement-inscription', [EntrepriseController::class, 'traiterInscription']);
 
-        $group->get('/Rechercher-Entreprise', [EntrepriseController::class, 'recherche_entreprise'])->setName('recherche_entreprise');
+            $group->get('/Liste-Entreprises', [EntrepriseController::class, 'liste'])
+                ->setName('liste_entreprises');
 
-        $group->get('/Modifier-Entreprise/{id}', [EntrepriseController::class, 'modifier'])->setName('modifier_entreprises');
-        $group->post('/Update-Entreprise/{id}', [EntrepriseController::class, 'update']);
+            $group->get('/Modifier-Entreprise/{id}', [EntrepriseController::class, 'modifier'])
+                ->setName('modifier_entreprises');
+            $group->post('/Update-Entreprise/{id}', [EntrepriseController::class, 'update']);
 
-        $group->get('/Supprimer-Entreprise/{id}', [EntrepriseController::class, 'supprimer']);
-        $group->post('/Supprimer-Entreprise/{id}', [EntrepriseController::class, 'supprimer']);
+            $group->get('/Supprimer-Entreprise/{id}', [EntrepriseController::class, 'supprimer']);
+            $group->post('/Supprimer-Entreprise/{id}', [EntrepriseController::class, 'supprimer']);
 
         })->add(new RoleCheckMiddleware($factory, [Role::PILOTE, Role::ADMIN]));
 
-    // --- GESTION DES UTILISATEURS ---
-
+        // --- Utilisateurs ---
         $app->get('/Liste-Utilisateurs', [UserController::class, 'listeUsers'])
-        ->add(new RoleCheckMiddleware($factory, [Role::PILOTE, Role::ADMIN]))
-        ->setName('liste_utilisateurs');
+            ->add(new RoleCheckMiddleware($factory, [Role::PILOTE, Role::ADMIN]))
+            ->setName('liste_utilisateurs');
 
         $app->get('/users/inscription-etudiant', [UserController::class, 'inscriptionEtudiant'])
-        ->add(new RoleCheckMiddleware($factory, [Role::PILOTE, Role::ADMIN]))
-        ->setName('inscription_etudiants');
+            ->add(new RoleCheckMiddleware($factory, [Role::PILOTE, Role::ADMIN]))
+            ->setName('inscription_etudiants');
 
         $app->post('/users/inscription-etudiant', [UserController::class, 'ajouterEtudiant'])
-        ->add(new RoleCheckMiddleware($factory, [Role::PILOTE, Role::ADMIN]));
+            ->add(new RoleCheckMiddleware($factory, [Role::PILOTE, Role::ADMIN]));
 
         $app->get('/users/inscription-pilote', [UserController::class, 'inscriptionPilote'])
-        ->add(new RoleCheckMiddleware($factory, [Role::PILOTE, Role::ADMIN]))
-        ->setName('inscription_pilotes');
+            ->add(new RoleCheckMiddleware($factory, [Role::PILOTE, Role::ADMIN]))
+            ->setName('inscription_pilotes');
 
         $app->post('/users/inscription-pilote', [UserController::class, 'ajouterPilote'])
-        ->add(new RoleCheckMiddleware($factory, [Role::PILOTE, Role::ADMIN]));
+            ->add(new RoleCheckMiddleware($factory, [Role::PILOTE, Role::ADMIN]));
 
+        $app->get('/users/etudiants-campus', [UserController::class, 'etudiantsDuCampus'])
+            ->add(new RoleCheckMiddleware($factory, [Role::PILOTE, Role::ADMIN]))
+            ->setName('etudiants_campus');
 
         $app->group('/users', function (RouteCollectorProxy $group) {
-
-            // Modifications & Suppressions (Étudiants)
-            $group->get('/etudiant/modifier/{id}', [UserController::class, 'modifierEtudiant'])->setName('modifier_etudiant');
+            $group->get('/etudiant/modifier/{id}', [UserController::class, 'modifierEtudiant'])
+                ->setName('modifier_etudiant');
             $group->post('/etudiant/modifier/{id}', [UserController::class, 'updateEtudiant']);
             $group->post('/etudiant/supprimer/{id}', [UserController::class, 'supprimerEtudiant']);
 
-            // Modifications & Suppressions (Pilotes)
-            $group->get('/pilote/modifier/{id}', [UserController::class, 'modifierPilote'])->setName('modifier_pilote');
+            $group->get('/pilote/modifier/{id}', [UserController::class, 'modifierPilote'])
+                ->setName('modifier_pilote');
             $group->post('/pilote/modifier/{id}', [UserController::class, 'updatePilote']);
             $group->post('/pilote/supprimer/{id}', [UserController::class, 'supprimerPilote']);
 
         })->add(new RoleCheckMiddleware($factory, [Role::PILOTE, Role::ADMIN]));
 
         // --- Offres ---
-
         $app->get('/Ajouter-Offre', [OffresController::class, 'ajouter']);
         $app->post('/Ajouter-Offre', [OffresController::class, 'ajouter']);
-
-        $app->get('/Offres/{id}/infos', [OffresController::class, 'infosOffre']);
-
+        $app->get('/Offres/{id}/infos_offres', [OffresController::class, 'infosOffre']);
         $app->get('/Offres', [OffresController::class, 'liste']);
 
-
         // --- Wishlist ---
-        $app->group('/wishlist', function (RouteCollectorProxy $group) use ($factory) {
-        $group->get('/', [WishlistController::class, 'wishlist'])->setName('consulter_wishlist');
+        $app->group('/wishlist', function (RouteCollectorProxy $group) {
+            $group->get('/', [WishlistController::class, 'wishlist'])
+                ->setName('consulter_wishlist');
+            $group->post('/ajouter/{id}', [WishlistController::class, 'ajouter'])
+                ->setName('ajouter_wishlist');
+            $group->post('/retirer/{id}', [WishlistController::class, 'retirer'])
+                ->setName('retirer_wishlist');
+        })->add(new RoleCheckMiddleware($factory, [Role::ETUDIANT, Role::PILOTE, Role::ADMIN]));
 
-        $group->post('/ajouter/{id}', [WishlistController::class, 'ajouter'])->setName('ajouter_wishlist');
-
-        $group->post('/retirer/{id}', [WishlistController::class, 'retirer'])->setName('retirer_wishlist');
-        }) ->add(new RoleCheckMiddleware($factory, [Role::ETUDIANT, Role::PILOTE, Role::ADMIN]));
         // --- Candidatures ---
-
         $app->get('/Candidatures', [CandidaturesController::class, 'candidatures']);
         $app->post('/Candidatures', [CandidaturesController::class, 'candidatures']);
         $app->get('/Candidater', [CandidaturesController::class, 'candidater']);
         $app->post('/Candidatures/ajouter', [CandidaturesController::class, 'ajouter']);
         $app->post('/Supprimer-Candidature/{id}', [CandidaturesController::class, 'supprimer']);
 
-
         // --- Avis sur les offres ---
-        $app->get('/Offres/{id}/avis', [EvaluationsController::class, 'listeAvis'])->setName('liste_avis_offre');
-        $app->post('/Offres/{id}/avis', [EvaluationsController::class, 'ajouterAvis'])->setName('ajouter_avis_offre');  
-
-
-
-
+        $app->get('/Offres/{id}/avis', [EvaluationsController::class, 'listeAvis'])
+            ->setName('liste_avis_offre');
+        $app->post('/Offres/{id}/avis', [EvaluationsController::class, 'ajouterAvis'])
+            ->setName('ajouter_avis_offre');
     };

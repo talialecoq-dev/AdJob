@@ -22,8 +22,17 @@ class Competence
         $this->nomCompetence = $nomCompetence;
     }
 
-    public function getId(): int { return $this->id; }
+    public function getId(): int
+    {
+        return $this->id;
+    }
 
-    public function getNomCompetence(): string { return $this->nomCompetence; }
-    public function setNomCompetence(string $nomCompetence): void { $this->nomCompetence = $nomCompetence; }
+    public function getNomCompetence(): string
+    {
+        return $this->nomCompetence;
+    }
+    public function setNomCompetence(string $nomCompetence): void
+    {
+        $this->nomCompetence = $nomCompetence;
+    }
 }

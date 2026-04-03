@@ -17,7 +17,6 @@ class OffresController
         $this->em = $em;
     }
 
-    
     public function liste(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $view       = Twig::fromRequest($request);
@@ -28,20 +27,21 @@ class OffresController
             'offres' => $offres
         ]);
     }
-  public function infosOffre(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
-{
-    $id    = (int) $args['id'];
-    $offre = $this->em->find(Offre::class, $id);
 
-    if (!$offre) {
-        return $response->withHeader('Location', '/Offres')->withStatus(302);
+    public function infosOffre(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+        $id    = (int) $args['id'];
+        $offre = $this->em->find(Offre::class, $id);
+
+        if (!$offre) {
+            return $response->withHeader('Location', '/Offres')->withStatus(302);
+        }
+
+        $view = Twig::fromRequest($request);
+        return $view->render($response, 'Offres/Page_Infos_Offres.html.twig', [
+            'offre' => $offre
+        ]);
     }
-
-    $view = Twig::fromRequest($request);
-    return $view->render($response, 'Offres/Page_Infos_Offres.html.twig', [
-        'offre' => $offre
-    ]);
-}
 
     public function ajouter(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
@@ -51,7 +51,6 @@ class OffresController
             $data = $request->getParsedBody();
 
             $repository = $this->em->getRepository(Offre::class);
-
             $errors = [];
 
             if (empty(trim($data['titre'] ?? '')))
@@ -80,14 +79,30 @@ class OffresController
             if (count($competences) < 3)
                 $errors['competences'] = 'Veuillez renseigner au moins 3 compétences.';
 
+
+            $logoName  = null;
+            $uploadDir = __DIR__ . '/../../../public/uploads/';
+
+            if (!isset($_FILES['logo']) || $_FILES['logo']['error'] !== UPLOAD_ERR_OK) {
+                $errors['logo'] = 'Le logo (PNG) est obligatoire.';
+            } else {
+                $ext = strtolower(pathinfo($_FILES['logo']['name'], PATHINFO_EXTENSION));
+                if ($ext !== 'png') {
+                    $errors['logo'] = 'Le logo doit être un fichier PNG.';
+                } else {
+                    $logoName = uniqid('logo_') . '.png';
+                    move_uploaded_file($_FILES['logo']['tmp_name'], $uploadDir . $logoName);
+                }
+            }
+
             if (!empty($errors)) {
                 $offres = $repository->findAll();
                 $data['competences'] = $competences;
 
                 return $view->render($response, 'Offres/Page_Liste_Offres.html.twig', [
-                    'offres'  => $offres,
-                    'errors'  => $errors,
-                    'old'     => $data,
+                    'offres' => $offres,
+                    'errors' => $errors,
+                    'old'    => $data,
                 ]);
             }
 
@@ -99,8 +114,8 @@ class OffresController
                 $data['domaine'],
                 implode(', ', $competences),
                 $data['description'],
-                $data['logo'] ?? null,
-                $data['informations'] ?? null
+                $data['informations'] ?? null,
+                '/uploads/' . $logoName
             );
 
             $this->em->persist($offre);

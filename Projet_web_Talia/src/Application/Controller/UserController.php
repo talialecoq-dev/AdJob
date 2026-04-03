@@ -4,6 +4,7 @@ namespace App\Application\Controller;
 
 use App\Domain\User;
 use App\Domain\Role;
+use App\Domain\Campus;
 use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -18,41 +19,50 @@ class UserController
         $this->em = $em;
     }
 
-    public function inscriptionEtudiant(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+
+
+    public function listeUsers(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
-        $view = Twig::fromRequest($request);
-        $campusList = $this->em->getRepository(\App\Domain\Campus::class)->findAll();
+        $view  = Twig::fromRequest($request);
+        $users = $this->em->getRepository(User::class)->findAll();
+
+        return $view->render($response, 'Users/Page_Liste_User.html.twig', [
+            'users' => $users,
+        ]);
+    }
+
+
+
+    public function inscriptionEtudiant(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    {
+        $view       = Twig::fromRequest($request);
+        $campusList = $this->em->getRepository(Campus::class)->findAll();
+
         return $view->render($response, 'Entreprises/Page_Inscription_Entreprise.html.twig', [
-            'type'       => 'Etudiants_ajout',
+            'type'       => 'Etudiantsajout',
             'campusList' => $campusList,
         ]);
     }
 
-    public function ajouterEtudiant(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    public function ajouterEtudiant(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
-        $data      = $request->getParsedBody();
-        $imageName = $this->traiterUpload();
+        $data = $request->getParsedBody();
+        $img  = $this->traiterUpload();
 
         $user = new User(
-            $data['nom']     ?? '',
-            $data['prenom']  ?? '',
-            $data['email']   ?? '',
-            password_hash($data['mot_de_passe'] ?? uniqid(), PASSWORD_BCRYPT),
+            $data['nom'],
+            $data['prenom'],
+            $data['email'],
+            password_hash($data['mot_de_passe'], PASSWORD_BCRYPT),
             $data['adresse'] ?? null,
             $data['ville']   ?? null,
             $data['region']  ?? null,
             null,
-            $imageName
+            $img
         );
-        $user->setRole(Role::ETUDIANT);
 
-        if (!empty($data['campus'])) {
-            $campus = $this->em->getRepository(\App\Domain\Campus::class)
-                ->findOneBy(['nomVille' => $data['campus']]);
-            if ($campus) {
-                $user->setCampus($campus);
-            }
-        }
+        $user->setRole(Role::ETUDIANT);
+        $this->assignCampus($user, $data['campus'] ?? null);
 
         $this->em->persist($user);
         $this->em->flush();
@@ -63,11 +73,12 @@ class UserController
     public function modifierEtudiant(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $view       = Twig::fromRequest($request);
-        $user       = $this->em->find(User::class, (int) $args['id']);
-        $campusList = $this->em->getRepository(\App\Domain\Campus::class)->findAll();
+        $etudiant   = $this->em->find(User::class, (int) $args['id']);
+        $campusList = $this->em->getRepository(Campus::class)->findAll();
 
-        return $view->render($response, 'Étudiants/Page_Modifier_Étudiant.html.twig', [
-            'etudiant'   => $user,
+        return $view->render($response, 'Entreprises/Page_Inscription_Entreprise.html.twig', [
+            'type'       => 'Etudiantsmodifier',
+            'etudiant'   => $etudiant,
             'campusList' => $campusList,
         ]);
     }
@@ -78,21 +89,19 @@ class UserController
         $user = $this->em->find(User::class, (int) $args['id']);
 
         if ($user) {
-            $user->setNom($data['nom']         ?? '');
-            $user->setPrenom($data['prenom']   ?? '');
-            $user->setEmail($data['email']     ?? '');
+            $user->setNom($data['nom']);
+            $user->setPrenom($data['prenom']);
+            $user->setEmail($data['email']);
             $user->setAdresse($data['adresse'] ?? null);
             $user->setVille($data['ville']     ?? null);
             $user->setRegion($data['region']   ?? null);
 
-            if (!empty($data['campus'])) {
-                $campus = $this->em->getRepository(\App\Domain\Campus::class)
-                    ->findOneBy(['nomVille' => $data['campus']]);
-                if ($campus) {
-                    $user->setCampus($campus);
-                }
+            $img = $this->traiterUpload();
+            if ($img) {
+                $user->setLogo($img);
             }
 
+            $this->assignCampus($user, $data['campus'] ?? null);
             $this->em->flush();
         }
 
@@ -111,39 +120,38 @@ class UserController
         return $response->withHeader('Location', '/Liste-Utilisateurs')->withStatus(302);
     }
 
-    public function inscriptionPilote(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+
+
+    public function inscriptionPilote(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $view       = Twig::fromRequest($request);
-        $campusList = $this->em->getRepository(\App\Domain\Campus::class)->findAll();
+        $campusList = $this->em->getRepository(Campus::class)->findAll();
+
         return $view->render($response, 'Entreprises/Page_Inscription_Entreprise.html.twig', [
-            'type'       => 'Pilote',
+            'type'       => 'Piloteajout',
             'campusList' => $campusList,
         ]);
     }
 
-    public function ajouterPilote(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    public function ajouterPilote(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
-        $data      = $request->getParsedBody();
-        $imageName = $this->traiterUpload();
+        $data = $request->getParsedBody();
+        $img  = $this->traiterUpload();
 
         $user = new User(
-            $data['nom']    ?? '',
-            $data['prenom'] ?? '',
-            $data['email']  ?? '',
-            password_hash($data['mot_de_passe'] ?? uniqid(), PASSWORD_BCRYPT),
-            null, null, null,
+            $data['nom'],
+            $data['prenom'],
+            $data['email'],
+            password_hash($data['mot_de_passe'], PASSWORD_BCRYPT),
+            null,
+            null,
+            null,
             $data['localisation'] ?? null,
-            $imageName
+            $img
         );
-        $user->setRole(Role::PILOTE);
 
-        if (!empty($data['campus'])) {
-            $campus = $this->em->getRepository(\App\Domain\Campus::class)
-                ->findOneBy(['nomVille' => $data['campus']]);
-            if ($campus) {
-                $user->setCampus($campus);
-            }
-        }
+        $user->setRole(Role::PILOTE);
+        $this->assignCampus($user, $data['campus'] ?? null);
 
         $this->em->persist($user);
         $this->em->flush();
@@ -154,11 +162,12 @@ class UserController
     public function modifierPilote(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $view       = Twig::fromRequest($request);
-        $user       = $this->em->find(User::class, (int) $args['id']);
-        $campusList = $this->em->getRepository(\App\Domain\Campus::class)->findAll();
+        $pilote     = $this->em->find(User::class, (int) $args['id']);
+        $campusList = $this->em->getRepository(Campus::class)->findAll();
 
-        return $view->render($response, 'Pilotes/Page_Modifier_Pilote.html.twig', [
-            'pilote'     => $user,
+        return $view->render($response, 'Entreprises/Page_Inscription_Entreprise.html.twig', [
+            'type'       => 'Pilotemodifier',
+            'pilote'     => $pilote,
             'campusList' => $campusList,
         ]);
     }
@@ -169,19 +178,17 @@ class UserController
         $user = $this->em->find(User::class, (int) $args['id']);
 
         if ($user) {
-            $user->setNom($data['nom']                   ?? '');
-            $user->setPrenom($data['prenom']             ?? '');
-            $user->setEmail($data['email']               ?? '');
+            $user->setNom($data['nom']);
+            $user->setPrenom($data['prenom']);
+            $user->setEmail($data['email']);
             $user->setLocalisation($data['localisation'] ?? null);
 
-            if (!empty($data['campus'])) {
-                $campus = $this->em->getRepository(\App\Domain\Campus::class)
-                    ->findOneBy(['nomVille' => $data['campus']]);
-                if ($campus) {
-                    $user->setCampus($campus);
-                }
+            $img = $this->traiterUpload();
+            if ($img) {
+                $user->setLogo($img);
             }
 
+            $this->assignCampus($user, $data['campus'] ?? null);
             $this->em->flush();
         }
 
@@ -200,57 +207,61 @@ class UserController
         return $response->withHeader('Location', '/Liste-Utilisateurs')->withStatus(302);
     }
 
-    public function listeUsers(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
-    {
-        $view  = Twig::fromRequest($request);
-        $users = $this->em->getRepository(User::class)->findAll();
 
-        return $view->render($response, 'Users/Page_Liste_User.html.twig', [
-            'users' => $users
-        ]);
-    }
 
-    // Étudiants du même campus que le pilote connecté
     public function etudiantsDuCampus(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $view   = Twig::fromRequest($request);
-        $pilote = $request->getAttribute('user');
+        $user   = $request->getAttribute('user');
 
         $etudiants = [];
-        if ($pilote && $pilote->getCampus()) {
+        $campus    = null;
+
+        if ($user && $user->getCampus()) {
+            $campus    = $user->getCampus();
             $etudiants = $this->em->getRepository(User::class)->findBy([
-                'campus' => $pilote->getCampus(),
+                'campus' => $campus,
                 'role'   => Role::ETUDIANT,
             ]);
         }
 
         return $view->render($response, 'Étudiants/Page_Liste_Étudiant.html.twig', [
-            'etudiants'    => $etudiants,
-            'campus'       => $pilote?->getCampus(),
-            'monCampus'    => true,
+            'etudiants' => $etudiants,
+            'campus'    => $campus,
+            'monCampus' => true,
         ]);
+    }
+
+
+
+    private function assignCampus(User $user, ?string $campusName): void
+    {
+        if ($campusName) {
+            $campus = $this->em->getRepository(Campus::class)->findOneBy(['nomVille' => $campusName]);
+            if ($campus) {
+                $user->setCampus($campus);
+            }
+        }
     }
 
     private function traiterUpload(): ?string
     {
-        if (!isset($_FILES['image_profil']) || $_FILES['image_profil']['error'] !== 0) {
+        if (!isset($_FILES['image_profil']) || $_FILES['image_profil']['error'] !== UPLOAD_ERR_OK) {
             return null;
         }
 
-        $allowedExtensions = ['png', 'jpg', 'jpeg'];
-        $extension = strtolower(pathinfo($_FILES['image_profil']['name'], PATHINFO_EXTENSION));
-
-        if (!in_array($extension, $allowedExtensions)) {
-            echo "Erreur : seuls les fichiers PNG, JPG ou JPEG sont autorisés.";
-            exit;
+        $uploadDir = __DIR__ . '/../../../../public/uploads/';
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
         }
 
-        $imageName = uniqid() . '.' . $extension;
-        move_uploaded_file(
-            $_FILES['image_profil']['tmp_name'],
-            __DIR__ . '/../../../../public/uploads/' . $imageName
-        );
+        $filename   = uniqid() . '_' . basename($_FILES['image_profil']['name']);
+        $targetPath = $uploadDir . $filename;
 
-        return $imageName;
+        if (move_uploaded_file($_FILES['image_profil']['tmp_name'], $targetPath)) {
+            return $filename;
+        }
+
+        return null;
     }
 }

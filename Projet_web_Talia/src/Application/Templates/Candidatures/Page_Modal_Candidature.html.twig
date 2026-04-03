@@ -1,58 +1,52 @@
 <div class="modal fade" id="Candidater" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: #ECEADE">
-        <h1 class="modal-title fs-5">Candidater</h1>
-      </div>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header" style="background-color: #ECEADE">
+				<h1 class="modal-title fs-5">Candidater</h1>
+			</div>
 
-      <form method="POST" action="/Candidatures/ajouter" enctype="multipart/form-data">
-        <input type="hidden" name="titre"        value="">
-        <input type="hidden" name="entreprise"   value="">
-        <input type="hidden" name="remuneration" value="">
-        <input type="hidden" name="duree"        value="">
-        <input type="hidden" name="domaine"      value="">
-        <input type="hidden" name="logo"         value="">
-        <input type="hidden" name="description"  value="">
+			<form method="POST" action="/Candidatures/ajouter" enctype="multipart/form-data">
+				<input type="hidden" name="titre" value="">
+				<input type="hidden" name="entreprise" value="">
+				<input type="hidden" name="remuneration" value="">
+				<input type="hidden" name="duree" value="">
+				<input type="hidden" name="domaine" value="">
+				<input type="hidden" name="logo" value="">
+				<input type="hidden" name="description" value="">
 
-        <div class="modal-body">
-          <div class="col p-2 m-2">
-            <label class="form-label">Nom :</label>
-            <input type="text" name="nom" class="form-control" placeholder="Entrez votre Nom"
-                   style="border-radius: 5px; border: 1px solid #A0A890;" required>
-          </div>
-          <div class="col p-2 m-2">
-            <label class="form-label">Prénom :</label>
-            <input type="text" name="prenom" class="form-control" placeholder="Entrez votre Prénom"
-                   style="border-radius: 5px; border: 1px solid #A0A890;" required>
-          </div>
-          <div class="col p-2 m-2">
-            <label class="form-label">Adresse Mail :</label>
-            <input type="email" name="email" class="form-control" placeholder="Entrez votre Adresse Mail"
-                   style="border-radius: 5px; border: 1px solid #A0A890;" required>
-          </div>
-          <div class="col p-2 m-2">
-            <label class="form-label">Téléphone :</label>
-            <input type="tel" name="telephone" class="form-control" placeholder="Ex: 06 12 34 56 78"
-                   style="border-radius: 5px; border: 1px solid #A0A890;" required>
-          </div>
-          <div class="col p-2 m-2">
-            <label class="form-label">CV (PDF) :</label>
-            <input type="file" name="cv" class="form-control" accept=".pdf"
-                   style="border-radius: 5px; border: 1px solid #A0A890;">
-          </div>
-          <div class="col p-2 m-2">
-            <label class="form-label">Lettre de motivation (PDF) :</label>
-            <input type="file" name="lettre" class="form-control" accept=".pdf"
-                   style="border-radius: 5px; border: 1px solid #A0A890;">
-          </div>
-        </div>
+				<div class="modal-body">
+					<div class="col p-2 m-2">
+						<label class="form-label">Nom :</label>
+						<input type="text" name="nom" class="form-control" placeholder="Entrez votre Nom" style="border-radius: 5px; border: 1px solid #A0A890;" required>
+					</div>
+					<div class="col p-2 m-2">
+						<label class="form-label">Prénom :</label>
+						<input type="text" name="prenom" class="form-control" placeholder="Entrez votre Prénom" style="border-radius: 5px; border: 1px solid #A0A890;" required>
+					</div>
+					<div class="col p-2 m-2">
+						<label class="form-label">Adresse Mail :</label>
+						<input type="email" name="email" class="form-control" placeholder="Entrez votre Adresse Mail" style="border-radius: 5px; border: 1px solid #A0A890;" required>
+					</div>
+					<div class="col p-2 m-2">
+						<label class="form-label">Téléphone :</label>
+						<input type="tel" name="telephone" class="form-control" placeholder="Ex: 06 12 34 56 78" style="border-radius: 5px; border: 1px solid #A0A890;" required>
+					</div>
+					<div class="col p-2 m-2">
+						<label class="form-label">CV (PDF) :</label>
+						<input type="file" name="cv" class="form-control" accept=".pdf" style="border-radius: 5px; border: 1px solid #A0A890;">
+					</div>
+					<div class="col p-2 m-2">
+						<label class="form-label">Lettre de motivation (PDF) :</label>
+						<input type="file" name="lettre" class="form-control" accept=".pdf" style="border-radius: 5px; border: 1px solid #A0A890;">
+					</div>
+				</div>
 
-        <div class="modal-footer" style="background-color: #ECEADE">
-          <button type="button" class="btn" data-bs-dismiss="modal" style="background-color: #A0A890">Fermer</button>
-          <button type="submit" class="btn" style="background-color: #EED4CB">Envoyer</button>
-        </div>
+				<div class="modal-footer" style="background-color: #ECEADE">
+					<button type="button" class="btn" data-bs-dismiss="modal" style="background-color: #A0A890">Fermer</button>
+					<button type="submit" class="btn" style="background-color: #EED4CB">Envoyer</button>
+				</div>
 
-      </form>
-    </div>
-  </div>
+			</form>
+		</div>
+	</div>
 </div>

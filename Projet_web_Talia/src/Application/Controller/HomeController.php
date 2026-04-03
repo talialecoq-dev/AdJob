@@ -4,6 +4,7 @@ namespace App\Application\Controller;
 
 use App\Domain\Wishlist;
 use App\Domain\Offre;
+use App\Domain\Candidature;
 use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -22,7 +23,6 @@ class HomeController
     public function home(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $view = Twig::fromRequest($request);
-        $conn = $this->em->getConnection();
 
         $parPage     = 9;
         $queryParams = $request->getQueryParams();
@@ -33,12 +33,13 @@ class HomeController
         $page        = isset($queryParams['page']) ? (int)$queryParams['page'] : 1;
         $offset      = ($page - 1) * $parPage;
 
+
         $repository = $this->em->getRepository(Offre::class);
         $qb = $repository->createQueryBuilder('o');
 
         if ($recherche !== '') {
             $qb->andWhere('o.titre LIKE :recherche OR o.description LIKE :recherche OR o.entreprise LIKE :recherche')
-            ->setParameter('recherche', '%' . $recherche . '%');
+                ->setParameter('recherche', '%' . $recherche . '%');
         }
         if ($domaine !== '') {
             $qb->andWhere('o.domaine = :domaine')->setParameter('domaine', $domaine);
@@ -60,37 +61,57 @@ class HomeController
             ->getQuery()
             ->getResult();
 
-        
-        $repartitionDuree = $conn->fetchAllAssociative('
-            SELECT duree, COUNT(*) as total
-            FROM offres
-            GROUP BY duree
-            ORDER BY total DESC
-        ');
 
-        $topWishlist = $conn->fetchAllAssociative('
-            SELECT o.titre, o.entreprise, COUNT(w.offre_id) as nb_wishlist
-            FROM wishlists w
-            JOIN offres o ON o.id = w.offre_id
-            GROUP BY w.offre_id, o.titre, o.entreprise
-            ORDER BY nb_wishlist DESC
-            LIMIT 5
-        ');
+        $repartitionDuree = $this->em->getRepository(Offre::class)
+            ->createQueryBuilder('o')
+            ->select('o.duree, COUNT(o.id) as total')
+            ->groupBy('o.duree')
+            ->orderBy('total', 'DESC')
+            ->getQuery()
+            ->getResult();
 
-        $totalOffres         = $conn->fetchOne('SELECT COUNT(*) FROM offres');
-        $moyenneCandidatures = $conn->fetchOne('
-            SELECT ROUND(COUNT(*) / NULLIF((SELECT COUNT(*) FROM offres), 0), 1)
-            FROM candidatures
-        ') ?? 0;
 
-        
-        $user = $request->getAttribute('user');
+        $topWishlist = $this->em->getRepository(Wishlist::class)
+            ->createQueryBuilder('w')
+            ->select('o.titre, o.entreprise, COUNT(w.id) as nb_wishlist')
+            ->join('w.offre', 'o')
+            ->groupBy('o.id')
+            ->orderBy('nb_wishlist', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult();
+
+
+        $totalOffres = (int) $this->em->getRepository(Offre::class)
+            ->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+
+        $totalCandidatures = (int) $this->em->getRepository(Candidature::class)
+            ->createQueryBuilder('c')
+            ->select('COUNT(c.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $moyenneCandidatures = $totalOffres > 0
+            ? round($totalCandidatures / $totalOffres, 1)
+            : 0;
+
+
+        $user        = $request->getAttribute('user');
         $wishlistIds = [];
+
         if ($user) {
-            $rows = $conn->fetchAllAssociative(
-                'SELECT offre_id FROM wishlists WHERE user_id = ?',
-                [$user->getId()]
-            );
+            $rows = $this->em->getRepository(Wishlist::class)
+                ->createQueryBuilder('w')
+                ->select('IDENTITY(w.offre) as offre_id')
+                ->where('w.user = :user')
+                ->setParameter('user', $user)
+                ->getQuery()
+                ->getScalarResult();
+
             $wishlistIds = array_column($rows, 'offre_id');
         }
 
@@ -108,7 +129,7 @@ class HomeController
         ]);
     }
 
-        public function ajouter(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    public function ajouter(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $view = Twig::fromRequest($request);
         $data = $request->getParsedBody();
@@ -133,7 +154,6 @@ class HomeController
         if (empty(trim($data['description'] ?? '')))
             $errors['description'] = 'La description est obligatoire.';
 
-        
         $competences = array_values(array_filter(
             array_map('trim', $data['competences'] ?? []),
             fn($c) => $c !== ''
@@ -142,11 +162,25 @@ class HomeController
         if (count($competences) < 3)
             $errors['competences'] = 'Veuillez renseigner au moins 3 compétences.';
 
-        
+        $logoName  = null;
+        $uploadDir = __DIR__ . '/../../../public/uploads/';
+
+        if (!isset($_FILES['logo']) || $_FILES['logo']['error'] !== UPLOAD_ERR_OK) {
+            $errors['logo'] = 'Le logo (PNG) est obligatoire.';
+        } else {
+            $ext = strtolower(pathinfo($_FILES['logo']['name'], PATHINFO_EXTENSION));
+            if ($ext !== 'png') {
+                $errors['logo'] = 'Le logo doit être un fichier PNG.';
+            } else {
+                $logoName = uniqid('logo_') . '.png';
+                move_uploaded_file($_FILES['logo']['tmp_name'], $uploadDir . $logoName);
+            }
+        }
+
         if (!empty($errors)) {
             $parPage = 9;
-            $repository = $this->em->getRepository(Offre::class);
 
+            $total = $repository = $this->em->getRepository(Offre::class);
             $total = $repository->createQueryBuilder('o')
                 ->select('COUNT(o.id)')
                 ->getQuery()
@@ -168,7 +202,10 @@ class HomeController
                 'total'      => $total,
                 'errors'     => $errors,
                 'old'        => $data,
-                'wishlist' => array_map(fn($item) => $item->getOffre()->getId(),$this->em->getRepository(Wishlist::class)->findAll()),
+                'wishlist'   => array_map(
+                    fn($item) => $item->getOffre()->getId(),
+                    $this->em->getRepository(Wishlist::class)->findAll()
+                ),
             ]);
         }
 
@@ -178,9 +215,10 @@ class HomeController
             $data['duree'],
             $data['remuneration'],
             $data['domaine'],
-            implode(', ', $competences),  
+            implode(', ', $competences),
             $data['description'],
-            $data['logo'] ?? null
+            $data['informations'] ?? null,
+            '/uploads/' . $logoName
         );
 
         $this->em->persist($offre);
@@ -189,19 +227,32 @@ class HomeController
         return $response->withHeader('Location', '/')->withStatus(302);
     }
 
-        public function supprimer(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    public function supprimer(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $id = (int) $args['id'];
+        $id    = (int) $args['id'];
+        $conn  = $this->em->getConnection();
         $offre = $this->em->find(Offre::class, $id);
 
         if ($offre) {
+            try {
+                $conn->executeStatement('DELETE FROM wishlists WHERE offre_id = ?', [$id]);
+            } catch (\Throwable $e) {
+            }
+
+            try {
+                $conn->executeStatement('DELETE FROM evaluations WHERE offre_id = ?', [$id]);
+            } catch (\Throwable $e) {
+            }
+
+            try {
+                $conn->executeStatement('DELETE FROM candidatures WHERE offre_id = ?', [$id]);
+            } catch (\Throwable $e) {
+            }
+
             $this->em->remove($offre);
             $this->em->flush();
         }
 
         return $response->withHeader('Location', '/')->withStatus(302);
     }
-
-
-    
 }

@@ -1,100 +1,100 @@
 <div class="text-center mt-3">
-  <img src="Image/Logo.png" class="img-fluid" alt="logo" width="400" height="400">
-  <div class="d-flex justify-content-center mt-2">
-    <div class="d-flex justify-content-center mt-4">
+	<img src="Image/Logo.png" class="img-fluid" alt="logo" width="400" height="400">
+	<div class="d-flex justify-content-center mt-2">
+		<div class="d-flex justify-content-center mt-4">
 
-      <form class="d-flex flex-column align-items-center gap-3" method="GET" action="/">
+			<form class="d-flex flex-column align-items-center gap-3" method="GET" action="/">
 
-        <div class="d-flex">
-          <input class="form-control me-2" type="search" name="recherche" style="width: 600px;"
-                 placeholder="Rechercher une offre..."
-                 value="{{ filtres.recherche ?? '' }}"/>
-          <button class="btn btn-outline-success" type="submit">
-            <img src="/Images/Image_Loupe.png" alt="Rechercher" width="30" height="30">
-          </button>
-        </div>
+				<div class="d-flex">
+					<input class="form-control me-2" type="search" name="recherche" style="width: 600px;" placeholder="Rechercher une offre..." value="{{ filtres.recherche ?? '' }}"/>
+					<button class="btn btn-outline-success" type="submit">
+						<img src="/Images/Image_Loupe.png" alt="Rechercher" width="30" height="30">
+					</button>
+				</div>
 
-        <div class="d-flex gap-3">
+				<div class="d-flex gap-3">
 
-          <select class="form-select" name="domaine">
-            <option value="" {% if not filtres.domaine %}selected{% endif %}>Domaine</option>
-            <option value="BTP"            {% if filtres.domaine == 'BTP' %}selected{% endif %}>BTP</option>
-            <option value="Commerce"       {% if filtres.domaine == 'Commerce' %}selected{% endif %}>Commerce</option>
-            <option value="Communication"  {% if filtres.domaine == 'Communication' %}selected{% endif %}>Communication</option>
-            <option value="Comptabilité"   {% if filtres.domaine == 'Comptabilité' %}selected{% endif %}>Comptabilité</option>
-            <option value="Cybersécurité"  {% if filtres.domaine == 'Cybersécurité' %}selected{% endif %}>Cybersécurité</option>
-            <option value="Droit"          {% if filtres.domaine == 'Droit' %}selected{% endif %}>Droit</option>
-            <option value="Éducation"      {% if filtres.domaine == 'Éducation' %}selected{% endif %}>Éducation</option>
-            <option value="Électronique"   {% if filtres.domaine == 'Électronique' %}selected{% endif %}>Électronique</option>
-            <option value="Environnement"  {% if filtres.domaine == 'Environnement' %}selected{% endif %}>Environnement</option>
-            <option value="Finance"        {% if filtres.domaine == 'Finance' %}selected{% endif %}>Finance</option>
-            <option value="Hôtellerie"     {% if filtres.domaine == 'Hôtellerie' %}selected{% endif %}>Hôtellerie</option>
-            <option value="Informatique"   {% if filtres.domaine == 'Informatique' %}selected{% endif %}>Informatique</option>
-            <option value="Ingénierie"     {% if filtres.domaine == 'Ingénierie' %}selected{% endif %}>Ingénierie</option>
-            <option value="Logistique"     {% if filtres.domaine == 'Logistique' %}selected{% endif %}>Logistique</option>
-            <option value="Marketing"      {% if filtres.domaine == 'Marketing' %}selected{% endif %}>Marketing</option>
-            <option value="Mécanique"      {% if filtres.domaine == 'Mécanique' %}selected{% endif %}>Mécanique</option>
-            <option value="Santé"          {% if filtres.domaine == 'Santé' %}selected{% endif %}>Santé</option>
-            <option value="Tourisme"       {% if filtres.domaine == 'Tourisme' %}selected{% endif %}>Tourisme</option>
-            <option value="Transport"      {% if filtres.domaine == 'Transport' %}selected{% endif %}>Transport</option>
-          </select>
+					<select class="form-select" name="domaine">
+						<option value="" {% if not filtres.domaine %} selected {% endif %}>Domaine</option>
+						<option value="BTP" {% if filtres.domaine == 'BTP' %} selected {% endif %}>BTP</option>
+						<option value="Commerce" {% if filtres.domaine == 'Commerce' %} selected {% endif %}>Commerce</option>
+						<option value="Communication" {% if filtres.domaine == 'Communication' %} selected {% endif %}>Communication</option>
+						<option value="Comptabilité" {% if filtres.domaine == 'Comptabilité' %} selected {% endif %}>Comptabilité</option>
+						<option value="Cybersécurité" {% if filtres.domaine == 'Cybersécurité' %} selected {% endif %}>Cybersécurité</option>
+						<option value="Droit" {% if filtres.domaine == 'Droit' %} selected {% endif %}>Droit</option>
+						<option value="Éducation" {% if filtres.domaine == 'Éducation' %} selected {% endif %}>Éducation</option>
+						<option value="Électronique" {% if filtres.domaine == 'Électronique' %} selected {% endif %}>Électronique</option>
+						<option value="Environnement" {% if filtres.domaine == 'Environnement' %} selected {% endif %}>Environnement</option>
+						<option value="Finance" {% if filtres.domaine == 'Finance' %} selected {% endif %}>Finance</option>
+						<option value="Hôtellerie" {% if filtres.domaine == 'Hôtellerie' %} selected {% endif %}>Hôtellerie</option>
+						<option value="Informatique" {% if filtres.domaine == 'Informatique' %} selected {% endif %}>Informatique</option>
+						<option value="Ingénierie" {% if filtres.domaine == 'Ingénierie' %} selected {% endif %}>Ingénierie</option>
+						<option value="Logistique" {% if filtres.domaine == 'Logistique' %} selected {% endif %}>Logistique</option>
+						<option value="Marketing" {% if filtres.domaine == 'Marketing' %} selected {% endif %}>Marketing</option>
+						<option value="Mécanique" {% if filtres.domaine == 'Mécanique' %} selected {% endif %}>Mécanique</option>
+						<option value="Santé" {% if filtres.domaine == 'Santé' %} selected {% endif %}>Santé</option>
+						<option value="Tourisme" {% if filtres.domaine == 'Tourisme' %} selected {% endif %}>Tourisme</option>
+						<option value="Transport" {% if filtres.domaine == 'Transport' %} selected {% endif %}>Transport</option>
+					</select>
 
-          <select class="form-select" name="duree">
-            <option value="" {% if not filtres.duree %}selected{% endif %}>Durée</option>
-            <option value="2 mois" {% if filtres.duree == '2 mois' %}selected{% endif %}>2 mois</option>
-            <option value="3 mois" {% if filtres.duree == '3 mois' %}selected{% endif %}>3 mois</option>
-            <option value="6 mois" {% if filtres.duree == '6 mois' %}selected{% endif %}>6 mois</option>
-            <option value="12 mois" {% if filtres.duree == '12 mois' %}selected{% endif %}>12 mois</option>
-          </select>
+					<select class="form-select" name="duree">
+						<option value="" {% if not filtres.duree %} selected {% endif %}>Durée</option>
+						<option value="2 mois" {% if filtres.duree == '2 mois' %} selected {% endif %}>2 mois</option>
+						<option value="3 mois" {% if filtres.duree == '3 mois' %} selected {% endif %}>3 mois</option>
+						<option value="6 mois" {% if filtres.duree == '6 mois' %} selected {% endif %}>6 mois</option>
+						<option value="12 mois" {% if filtres.duree == '12 mois' %} selected {% endif %}>12 mois</option>
+					</select>
 
-          <select class="form-select" name="ville">
-            <option value="" {% if not filtres.ville %}selected{% endif %}>Ville</option>
-            <option value="Aix-en-Provence"  {% if filtres.ville == 'Aix-en-Provence' %}selected{% endif %}>Aix-en-Provence</option>
-            <option value="Amiens"           {% if filtres.ville == 'Amiens' %}selected{% endif %}>Amiens</option>
-            <option value="Angers"           {% if filtres.ville == 'Angers' %}selected{% endif %}>Angers</option>
-            <option value="Annecy"           {% if filtres.ville == 'Annecy' %}selected{% endif %}>Annecy</option>
-            <option value="Besançon"         {% if filtres.ville == 'Besançon' %}selected{% endif %}>Besançon</option>
-            <option value="Bordeaux"         {% if filtres.ville == 'Bordeaux' %}selected{% endif %}>Bordeaux</option>
-            <option value="Brest"            {% if filtres.ville == 'Brest' %}selected{% endif %}>Brest</option>
-            <option value="Caen"             {% if filtres.ville == 'Caen' %}selected{% endif %}>Caen</option>
-            <option value="Clermont-Ferrand" {% if filtres.ville == 'Clermont-Ferrand' %}selected{% endif %}>Clermont-Ferrand</option>
-            <option value="Dijon"            {% if filtres.ville == 'Dijon' %}selected{% endif %}>Dijon</option>
-            <option value="Grenoble"         {% if filtres.ville == 'Grenoble' %}selected{% endif %}>Grenoble</option>
-            <option value="Le Havre"         {% if filtres.ville == 'Le Havre' %}selected{% endif %}>Le Havre</option>
-            <option value="Le Mans"          {% if filtres.ville == 'Le Mans' %}selected{% endif %}>Le Mans</option>
-            <option value="Lille"            {% if filtres.ville == 'Lille' %}selected{% endif %}>Lille</option>
-            <option value="Limoges"          {% if filtres.ville == 'Limoges' %}selected{% endif %}>Limoges</option>
-            <option value="Lyon"             {% if filtres.ville == 'Lyon' %}selected{% endif %}>Lyon</option>
-            <option value="Marseille"        {% if filtres.ville == 'Marseille' %}selected{% endif %}>Marseille</option>
-            <option value="Metz"             {% if filtres.ville == 'Metz' %}selected{% endif %}>Metz</option>
-            <option value="Montpellier"      {% if filtres.ville == 'Montpellier' %}selected{% endif %}>Montpellier</option>
-            <option value="Mulhouse"         {% if filtres.ville == 'Mulhouse' %}selected{% endif %}>Mulhouse</option>
-            <option value="Nancy"            {% if filtres.ville == 'Nancy' %}selected{% endif %}>Nancy</option>
-            <option value="Nantes"           {% if filtres.ville == 'Nantes' %}selected{% endif %}>Nantes</option>
-            <option value="Nice"             {% if filtres.ville == 'Nice' %}selected{% endif %}>Nice</option>
-            <option value="Nîmes"            {% if filtres.ville == 'Nîmes' %}selected{% endif %}>Nîmes</option>
-            <option value="Orléans"          {% if filtres.ville == 'Orléans' %}selected{% endif %}>Orléans</option>
-            <option value="Paris"            {% if filtres.ville == 'Paris' %}selected{% endif %}>Paris</option>
-            <option value="Perpignan"        {% if filtres.ville == 'Perpignan' %}selected{% endif %}>Perpignan</option>
-            <option value="Reims"            {% if filtres.ville == 'Reims' %}selected{% endif %}>Reims</option>
-            <option value="Rennes"           {% if filtres.ville == 'Rennes' %}selected{% endif %}>Rennes</option>
-            <option value="Rouen"            {% if filtres.ville == 'Rouen' %}selected{% endif %}>Rouen</option>
-            <option value="Saint-Étienne"    {% if filtres.ville == 'Saint-Étienne' %}selected{% endif %}>Saint-Étienne</option>
-            <option value="Strasbourg"       {% if filtres.ville == 'Strasbourg' %}selected{% endif %}>Strasbourg</option>
-            <option value="Toulon"           {% if filtres.ville == 'Toulon' %}selected{% endif %}>Toulon</option>
-            <option value="Toulouse"         {% if filtres.ville == 'Toulouse' %}selected{% endif %}>Toulouse</option>
-            <option value="Tours"            {% if filtres.ville == 'Tours' %}selected{% endif %}>Tours</option>
-            <option value="Villeurbanne"     {% if filtres.ville == 'Villeurbanne' %}selected{% endif %}>Villeurbanne</option>
-          </select>
+					<select class="form-select" name="ville">
+						<option value="" {% if not filtres.ville %} selected {% endif %}>Ville</option>
+						<option value="Aix-en-Provence" {% if filtres.ville == 'Aix-en-Provence' %} selected {% endif %}>Aix-en-Provence</option>
+						<option value="Amiens" {% if filtres.ville == 'Amiens' %} selected {% endif %}>Amiens</option>
+						<option value="Angers" {% if filtres.ville == 'Angers' %} selected {% endif %}>Angers</option>
+						<option value="Annecy" {% if filtres.ville == 'Annecy' %} selected {% endif %}>Annecy</option>
+						<option value="Besançon" {% if filtres.ville == 'Besançon' %} selected {% endif %}>Besançon</option>
+						<option value="Bordeaux" {% if filtres.ville == 'Bordeaux' %} selected {% endif %}>Bordeaux</option>
+						<option value="Brest" {% if filtres.ville == 'Brest' %} selected {% endif %}>Brest</option>
+						<option value="Caen" {% if filtres.ville == 'Caen' %} selected {% endif %}>Caen</option>
+						<option value="Clermont-Ferrand" {% if filtres.ville == 'Clermont-Ferrand' %} selected {% endif %}>Clermont-Ferrand</option>
+						<option value="Dijon" {% if filtres.ville == 'Dijon' %} selected {% endif %}>Dijon</option>
+						<option value="Grenoble" {% if filtres.ville == 'Grenoble' %} selected {% endif %}>Grenoble</option>
+						<option value="Le Havre" {% if filtres.ville == 'Le Havre' %} selected {% endif %}>Le Havre</option>
+						<option value="Le Mans" {% if filtres.ville == 'Le Mans' %} selected {% endif %}>Le Mans</option>
+						<option value="Lille" {% if filtres.ville == 'Lille' %} selected {% endif %}>Lille</option>
+						<option value="Limoges" {% if filtres.ville == 'Limoges' %} selected {% endif %}>Limoges</option>
+						<option value="Lyon" {% if filtres.ville == 'Lyon' %} selected {% endif %}>Lyon</option>
+						<option value="Marseille" {% if filtres.ville == 'Marseille' %} selected {% endif %}>Marseille</option>
+						<option value="Metz" {% if filtres.ville == 'Metz' %} selected {% endif %}>Metz</option>
+						<option value="Montpellier" {% if filtres.ville == 'Montpellier' %} selected {% endif %}>Montpellier</option>
+						<option value="Mulhouse" {% if filtres.ville == 'Mulhouse' %} selected {% endif %}>Mulhouse</option>
+						<option value="Nancy" {% if filtres.ville == 'Nancy' %} selected {% endif %}>Nancy</option>
+						<option value="Nantes" {% if filtres.ville == 'Nantes' %} selected {% endif %}>Nantes</option>
+						<option value="Nice" {% if filtres.ville == 'Nice' %} selected {% endif %}>Nice</option>
+						<option value="Nîmes" {% if filtres.ville == 'Nîmes' %} selected {% endif %}>Nîmes</option>
+						<option value="Orléans" {% if filtres.ville == 'Orléans' %} selected {% endif %}>Orléans</option>
+						<option value="Paris" {% if filtres.ville == 'Paris' %} selected {% endif %}>Paris</option>
+						<option value="Perpignan" {% if filtres.ville == 'Perpignan' %} selected {% endif %}>Perpignan</option>
+						<option value="Reims" {% if filtres.ville == 'Reims' %} selected {% endif %}>Reims</option>
+						<option value="Rennes" {% if filtres.ville == 'Rennes' %} selected {% endif %}>Rennes</option>
+						<option value="Rouen" {% if filtres.ville == 'Rouen' %} selected {% endif %}>Rouen</option>
+						<option value="Saint-Étienne" {% if filtres.ville == 'Saint-Étienne' %} selected {% endif %}>Saint-Étienne</option>
+						<option value="Strasbourg" {% if filtres.ville == 'Strasbourg' %} selected {% endif %}>Strasbourg</option>
+						<option value="Toulon" {% if filtres.ville == 'Toulon' %} selected {% endif %}>Toulon</option>
+						<option value="Toulouse" {% if filtres.ville == 'Toulouse' %} selected {% endif %}>Toulouse</option>
+						<option value="Tours" {% if filtres.ville == 'Tours' %} selected {% endif %}>Tours</option>
+						<option value="Villeurbanne" {% if filtres.ville == 'Villeurbanne' %} selected {% endif %}>Villeurbanne</option>
+					</select>
 
-          <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#Ajouter"
-                  style="width: 700px; background-color: #e0c7bf; color: black;">
-            Ajouter une offre
-          </button>
 
-        </div>
+					{% if user and user.role.value in ['pilote', 'admin'] %}
+						<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#Ajouter" style="width: 700px; background-color: #e0c7bf; color: black;">
+							Ajouter une offre
+						</button>
+					{% endif %}
 
-      </form>
-    </div>
-  </div>
+				</div>
+
+			</form>
+		</div>
+	</div>
 </div>

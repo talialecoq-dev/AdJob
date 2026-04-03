@@ -1,93 +1,95 @@
 {% block content %}
-<div class="text-center mt-3">
-  <img src="Image/Logo.png" class="img-fluid" alt="logo" width="400" height="400">
-    <div class="d-flex justify-content-center mt-2">
-        <div class="d-flex justify-content-center mt-4">
-            <form class="d-flex flex-column align-items-center gap-3" role="search">
-            
-            
-            <div class="d-flex">
-                <input class="form-control me-2" type="search" style="width: 600px;" placeholder="Rechercher une entreprise..."/>
-                <button class="btn btn-outline-success" type="submit">
-                <img src="/Images/Image_Loupe.png" alt="Rechercher" width="30" height="30">
-                </button>
-            </div>
+	<div class="text-center mt-3">
+		<img src="Image/Logo.png" class="img-fluid" alt="logo" width="400" height="400">
+		<div class="d-flex justify-content-center mt-2">
+			<div class="d-flex justify-content-center mt-4">
+				<form class="d-flex flex-column align-items-center gap-3" role="search">
 
-            
-            <div class="d-flex gap-3">
-                <select class="form-select" name="domaine">
-                    <option value="" selected disabled>Domaine</option>
-                    <option value="btp">BTP </option>
-                    <option value="commerce">Commerce</option>
-                    <option value="communication">Communication</option>
-                    <option value="comptabilite">Comptabilité</option>
-                    <option value="cybersecurite">Cybersécurité</option>
-                    <option value="droit">Droit</option>
-                    <option value="education">Éducation</option>
-                    <option value="electronique">Électronique</option>
-                    <option value="environnement">Environnement</option>
-                    <option value="finance">Finance</option>
-                    <option value="hotellerie">Hôtellerie</option>
-                    <option value="informatique">Informatique</option>
-                    <option value="ingenierie">Ingénierie</option>
-                    <option value="logistique">Logistique</option>
-                    <option value="marketing">Marketing</option>
-                    <option value="mecanique">Mécanique</option>
-                    <option value="sante">Santé</option>
-                    <option value="tourisme">Tourisme</option>
-                    <option value="transport">Transport</option>
-                </select>
 
-                    
-                    <select class="form-select" name="ville">
-                        <option value="" selected disabled>Ville</option>
-                        <option value="aix-en-provence">Aix-en-Provence</option>
-                        <option value="amiens">Amiens</option>
-                        <option value="angers">Angers</option>
-                        <option value="annecy">Annecy</option>
-                        <option value="besancon">Besançon</option>
-                        <option value="bordeaux">Bordeaux</option>
-                        <option value="brest">Brest</option>
-                        <option value="caen">Caen</option>
-                        <option value="clermont-ferrand">Clermont-Ferrand</option>
-                        <option value="dijon">Dijon</option>
-                        <option value="grenoble">Grenoble</option>
-                        <option value="le-havre">Le Havre</option>
-                        <option value="le-mans">Le Mans</option>
-                        <option value="lille">Lille</option>
-                        <option value="limoges">Limoges</option>
-                        <option value="lyon">Lyon</option>
-                        <option value="marseille">Marseille</option>
-                        <option value="metz">Metz</option>
-                        <option value="montpellier">Montpellier</option>
-                        <option value="mulhouse">Mulhouse</option>
-                        <option value="nancy">Nancy</option>
-                        <option value="nantes">Nantes</option>
-                        <option value="nice">Nice</option>
-                        <option value="nimes">Nîmes</option>
-                        <option value="orleans">Orléans</option>
-                        <option value="paris">Paris</option>
-                        <option value="perpignan">Perpignan</option>
-                        <option value="reims">Reims</option>
-                        <option value="rennes">Rennes</option>
-                        <option value="rouen">Rouen</option>
-                        <option value="saint-etienne">Saint-Étienne</option>
-                        <option value="strasbourg">Strasbourg</option>
-                        <option value="toulon">Toulon</option>
-                        <option value="toulouse">Toulouse</option>
-                        <option value="tours">Tours</option>
-                        <option value="villeurbanne">Villeurbanne</option>
-                    </select>
+					<div class="d-flex">
+						<input class="form-control me-2" type="search" style="width: 600px;" placeholder="Rechercher une entreprise..."/>
+						<button class="btn btn-outline-success" type="submit">
+							<img src="/Images/Image_Loupe.png" alt="Rechercher" width="30" height="30">
+						</button>
+					</div>
 
-            
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#Ajouter" style="width: 700px; background-color: #e0c7bf; color: black;">
-                        Ajouter une entreprise
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+
+					<div class="d-flex gap-3">
+						<select class="form-select" name="domaine">
+							<option value="" selected disabled>Domaine</option>
+							<option value="btp">BTP
+							</option>
+							<option value="commerce">Commerce</option>
+							<option value="communication">Communication</option>
+							<option value="comptabilite">Comptabilité</option>
+							<option value="cybersecurite">Cybersécurité</option>
+							<option value="droit">Droit</option>
+							<option value="education">Éducation</option>
+							<option value="electronique">Électronique</option>
+							<option value="environnement">Environnement</option>
+							<option value="finance">Finance</option>
+							<option value="hotellerie">Hôtellerie</option>
+							<option value="informatique">Informatique</option>
+							<option value="ingenierie">Ingénierie</option>
+							<option value="logistique">Logistique</option>
+							<option value="marketing">Marketing</option>
+							<option value="mecanique">Mécanique</option>
+							<option value="sante">Santé</option>
+							<option value="tourisme">Tourisme</option>
+							<option value="transport">Transport</option>
+						</select>
+
+
+						<select class="form-select" name="ville">
+							<option value="" selected disabled>Ville</option>
+							<option value="aix-en-provence">Aix-en-Provence</option>
+							<option value="amiens">Amiens</option>
+							<option value="angers">Angers</option>
+							<option value="annecy">Annecy</option>
+							<option value="besancon">Besançon</option>
+							<option value="bordeaux">Bordeaux</option>
+							<option value="brest">Brest</option>
+							<option value="caen">Caen</option>
+							<option value="clermont-ferrand">Clermont-Ferrand</option>
+							<option value="dijon">Dijon</option>
+							<option value="grenoble">Grenoble</option>
+							<option value="le-havre">Le Havre</option>
+							<option value="le-mans">Le Mans</option>
+							<option value="lille">Lille</option>
+							<option value="limoges">Limoges</option>
+							<option value="lyon">Lyon</option>
+							<option value="marseille">Marseille</option>
+							<option value="metz">Metz</option>
+							<option value="montpellier">Montpellier</option>
+							<option value="mulhouse">Mulhouse</option>
+							<option value="nancy">Nancy</option>
+							<option value="nantes">Nantes</option>
+							<option value="nice">Nice</option>
+							<option value="nimes">Nîmes</option>
+							<option value="orleans">Orléans</option>
+							<option value="paris">Paris</option>
+							<option value="perpignan">Perpignan</option>
+							<option value="reims">Reims</option>
+							<option value="rennes">Rennes</option>
+							<option value="rouen">Rouen</option>
+							<option value="saint-etienne">Saint-Étienne</option>
+							<option value="strasbourg">Strasbourg</option>
+							<option value="toulon">Toulon</option>
+							<option value="toulouse">Toulouse</option>
+							<option value="tours">Tours</option>
+							<option value="villeurbanne">Villeurbanne</option>
+						</select>
+
+						{% if user and user.role.value in ['pilote', 'admin'] %}
+							<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#Ajouter" style="width: 700px; background-color: #e0c7bf; color: black;">
+								Ajouter une entreprise
+							</button>
+						{% endif %}
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 
 
 {% endblock %}

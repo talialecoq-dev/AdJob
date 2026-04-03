@@ -1,0 +1,60 @@
+{% extends "Bases/Base.html.twig" %}
+{% block title %}Offres de
+	{{ entreprise }}
+	- AdJob
+{% endblock %}
+
+{% block content %}
+	<div class="container mt-5 mb-5">
+
+		<a href="{{ url_for('recherche_entreprise') }}" class="btn mb-4" style="background-color: #a0a890; color: white; border-radius: 0.6rem;">
+			← Retour aux entreprises
+		</a>
+
+		<h2 class="mb-4 fw-bold" style="color: #4a5d43;">
+			Offres de
+			<span style="color: #97a48a;">{{ entreprise }}</span>
+		</h2>
+
+		{% if offres is empty %}
+			<div class="alert" style="background-color: #eceade; border-radius: 1rem;">
+				Aucune offre disponible pour cette entreprise pour le moment.
+			</div>
+		{% else %}
+			<div class="row row-cols-1 row-cols-md-3 g-4">
+				{% for offre in offres %}
+					<div class="col">
+						<div class="card h-100 border-0 p-4" style="background-color: #97a48a; border-radius: 2rem;">
+
+							<div class="d-flex align-items-center mb-3">
+								{% if offre.logo %}
+									<img src="{{ offre.logo }}" alt="Logo {{ offre.entreprise }}" class="rounded-3 bg-white p-1" style="width: 70px; height: 70px; object-fit: contain; flex-shrink: 0;">
+								{% endif %}
+								<h5 class="text-white fw-bold ms-3 mb-0" style="font-size: 1.1rem;">
+									{{ offre.titre }}
+								</h5>
+							</div>
+
+							<div class="d-flex flex-wrap gap-2 mb-3">
+								<span class="badge rounded-pill px-3 py-2 fw-normal text-dark" style="background-color: #ffffff;">{{ offre.duree }}</span>
+								<span class="badge rounded-pill px-3 py-2 fw-normal text-dark" style="background-color: #ffffff;">{{ offre.remuneration }}</span>
+								<span class="badge rounded-pill px-3 py-2 fw-normal text-dark" style="background-color: #ffffff;">{{ offre.domaine }}</span>
+							</div>
+
+							<div class="p-3 mb-3 fst-italic flex-grow-1" style="background-color: #ffffff; border-radius: 1.5rem;
+																		                            color: #4a5d43; font-size: 0.9rem; line-height: 1.6;">
+								{{ offre.description|slice(0, 120) }}...
+							</div>
+
+							<a href="/Offres/{{ offre.id }}/infos_offres" class="btn mt-auto" style="background-color: #e0c7bf; color: black; border-radius: 0.6rem;">
+								Voir le détail
+							</a>
+
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		{% endif %}
+
+	</div>
+{% endblock %}

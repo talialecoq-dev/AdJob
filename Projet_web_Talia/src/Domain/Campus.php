@@ -25,13 +25,28 @@ class Campus
         $this->nomVille = $nomVille;
     }
 
-    public function getId(): int { return $this->id; }
+    public function getId(): int
+    {
+        return $this->id;
+    }
 
-    public function getNomVille(): string { return $this->nomVille; }
-    public function setNomVille(string $nomVille): void { $this->nomVille = $nomVille; }
+    public function getNomVille(): string
+    {
+        return $this->nomVille;
+    }
+    public function setNomVille(string $nomVille): void
+    {
+        $this->nomVille = $nomVille;
+    }
 
-    public function isEstActif(): bool { return $this->estActif; }
-    public function setEstActif(bool $estActif): void { $this->estActif = $estActif; }
+    public function isEstActif(): bool
+    {
+        return $this->estActif;
+    }
+    public function setEstActif(bool $estActif): void
+    {
+        $this->estActif = $estActif;
+    }
 
     public function __toString(): string
     {

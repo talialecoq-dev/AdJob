@@ -1,135 +1,126 @@
-<div class="container-fluid px-0 mb-4"
-     style="background-color: #ffffff;">
+<div class="container-fluid px-0 mb-4" style="background-color: #ffffff;">
 
-    <div id="carouselStats" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+	<div id="carouselStats" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
 
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselStats" data-bs-slide-to="0"
-                    class="active"
-                    style="background-color: #73986f; width:10px; height:10px; border-radius:50%;"></button>
-            <button type="button" data-bs-target="#carouselStats" data-bs-slide-to="1"
-                    style="background-color: #73986f; width:10px; height:10px; border-radius:50%;"></button>
-            <button type="button" data-bs-target="#carouselStats" data-bs-slide-to="2"
-                    style="background-color: #73986f; width:10px; height:10px; border-radius:50%;"></button>
-            <button type="button" data-bs-target="#carouselStats" data-bs-slide-to="3"
-                    style="background-color: #73986f; width:10px; height:10px; border-radius:50%;"></button>
-        </div>
+		<div class="carousel-indicators">
+			<button type="button" data-bs-target="#carouselStats" data-bs-slide-to="0" class="active" style="background-color: #73986f; width:10px; height:10px; border-radius:50%;"></button>
+			<button type="button" data-bs-target="#carouselStats" data-bs-slide-to="1" style="background-color: #73986f; width:10px; height:10px; border-radius:50%;"></button>
+			<button type="button" data-bs-target="#carouselStats" data-bs-slide-to="2" style="background-color: #73986f; width:10px; height:10px; border-radius:50%;"></button>
+			<button type="button" data-bs-target="#carouselStats" data-bs-slide-to="3" style="background-color: #73986f; width:10px; height:10px; border-radius:50%;"></button>
+		</div>
 
-        <div class="carousel-inner py-4 px-5">
+		<div class="carousel-inner py-4 px-5">
 
-            
-            <div class="carousel-item active">
-                <div class="d-flex justify-content-center align-items-center gap-5 py-3">
 
-                    <div class="text-center p-4 rounded-4 bg-white shadow-sm" style="min-width:200px;">
-                        <div style="font-size:3rem; font-weight:700; color: #73986f;">
-                            {{ totalOffres }}
-                        </div>
-                        <div class="text-muted mt-1">offres disponibles</div>
-                    </div>
+			<div class="carousel-item active">
+				<div class="d-flex justify-content-center align-items-center gap-5 py-3">
 
-                    <div class="text-center p-4 rounded-4 bg-white shadow-sm" style="min-width:200px;">
-                        <div style="font-size:3rem; font-weight:700; color: #73986f;">
-                            {{ moyenneCandidatures }}
-                        </div>
-                        <div class="text-muted mt-1">candidatures en moyenne / offre</div>
-                    </div>
+					<div class="text-center p-4 rounded-4 bg-white shadow-sm" style="min-width:200px;">
+						<div style="font-size:3rem; font-weight:700; color: #73986f;">
+							{{ totalOffres }}
+						</div>
+						<div class="text-muted mt-1">offres disponibles</div>
+					</div>
 
-                </div>
-            </div>
+					<div class="text-center p-4 rounded-4 bg-white shadow-sm" style="min-width:200px;">
+						<div style="font-size:3rem; font-weight:700; color: #73986f;">
+							{{ moyenneCandidatures }}
+						</div>
+						<div class="text-muted mt-1">candidatures en moyenne / offre</div>
+					</div>
 
-            
-            <div class="carousel-item">
-                <div class="py-3">
-                    <h6 class="text-center fw-bold mb-3" style="color: #4a5d43;">
-                        Répartition des offres par durée
-                    </h6>
-                    <div class="d-flex justify-content-center gap-3 flex-wrap">
-                        {% for item in repartitionDuree %}
-                        <div class="text-center p-4 rounded-4 bg-white shadow-sm" style="min-width:130px;">
-                            <div style="font-size:2rem; font-weight:700; color: #73986f;">
-                                {{ item.total }}
-                            </div>
-                            <div class="text-muted mt-1" style="font-size:0.85rem;">
-                                {{ item.duree }}
-                            </div>
-                        </div>
-                        {% else %}
-                        <p class="text-muted">Aucune donnée.</p>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
+				</div>
+			</div>
 
-            
-            <div class="carousel-item">
-                <div class="py-3 px-3">
-                    <h6 class="text-center fw-bold mb-3" style="color: #4a5d43;">
-                        Top offres les plus ajoutées en wishlist
-                    </h6>
-                    {% if topWishlist is empty %}
-                        <p class="text-center text-muted">Aucune wishlist enregistrée.</p>
-                    {% else %}
-                    <div class="d-flex flex-column gap-2 mx-auto" style="max-width:600px;">
-                        {% for i, item in topWishlist %}
-                        <div class="d-flex justify-content-between align-items-center
-                                    p-3 rounded-3 bg-white shadow-sm">
-                            <div>
-                                <span class="fw-bold me-2" style="color: #73986f;">#{{ i + 1 }}</span>
-                                {{ item.titre }}
-                                <span class="text-muted" style="font-size:0.85rem;">
-                                    — {{ item.entreprise }}
-                                </span>
-                            </div>
-                            <span class="badge rounded-pill px-3 py-2"
-                                  style="background-color:#e0c7bf; color: #4a2a1a;">
-                                ★ {{ item.nb_wishlist }}
-                            </span>
-                        </div>
-                        {% endfor %}
-                    </div>
-                    {% endif %}
-                </div>
-            </div>
 
-            
-            <div class="carousel-item">
-                <div class="d-flex justify-content-center align-items-center gap-4 py-3 flex-wrap">
-                    <div class="text-center p-4 rounded-4 bg-white shadow-sm" style="min-width:160px;">
-                        <div style="font-size:2rem; font-weight:700; color: #73986f;">
-                            {{ totalOffres }}
-                        </div>
-                        <div class="text-muted mt-1" style="font-size:0.85rem;">offres en base</div>
-                    </div>
-                    {% for item in repartitionDuree %}
-                    <div class="text-center p-4 rounded-4 bg-white shadow-sm" style="min-width:130px;">
-                        <div style="font-size:2rem; font-weight:700; color: #97a48a;">
-                            {{ item.total }}
-                        </div>
-                        <div class="text-muted mt-1" style="font-size:0.85rem;">{{ item.duree }}</div>
-                    </div>
-                    {% endfor %}
-                    <div class="text-center p-4 rounded-4 bg-white shadow-sm" style="min-width:160px;">
-                        <div style="font-size:2rem; font-weight:700; color: #e0c7bf;">
-                            {{ moyenneCandidatures }}
-                        </div>
-                        <div class="text-muted mt-1" style="font-size:0.85rem;">moyenne candidatures</div>
-                    </div>
-                </div>
-            </div>
+			<div class="carousel-item">
+				<div class="py-3">
+					<h6 class="text-center fw-bold mb-3" style="color: #4a5d43;">
+						Répartition des offres par durée
+					</h6>
+					<div class="d-flex justify-content-center gap-3 flex-wrap">
+						{% for item in repartitionDuree %}
+							<div class="text-center p-4 rounded-4 bg-white shadow-sm" style="min-width:130px;">
+								<div style="font-size:2rem; font-weight:700; color: #73986f;">
+									{{ item.total }}
+								</div>
+								<div class="text-muted mt-1" style="font-size:0.85rem;">
+									{{ item.duree }}
+								</div>
+							</div>
+						{% else %}
+							<p class="text-muted">Aucune donnée.</p>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
 
-        </div>
 
-        <button class="carousel-control-prev" type="button"
-                data-bs-target="#carouselStats" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"
-                  style="filter:invert(1) sepia(1) saturate(2) hue-rotate(80deg);"></span>
-        </button>
-        <button class="carousel-control-next" type="button"
-                data-bs-target="#carouselStats" data-bs-slide="next">
-            <span class="carousel-control-next-icon"
-                  style="filter:invert(1) sepia(1) saturate(2) hue-rotate(80deg);"></span>
-        </button>
+			<div class="carousel-item">
+				<div class="py-3 px-3">
+					<h6 class="text-center fw-bold mb-3" style="color: #4a5d43;">
+						Top offres les plus ajoutées en wishlist
+					</h6>
+					{% if topWishlist is empty %}
+						<p class="text-center text-muted">Aucune wishlist enregistrée.</p>
+					{% else %}
+						<div class="d-flex flex-column gap-2 mx-auto" style="max-width:600px;">
+							{% for i, item in topWishlist %}
+								<div class="d-flex justify-content-between align-items-center
+										                                    p-3 rounded-3 bg-white shadow-sm">
+									<div>
+										<span class="fw-bold me-2" style="color: #73986f;">#{{ i + 1 }}</span>
+										{{ item.titre }}
+										<span class="text-muted" style="font-size:0.85rem;">
+											—
+											{{ item.entreprise }}
+										</span>
+									</div>
+									<span class="badge rounded-pill px-3 py-2" style="background-color:#e0c7bf; color: #4a2a1a;">
+										★
+										{{ item.nb_wishlist }}
+									</span>
+								</div>
+							{% endfor %}
+						</div>
+					{% endif %}
+				</div>
+			</div>
 
-    </div>
+
+			<div class="carousel-item">
+				<div class="d-flex justify-content-center align-items-center gap-4 py-3 flex-wrap">
+					<div class="text-center p-4 rounded-4 bg-white shadow-sm" style="min-width:160px;">
+						<div style="font-size:2rem; font-weight:700; color: #73986f;">
+							{{ totalOffres }}
+						</div>
+						<div class="text-muted mt-1" style="font-size:0.85rem;">offres en base</div>
+					</div>
+					{% for item in repartitionDuree %}
+						<div class="text-center p-4 rounded-4 bg-white shadow-sm" style="min-width:130px;">
+							<div style="font-size:2rem; font-weight:700; color: #97a48a;">
+								{{ item.total }}
+							</div>
+							<div class="text-muted mt-1" style="font-size:0.85rem;">{{ item.duree }}</div>
+						</div>
+					{% endfor %}
+					<div class="text-center p-4 rounded-4 bg-white shadow-sm" style="min-width:160px;">
+						<div style="font-size:2rem; font-weight:700; color: #e0c7bf;">
+							{{ moyenneCandidatures }}
+						</div>
+						<div class="text-muted mt-1" style="font-size:0.85rem;">moyenne candidatures</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<button class="carousel-control-prev" type="button" data-bs-target="#carouselStats" data-bs-slide="prev">
+			<span class="carousel-control-prev-icon" style="filter:invert(1) sepia(1) saturate(2) hue-rotate(80deg);"></span>
+		</button>
+		<button class="carousel-control-next" type="button" data-bs-target="#carouselStats" data-bs-slide="next">
+			<span class="carousel-control-next-icon" style="filter:invert(1) sepia(1) saturate(2) hue-rotate(80deg);"></span>
+		</button>
+
+	</div>
 </div>

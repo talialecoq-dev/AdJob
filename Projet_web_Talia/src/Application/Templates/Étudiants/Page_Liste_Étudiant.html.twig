@@ -1,74 +1,86 @@
 {% extends "Bases/Base.html.twig" %}
 
 {% block content %}
-<style>
-    .btn-modifier  { background-color: #73986f; color: white; margin-right: 5px; }
-    .btn-supprimer { background-color: #e0c7bf; color: white; }
-    th, td { text-align: center; vertical-align: middle; }
-    .actions-col { text-align: right; white-space: nowrap; }
-</style>
+	<style>
+		.btn-modifier {
+			background-color: #73986f;
+			color: white;
+			margin-right: 5px;
+		}
+		.btn-supprimer {
+			background-color: #e0c7bf;
+			color: white;
+		}
+		th,
+		td {
+			text-align: center;
+			vertical-align: middle;
+		}
+		.actions-col {
+			text-align: right;
+			white-space: nowrap;
+		}
+	</style>
 
-<div class="container my-4">
+	<div class="container my-4">
 
-    {% if monCampus is defined and monCampus %}
-        <h1>
-            Mes étudiants —
-            <span style="color:#73986f;">
-                {{ campus ? campus.nomVille : '' }}
-            </span>
-        </h1>
-    {% else %}
-        <h1>Liste de tous les étudiants</h1>
-        <div class="text-center my-4">
-            <a href="{{ url_for('inscription_etudiants') }}" class="btn btn-modifier">
-                Ajouter un(e) étudiant(e)
-            </a>
-        </div>
-    {% endif %}
+		{% if monCampus is defined and monCampus %}
+			<h1>
+				Mes étudiants —
+				<span style="color:#73986f;">
+					{{ campus ? campus.nomVille : '' }}
+				</span>
+			</h1>
+		{% else %}
+			<h1>Liste de tous les étudiants</h1>
+			<div class="text-center my-4">
+				<a href="{{ url_for('inscription_etudiants') }}" class="btn btn-modifier">
+					Ajouter un(e) étudiant(e)
+				</a>
+			</div>
+		{% endif %}
 
-    <table class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Prénom</th>
-                <th>Nom</th>
-                <th>Email</th>
-                <th>Campus</th>
-                <th>Région</th>
-                <th>Image</th>
-                <th class="actions-col">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for etudiant in etudiants %}
-            <tr>
-                <td>{{ etudiant.id }}</td>
-                <td>{{ etudiant.prenom }}</td>
-                <td>{{ etudiant.nom }}</td>
-                <td>{{ etudiant.email }}</td>
-                <td>{{ etudiant.campus ? etudiant.campus.nomVille : '—' }}</td>
-                <td>{{ etudiant.region ?? '—' }}</td>
-                <td>
-                    {% if etudiant.logo %}
-                        <img src="/uploads/{{ etudiant.logo }}" style="height:35px;">
-                    {% else %}—{% endif %}
-                </td>
-                <td class="actions-col">
-                    <a href="{{ url_for('modifier_etudiant', {id: etudiant.id}) }}"
-                       class="btn btn-sm btn-modifier">Modifier</a>
-                    <form method="POST"
-                          action="/users/etudiant/supprimer/{{ etudiant.id }}"
-                          style="display:inline;">
-                        <button type="submit" class="btn btn-sm btn-supprimer">Supprimer</button>
-                    </form>
-                </td>
-            </tr>
-            {% else %}
-            <tr>
-                <td colspan="8">Aucun étudiant trouvé.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Prénom</th>
+					<th>Nom</th>
+					<th>Email</th>
+					<th>Campus</th>
+					<th>Région</th>
+					<th>Image</th>
+					<th class="actions-col">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for etudiant in etudiants %}
+					<tr>
+						<td>{{ etudiant.id }}</td>
+						<td>{{ etudiant.prenom }}</td>
+						<td>{{ etudiant.nom }}</td>
+						<td>{{ etudiant.email }}</td>
+						<td>{{ etudiant.campus ? etudiant.campus.nomVille : '—' }}</td>
+						<td>{{ etudiant.region ?? '—' }}</td>
+						<td>
+							{% if etudiant.logo %}
+								<img src="/uploads/{{ etudiant.logo }}" style="height:35px;">
+								{% else %}—
+							{% endif %}
+						</td>
+						<td class="actions-col">
+							<a href="{{ url_for('modifier_etudiant', {id: etudiant.id}) }}" class="btn btn-sm btn-modifier">Modifier</a>
+							<form method="POST" action="/users/etudiant/supprimer/{{ etudiant.id }}" style="display:inline;">
+								<button type="submit" class="btn btn-sm btn-supprimer">Supprimer</button>
+							</form>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="8">Aucun étudiant trouvé.</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 {% endblock %}

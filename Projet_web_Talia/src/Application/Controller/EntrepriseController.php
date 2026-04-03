@@ -29,7 +29,7 @@ class EntrepriseController
 
     public function liste(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $view = Twig::fromRequest($request);
+        $view        = Twig::fromRequest($request);
         $entreprises = $this->em->getRepository(Entreprise::class)->findAll();
         return $view->render($response, 'Entreprises/Page_Liste_Entreprises.html.twig', [
             'entreprises' => $entreprises
@@ -38,7 +38,7 @@ class EntrepriseController
 
     public function supprimer(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $id = (int) $args['id'];
+        $id         = (int) $args['id'];
         $entreprise = $this->em->find(Entreprise::class, $id);
 
         if ($entreprise) {
@@ -123,8 +123,8 @@ class EntrepriseController
 
     public function modifier(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $view = Twig::fromRequest($request);
-        $id = (int) $args['id'];
+        $view       = Twig::fromRequest($request);
+        $id         = (int) $args['id'];
         $entreprise = $this->em->find(Entreprise::class, $id);
         $campusList = $this->em->getRepository(\App\Domain\Campus::class)->findAll();
 
@@ -137,7 +137,7 @@ class EntrepriseController
 
     public function recherche_entreprise(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $view = Twig::fromRequest($request);
+        $view        = Twig::fromRequest($request);
         $entreprises = $this->em->getRepository(Entreprise::class)->findAll();
 
         return $view->render($response, 'Entreprises/Page_Consulter_Entreprises.html.twig', [
@@ -170,5 +170,20 @@ class EntrepriseController
         }
 
         return $response->withHeader('Location', '/entreprise/Liste-Entreprises')->withStatus(302);
+    }
+
+    public function offresParEntreprise(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+        $view          = Twig::fromRequest($request);
+        $nomEntreprise = urldecode($args['nom']);
+
+        $offres = $this->em->getRepository(\App\Domain\Offre::class)->findBy([
+            'entreprise' => $nomEntreprise
+        ]);
+
+        return $view->render($response, 'Entreprises/Page_Offres_Entreprise.html.twig', [
+            'offres'     => $offres,
+            'entreprise' => $nomEntreprise,
+        ]);
     }
 }
