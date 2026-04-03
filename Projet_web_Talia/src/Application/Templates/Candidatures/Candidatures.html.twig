@@ -1,39 +1,108 @@
 {% extends "Bases/Base.html.twig" %}
 
-{% block title %}Candidatures - AdJob
+{% block title %}Candidatures  AdJob
 {% endblock %}
 
 {% block content %}
-	<div class="container-fluid p-4" style="background-color: #eed4cb; min-height: 100vh;">
+	<div class="container-fluid p-4" style="background-color:#eed4cb; min-height:100vh;">
+
+		<h2 class="mb-4 fw-bold" style="color:#4a5d43;">
+			{% if user and user.role.value in ['admin', 'pilote'] %}
+				Toutes les candidatures
+			{% else %}
+				Mes candidatures
+			{% endif %}
+		</h2>
 
 		{% if candidatures is empty %}
 			<p class="text-muted">Aucune candidature pour le moment.</p>
 		{% else %}
 			{% for c in candidatures %}
-				<div class="card mb-3" style="max-width: 750px; padding: 20px; border: 3px solid #a0a890; border-radius: 15px;">
+				<div class="card mb-3" style="max-width:800px; border:2px solid #a0a890; border-radius:15px; overflow:hidden;">
 					<div class="row g-0 align-items-center">
 
-						<div class="col-md-2">
-							<img src="{{ c.image }}" class="img-fluid rounded" style="max-height: 200px">
+						<div class="col-md-2 text-center p-3">
+							{% if c.logo %}
+								<img src="{{ c.logo }}" class="img-fluid rounded" style="max-height:80px; object-fit:contain;">
+							{% else %}
+								<div class="rounded-3 bg-light d-flex align-items-center justify-content-center" style="width:70px; height:70px; margin:auto;">
+									<span style="font-size:1.5rem;"><img src="{{ offre.logo }}" alt="Logo de {{ offre.entreprise }}" style="max-height:100%; max-width:100%;"></span>
+								</div>
+							{% endif %}
 						</div>
 
 						<div class="col-md-10">
 							<div class="card-body">
-								<h5 class="card-title" style="color: #8fa882">{{ c.titre}}</h5>
-								<p class="text-muted mb-1" style="font-size: 0.9rem;">{{ c.entreprise }}</p>
-								<p class="mb-1" style="front-style">{{o.domaine}}</p>
-								<span class="badge rounded-pill bg-{{ c.color }} text-dark">{{c.statut }}</span>
-								<p class="card-text mt-2">{{ c.desc }}</p>
 
-								<div class="d-flex gap-2 mt-3">
+								<div class="d-flex justify-content-between align-items-start">
+									<div>
+										<h5 class="card-title mb-1" style="color:#4a5d43;">
+											{{ c.titre }}
+										</h5>
+										<p class="text-muted mb-1" style="font-size:0.9rem;">
+											{{ c.entreprise }}
+											
+											{{ c.domaine }}
+										</p>
+										<p class="text-muted mb-1" style="font-size:0.85rem;">
+											{{ c.nom }}
+											{{ c.prenom }}
+											·
+											{{ c.email }}
+										</p>
+									</div>
 
+									
+									<span class="badge rounded-pill bg-{{ c.color }} text-dark px-3 py-2">
+										{{ c.statut }}
+									</span>
+								</div>
 
-									<a href="/?recherche={{ c.titre|url_encode }}" class="btn btn-sm" style="background-color: #a0a890; color: white; border: none; padding: 8px 12px;">
+								<p class="text-muted mt-2 mb-2" style="font-size:0.85rem;">
+									Candidaté le
+									{{ c.created_at|date('d/m/Y') }}
+								</p>
+
+								<div class="d-flex gap-2 mt-2 flex-wrap align-items-center">
+
+									<a href="/?recherche={{ c.titre|url_encode }}" class="btn btn-sm" style="background-color:#a0a890; color:white; border:none; padding:6px 12px;">
 										Voir l'offre
 									</a>
 
+									{% if c.cv %}
+										<a href="/{{ c.cv }}" target="_blank" class="btn btn-sm" style="background-color:#eceade; color:#4a5d43; border:1px solid #a0a890; padding:6px 12px;">
+											 CV
+										</a>
+									{% endif %}
+
+									{% if c.lettre_motivation %}
+										<a href="/{{ c.lettre_motivation }}" target="_blank" class="btn btn-sm" style="background-color:#eceade; color:#4a5d43; border:1px solid #a0a890; padding:6px 12px;">
+											 Lettre
+										</a>
+									{% endif %}
+
+									
+									{% if user and user.role.value in ['admin', 'pilote'] %}
+										<form method="POST" action="/Candidatures/etat/{{ c.id }}" class="d-flex gap-2 align-items-center">
+											<select name="etat" class="form-select form-select-sm" style="width:auto; border:1px solid #a0a890;">
+												<option value="En attente" {{ c.statut == 'En attente' ? 'selected' : '' }}>
+													En attente
+												</option>
+												<option value="Acceptée" {{ c.statut == 'Acceptée' ? 'selected' : '' }}>
+													Acceptée
+												</option>
+												<option value="Refusée" {{ c.statut == 'Refusée' ? 'selected' : '' }}>
+													Refusée
+												</option>
+											</select>
+											<button type="submit" class="btn btn-sm" style="background-color:#73986f; color:white; border:none; padding:6px 12px;">
+												Valider
+											</button>
+										</form>
+									{% endif %}
+
 									<form method="POST" action="/Supprimer-Candidature/{{ c.id }}">
-										<button type="submit" class="btn btn-sm" style="background-color: #e07070; color: white; border: none; padding: 8px 12px;">
+										<button type="submit" class="btn btn-sm" style="background-color:#e07070; color:white; border:none; padding:6px 12px;">
 											Supprimer
 										</button>
 									</form>
@@ -45,7 +114,7 @@
 					</div>
 				</div>
 			{% endfor %}
+		{% endif %}
 
-		</div>
-	{% endif %}
+	</div>
 {% endblock %}

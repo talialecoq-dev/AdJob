@@ -17,9 +17,32 @@ class EntrepriseController
         $this->em = $em;
     }
 
+    private function traiterUploadImage(ServerRequestInterface $request): ?string
+    {
+        $files = $request->getUploadedFiles();
+
+        if (!isset($files['image_profil']) || $files['image_profil']->getError() !== UPLOAD_ERR_OK) {
+            return null;
+        }
+
+        $allowedExtensions = ['png', 'jpg', 'jpeg'];
+        $extension = strtolower(pathinfo($files['image_profil']->getClientFilename(), PATHINFO_EXTENSION));
+
+        if (!in_array($extension, $allowedExtensions)) {
+            return null;
+        }
+
+        $imageName = 'logo_' . uniqid() . '.' . $extension;
+        $files['image_profil']->moveTo(
+            __DIR__ . '/../../../public/uploads/' . $imageName
+        );
+
+        return $imageName;
+    }
+
     public function inscription(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $view = Twig::fromRequest($request);
+        $view       = Twig::fromRequest($request);
         $campusList = $this->em->getRepository(\App\Domain\Campus::class)->findAll();
         return $view->render($response, 'Entreprises/Page_Inscription_Entreprise.html.twig', [
             'type'       => 'Entreprise',
@@ -80,24 +103,8 @@ class EntrepriseController
 
     public function traiterInscription(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
-        $data = $request->getParsedBody();
-
-        $imageName = null;
-        if (isset($_FILES['image_profil']) && $_FILES['image_profil']['error'] === 0) {
-            $allowedExtensions = ['png', 'jpg', 'jpeg'];
-            $extension = strtolower(pathinfo($_FILES['image_profil']['name'], PATHINFO_EXTENSION));
-
-            if (!in_array($extension, $allowedExtensions)) {
-                echo "Erreur : seuls les fichiers PNG, JPG ou JPEG sont autorisés.";
-                exit;
-            }
-
-            $imageName = uniqid() . '.' . $extension;
-            move_uploaded_file(
-                $_FILES['image_profil']['tmp_name'],
-                __DIR__ . '/../../../../public/uploads/' . $imageName
-            );
-        }
+        $data      = $request->getParsedBody();
+        $imageName = $this->traiterUploadImage($request);
 
         $entreprise = new Entreprise(
             $data['nom_entreprise'] ?? '',
@@ -118,7 +125,7 @@ class EntrepriseController
         $this->em->persist($entreprise);
         $this->em->flush();
 
-        return $response->withHeader('Location', '/entreprise/Liste-Entreprises')->withStatus(302);
+        return $response->withHeader('Location', '/entreprise/Rechercher-Entreprise')->withStatus(302);
     }
 
     public function modifier(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
@@ -147,9 +154,8 @@ class EntrepriseController
 
     public function update(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $id   = (int) $args['id'];
-        $data = $request->getParsedBody();
-
+        $id         = (int) $args['id'];
+        $data       = $request->getParsedBody();
         $entreprise = $this->em->find(Entreprise::class, $id);
 
         if ($entreprise) {
@@ -157,6 +163,11 @@ class EntrepriseController
             $entreprise->setSecteur($data['secteur']    ?? '');
             $entreprise->setEmail($data['email']        ?? '');
             $entreprise->setSiteWeb($data['site_web']   ?? '');
+
+            $newImage = $this->traiterUploadImage($request);
+            if ($newImage) {
+                $entreprise->setImage($newImage);
+            }
 
             if (!empty($data['campus'])) {
                 $campus = $this->em->getRepository(\App\Domain\Campus::class)

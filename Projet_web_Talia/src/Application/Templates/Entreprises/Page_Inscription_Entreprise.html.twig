@@ -1,116 +1,175 @@
-{% extends "Bases/base.html.twig" %}
+{% extends "Bases/Base.html.twig" %}
 
 {% block content %}
 	<div class="main-container" style="background-color: #eed4cb; padding: 50px; min-height: 100vh;">
-		<div
-			class="container" style="background-color: #ffffff; border-radius: 12px; padding: 30px; max-width: 700px; border: 1px solid #a0a890; margin: auto;">
+		<div class="container" style="background-color: #ffffff; border-radius: 12px; padding: 30px; max-width: 700px; border: 1px solid #a0a890; margin: auto;">
 
-			{# URL ACTION #}
-			{% if type == "Etudiants_ajout" %}
-				{% set action_url = "/users/inscription-etudiant" %}
-			{% elseif type == "Etudiants_modifier" %}
-				{% set action_url = "/users/etudiant/modifier/" ~ etudiant.id %}
-			{% elseif type == "Pilote_ajout" %}
-				{% set action_url = "/users/inscription-pilote" %}
-			{% elseif type == "Pilote_modifier" %}
-				{% set action_url = "/users/pilote/modifier/" ~ pilote.id %}
-			{% endif %}
+			{% if type == "Entreprise" or type == "Entreprise_Modifier" %}
 
-			{# TITRE #}
-			<h2 class="text-center mb-4" style="color: #a0a890;">
-				{% if type == "Etudiants_modifier" or type == "Pilote_modifier" %}
-					Modifier
-				{% else %}
-					Ajouter
-				{% endif %}
+				{% set action_url = type == "Entreprise_Modifier"
+                ? "/entreprise/Update-Entreprise/" ~ entreprise.id
+                : "/entreprise/inscription-entreprise" %}
 
-				{% if type == "Etudiants_ajout" or type == "Etudiants_modifier" %}
-					un Étudiant
-				{% else %}
-					un Pilote
-				{% endif %}
-			</h2>
+				<h2 class="text-center mb-4" style="color:#a0a890;">
+					{{ type == "Entreprise_Modifier" ? "Modifier l'entreprise" : "Ajouter une entreprise" }}
+				</h2>
 
-			<form method="POST" action="{{ action_url }}" enctype="multipart/form-data">
+				<form method="POST" action="{{ action_url }}" enctype="multipart/form-data">
 
-				{% set user_obj = etudiant ?? pilote ?? null %}
-
-				<div class="mb-3">
-					<label>Nom</label>
-					<input type="text" name="nom" class="form-control" value="{{ user_obj.nom ?? '' }}" required>
-				</div>
-
-				<div class="mb-3">
-					<label>Prénom</label>
-					<input type="text" name="prenom" class="form-control" value="{{ user_obj.prenom ?? '' }}" required>
-				</div>
-
-				<div class="mb-3">
-					<label>Email</label>
-					<input type="email" name="email" class="form-control" value="{{ user_obj.email ?? '' }}" required>
-				</div>
-
-				{# MOT DE PASSE UNIQUEMENT EN AJOUT #}
-				{% if type == "Etudiants_ajout" or type == "Pilote_ajout" %}
 					<div class="mb-3">
-						<label>Mot de passe</label>
-						<input type="password" name="mot_de_passe" class="form-control" required>
+						<label class="form-label">Nom de l'entreprise</label>
+						<input type="text" name="nom_entreprise" class="form-control" value="{{ entreprise.nom ?? '' }}" placeholder="Nom de votre entreprise" style="border:1px solid #a0a890;" required>
 					</div>
-				{% endif %}
 
-				{# ETUDIANT #}
-				{% if type == "Etudiants_ajout" or type == "Etudiants_modifier" %}
-					<div class="mb-3">
-						<label>Adresse</label>
-						<input type="text" name="adresse" class="form-control" value="{{ etudiant.adresse ?? '' }}">
+					<div class="row g-3">
+						<div class="col-md-6 mb-3">
+							<label class="form-label">Secteur d'activité</label>
+							<input type="text" name="secteur" class="form-control" value="{{ entreprise.secteur ?? '' }}" placeholder="Ex: Informatique" style="border:1px solid #a0a890;" required>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label class="form-label">Site Internet</label>
+							<input type="url" name="site_web" class="form-control" value="{{ entreprise.siteWeb ?? '' }}" placeholder="https://..." style="border:1px solid #a0a890;" required>
+						</div>
 					</div>
 
 					<div class="mb-3">
-						<label>Ville</label>
-						<input type="text" name="ville" class="form-control" value="{{ etudiant.ville ?? '' }}">
+						<label class="form-label">Email de contact</label>
+						<input type="email" name="email" class="form-control" value="{{ entreprise.email ?? '' }}" placeholder="contact@entreprise.com" style="border:1px solid #a0a890;" required>
 					</div>
 
 					<div class="mb-3">
-						<label>Région</label>
-						<input type="text" name="region" class="form-control" value="{{ etudiant.region ?? '' }}">
+						<label class="form-label">Logo de l'entreprise (PNG, JPG, JPEG)</label>
+						<input type="file" name="image_profil" class="form-control" accept=".png,.jpg,.jpeg" style="border:1px solid #a0a890;" {{ type != "Entreprise_Modifier" ? 'required' : '' }}>
+						{% if entreprise is defined and entreprise.image %}
+							<div class="mt-2 d-flex align-items-center gap-2">
+								<img src="/uploads/{{ entreprise.image }}" style="height:50px; border-radius:6px;" alt="logo actuel">
+								<span class="text-muted" style="font-size:0.85rem;">Logo actuel</span>
+							</div>
+						{% endif %}
 					</div>
-				{% endif %}
 
-				{# PILOTE #}
-				{% if type == "Pilote_ajout" or type == "Pilote_modifier" %}
 					<div class="mb-3">
-						<label>Localisation</label>
-						<input type="text" name="localisation" class="form-control" value="{{ pilote.localisation ?? '' }}">
+						<label class="form-label">Campus rattaché</label>
+						<select name="campus" class="form-select" style="border:1px solid #a0a890;">
+							<option value="">Aucun campus...</option>
+							{% for c in campusList %}
+								<option value="{{ c.nomVille }}" {{ (entreprise is defined and entreprise.campus and entreprise.campus.nomVille == c.nomVille) ? 'selected' : '' }}>
+									{{ c.nomVille }}
+								</option>
+							{% endfor %}
+						</select>
 					</div>
+
+					<button type="submit" class="btn w-100" style="background-color:#a0a890; color:white; padding:12px; border-radius:25px;">
+						{{ type == "Entreprise_Modifier" ? "Enregistrer les modifications" : "Ajouter l'entreprise" }}
+					</button>
+
+				</form>
+
+			{% else %}
+
+				{% if type == "Etudiants_ajout" %}
+					{% set action_url = "/users/inscription-etudiant" %}
+				{% elseif type == "Etudiants_modifier" %}
+					{% set action_url = "/users/etudiant/modifier/" ~ etudiant.id %}
+				{% elseif type == "Pilote_ajout" %}
+					{% set action_url = "/users/inscription-pilote" %}
+				{% elseif type == "Pilote_modifier" %}
+					{% set action_url = "/users/pilote/modifier/" ~ pilote.id %}
 				{% endif %}
 
-				{# CAMPUS #}
-				<div class="mb-3">
-					<label>Campus</label>
-					<select name="campus" class="form-select" required>
-						{% for c in campusList %}
-							<option value="{{ c.nomVille }}" {% if user_obj and user_obj.campus and user_obj.campus.nomVille == c.nomVille %} selected {% endif %}>
-								{{ c.nomVille }}
-							</option>
-						{% endfor %}
-					</select>
-				</div>
-
-				{# IMAGE #}
-				<div class="mb-3">
-					<label>Image de profil</label>
-					<input type="file" name="image_profil" class="form-control" {% if type == "Etudiants_ajout" or type == "Pilote_ajout" %} required {% endif %}>
-				</div>
-
-				<button type="submit" class="btn w-100" style="background-color:#a0a890; color:white;">
+				<h2 class="text-center mb-4" style="color:#a0a890;">
 					{% if type == "Etudiants_modifier" or type == "Pilote_modifier" %}
 						Modifier
 					{% else %}
 						Ajouter
 					{% endif %}
-				</button>
+					{% if type == "Etudiants_ajout" or type == "Etudiants_modifier" %}
+						un Étudiant
+					{% else %}
+						un Pilote
+					{% endif %}
+				</h2>
 
-			</form>
+				<form method="POST" action="{{ action_url }}" enctype="multipart/form-data">
+
+					{% set user_obj = etudiant ?? pilote ?? null %}
+
+					<div class="mb-3">
+						<label class="form-label">Nom</label>
+						<input type="text" name="nom" class="form-control" value="{{ user_obj.nom ?? '' }}" required>
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Prénom</label>
+						<input type="text" name="prenom" class="form-control" value="{{ user_obj.prenom ?? '' }}" required>
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Email</label>
+						<input type="email" name="email" class="form-control" value="{{ user_obj.email ?? '' }}" required>
+					</div>
+
+					{% if type == "Etudiants_ajout" or type == "Pilote_ajout" %}
+						<div class="mb-3">
+							<label class="form-label">Mot de passe</label>
+							<input type="password" name="mot_de_passe" class="form-control" required>
+						</div>
+					{% endif %}
+
+					{% if type == "Etudiants_ajout" or type == "Etudiants_modifier" %}
+						<div class="mb-3">
+							<label class="form-label">Adresse</label>
+							<input type="text" name="adresse" class="form-control" value="{{ etudiant.adresse ?? '' }}">
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Ville</label>
+							<input type="text" name="ville" class="form-control" value="{{ etudiant.ville ?? '' }}">
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Région</label>
+							<input type="text" name="region" class="form-control" value="{{ etudiant.region ?? '' }}">
+						</div>
+					{% endif %}
+
+					{% if type == "Pilote_ajout" or type == "Pilote_modifier" %}
+						<div class="mb-3">
+							<label class="form-label">Localisation</label>
+							<input type="text" name="localisation" class="form-control" value="{{ pilote.localisation ?? '' }}">
+						</div>
+					{% endif %}
+
+					<div class="mb-3">
+						<label class="form-label">Campus</label>
+						<select name="campus" class="form-select" required>
+							<option value="">Choisir un campus...</option>
+							{% for c in campusList %}
+								<option value="{{ c.nomVille }}" {{ (user_obj and user_obj.campus and user_obj.campus.nomVille == c.nomVille) ? 'selected' : '' }}>
+									{{ c.nomVille }}
+								</option>
+							{% endfor %}
+						</select>
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Image de profil</label>
+						<input type="file" name="image_profil" class="form-control" accept=".png,.jpg,.jpeg" {{ (type == "Etudiants_ajout" or type == "Pilote_ajout") ? 'required' : '' }}>
+						{% if user_obj is defined and user_obj and user_obj.logo %}
+							<div class="mt-2 d-flex align-items-center gap-2">
+								<img src="/uploads/{{ user_obj.logo }}" style="height:50px; border-radius:50%;" alt="photo actuelle">
+								<span class="text-muted" style="font-size:0.85rem;">Photo actuelle</span>
+							</div>
+						{% endif %}
+					</div>
+
+					<button type="submit" class="btn w-100" style="background-color:#a0a890; color:white; padding:12px; border-radius:25px;">
+						{{ (type == "Etudiants_modifier" or type == "Pilote_modifier") ? "Modifier" : "Ajouter" }}
+					</button>
+
+				</form>
+
+			{% endif %}
+
 		</div>
 	</div>
 {% endblock %}
